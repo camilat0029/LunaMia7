@@ -62,9 +62,9 @@ public class CadastroUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[grow][][][][][][][grow]", "[grow][][116.00][][][][][][][][][][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("Luna & Mia");
-		lblNewLabel.setFont(new Font("David Libre", Font.PLAIN, 99));
-		contentPane.add(lblNewLabel, "cell 2 2 4 1");
+		JLabel lbLunaMia = new JLabel("Luna & Mia");
+		lbLunaMia.setFont(new Font("David Libre", Font.PLAIN, 99));
+		contentPane.add(lbLunaMia, "cell 2 2 4 1");
 		
 		JLabel lbNomeComp = new JLabel("Nome Completo");
 		lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
