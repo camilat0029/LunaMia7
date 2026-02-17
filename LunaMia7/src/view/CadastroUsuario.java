@@ -22,10 +22,10 @@ public class CadastroUsuario extends JPanel {
 	 */
 	public CadastroUsuario() {
 		setBackground(new Color(234, 219, 247));
-		setLayout(new MigLayout("", "[][][][][][grow][][]", "[][][][][][][][][][][grow][][]"));
+		setLayout(new MigLayout("", "[grow][][][][][][][grow]", "[grow][][][][][][][][][][][][grow]"));
 		
 		JLabel lbLunaMia = new JLabel("Luna & Mia");
-		lbLunaMia.setFont(new Font("Dialog", Font.PLAIN, 99));
+		lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, 80));
 		add(lbLunaMia, "cell 2 2 4 1");
 		
 		JLabel lbNomeComp = new JLabel("Nome Completo");
