@@ -19,7 +19,7 @@ public class Relatorios extends JPanel {
 		setLayout(new MigLayout("", "[grow][][][grow]", "[grow][][][][][][][][grow]"));
 		
 		JLabel lbVisualizeRelatorioa = new JLabel("Visualize seus relatórios a\r\n partir do primeiro mês!");
-		lbVisualizeRelatorioa.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lbVisualizeRelatorioa.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbVisualizeRelatorioa, "cell 2 1");
 		
 		JPanel panel = new JPanel();
@@ -28,7 +28,7 @@ public class Relatorios extends JPanel {
 		
 		JButton btRelatorioHT = new JButton("Relatório de Horas Trabalhadas");
 		btRelatorioHT.setBackground(new Color(193, 151, 232));
-		btRelatorioHT.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btRelatorioHT.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel.add(btRelatorioHT);
 		
 		JPanel panel_1 = new JPanel();
@@ -37,7 +37,7 @@ public class Relatorios extends JPanel {
 		
 		JButton btRelatorioLC = new JButton("Relatório de Lucros");
 		btRelatorioLC.setBackground(new Color(193, 151, 232));
-		btRelatorioLC.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btRelatorioLC.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_1.add(btRelatorioLC);
 		
 		JPanel panel_2 = new JPanel();
@@ -46,7 +46,7 @@ public class Relatorios extends JPanel {
 		
 		JButton btRelatorioGT = new JButton("Relatório de Gastos");
 		btRelatorioGT.setBackground(new Color(193, 151, 232));
-		btRelatorioGT.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btRelatorioGT.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_2.add(btRelatorioGT);
 		
 		btRelatorioHT.setBorderPainted(false);

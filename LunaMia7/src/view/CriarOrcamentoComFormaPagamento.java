@@ -17,21 +17,21 @@ import java.awt.event.ActionEvent;
 public class CriarOrcamentoComFormaPagamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField tituloOrcamento;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField txtR_1;
-	private JTextField txtR;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField txtR_2;
+	private JTextField tfTituloOrcamentoCOFP;
+	private JTextField tfNomeClienteCOFP;
+	private JTextField tfEmailCOFP;
+	private JTextField tfContatoCOFP;
+	private JTextField tfPrecoHoraCOFP;
+	private JTextField tfPercentualLucroCOFP;
+	private JTextField tfHorasPrevistasCOFP;
+	private JTextField tfQuantMaxDiasCOFP;
+	private JTextField tfValorSemLuvroCOFP;
+	private JTextField tfValorLucroCOFP;
+	private JTextField tfTotalGastosCOFP;
+	private JTextField tfValorDeVendaCOFP;
+	private JTextField tfDtPrevistaEntregaCOFP;
+	private JTextField tfDtConfirmacaoPedidoCOFP;
+	private JTextField tfValorFinalCOFP;
 
 	/**
 	 * Create the panel.
@@ -40,179 +40,179 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setLayout(new MigLayout("", "[grow][][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("Título do orçamento");
-		lblNewLabel.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblNewLabel, "cell 2 1 3 1");
+		JLabel lbTituloOrcamentoCOFP = new JLabel("Título do orçamento");
+		lbTituloOrcamentoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbTituloOrcamentoCOFP, "cell 2 1 3 1");
 		
-		tituloOrcamento = new JTextField();
-		tituloOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tituloOrcamento, "cell 2 2 3 1,growx");
-		tituloOrcamento.setColumns(10);
+		tfTituloOrcamentoCOFP = new JTextField();
+		tfTituloOrcamentoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		add(tfTituloOrcamentoCOFP, "cell 2 2 3 1,growx");
+		tfTituloOrcamentoCOFP.setColumns(10);
 		
-		JLabel lblNomeDoCliente = new JLabel("Nome do cliente");
-		lblNomeDoCliente.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblNomeDoCliente, "cell 2 4");
+		JLabel lbNomeClienteCOFP = new JLabel("Nome do cliente");
+		lbNomeClienteCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbNomeClienteCOFP, "cell 2 4");
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField.setColumns(10);
-		add(textField, "cell 2 5 3 1,growx");
+		tfNomeClienteCOFP = new JTextField();
+		tfNomeClienteCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfNomeClienteCOFP.setColumns(10);
+		add(tfNomeClienteCOFP, "cell 2 5 3 1,growx");
 		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblEmail, "cell 2 7");
+		JLabel lbEmailCOFP = new JLabel("Email");
+		lbEmailCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbEmailCOFP, "cell 2 7");
 		
-		JLabel lblContato = new JLabel("Contato");
-		lblContato.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblContato, "cell 4 7");
+		JLabel lbContatoCOFP = new JLabel("Contato");
+		lbContatoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbContatoCOFP, "cell 4 7");
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_1.setColumns(10);
-		add(textField_1, "cell 2 8,growx");
+		tfEmailCOFP = new JTextField();
+		tfEmailCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfEmailCOFP.setColumns(10);
+		add(tfEmailCOFP, "cell 2 8,growx");
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_2.setColumns(10);
-		add(textField_2, "cell 4 8,growx");
+		tfContatoCOFP = new JTextField();
+		tfContatoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfContatoCOFP.setColumns(10);
+		add(tfContatoCOFP, "cell 4 8,growx");
 		
-		JLabel lblPreoDaHora = new JLabel("Preço da hora");
-		lblPreoDaHora.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblPreoDaHora, "cell 2 10");
+		JLabel lbPrecoHoraCOFP = new JLabel("Preço da hora");
+		lbPrecoHoraCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbPrecoHoraCOFP, "cell 2 10");
 		
-		JLabel lblPercentualDeLucro = new JLabel("Percentual de lucro");
-		lblPercentualDeLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblPercentualDeLucro, "cell 4 10");
+		JLabel lbPercentualLucroCOFP = new JLabel("Percentual de lucro");
+		lbPercentualLucroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbPercentualLucroCOFP, "cell 4 10");
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_3.setColumns(10);
-		add(textField_3, "cell 2 11,growx");
+		tfPrecoHoraCOFP = new JTextField();
+		tfPrecoHoraCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfPrecoHoraCOFP.setColumns(10);
+		add(tfPrecoHoraCOFP, "cell 2 11,growx");
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_4.setColumns(10);
-		add(textField_4, "cell 4 11,growx");
+		tfPercentualLucroCOFP = new JTextField();
+		tfPercentualLucroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfPercentualLucroCOFP.setColumns(10);
+		add(tfPercentualLucroCOFP, "cell 4 11,growx");
 		
-		JLabel lblMateriais = new JLabel("Materiais");
-		lblMateriais.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblMateriais, "cell 2 13");
+		JLabel lbMateriaisCOFP = new JLabel("Materiais");
+		lbMateriaisCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbMateriaisCOFP, "cell 2 13");
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(234, 219, 247));
-		add(panel, "cell 2 14,grow");
+		JPanel panelMateriaisCOFP = new JPanel();
+		panelMateriaisCOFP.setBackground(new Color(234, 219, 247));
+		add(panelMateriaisCOFP, "cell 2 14,grow");
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		panel.add(comboBox);
+		JComboBox cbMateriaisCOFP = new JComboBox();
+		cbMateriaisCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		panelMateriaisCOFP.add(cbMateriaisCOFP);
 		
-		JLabel lblHorasPrevistas = new JLabel("Horas previstas");
-		lblHorasPrevistas.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblHorasPrevistas, "cell 2 16");
+		JLabel lbHorasPrevistasCOFP = new JLabel("Horas previstas");
+		lbHorasPrevistasCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbHorasPrevistasCOFP, "cell 2 16");
 		
-		JLabel lblQuantidadeMximaDe = new JLabel("Quantidade máxima de dias");
-		lblQuantidadeMximaDe.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblQuantidadeMximaDe, "cell 4 16");
+		JLabel lbQuantMaxDiasCOFP = new JLabel("Quantidade máxima de dias");
+		lbQuantMaxDiasCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbQuantMaxDiasCOFP, "cell 4 16");
 		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_5.setColumns(10);
-		add(textField_5, "cell 2 17,growx");
+		tfHorasPrevistasCOFP = new JTextField();
+		tfHorasPrevistasCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfHorasPrevistasCOFP.setColumns(10);
+		add(tfHorasPrevistasCOFP, "cell 2 17,growx");
 		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_6.setColumns(10);
-		add(textField_6, "cell 4 17,growx");
+		tfQuantMaxDiasCOFP = new JTextField();
+		tfQuantMaxDiasCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfQuantMaxDiasCOFP.setColumns(10);
+		add(tfQuantMaxDiasCOFP, "cell 4 17,growx");
 		
-		JLabel lblValorSemLucro = new JLabel("Valor sem lucro");
-		lblValorSemLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblValorSemLucro, "cell 2 19");
+		JLabel lbValorSemLucroCOFP = new JLabel("Valor sem lucro");
+		lbValorSemLucroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbValorSemLucroCOFP, "cell 2 19");
 		
-		JLabel lblValorDoLucro = new JLabel("Valor do lucro");
-		lblValorDoLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblValorDoLucro, "cell 4 19");
+		JLabel lbValorLucroCOFP = new JLabel("Valor do lucro");
+		lbValorLucroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbValorLucroCOFP, "cell 4 19");
 		
-		txtR_1 = new JTextField();
-		txtR_1.setText("R$");
-		txtR_1.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		txtR_1.setColumns(10);
-		add(txtR_1, "cell 2 20,growx");
+		tfValorSemLuvroCOFP = new JTextField();
+		tfValorSemLuvroCOFP.setText("R$");
+		tfValorSemLuvroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfValorSemLuvroCOFP.setColumns(10);
+		add(tfValorSemLuvroCOFP, "cell 2 20,growx");
 		
-		txtR = new JTextField();
-		txtR.setText("R$");
-		txtR.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		txtR.setColumns(10);
-		add(txtR, "cell 4 20,growx");
+		tfValorLucroCOFP = new JTextField();
+		tfValorLucroCOFP.setText("R$");
+		tfValorLucroCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfValorLucroCOFP.setColumns(10);
+		add(tfValorLucroCOFP, "cell 4 20,growx");
 		
-		JLabel lblValorDeLucro = new JLabel("Total de gastos");
-		lblValorDeLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblValorDeLucro, "cell 2 22");
+		JLabel lbTotalGastosCOFP = new JLabel("Total de gastos");
+		lbTotalGastosCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbTotalGastosCOFP, "cell 2 22");
 		
-		JLabel lblTotalDeGastos = new JLabel("Valor de venda");
-		lblTotalDeGastos.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblTotalDeGastos, "cell 4 22");
+		JLabel lbValorDeVendaCOFP = new JLabel("Valor de venda");
+		lbValorDeVendaCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbValorDeVendaCOFP, "cell 4 22");
 		
-		textField_7 = new JTextField();
-		textField_7.setText("R$");
-		textField_7.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_7.setColumns(10);
-		add(textField_7, "cell 2 23,growx");
+		tfTotalGastosCOFP = new JTextField();
+		tfTotalGastosCOFP.setText("R$");
+		tfTotalGastosCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfTotalGastosCOFP.setColumns(10);
+		add(tfTotalGastosCOFP, "cell 2 23,growx");
 		
-		textField_8 = new JTextField();
-		textField_8.setText("R$");
-		textField_8.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_8.setColumns(10);
-		add(textField_8, "cell 4 23,growx");
+		tfValorDeVendaCOFP = new JTextField();
+		tfValorDeVendaCOFP.setText("R$");
+		tfValorDeVendaCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfValorDeVendaCOFP.setColumns(10);
+		add(tfValorDeVendaCOFP, "cell 4 23,growx");
 		
-		JLabel lblDataPrevistaDe = new JLabel("Data prevista de entrega");
-		lblDataPrevistaDe.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblDataPrevistaDe, "cell 2 25");
+		JLabel lbDtPrevistaEntregaCOFP = new JLabel("Data prevista de entrega");
+		lbDtPrevistaEntregaCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbDtPrevistaEntregaCOFP, "cell 2 25");
 		
-		JLabel lblDataDaConfirmao = new JLabel("Data da confirmação do pedido");
-		lblDataDaConfirmao.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblDataDaConfirmao, "cell 4 25");
+		JLabel lbDtConfirmacaoPedidoCOFP = new JLabel("Data da confirmação do pedido");
+		lbDtConfirmacaoPedidoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbDtConfirmacaoPedidoCOFP, "cell 4 25");
 		
-		textField_9 = new JTextField();
-		textField_9.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_9.setColumns(10);
-		add(textField_9, "cell 2 26,growx");
+		tfDtPrevistaEntregaCOFP = new JTextField();
+		tfDtPrevistaEntregaCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfDtPrevistaEntregaCOFP.setColumns(10);
+		add(tfDtPrevistaEntregaCOFP, "cell 2 26,growx");
 		
-		textField_10 = new JTextField();
-		textField_10.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		textField_10.setColumns(10);
-		add(textField_10, "cell 4 26,growx");
+		tfDtConfirmacaoPedidoCOFP = new JTextField();
+		tfDtConfirmacaoPedidoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfDtConfirmacaoPedidoCOFP.setColumns(10);
+		add(tfDtConfirmacaoPedidoCOFP, "cell 4 26,growx");
 		
-		JLabel lblFormaDePagamento = new JLabel("Forma de pagamento");
-		lblFormaDePagamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblFormaDePagamento, "cell 2 28");
+		JLabel lbFormaPagamentoCOFP = new JLabel("Forma de pagamento");
+		lbFormaPagamentoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbFormaPagamentoCOFP, "cell 2 28");
 		
-		JLabel lblValorFinal = new JLabel("Valor final");
-		lblValorFinal.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblValorFinal, "cell 4 28");
+		JLabel lbValorFinalCOFP = new JLabel("Valor final");
+		lbValorFinalCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbValorFinalCOFP, "cell 4 28");
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(234, 219, 247));
-		add(panel_1, "cell 2 29,grow");
+		JPanel panelFormaPagamentoCOFP = new JPanel();
+		panelFormaPagamentoCOFP.setBackground(new Color(234, 219, 247));
+		add(panelFormaPagamentoCOFP, "cell 2 29,grow");
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		panel_1.add(comboBox_1);
+		JComboBox cbFormaPagamentoCOFP = new JComboBox();
+		cbFormaPagamentoCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		panelFormaPagamentoCOFP.add(cbFormaPagamentoCOFP);
 		
-		txtR_2 = new JTextField();
-		txtR_2.setText("R$");
-		txtR_2.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		txtR_2.setColumns(10);
-		add(txtR_2, "cell 4 29,growx");
+		tfValorFinalCOFP = new JTextField();
+		tfValorFinalCOFP.setText("R$");
+		tfValorFinalCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfValorFinalCOFP.setColumns(10);
+		add(tfValorFinalCOFP, "cell 4 29,growx");
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(234, 219, 247));
 		add(panel_2, "cell 3 31,grow");
 		
-		JButton btConfirmar = new JButton("Confirmar");
-		btConfirmar.setBackground(new Color(193, 151, 232));
-		btConfirmar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		panel_2.add(btConfirmar);
-		btConfirmar.setBorderPainted(false);
+		JButton btConfirmarCOFP = new JButton("Confirmar");
+		btConfirmarCOFP.setBackground(new Color(193, 151, 232));
+		btConfirmarCOFP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		panel_2.add(btConfirmarCOFP);
+		btConfirmarCOFP.setBorderPainted(false);
 		
 		
 
