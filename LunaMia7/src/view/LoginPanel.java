@@ -8,69 +8,72 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField tfUsuarioLogin;
+	private JPasswordField pfSenha;
 
 	/**
 	 * Create the panel.
 	 */
 	public LoginPanel() {
 		setBackground(new Color(234, 219, 247));
-		setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][][][][][][grow]"));
+		setPreferredSize(new Dimension(1020,640));
+		setMinimumSize(new Dimension(1020, 640));
+		setLayout(new MigLayout("", "[grow][center][][center][267.00,center][grow]", "[grow][][][30.00][][][][][][][][grow]"));
+		
+		JLabel lblNewLabel = new JLabel("");
+		add(lblNewLabel, "cell 0 0");
 		
 		JLabel lbLunaEMia = new JLabel("Luna & Mia");
 		lbLunaEMia.setFont(new Font("Constantia", Font.PLAIN, 80));
-		add(lbLunaEMia, "cell 1 1 4 1,alignx center,aligny center");
+		add(lbLunaEMia, "cell 1 1 4 1,aligny center");
 		
 		JLabel lbUsuario = new JLabel("Usuário");
-		lbUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lbUsuario, "cell 1 2 4 1,alignx center");
+		lbUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbUsuario, "cell 1 2 4 1");
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
-		textField.setColumns(10);
-		add(textField, "cell 1 3 4 1,growx");
+		tfUsuarioLogin = new JTextField();
+		tfUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
+		tfUsuarioLogin.setColumns(10);
+		add(tfUsuarioLogin, "cell 1 3 4 1,width 400px,height 30px");
 		
-		JLabel lblNewLabel_2 = new JLabel("Senha");
-		lblNewLabel_2.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(lblNewLabel_2, "cell 1 5 4 1,alignx center");
+		JLabel lbSenha = new JLabel("Senha");
+		lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbSenha, "cell 1 5 4 1,alignx center");
 		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
-		add(passwordField, "cell 1 6 4 1,growx");
+		pfSenha = new JPasswordField();
+		pfSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
+		add(pfSenha, "cell 1 6 4 1,width 400px,height 30px");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(234, 219, 247));
 		add(panel, "cell 1 8 4 1,grow");
 		
-		JButton btEntrar = new JButton("Entrar");
-		btEntrar.setBackground(new Color(193, 151, 232));
-		btEntrar.setForeground(new Color(0, 0, 0));
-		btEntrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		panel.add(btEntrar);
-		btEntrar.setBorderPainted(false);
+		JButton btEntrarLogin = new JButton("Entrar");
+		btEntrarLogin.setBackground(new Color(193, 151, 232));
+		btEntrarLogin.setForeground(new Color(0, 0, 0));
+		btEntrarLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		panel.add(btEntrarLogin);
+		btEntrarLogin.setBorderPainted(false);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(234, 219, 247));
-		add(panel_1, "cell 1 10 2 1,alignx left,growy");
-		
-		JLabel lblNewLabel = new JLabel("Não tem conta?");
-		lblNewLabel.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
-		panel_1.add(lblNewLabel);
+		JLabel lbNaoTemConta = new JLabel("Não tem conta?");
+		lbNaoTemConta.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		add(lbNaoTemConta, "cell 1 10 3 1, gapx 60");
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(234, 219, 247));
-		add(panel_2, "cell 3 10 2 1,alignx right,growy");
+		add(panel_2, "cell 4 10,alignx right,growy, gapafter 60");
 		
-		JButton btCadastrese = new JButton("Cadastre-se");
-		btCadastrese.setBackground(new Color(193, 151, 232));
-		btCadastrese.setFont(new Font("Bodoni MT", Font.PLAIN, 18));
-		panel_2.add(btCadastrese);
-		btCadastrese.setBorderPainted(false);
+		JButton btCadastreseLogin = new JButton("Cadastre-se");
+		btCadastreseLogin.setBackground(new Color(193, 151, 232));
+		btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		panel_2.add(btCadastreseLogin);
+		btCadastreseLogin.setBorderPainted(false);
 		
 
 	}
