@@ -13,6 +13,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class CadastroUsuario extends JPanel {
 
@@ -21,7 +22,7 @@ public class CadastroUsuario extends JPanel {
 	private JTextField tfNomeUsuario;
 	private JTextField tfEmail;
 	private JTextField tfTelefone;
-	private JTextField tfSenha;
+	private JPasswordField pfSenha;
 
 	/**
 	 * Create the panel.
@@ -30,7 +31,7 @@ public class CadastroUsuario extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
-		setLayout(new MigLayout("", "[][30.00][grow][][][][][45.00][grow]", "[][grow][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("", "[][30.00][grow][][][][][45.00][grow]", "[][grow][][][][][][][][71.00][][][grow]"));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
@@ -39,7 +40,7 @@ public class CadastroUsuario extends JPanel {
 		
 		JLabel lbLunaMia = new JLabel("Luna & Mia");
 		lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, 99));
-		add(lbLunaMia, "cell 3 2 4 1,center");
+		add(lbLunaMia, "cell 3 2 4 1,alignx center,aligny center");
 		
 		JLabel lbNomeComp = new JLabel("Nome Completo");
 		lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -47,7 +48,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfNomeComp = new JTextField();
 		tfNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeComp, "cell 5 4 2 1,width 22%,height 38px");
+		add(tfNomeComp, "cell 5 4 2 1,width 27%,alignx left,height 38px");
 		tfNomeComp.setColumns(10);
 		
 		JLabel lbNomeUsuario = new JLabel("Nome de Usuário");
@@ -56,7 +57,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfNomeUsuario = new JTextField();
 		tfNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeUsuario, "cell 5 5 2 1,width 22%,height 38px");
+		add(tfNomeUsuario, "cell 5 5 2 1,width 27%,height 38px");
 		tfNomeUsuario.setColumns(10);
 		
 		JLabel lbEmail = new JLabel("Email");
@@ -65,7 +66,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfEmail = new JTextField();
 		tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfEmail, "cell 5 6 2 1,width 22%,height 38px");
+		add(tfEmail, "cell 5 6 2 1,width 27%,height 38px");
 		tfEmail.setColumns(10);
 		
 		JLabel lbTelefone = new JLabel("Telefone");
@@ -74,17 +75,16 @@ public class CadastroUsuario extends JPanel {
 		
 		tfTelefone = new JTextField();
 		tfTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfTelefone, "cell 5 7 2 1,width 22%,height 38px");
+		add(tfTelefone, "cell 5 7 2 1,width 27%,height 38px");
 		tfTelefone.setColumns(10);
 		
 		JLabel lbSenha = new JLabel("Senha");
 		lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbSenha, "cell 3 8");
 		
-		tfSenha = new JTextField();
-		tfSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfSenha, "cell 5 8 2 1,width 22%,height 38px");
-		tfSenha.setColumns(10);
+		pfSenha = new JPasswordField();
+		pfSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		add(pfSenha, "cell 5 8 2 1,width 27%,height 38px");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(234, 219, 247));
@@ -102,22 +102,17 @@ public class CadastroUsuario extends JPanel {
             public void componentResized(ComponentEvent e) {
                 // Calcula novo tamanho baseado na largura
                 int newFontSize = Math.max(20, Math.min(40, getWidth() / 30));
-                //int newFontSize2 = Math.max(80, Math.min(99,getWidth() / 30));
-                //lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, newFontSize2));
+
                 lbEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
                 lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
                 lbNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
                 lbTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
                 lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
                 btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
-                
-                //tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize2));
-                
-                
+                                
             }
         });
 
 
 	}
-	//width 220px,height 30px
 }

@@ -1,9 +1,13 @@
+
 package view;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -24,13 +28,13 @@ public class Login extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
-		setLayout(new MigLayout("", "[grow][center][][center][267.00,center][grow]", "[grow][][][30.00][][][][][][][][grow]"));
+		setLayout(new MigLayout("", "[grow][center][][center][267.00,center][grow]", "[grow][][][][][][][][][][][grow]"));
 		
 		JLabel lblNewLabel = new JLabel("");
 		add(lblNewLabel, "cell 0 0");
 		
 		JLabel lbLunaEMiaLogin = new JLabel("Luna & Mia");
-		lbLunaEMiaLogin.setFont(new Font("Constantia", Font.PLAIN, 80));
+		lbLunaEMiaLogin.setFont(new Font("Constantia", Font.PLAIN, 99));
 		add(lbLunaEMiaLogin, "cell 1 1 4 1,aligny center");
 		
 		JLabel lbUsuarioLogin = new JLabel("Usuário");
@@ -40,7 +44,7 @@ public class Login extends JPanel {
 		tfUsuarioLogin = new JTextField();
 		tfUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
 		tfUsuarioLogin.setColumns(10);
-		add(tfUsuarioLogin, "cell 1 3 4 1,width 400px,height 30px");
+		add(tfUsuarioLogin, "cell 1 3 4 1,width 35%,height 38px");
 		
 		JLabel lbSenhaLogin = new JLabel("Senha");
 		lbSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -48,7 +52,7 @@ public class Login extends JPanel {
 		
 		pfSenhaLogin = new JPasswordField();
 		pfSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
-		add(pfSenhaLogin, "cell 1 6 4 1,width 400px,height 30px");
+		add(pfSenhaLogin, "cell 1 6 4 1,width 35%,height 38px");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(234, 219, 247));
@@ -74,6 +78,23 @@ public class Login extends JPanel {
 		btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		panel_2.add(btCadastreseLogin);
 		btCadastreseLogin.setBorderPainted(false);
+		
+		addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Calcula novo tamanho baseado na largura
+                int fonteProporcional = Math.max(20, Math.min(40, getWidth() / 30));
+                int fonteProporcional2 = Math.max(10, Math.min(30, getWidth() / 30));
+                
+                lbUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                lbSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                btEntrarLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                
+                lbNaoTemContaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional2));
+                btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional2));
+            }
+        });
+
 		
 
 	}

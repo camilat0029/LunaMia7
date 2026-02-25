@@ -1,8 +1,11 @@
+
 package view;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -18,7 +21,9 @@ public class Inicio extends JPanel {
 	 */
 	public Inicio() {
 		setBackground(new Color(234, 219, 247));
-		setLayout(new MigLayout("", "[][][][][grow][]", "[][][26.00][26][26][26][][][23.00,grow]"));
+		setPreferredSize(new Dimension(1020,640));
+		setMinimumSize(new Dimension(1020, 640));
+		setLayout(new MigLayout("gap 15", "[][grow][][][][grow]", "[grow][][][][][][][][grow]"));
 		
 		JLabel lbPorOndeDesejaComecarIn = new JLabel("Por onde deseja começar?");
 		lbPorOndeDesejaComecarIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -57,6 +62,7 @@ public class Inicio extends JPanel {
 		btCriarOrcamentoIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panelCriarOrcamentoIn.add(btCriarOrcamentoIn);
 		btCriarOrcamentoIn.setBorderPainted(false);
+		
 		
 
 	}

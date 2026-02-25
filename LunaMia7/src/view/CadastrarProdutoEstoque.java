@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class CadastrarProdutoEstoque extends JPanel {
 
@@ -25,6 +26,9 @@ public class CadastrarProdutoEstoque extends JPanel {
 	public CadastrarProdutoEstoque() {
 		setBackground(new Color(234, 219, 247));
 		setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][][][][][][][][][][][][grow]"));
+		
+		JLabel lblNewLabel = new JLabel("");
+		add(lblNewLabel, "flowx,cell 0 0");
 		
 		JLabel lbNomeProduto = new JLabel("Nome do Produto");
 		lbNomeProduto.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -84,6 +88,8 @@ public class CadastrarProdutoEstoque extends JPanel {
 		cbUnidadeMed.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		add(cbUnidadeMed, "cell 2 14,growx");
 		
+		
+		
 		tfQtdUnidade = new JTextField();
 		tfQtdUnidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		add(tfQtdUnidade, "cell 4 14,growx");
@@ -99,6 +105,10 @@ public class CadastrarProdutoEstoque extends JPanel {
 		panel.add(btConfirmar);
 		
 		btConfirmar.setBorderPainted(false);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(CadastrarProdutoEstoque.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		add(lblNewLabel_1, "cell 0 0");
 
 	}
 
