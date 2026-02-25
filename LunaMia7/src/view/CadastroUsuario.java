@@ -7,6 +7,9 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -30,13 +33,13 @@ public class CadastroUsuario extends JPanel {
 		setLayout(new MigLayout("", "[][30.00][grow][][][][][45.00][grow]", "[][grow][][][][][][][][][][][grow]"));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblNewLabel.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		add(lblNewLabel, "cell 0 0 2 1");
 		
 		JLabel lbLunaMia = new JLabel("Luna & Mia");
-		lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, 80));
-		add(lbLunaMia, "cell 3 2 4 1,alignx left,aligny center");
+		lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, 99));
+		add(lbLunaMia, "cell 3 2 4 1,center");
 		
 		JLabel lbNomeComp = new JLabel("Nome Completo");
 		lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -44,7 +47,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfNomeComp = new JTextField();
 		tfNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeComp, "cell 5 4 2 1,width 220px,height 30px");
+		add(tfNomeComp, "cell 5 4 2 1,width 22%,height 38px");
 		tfNomeComp.setColumns(10);
 		
 		JLabel lbNomeUsuario = new JLabel("Nome de Usuário");
@@ -53,7 +56,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfNomeUsuario = new JTextField();
 		tfNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeUsuario, "cell 5 5 2 1,width 220px,height 30px");
+		add(tfNomeUsuario, "cell 5 5 2 1,width 22%,height 38px");
 		tfNomeUsuario.setColumns(10);
 		
 		JLabel lbEmail = new JLabel("Email");
@@ -62,7 +65,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfEmail = new JTextField();
 		tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfEmail, "cell 5 6 2 1,width 220px,height 30px");
+		add(tfEmail, "cell 5 6 2 1,width 22%,height 38px");
 		tfEmail.setColumns(10);
 		
 		JLabel lbTelefone = new JLabel("Telefone");
@@ -71,7 +74,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfTelefone = new JTextField();
 		tfTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfTelefone, "cell 5 7 2 1,width 220px,height 30px");
+		add(tfTelefone, "cell 5 7 2 1,width 22%,height 38px");
 		tfTelefone.setColumns(10);
 		
 		JLabel lbSenha = new JLabel("Senha");
@@ -80,7 +83,7 @@ public class CadastroUsuario extends JPanel {
 		
 		tfSenha = new JTextField();
 		tfSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfSenha, "cell 5 8 2 1,width 220px,height 30px");
+		add(tfSenha, "cell 5 8 2 1,width 22%,height 38px");
 		tfSenha.setColumns(10);
 		
 		JPanel panel = new JPanel();
@@ -93,7 +96,28 @@ public class CadastroUsuario extends JPanel {
 		panel.add(btCadastrar);
 		
 		btCadastrar.setBorderPainted(false);
+		
+		addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Calcula novo tamanho baseado na largura
+                int newFontSize = Math.max(20, Math.min(40, getWidth() / 30));
+                //int newFontSize2 = Math.max(80, Math.min(99,getWidth() / 30));
+                //lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, newFontSize2));
+                lbEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                lbNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                lbTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize));
+                
+                //tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, newFontSize2));
+                
+                
+            }
+        });
+
 
 	}
-
+	//width 220px,height 30px
 }
