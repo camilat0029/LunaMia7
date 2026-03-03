@@ -50,10 +50,8 @@ JPanel panelAtual;
 		panelAtual = panelc;
 		validate();
 		repaint();
-		
-		
+				
 	}
-
 
 	public void mostrarPainelExp() {
 		// TODO Auto-generated method stub
