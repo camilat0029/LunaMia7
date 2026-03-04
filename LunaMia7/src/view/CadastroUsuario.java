@@ -38,6 +38,10 @@ public class CadastroUsuario extends JPanel {
 	 * Create the panel.
 	 */
 	public CadastroUsuario(NavegadorTelas2 navegadorTelas2, Menu menu) {
+		
+		
+		
+		// Ação botão de um jeito
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

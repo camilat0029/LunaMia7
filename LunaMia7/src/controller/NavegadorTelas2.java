@@ -22,6 +22,7 @@ public class NavegadorTelas2 {
 		
 		this.telaPrincipal2 = telaPrincipal2;
 		
+		//Ação botão 
 		this.login.getBtEntrarLogin().addActionListener(e -> {
 			navegarTela("INICIO");
 			this.menu.mostrarPanelCont();
