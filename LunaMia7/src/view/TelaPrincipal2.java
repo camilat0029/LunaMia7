@@ -1,4 +1,3 @@
-
 package view;
 
 import java.awt.Dimension;
@@ -10,11 +9,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import java.awt.BorderLayout;
 
-public class Tela extends JFrame {
+public class TelaPrincipal2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private CardLayout cardLayout;
+	JPanel panelTelas = new JPanel();
+	JPanel panelMenu;
 	
 
 	/**
@@ -24,10 +25,8 @@ public class Tela extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ControllerTeste c = new ControllerTeste();
-					Tela frame = new Tela();
-					c.iniciar();
-					//frame.setVisible(true);
+					TelaPrincipal2 frame = new TelaPrincipal2();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,7 +37,7 @@ public class Tela extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Tela() {
+	public TelaPrincipal2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1020, 640);
 		contentPane = new JPanel();
@@ -46,10 +45,15 @@ public class Tela extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.WEST);
-		
 		this.cardLayout = new CardLayout();
+		
+		panelMenu = new JPanel(new BorderLayout());
+		contentPane.add(panelMenu, BorderLayout.WEST);
+		
+		contentPane.add(panelTelas, BorderLayout.CENTER);
+		panelTelas.setLayout(cardLayout);
+		
+		
 		
 		setPreferredSize(new Dimension(1020,640)); // Tamanho de padrão
 		setMinimumSize(new Dimension(1020, 640)); // Tamanho minimo
@@ -58,12 +62,19 @@ public class Tela extends JFrame {
 
 	}
 	public void adicionarTela(String nome, JPanel tela){
-		this.contentPane.add(nome, tela);
+		this.panelTelas.add(tela, nome);
 	}
 	
 	public void mostrarTela(String nome) {
-		this.cardLayout.show(this.contentPane, nome);
+		this.cardLayout.show(this.panelTelas, nome);
 		this.pack();
+	}
+	
+	public void mudarMenu(JPanel menu) {
+	    panelMenu.removeAll();
+	    panelMenu.add(menu, BorderLayout.CENTER);
+	    panelMenu.revalidate();
+	    panelMenu.repaint();
 	}
 
 }

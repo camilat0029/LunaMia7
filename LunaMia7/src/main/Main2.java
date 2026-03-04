@@ -1,10 +1,13 @@
 package main;
 
+import controller.Menu;
 import controller.NavegadorTelas;
+import controller.NavegadorTelas2;
 import view.CadastrarProdutoEstoque;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
+import view.ControllerTeste;
 import view.CriarOrcamento;
 import view.CriarOrcamentoAposCalcular;
 import view.CriarOrcamentoComFormaPagamento;
@@ -14,14 +17,20 @@ import view.Login;
 import view.RedefinirSenha;
 import view.Relatorios;
 import view.TelaPrincipal;
+import view.TelaPrincipal2;
 
-public class Main {
+public class Main2 {
 
 	public static void main(String[] args) {
 		
-		TelaPrincipal telaPrincipal = new TelaPrincipal();
-		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
+		//JFrame
+		TelaPrincipal2 telaPrincipal2 = new TelaPrincipal2();
 		
+		//Controller
+		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2);
+		Menu menu = new Menu(telaPrincipal2);
+		
+		//View
 		Login login = new Login();
 		CadastroUsuario cadastro = new CadastroUsuario();
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
@@ -42,18 +51,21 @@ public class Main {
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
-		navegadorTelas.adicionarPainel("INICIO", inicio);
+		navegadorTelas2.adicionarPainel("INICIO", inicio);
 		//navegadorTelas.adicionarPainel("INICIOPOSCADASTRO", inicioPosCadastro);
 		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		
-		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
+		
+		//menu.iniciar();
+		
+		navegadorTelas2.adicionarPainel("CADASTRO", cadastro);
 		
 		
 		
-		telaPrincipal.setVisible(true);
+		telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("INICIO");
+		navegadorTelas2.navegarTela("INICIO");
 
 	}
 

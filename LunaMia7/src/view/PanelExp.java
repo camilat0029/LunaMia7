@@ -7,28 +7,36 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelExp extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private ControllerTeste controller;
 	/**
 	 * Create the panel.
 	 * @param teste 
 	 */
-	public PanelExp(Teste teste) {
+	public PanelExp(ControllerTeste controllerTeste) {
 		setBackground(new Color(255, 0, 128));
+		
+		setPreferredSize(new Dimension(100, 400));
 		setLayout(new MigLayout("", "[grow,fill]", "[][][][][][]"));
 		
-		JLabel lblNewLabel = new JLabel("<<<");
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("ghjkghkhjk");
-				teste.mostrarPainelCont();
-			}
+		this.controller = controllerTeste;
+		
+		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.addActionListener(e ->{
+			controller.cont();
 		});
-		add(lblNewLabel, "cell 0 0");
+		btnNewButton_3.setSelectedIcon(new ImageIcon(PanelExp.class.getResource("/imagensIcones/AbrirFechar.png")));
+		btnNewButton_3.setBackground(new Color(255, 0, 128));
+		add(btnNewButton_3, "cell 0 0");
 		
 		JButton btnNewButton = new JButton("New button");
 		add(btnNewButton, "cell 0 3");

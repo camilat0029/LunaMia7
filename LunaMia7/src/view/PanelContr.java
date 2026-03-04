@@ -6,28 +6,34 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelContr extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	 private ControllerTeste controller;
 	/**
 	 * Create the panel.
 	 * @param teste 
 	 */
-	public PanelContr(Teste teste) {
-		setBackground(new Color(255, 0, 128));
-		setLayout(new MigLayout("", "[grow]", "[]"));
+	public PanelContr(ControllerTeste controllerTeste) {
 		
-		JLabel lblNewLabel = new JLabel(">>>");
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("ghjkghkhjk");
-				teste.mostrarPainelExp();
-			}
+		this.controller = controllerTeste;
+		
+		setBackground(new Color(255, 0, 128));
+		setPreferredSize(new Dimension(100, 400));
+		setLayout(new MigLayout("", "[grow]", "[]"));
+	
+		JButton btnNewButton = new JButton(">>>");
+		btnNewButton.addActionListener(e -> {
+			controller.exp();
 		});
-		add(lblNewLabel, "cell 0 0");
+		add(btnNewButton, "cell 0 0");
 
 	}
 

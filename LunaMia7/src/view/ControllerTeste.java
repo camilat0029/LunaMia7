@@ -14,7 +14,7 @@ public class ControllerTeste {
 		// TODO Auto-generated constructor stub
 		 frame = new Teste(this);
 	}
-	private void iniciar() {
+	public void iniciar() {
 		// TODO Auto-generated method stub
 		frame.setVisible(true);
 		

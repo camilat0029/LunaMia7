@@ -21,8 +21,10 @@ JPanel panelAtual;
 	 * @param controllerTeste 
 	 */
 	public Teste(ControllerTeste controllerTeste) {
-		panelc = new PanelContr(this);
-		panel = new PanelExp(this);
+		panelc = new PanelContr(controllerTeste);
+		panel = new PanelExp(controllerTeste);
+		
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -40,6 +42,9 @@ JPanel panelAtual;
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new MigLayout("", "[]", "[]"));
 
+		
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 
@@ -48,8 +53,8 @@ JPanel panelAtual;
 		contentPane.remove(panelAtual);
 		contentPane.add(panelc, BorderLayout.WEST);
 		panelAtual = panelc;
-		validate();
-		repaint();
+		contentPane.revalidate();
+		contentPane.repaint();
 				
 	}
 
@@ -58,10 +63,12 @@ JPanel panelAtual;
 		contentPane.remove(panelAtual);
 		contentPane.add(panel, BorderLayout.WEST);
 		panelAtual = panel;
-		validate();
-		repaint();
+		contentPane.revalidate();
+		contentPane.repaint();
 		
 		
 	}
+	
+	
 
 }
