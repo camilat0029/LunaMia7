@@ -33,6 +33,7 @@ public class CadastroUsuario extends JPanel {
 	private JPasswordField pfSenha;
 	private NavegadorTelas2 navegadorTelas2;
 	private Menu menu;
+	private JLabel lbIconeVoltar;
 
 	/**
 	 * Create the panel.
@@ -42,14 +43,14 @@ public class CadastroUsuario extends JPanel {
 		
 		
 		// Ação botão de um jeito
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		//addMouseListener(new MouseAdapter() {
+		//	@Override
+		//	public void mouseClicked(MouseEvent e) {
 				
-				navegadorTelas2.navegarTela("LOGIN");
-				
-			}
-		});
+		//		navegadorTelas2.navegarTela("LOGIN");
+		//		
+		//	}
+		//});
 		
 		this.navegadorTelas2 = navegadorTelas2;
 		this.menu = menu;
@@ -59,10 +60,10 @@ public class CadastroUsuario extends JPanel {
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("", "[][30.00][grow][][][][][45.00][grow]", "[][grow][][][][][][][][71.00][][][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
-		add(lblNewLabel, "cell 0 0 2 1");
+		lbIconeVoltar = new JLabel("");
+		lbIconeVoltar.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
+		lbIconeVoltar.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		add(lbIconeVoltar, "cell 0 0 2 1");
 		
 		JLabel lbLunaMia = new JLabel("Luna & Mia");
 		lbLunaMia.setFont(new Font("Constantia", Font.PLAIN, 99));
@@ -147,7 +148,10 @@ public class CadastroUsuario extends JPanel {
                                 
             }
         });
-
+		
+		public void voltar(MouseListener mouseListener) {
+			this.lbIconeVoltar.addMouseListener(mouseListener);
+		}
 
 	}
 }

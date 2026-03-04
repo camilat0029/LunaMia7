@@ -3,6 +3,7 @@ package controller;
 import javax.swing.JPanel;
 
 import main.Main2;
+import view.CadastroUsuario;
 import view.Login;
 import view.TelaPrincipal;
 import view.TelaPrincipal2;
@@ -12,13 +13,15 @@ public class NavegadorTelas2 {
 	private TelaPrincipal2 telaPrincipal2;
 	private Login login;
 	private Menu menu;
+	private CadastroUsuario cadastro;
 	
 	
 	
-	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu) {
+	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu, CadastroUsuario cadastro) {
 		
 		this.login = login;
 		this.menu = menu;
+		this.cadastro = cadastro;
 		
 		this.telaPrincipal2 = telaPrincipal2;
 		
@@ -33,6 +36,8 @@ public class NavegadorTelas2 {
 			navegarTela("CADASTRO");
 			this.menu.removerMenu();
 		});
+		
+		this.cadastro.voltar()
 	}
 	
 	public void adicionarPainel(String nome, JPanel tela) {
@@ -42,6 +47,8 @@ public class NavegadorTelas2 {
 	public void navegarTela(String nome) {
 		this.telaPrincipal2.mostrarTela(nome);
 	}
+	
+	
 	
 	
 	
