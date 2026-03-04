@@ -16,23 +16,24 @@ public class TelaPrincipal2 extends JFrame {
 	private CardLayout cardLayout;
 	JPanel panelTelas = new JPanel();
 	JPanel panelMenu;
+	private String panelAtual;
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaPrincipal2 frame = new TelaPrincipal2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	//public static void main(String[] args) {
+	//	EventQueue.invokeLater(new Runnable() {
+	//		public void run() {
+	//			try {
+	//				TelaPrincipal2 frame = new TelaPrincipal2();
+					//frame.setVisible(true);
+	//			} catch (Exception e) {
+	//				e.printStackTrace();
+	//			}
+	//		}
+	//	});
+	//}
 
 	/**
 	 * Create the frame.
@@ -67,14 +68,36 @@ public class TelaPrincipal2 extends JFrame {
 	
 	public void mostrarTela(String nome) {
 		this.cardLayout.show(this.panelTelas, nome);
+		this.panelAtual = nome;
 		this.pack();
 	}
 	
+	public String getPanelAtual() {
+		return panelAtual;
+	}
+	public void setPanelAtual(String panelAtual) {
+		this.panelAtual = panelAtual;
+	}
 	public void mudarMenu(JPanel menu) {
 	    panelMenu.removeAll();
 	    panelMenu.add(menu, BorderLayout.CENTER);
 	    panelMenu.revalidate();
 	    panelMenu.repaint();
 	}
+	public JPanel getPanelMenu() {
+		return panelMenu;
+	}
+	public void setPanelMenu(JPanel panelMenu) {
+		this.panelMenu = panelMenu;
+	}
+	public JPanel getPanelTelas() {
+		return panelTelas;
+	}
+	public void setPanelTelas(JPanel panelTelas) {
+		this.panelTelas = panelTelas;
+	}
+	
+	
+	
 
 }

@@ -12,6 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class MenuContraido2 extends JPanel {
 
@@ -29,7 +30,8 @@ public class MenuContraido2 extends JPanel {
 		setPreferredSize(new Dimension(50,640));
 		setLayout(new MigLayout("", "[]", "[]"));
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MenuContraido2.class.getResource("/imagensIcones/Icone_Abrir.png")));
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -22,8 +22,8 @@ public class Main {
 		TelaPrincipal telaPrincipal = new TelaPrincipal();
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
 		
-		Login login = new Login();
-		CadastroUsuario cadastro = new CadastroUsuario();
+		//Login login = new Login();
+		//CadastroUsuario cadastro = new CadastroUsuario(navegadorTelas2);
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
 		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
@@ -47,7 +47,7 @@ public class Main {
 		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		
-		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
+		//navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
 		
 		

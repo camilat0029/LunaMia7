@@ -22,7 +22,7 @@ public class Inicio extends JPanel {
 	 * Create the panel.
 	 */
 	public Inicio() {
-		setBackground(new Color(234, 219, 247));
+		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("gap 30", "[][grow][][][][grow]", "[grow][][][][][grow]"));

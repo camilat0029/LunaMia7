@@ -23,16 +23,20 @@ public class Main2 {
 
 	public static void main(String[] args) {
 		
+		//this.main2 = main2;
+		
 		//JFrame
 		TelaPrincipal2 telaPrincipal2 = new TelaPrincipal2();
 		
+		
 		//Controller
-		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2);
+		;
 		Menu menu = new Menu(telaPrincipal2);
 		
 		//View
-		Login login = new Login();
-		CadastroUsuario cadastro = new CadastroUsuario();
+		Login login = new Login( menu);
+		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2, login, menu);
+		CadastroUsuario cadastro = new CadastroUsuario(navegadorTelas2, menu);
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
 		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
@@ -44,7 +48,7 @@ public class Main2 {
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
 		Relatorios relatorios = new Relatorios();
 		
-		//navegadorTelas.adicionarPainel("LOGIN", login);
+		navegadorTelas2.adicionarPainel("LOGIN", login);
 		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
 		//navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
 		//navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configuarPerfilAposCadastrar);
@@ -57,15 +61,18 @@ public class Main2 {
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		
 		
-		//menu.iniciar();
+		
 		
 		navegadorTelas2.adicionarPainel("CADASTRO", cadastro);
 		
 		
 		
-		telaPrincipal2.setVisible(true);
+		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas2.navegarTela("INICIO");
+		navegadorTelas2.navegarTela("LOGIN");
+		
+		
+		menu.iniciar();
 
 	}
 

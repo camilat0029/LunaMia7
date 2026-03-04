@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+import view.CadastroUsuario;
+import view.Login;
 import view.MenuContraido2;
 import view.MenuExpandido2;
 import view.TelaPrincipal;
@@ -17,6 +19,8 @@ public class Menu {
 	private MenuContraido2 mnCont;
 	private JPanel menuAtual;
 	private TelaPrincipal2 tela;
+	private NavegadorTelas2 navegadorTelas2;
+	private Login login;
 	
 	public Menu(TelaPrincipal2 tela) {
 		this.tela = tela;
@@ -44,12 +48,28 @@ public class Menu {
 		//tela.getContentPane().remove(menuAtual);
 		//tela.getContentPane().add(mnCont, BorderLayout.WEST);
 		//menuAtual = mnCont;
-		tela.getContentPane().revalidate();
-		tela.getContentPane().repaint();
+		//tela.getContentPane().revalidate();
+		//tela.getContentPane().repaint();
 	}
 	
+	public void removerMenu() {
+		tela.getPanelMenu().removeAll();
+		tela.revalidate();  
+        tela.repaint(); 
+	}
+	
+	
 	public void iniciar() {
-		tela.setVisible(true);
+		//if (tela.getPanelTelas() instanceof Login || tela.getPanelTelas() instanceof CadastroUsuario) {
+		if(tela.getPanelAtual().equals("LOGIN") || tela.getPanelAtual().equals("CADASTRO")) {
+			removerMenu();
+            tela.setVisible(true);
+		} else {
+			tela.setVisible(true);
+			menuAtual = mnCont;
+			tela.mudarMenu(menuAtual);
+		}
+		
 	}
 	
 	//public void cont() {
@@ -59,6 +79,8 @@ public class Menu {
 	//public void exp() {
 	//	tela.mostrarPainelExp();
 	//}
+	
+	
 	
 
 }

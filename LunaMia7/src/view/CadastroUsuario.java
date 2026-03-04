@@ -11,9 +11,17 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JTextField;
+
+import controller.Menu;
+import controller.NavegadorTelas2;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CadastroUsuario extends JPanel {
 
@@ -23,11 +31,25 @@ public class CadastroUsuario extends JPanel {
 	private JTextField tfEmail;
 	private JTextField tfTelefone;
 	private JPasswordField pfSenha;
+	private NavegadorTelas2 navegadorTelas2;
+	private Menu menu;
 
 	/**
 	 * Create the panel.
 	 */
-	public CadastroUsuario() {
+	public CadastroUsuario(NavegadorTelas2 navegadorTelas2, Menu menu) {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				navegadorTelas2.navegarTela("LOGIN");
+				
+			}
+		});
+		
+		this.navegadorTelas2 = navegadorTelas2;
+		this.menu = menu;
+		
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
@@ -90,7 +112,16 @@ public class CadastroUsuario extends JPanel {
 		panel.setBackground(new Color(234, 219, 247));
 		add(panel, "cell 3 10 4 1,grow");
 		
+		
+		
 		JButton btCadastrar = new JButton("Cadastrar");
+		btCadastrar.addActionListener(e -> {
+			navegadorTelas2.navegarTela("INICIO");
+			menu.mostrarPanelCont();
+			
+		});
+		
+		
 		btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btCadastrar.setBackground(new Color(193, 151, 232));
 		panel.add(btCadastrar);
