@@ -23,9 +23,13 @@ public class UsuarioPerfil {
 		this.percentualLucro = percentualLucro;
 		this.fotoPerfil = fotoPerfil;
 	}
+	
 	//métodos 
 	
 	public void adicionarDados() {
+		
+		
+		
 		
 	}
 	

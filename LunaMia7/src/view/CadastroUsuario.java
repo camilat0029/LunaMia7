@@ -3,6 +3,7 @@ package view;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class CadastroUsuario extends JPanel {
 
@@ -39,9 +41,7 @@ public class CadastroUsuario extends JPanel {
 	 * Create the panel.
 	 */
 	public CadastroUsuario(NavegadorTelas2 navegadorTelas2, Menu menu) {
-		
-		
-		
+				
 		// Ação botão de um jeito
 		//addMouseListener(new MouseAdapter() {
 		//	@Override
@@ -77,7 +77,7 @@ public class CadastroUsuario extends JPanel {
 		tfNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(tfNomeComp, "cell 5 4 2 1,width 27%,alignx left,height 38px");
 		tfNomeComp.setColumns(10);
-		
+				
 		JLabel lbNomeUsuario = new JLabel("Nome de Usuário");
 		lbNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbNomeUsuario, "cell 3 5");
@@ -118,14 +118,12 @@ public class CadastroUsuario extends JPanel {
 		add(panel, "cell 3 10 4 1,grow");
 		
 		
-		
 		JButton btCadastrar = new JButton("Cadastrar");
 		btCadastrar.addActionListener(e -> {
 			navegadorTelas2.navegarTela("INICIO");
 			menu.mostrarPanelCont();
 			
 		});
-		
 		
 		btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btCadastrar.setBackground(new Color(193, 151, 232));
@@ -149,9 +147,21 @@ public class CadastroUsuario extends JPanel {
             }
         });
 		
-		public void voltar(MouseListener mouseListener) {
-			this.lbIconeVoltar.addMouseListener(mouseListener);
-		}
 
+
+	}
+	
+	public void voltar(MouseListener mouseListener) {
+		this.lbIconeVoltar.addMouseListener(mouseListener);
+	}
+
+	public void voltar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Component getIconeVoltar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

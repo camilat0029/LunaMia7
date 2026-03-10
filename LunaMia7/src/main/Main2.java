@@ -35,7 +35,7 @@ public class Main2 {
 		
 		//View
 		Login login = new Login( menu);
-		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2, login, menu);
+		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2, login, menu, null);
 		CadastroUsuario cadastro = new CadastroUsuario(navegadorTelas2, menu);
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();

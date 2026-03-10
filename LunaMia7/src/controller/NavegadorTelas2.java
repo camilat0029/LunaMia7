@@ -17,6 +17,7 @@ public class NavegadorTelas2 {
 	
 	
 	
+	
 	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu, CadastroUsuario cadastro) {
 		
 		this.login = login;
@@ -35,10 +36,8 @@ public class NavegadorTelas2 {
 		this.login.getBtCadastreseLogin().addActionListener(e -> {
 			navegarTela("CADASTRO");
 			this.menu.removerMenu();
-		});
-		
-		this.cadastro.voltar()
-	}
+		});}
+			
 	
 	public void adicionarPainel(String nome, JPanel tela) {
 		this.telaPrincipal2.adicionarTela(nome, tela);
