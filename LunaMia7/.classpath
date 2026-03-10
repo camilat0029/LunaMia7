@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="com.miglayout.swing_11.4.2.jar"/>
 	<classpathentry kind="lib" path="com.miglayout.core_11.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Camila/Desktop/Camila/I6/PDS 2/mysql-connector-j-9.6.0/mysql-connector-j-9.6.0/mysql-connector-j-9.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

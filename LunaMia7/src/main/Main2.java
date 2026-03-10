@@ -35,8 +35,7 @@ public class Main2 {
 		
 		//View
 		Login login = new Login( menu);
-		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2, login, menu, null);
-		CadastroUsuario cadastro = new CadastroUsuario(navegadorTelas2, menu);
+		CadastroUsuario cadastro = new CadastroUsuario( menu);
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
 		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
@@ -47,10 +46,11 @@ public class Main2 {
 		InicioPosCadastro inicioPosCadastro = new InicioPosCadastro();
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
 		Relatorios relatorios = new Relatorios();
+		NavegadorTelas2 navegadorTelas2 = new NavegadorTelas2(telaPrincipal2, login, menu, cadastro);
 		
 		navegadorTelas2.adicionarPainel("LOGIN", login);
 		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
-		//navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
+		navegadorTelas2.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
 		//navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configuarPerfilAposCadastrar);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);

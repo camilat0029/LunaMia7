@@ -14,23 +14,25 @@ import model.UsuarioPerfil;
 
 public class UsuarioPerfilDAO {
 	
-    public void adicionarDados(CadastroUsuario cadastroUsuario) {
+	//MUDEI AQUI
+    public void adicionarDados(UsuarioPerfil usuarioPerfil) {
         String sql = "INSERT INTO perfil_usuario (email, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
-        		+ "VALUES (?, ?, ?,?,?,?,?,?)";
+        		+ "VALUES (?,?,?,?,?,?,?,?)";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-    //        pstm.setString(1, cadastroUsuario.get());
-     //       pstm.setString(2, cadastroUsuario.getEmail());
-    //        pstm.setString(3, cadastroUsuario.getEndereco());
-   //         pstm.setString(4, cadastroUsuario.getNomeUsuario());
-   //         pstm.setString(5, cadastroUsuario.getSenha());
-  //          pstm.setString(6, cadastroUsuario.getTelefone());
-  //          pstm.setFloat(7, cadastroUsuario.getPrecoHora());
-//            pstm.setFloat(8,cadastroUsuario.getPercentualLucro());         
+            //pstm.setString(1, usuarioPerfil.get());
+            pstm.setString(1, usuarioPerfil.getEmail());
+            pstm.setString(2, usuarioPerfil.getSenha());
+            pstm.setString(3, usuarioPerfil.getTelefone());
+            pstm.setString(4, usuarioPerfil.getNomeUsuario());
+            pstm.setString(5, usuarioPerfil.getNome());
+            pstm.setFloat(6, usuarioPerfil.getPrecoHora());
+            pstm.setString(7, usuarioPerfil.getEndereco());
+            pstm.setFloat(8,usuarioPerfil.getPercentualLucro());         
             pstm.executeUpdate();
             
         } catch (SQLException e) {
@@ -62,7 +64,7 @@ public class UsuarioPerfilDAO {
             while (rset.next()) {
                 UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, null);
                 usuario.setNome(rset.getString("nome"));
-                usuario.setEmail(rset.getString("email"));
+                usuario.setNomeUsuario(rset.getString("nome usuario"));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {

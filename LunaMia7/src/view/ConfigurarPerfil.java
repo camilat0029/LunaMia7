@@ -8,8 +8,14 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import model.UsuarioPerfil;
+import model.UsuarioPerfilDAO;
+
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConfigurarPerfil extends JPanel {
 
@@ -22,6 +28,8 @@ public class ConfigurarPerfil extends JPanel {
 	private JTextField tfEnderecoCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
+	UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0.0f, 0.0f, null);
+	UsuarioPerfilDAO usuarioDAO = new UsuarioPerfilDAO();
 
 	/**
 	 * Create the panel.
@@ -155,6 +163,28 @@ public class ConfigurarPerfil extends JPanel {
 		add(panel_1, "cell 5 17,grow");
 		
 		JButton btSalvar = new JButton("Salvar");
+		btSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				novoUsuario.setNome(tfNomeCompCP.getText());
+	            novoUsuario.setNomeUsuario(tfNomeUsuaCP.getText());
+	            novoUsuario.setEmail(tfEmailCP.getText());
+	            novoUsuario.setSenha(pfSenhaCP.getText());
+	            novoUsuario.setEndereco(tfEnderecoCP.getText());
+	            novoUsuario.setPercentualLucro(Float.parseFloat(tfPercLucroCP.getText()));
+	            novoUsuario.setPrecoHora(Float.parseFloat(tfPrecoHoraCP.getText()));
+	            novoUsuario.setTelefone(tfTelefoneCP.getText());
+	            
+
+	            usuarioDAO.adicionarDados(novoUsuario);
+	            
+				
+				
+				
+				
+				
+			}
+		});
 		btSalvar.setBackground(new Color(193, 151, 232));
 		btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_1.add(btSalvar);

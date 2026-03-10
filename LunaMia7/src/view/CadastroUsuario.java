@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 
 import controller.Menu;
 import controller.NavegadorTelas2;
+//import main.Usuario;
+import model.UsuarioPerfil;
+import model.UsuarioPerfilDAO;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -36,11 +39,13 @@ public class CadastroUsuario extends JPanel {
 	private NavegadorTelas2 navegadorTelas2;
 	private Menu menu;
 	private JLabel lbIconeVoltar;
+	UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0.0f, 0.0f, null);
+	UsuarioPerfilDAO usuarioDAO = new UsuarioPerfilDAO();
 
 	/**
 	 * Create the panel.
 	 */
-	public CadastroUsuario(NavegadorTelas2 navegadorTelas2, Menu menu) {
+	public CadastroUsuario( Menu menu) {
 				
 		// Ação botão de um jeito
 		//addMouseListener(new MouseAdapter() {
@@ -120,8 +125,23 @@ public class CadastroUsuario extends JPanel {
 		
 		JButton btCadastrar = new JButton("Cadastrar");
 		btCadastrar.addActionListener(e -> {
+			
+			novoUsuario.setNome(tfNomeComp.getText());
+            novoUsuario.setNomeUsuario(tfNomeUsuario.getText());
+            novoUsuario.setEmail(tfEmail.getText());
+            novoUsuario.setSenha(pfSenha.getText());
+            novoUsuario.setEndereco("");
+            novoUsuario.setPercentualLucro(0);
+            novoUsuario.setPrecoHora(0);
+            novoUsuario.setTelefone(tfTelefone.getText());
+            
+
+            usuarioDAO.adicionarDados(novoUsuario);
+            
 			navegadorTelas2.navegarTela("INICIO");
 			menu.mostrarPanelCont();
+			
+			
 			
 		});
 		
@@ -155,13 +175,13 @@ public class CadastroUsuario extends JPanel {
 		this.lbIconeVoltar.addMouseListener(mouseListener);
 	}
 
-	public void voltar() {
-		// TODO Auto-generated method stub
+	//public void voltar() {
+	///	// TODO Auto-generated method stub
 		
-	}
+	//}
 
-	public Component getIconeVoltar() {
+	//public Component getIconeVoltar() {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		//return null;
+	//}
 }

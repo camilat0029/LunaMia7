@@ -31,7 +31,7 @@ public class Login extends JPanel {
 	private NavegadorTelas2 navegadorTelas2;
 	private Main main;
 	private Menu menu;
-	private CadastroUsuario cadastro = new CadastroUsuario(navegadorTelas2, menu);
+	private CadastroUsuario cadastro = new CadastroUsuario(menu);
 	private JButton btEntrarLogin;
 	private JButton btCadastreseLogin;
 	

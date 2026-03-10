@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
 
 import main.Main2;
@@ -23,15 +26,18 @@ public class NavegadorTelas2 {
 		this.login = login;
 		this.menu = menu;
 		this.cadastro = cadastro;
-		
 		this.telaPrincipal2 = telaPrincipal2;
 		
 		//Ação botão 
-		this.login.getBtEntrarLogin().addActionListener(e -> {
-			navegarTela("INICIO");
-			this.menu.mostrarPanelCont();
-			
+		//MUDEI AQUI
+		this.cadastro.voltar(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				navegarTela("LOGIN");
+				menu.mostrarPanelCont();
+			}
 		});
+		
 		
 		this.login.getBtCadastreseLogin().addActionListener(e -> {
 			navegarTela("CADASTRO");
