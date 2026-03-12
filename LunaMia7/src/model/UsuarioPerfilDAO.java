@@ -1,3 +1,4 @@
+
 package model;
 
 import java.sql.Connection;
@@ -32,7 +33,7 @@ public class UsuarioPerfilDAO {
             pstm.setString(5, usuarioPerfil.getNome());
             pstm.setFloat(6, usuarioPerfil.getPrecoHora());
             pstm.setString(7, usuarioPerfil.getEndereco());
-            pstm.setFloat(8,usuarioPerfil.getPercentualLucro());         
+            pstm.setFloat(8, usuarioPerfil.getPercentualLucro());         
             pstm.executeUpdate();
             
         } catch (SQLException e) {
