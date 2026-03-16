@@ -65,8 +65,16 @@ public class UsuarioPerfilDAO {
             while (rset.next()) {
                 UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, null);
                 usuario.setNome(rset.getString("nome"));
-                usuario.setNomeUsuario(rset.getString("nome usuario"));
+                usuario.setNomeUsuario(rset.getString("nomeUsuario"));
+                usuario.setEmail(rset.getString("email"));
+                usuario.setEndereco(rset.getString ("endereco"));
+                usuario.setTelefone(rset.getString("senha"));
+                usuario.setSenha(rset.getString("senha"));
+                usuario.setPercentualLucro(rset.getFloat(0));
+                usuario.setPrecoHora(rset.getFloat(0));
+            //    usuario.setFotoPerfil(rset.getByte("null"));
                 usuarios.add(usuario);
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
