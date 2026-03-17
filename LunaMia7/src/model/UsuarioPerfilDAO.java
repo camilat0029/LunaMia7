@@ -17,7 +17,7 @@ public class UsuarioPerfilDAO {
 	
 	//MUDEI AQUI
     public void adicionarDados(UsuarioPerfil usuarioPerfil) {
-        String sql = "INSERT INTO perfil_usuario (email, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
+        String sql = "INSERT INTO Perfil_Usuario (email, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
         		+ "VALUES (?,?,?,?,?,?,?,?)";
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -51,7 +51,7 @@ public class UsuarioPerfilDAO {
     }
     
     public List<UsuarioPerfil> listarUsuarios() {
-        String sql = "SELECT * FROM usuario_perfil";
+        String sql = "SELECT * FROM Perfil_Usuario";
         List<UsuarioPerfil> usuarios = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -70,9 +70,9 @@ public class UsuarioPerfilDAO {
                 usuario.setEndereco(rset.getString ("endereco"));
                 usuario.setTelefone(rset.getString("senha"));
                 usuario.setSenha(rset.getString("senha"));
-                usuario.setPercentualLucro(rset.getFloat(0));
-                usuario.setPrecoHora(rset.getFloat(0));
-            //    usuario.setFotoPerfil(rset.getByte("null"));
+                usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
+                usuario.setPrecoHora(rset.getFloat("precoHora"));
+               // usuario.setFotoPerfil(blob);
                 usuarios.add(usuario);
                 
             }

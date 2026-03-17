@@ -16,7 +16,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JTextField;
 
 import controller.Menu;
-import controller.NavegadorTelas2;
+//import controller.NavegadorTelas2;
 //import main.Usuario;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
@@ -38,12 +38,17 @@ public class CadastroUsuario extends JPanel {
 	private JTextField tfEmail;
 	private JTextField tfTelefone;
 	private JPasswordField pfSenha;
-	private NavegadorTelas2 navegadorTelas2;
+	//private NavegadorTelas2 navegadorTelas2;
 	private Menu menu;
 	private JLabel lbIconeVoltar;
+	private JButton btCadastrar;
+	
 	UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0.0f, 0.0f, null);
 	UsuarioPerfilDAO usuarioDAO = new UsuarioPerfilDAO();
+	
+	
 
+	
 	/**
 	 * Create the panel.
 	 */
@@ -59,7 +64,7 @@ public class CadastroUsuario extends JPanel {
 		//	}
 		//});
 		
-		this.navegadorTelas2 = navegadorTelas2;
+		//this.navegadorTelas2 = navegadorTelas2;
 		this.menu = menu;
 		
 		setBackground(new Color(234, 219, 247));
@@ -125,27 +130,27 @@ public class CadastroUsuario extends JPanel {
 		add(panel, "cell 3 10 4 1,grow");
 		
 		
-		JButton btCadastrar = new JButton("Cadastrar");
-		btCadastrar.addActionListener(e -> {
-			
-			novoUsuario.setNome(tfNomeComp.getText());
-            novoUsuario.setNomeUsuario(tfNomeUsuario.getText());
-            novoUsuario.setEmail(tfEmail.getText());
-            novoUsuario.setSenha(pfSenha.getText());
-            novoUsuario.setEndereco("");
-            novoUsuario.setPercentualLucro(0);
-            novoUsuario.setPrecoHora(0);
-            novoUsuario.setTelefone(tfTelefone.getText());
-            
-
-            usuarioDAO.adicionarDados(novoUsuario);
-            
-			navegadorTelas2.navegarTela("INICIO");
-			menu.mostrarPanelCont();
-			
-			
-			
-		});
+		btCadastrar = new JButton("Cadastrar");
+//		btCadastrar.addActionListener(e -> {
+//			
+//			novoUsuario.setNome(tfNomeComp.getText());
+//            novoUsuario.setNomeUsuario(tfNomeUsuario.getText());
+//            novoUsuario.setEmail(tfEmail.getText());
+//            novoUsuario.setSenha(pfSenha.getText());
+//            novoUsuario.setEndereco("");
+//            novoUsuario.setPercentualLucro(0);
+//            novoUsuario.setPrecoHora(0);
+//            novoUsuario.setTelefone(tfTelefone.getText());
+//            
+//
+//            usuarioDAO.adicionarDados(novoUsuario);
+//            
+//			navegadorTelas2.navegarTela("INICIO");
+//			menu.mostrarPanelCont();
+//			
+//			
+//			
+//		});
 		
 		btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btCadastrar.setBackground(new Color(193, 151, 232));
@@ -176,6 +181,51 @@ public class CadastroUsuario extends JPanel {
 	public void voltar(MouseListener mouseListener) {
 		this.lbIconeVoltar.addMouseListener(mouseListener);
 	}
+	
+	public void cadastrar(ActionListener actionListener) {
+		this.btCadastrar.addActionListener(actionListener);
+	}
+	
+	public JTextField getTfNomeComp() {
+		return tfNomeComp;
+	}
+
+	public void setTfNomeComp(JTextField tfNomeComp) {
+		this.tfNomeComp = tfNomeComp;
+	}
+
+	public JTextField getTfNomeUsuario() {
+		return tfNomeUsuario;
+	}
+
+	public void setTfNomeUsuario(JTextField tfNomeUsuario) {
+		this.tfNomeUsuario = tfNomeUsuario;
+	}
+
+	public JTextField getTfEmail() {
+		return tfEmail;
+	}
+
+	public void setTfEmail(JTextField tfEmail) {
+		this.tfEmail = tfEmail;
+	}
+
+	public JTextField getTfTelefone() {
+		return tfTelefone;
+	}
+
+	public void setTfTelefone(JTextField tfTelefone) {
+		this.tfTelefone = tfTelefone;
+	}
+
+	public JPasswordField getPfSenha() {
+		return pfSenha;
+	}
+
+	public void setPfSenha(JPasswordField pfSenha) {
+		this.pfSenha = pfSenha;
+	}
+
 
 	//public void voltar() {
 	///	// TODO Auto-generated method stub

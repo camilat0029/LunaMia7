@@ -14,7 +14,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JTextField;
 
 import controller.Menu;
-import controller.NavegadorTelas2;
+//import controller.NavegadorTelas2;
 import main.Main;
 
 import javax.swing.JPasswordField;
@@ -30,12 +30,13 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfUsuarioLogin;
 	private JPasswordField pfSenhaLogin;
-	private NavegadorTelas2 navegadorTelas2;
+	//private NavegadorTelas2 navegadorTelas2;
 	private Main main;
 	private Menu menu;
-	private CadastroUsuario cadastro = new CadastroUsuario(menu);
+	//private CadastroUsuario cadastro = new CadastroUsuario(menu);
 	private JButton btEntrarLogin;
 	private JButton btCadastreseLogin;
+	
 	
 
 	public JButton getBtEntrarLogin() {
@@ -53,7 +54,7 @@ public class Login extends JPanel {
 	 */
 	public Login(Menu menu) {
 		
-		this.navegadorTelas2 = navegadorTelas2;
+		//this.navegadorTelas2 = navegadorTelas2;
 		
 		
 		
@@ -137,14 +138,35 @@ public class Login extends JPanel {
 
 	}
 
-
-	public JButton getBtCadastreseLogin() {
-		return btCadastreseLogin;
+	
+	public void cadastrese(ActionListener actionListener) {
+		this.btCadastreseLogin.addActionListener(actionListener);
+	}
+	
+	public void entrar(ActionListener actionListener) {
+		this.btEntrarLogin.addActionListener(actionListener);
 	}
 
 
-	public void setBtCadastreseLogin(JButton btCadastreseLogin) {
-		this.btCadastreseLogin = btCadastreseLogin;
+	public JTextField getTfUsuarioLogin() {
+		return tfUsuarioLogin;
 	}
+
+
+	public void setTfUsuarioLogin(JTextField tfUsuarioLogin) {
+		this.tfUsuarioLogin = tfUsuarioLogin;
+	}
+
+
+	public JPasswordField getPfSenhaLogin() {
+		return pfSenhaLogin;
+	}
+
+
+	public void setPfSenhaLogin(JPasswordField pfSenhaLogin) {
+		this.pfSenhaLogin = pfSenhaLogin;
+	}
+	
+	
 
 }

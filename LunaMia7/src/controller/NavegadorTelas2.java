@@ -18,10 +18,7 @@ public class NavegadorTelas2 {
 	private Login login;
 	private Menu menu;
 	private CadastroUsuario cadastro;
-	
-	
-	
-	
+		
 	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu, CadastroUsuario cadastro) {
 		
 		this.login = login;
@@ -36,14 +33,21 @@ public class NavegadorTelas2 {
 			public void mouseClicked(MouseEvent e) {
 				navegarTela("LOGIN");
 				menu.mostrarPanelCont();
+				menu.removerMenu();
 			}
 		});
 		
 		
-		this.login.getBtCadastreseLogin().addActionListener(e -> {
+		this.login.cadastrese(e -> {
 			navegarTela("CADASTRO");
 			this.menu.removerMenu();
-		});}
+		});
+		
+		
+	
+	}
+	
+	
 			
 	
 	public void adicionarPainel(String nome, JPanel tela) {
@@ -54,10 +58,4 @@ public class NavegadorTelas2 {
 		this.telaPrincipal2.mostrarTela(nome);
 	}
 	
-	
-	
-	
-	
-	
-
 }
