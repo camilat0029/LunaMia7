@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.BancoDeDados;
-import main.Usuario;
+import model.BancoDeDados;
+import model.OrcamentoDAO;
+import view.CriarOrcamento;
 
 public class OrcamentoDAO {
 
@@ -43,36 +44,34 @@ public class OrcamentoDAO {
 		}
 	}
 
-	public List<Orcamento> listarUsuarios() {
-        String sql = "SELECT * FROM usuarios";
-        List<Orcamento> orcamento = new ArrayList<>();
-        Connection conexao = null;
-        PreparedStatement pstm = null;
-        ResultSet rset = null; // Objeto que guarda o resultado da consulta
-
+	public List<Orcamento> listarOrcamentos() {
+		String sql = "SELECT * FROM orcamento";
+		List<Orcamento> orcamentos = new ArrayList<>();
+		Connection conexao = null;
+		PreparedStatement pstm = null;
+		ResultSet rset = null; // Objeto que guarda o resultado da consulta
 
 		try {
-			  conexao = BancoDeDados.conectar();
-	            pstm = conexao.prepareStatement(sql);
-	            rset = pstm.executeQuery();
+			conexao = BancoDeDados.conectar();
+			pstm = conexao.prepareStatement(sql);
+			rset = pstm.executeQuery();
 
 			while (rset.next()) {
 
-				Orcamento orcamentos = new Orcamento(sql, sql, sql, 0, 0, null, null);
-				orcamentos.setTituloPedido(rset.getString("tituloPedido"));
-				orcamentos.setTituloPedido("tituloPedido");
-				orcamentos.setQuantHorasPrevistas(0);
-				orcamentos.setMaxDias(0);
-				orcamentos.setDescricaoPedido("descricao");
-
-				orcamento.add(orcamentos);
+				Orcamento orcamento = new Orcamento(sql, sql, sql, 0, 0, null, null);
+				orcamento.setTituloPedido(rset.getString("tituloPedido"));
+				orcamento.setTituloPedido("tituloPedido");
+				orcamento.setQuantHorasPrevistas(0);
+				orcamento.setMaxDias(0);
+				orcamento.setDescricaoPedido("descricao");
+				orcamentos.add(orcamento);
 			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 //			BancoDeDados.desconectar(conexao);
-//			// Fechar recursos
-//		}
-//		return orcamentos;
-	}
+			// Fechar recursos
+		}
+		return orcamentos;
+    }
 }

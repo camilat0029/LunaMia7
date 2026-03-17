@@ -3,13 +3,16 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAO {
 
 	public void adicionarDados(Cliente cliente) {
 
-		String sql = "INSERT INTO cliente (nomeCliente, telefone, email" + "VALURES (?,?,?)";
+		String sql = "INSERT INTO cliente (nomeCliente, telefone, email" + "VALUES (?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -18,7 +21,7 @@ public class ClienteDAO {
 			pstm = conexao.prepareStatement(sql);
 			pstm.setString(1, cliente.getNome());
 			pstm.setString(2, cliente.getTelefone());
-			pstm.setString(3, cliente.getTelefone());
+			pstm.setString(3, cliente.getEmail());
 			pstm.executeUpdate();
 
 		} catch (SQLException e) {
@@ -34,4 +37,34 @@ public class ClienteDAO {
 			}
 		}
 	}
+	public List<Cliente> listarClientes() {
+        String sql = "SELECT * FROM cliente";
+        List<Cliente> clientes = new ArrayList<>();
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null; // Objeto que guarda o resultado da consulta
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while (rset.next()) {
+                Cliente cliente = new Cliente(sql, sql, sql);
+                cliente.setNome(rset.getString("nomeCliente"));
+                cliente.setTelefone(rset.getString("telefone"));
+                cliente.setEmail(rset.getString("email"));
+                
+                clientes.add(cliente);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+ //       	BancoDeDados.desconectar(conexao);
+            // Fechar recursos
+        }
+        return clientes;
+    }
+	
 }
