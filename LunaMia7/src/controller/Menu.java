@@ -5,20 +5,19 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import view.Login;
-import view.MenuContraido2;
-import view.MenuExpandido2;
-import view.TelaPrincipal2;
+import view.MenuContraido;
+import view.MenuExpandido;
+import view.TelaPrincipal;
 
 public class Menu {
 	
 	
-	private MenuExpandido2 mnExp;
-	private MenuContraido2 mnCont;
+	private MenuExpandido mnExp;
+	private MenuContraido mnCont;
 	private JPanel menuAtual;
-	private TelaPrincipal2 tela;
+	private TelaPrincipal tela;
 	
-	public Menu(TelaPrincipal2 tela, MenuExpandido2 mnExp, MenuContraido2 mnCont) {
+	public Menu(TelaPrincipal tela, MenuExpandido mnExp, MenuContraido mnCont) {
 		this.tela = tela;
 		this.mnExp = mnExp;
 		this.mnCont = mnCont;

@@ -12,10 +12,10 @@ public class LoginController {
 	
 	private Login login;
 	private UsuarioPerfilDAO usuarioDAO;
-	private NavegadorTelas2 navegadorTelas2;
+	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
 	
-	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas2 navegadorTelas2, Menu menu) {
+	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
 		super();
 		this.login = login;
 		this.usuarioDAO = usuarioDAO;
@@ -32,25 +32,36 @@ public class LoginController {
 		
 		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
 		
-		for (UsuarioPerfil usuarioPerfil : usuarios) {
+		
+		if(login.getTfUsuarioLogin().getText().isEmpty() || login.getPfSenhaLogin().getText().isEmpty()) {
 			
-			if(login.getTfUsuarioLogin().getText().isEmpty() || login.getPfSenhaLogin().getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Opa, algum campo está vazio");
+			
+		}
+		else{
+			boolean usuarioEncontrado = false; 
+			
+			for (UsuarioPerfil usuarioPerfil : usuarios) {
 				
-				JOptionPane.showMessageDialog(null, "Opa, algum campo está vazio");
-				break;
+				if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
+						usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
+
+					 usuarioEncontrado = true;
+					 break;
+				}
 				
 			}
-			else if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
-					usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
-				
-				this.navegadorTelas2.navegarTela("INICIO");
-				this.menu.mostrarPanelCont();	
+			
+			if (usuarioEncontrado) {
+				 this.navegadorTelas2.navegarTela("INICIO");
+				 this.menu.mostrarPanelCont();	
 			}else {
 				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);
-				break;
 			}
 			
 		}
+		
+		
 	}
 	
 	public void limparCamposLogin() {

@@ -12,12 +12,12 @@ public class CadastroUsuarioController {
 
 	private CadastroUsuario cadastroUsuario;
 	private UsuarioPerfilDAO usuarioDAO;
-	private NavegadorTelas2 navegadorTelas2;
+	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
 	private boolean EmailRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
-			UsuarioPerfilDAO usuarioDAO, NavegadorTelas2 navegadorTelas2, Menu menu) {
+			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
