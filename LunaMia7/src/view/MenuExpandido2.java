@@ -1,49 +1,40 @@
-
 package view;
 
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import controller.Menu;
-
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 
 public class MenuExpandido2 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private Menu menu;
+	private JLabel lbMostrarMenuCont;
 	
-	/**
-	 * Create the panel.
-	 */
-	public MenuExpandido2(Menu menu) {
+	public MenuExpandido2() {
 		
-		this.menu = menu;
-		
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				menu.mostrarPanelCont();
-				
-			}
-		});
 		setBackground(new Color(234, 219, 247));
 		
 		setPreferredSize(new Dimension(200,640));
 		setLayout(new MigLayout("gap 18", "[][][]", "[][][][][][][][][][]"));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuExpandido2.class.getResource("/imagensIcones/Icone_Fechar.png")));
-		add(lblNewLabel, "cell 1 0,alignx right");
+		lbMostrarMenuCont = new JLabel(""){
+		    @Override
+		    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent event) {
+		        return new java.awt.Point(getWidth(), 10);
+		    }
+		};
+		lbMostrarMenuCont.setIcon(new ImageIcon(MenuExpandido2.class.getResource("/imagensIcones/Icone_Fechar.png")));
+		add(lbMostrarMenuCont, "cell 1 0,alignx right");
+		
+		lbMostrarMenuCont.setToolTipText("Fechar Menu");
 		
 		JLabel lbImagem = new JLabel("Imagem");
 		lbImagem.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
@@ -84,6 +75,10 @@ public class MenuExpandido2 extends JPanel {
 		btEstoque.setBorderPainted(false);
 		btRelatorios.setBorderPainted(false);
 
+	}
+	
+	public void mostrarMenuContraido(MouseListener mouseListener) {
+		this.lbMostrarMenuCont.addMouseListener(mouseListener);
 	}
 
 }

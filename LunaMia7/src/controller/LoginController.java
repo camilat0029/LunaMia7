@@ -10,10 +10,8 @@ import view.Login;
 
 public class LoginController {
 	
-	
 	private Login login;
 	private UsuarioPerfilDAO usuarioDAO;
-	private UsuarioPerfil usuarioPerfil;
 	private NavegadorTelas2 navegadorTelas2;
 	private Menu menu;
 	
@@ -39,17 +37,25 @@ public class LoginController {
 			if(login.getTfUsuarioLogin().getText().isEmpty() || login.getPfSenhaLogin().getText().isEmpty()) {
 				
 				JOptionPane.showMessageDialog(null, "Opa, algum campo está vazio");
+				break;
 				
 			}
 			else if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
 					usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
 				
 				this.navegadorTelas2.navegarTela("INICIO");
-				this.menu.mostrarPanelCont();
-				
+				this.menu.mostrarPanelCont();	
+			}else {
+				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);
+				break;
 			}
 			
 		}
+	}
+	
+	public void limparCamposLogin() {
+		login.getTfUsuarioLogin().setText("");
+		login.getPfSenhaLogin().setText("");
 	}
 
 }

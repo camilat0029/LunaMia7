@@ -5,42 +5,45 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import controller.Menu;
-
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 
 public class MenuContraido2 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private Menu menu;
+	private JLabel lbMostrarMenuExp;
 
 	/**
 	 * Create the panel.
 	 */
-	public MenuContraido2(Menu menu) {
+	public MenuContraido2() {
 		
-		this.menu = menu;
 		setBackground(new Color(234, 219, 247));
 		
 		setPreferredSize(new Dimension(50,640));
 		setLayout(new MigLayout("", "[]", "[]"));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuContraido2.class.getResource("/imagensIcones/Icone_Abrir.png")));
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Clique detectado");
-				menu.mostrarPanelExp();
-			}
-		});
-		add(lblNewLabel, "cell 0 0");
-
+		lbMostrarMenuExp = new JLabel(""){
+		    @Override
+		    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent event) {
+		        return new java.awt.Point(getWidth(), 10);
+		    }
+		};
+		
+		lbMostrarMenuExp.setIcon(new ImageIcon(MenuContraido2.class.getResource("/imagensIcones/Icone_Abrir.png")));
+		
+		add(lbMostrarMenuExp, "cell 0 0");
+		
+		lbMostrarMenuExp.setToolTipText("Menu");
+		
+	}
+	
+	public void mostrarMenuExpandido(MouseListener mouseListener) {
+		this.lbMostrarMenuExp.addMouseListener(mouseListener);
 	}
 
 }

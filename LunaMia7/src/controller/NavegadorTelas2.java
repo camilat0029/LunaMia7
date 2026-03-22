@@ -18,8 +18,11 @@ public class NavegadorTelas2 {
 	private Login login;
 	private Menu menu;
 	private CadastroUsuario cadastro;
+	private CadastroUsuarioController cadastroController;
+	private LoginController loginController;
 		
-	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu, CadastroUsuario cadastro) {
+	public NavegadorTelas2(TelaPrincipal2 telaPrincipal2, Login login, Menu menu, 
+			CadastroUsuario cadastro) {
 		
 		this.login = login;
 		this.menu = menu;
@@ -32,6 +35,7 @@ public class NavegadorTelas2 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegarTela("LOGIN");
+				cadastroController.limparCamposTelaCadastro();
 				menu.mostrarPanelCont();
 				menu.removerMenu();
 			}
@@ -40,16 +44,22 @@ public class NavegadorTelas2 {
 		
 		this.login.cadastrese(e -> {
 			navegarTela("CADASTRO");
+			loginController.limparCamposLogin();
 			this.menu.removerMenu();
 		});
 		
-		
-	
 	}
 	
-	
-			
-	
+
+	public void setCadastroController(CadastroUsuarioController cadastroController) {
+		this.cadastroController = cadastroController;
+	}
+
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
+	}
+
+
 	public void adicionarPainel(String nome, JPanel tela) {
 		this.telaPrincipal2.adicionarTela(nome, tela);
 	}

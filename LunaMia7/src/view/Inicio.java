@@ -1,4 +1,3 @@
-
 package view;
 
 import javax.swing.JPanel;
@@ -18,10 +17,8 @@ public class Inicio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
 	public Inicio() {
+		
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));

@@ -1,62 +1,28 @@
-
-
-
-
 package view;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import controller.Menu;
-//import controller.NavegadorTelas2;
-import main.Main;
-
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Login extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfUsuarioLogin;
 	private JPasswordField pfSenhaLogin;
-	//private NavegadorTelas2 navegadorTelas2;
-	private Main main;
-	private Menu menu;
-	//private CadastroUsuario cadastro = new CadastroUsuario(menu);
 	private JButton btEntrarLogin;
 	private JButton btCadastreseLogin;
-	
-	
 
-	public JButton getBtEntrarLogin() {
-		return btEntrarLogin;
-	}
-
-
-	public void setBtEntrarLogin(JButton btEntrarLogin) {
-		this.btEntrarLogin = btEntrarLogin;
-	}
-
-
-	/**
-	 * Create the panel.
-	 */
-	public Login(Menu menu) {
-		
-		//this.navegadorTelas2 = navegadorTelas2;
-		
-		
+	public Login() {
 		
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
@@ -92,10 +58,6 @@ public class Login extends JPanel {
 		add(panel, "cell 1 8 4 1,grow");
 		
 		btEntrarLogin = new JButton("Entrar");
-		//btEntrarLogin.addActionListener(e -> {
-		//	navegadorTelas2.navegarTela("INICIO");
-		//	menu.mostrarPanelCont();
-		//});
 		btEntrarLogin.setBackground(new Color(193, 151, 232));
 		btEntrarLogin.setForeground(new Color(0, 0, 0));
 		btEntrarLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -111,10 +73,6 @@ public class Login extends JPanel {
 		add(panel_2, "cell 4 10,alignx right,growy, gapafter 60");
 		
 		btCadastreseLogin = new JButton("Cadastre-se");
-		//btCadastreseLogin.addActionListener(e -> {
-		//	navegadorTelas2.navegarTela("CADASTRO");
-		//	menu.removerMenu();
-		//});
 		btCadastreseLogin.setBackground(new Color(193, 151, 232));
 		btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		panel_2.add(btCadastreseLogin);

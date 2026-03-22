@@ -1,16 +1,14 @@
 package controller;
 
-import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import view.CadastroUsuario;
 import view.Login;
 import view.MenuContraido2;
 import view.MenuExpandido2;
-import view.TelaPrincipal;
 import view.TelaPrincipal2;
-import view.Teste;
 
 public class Menu {
 	
@@ -19,37 +17,41 @@ public class Menu {
 	private MenuContraido2 mnCont;
 	private JPanel menuAtual;
 	private TelaPrincipal2 tela;
-	private NavegadorTelas2 navegadorTelas2;
-	private Login login;
 	
-	public Menu(TelaPrincipal2 tela) {
+	public Menu(TelaPrincipal2 tela, MenuExpandido2 mnExp, MenuContraido2 mnCont) {
 		this.tela = tela;
-		mnExp = new MenuExpandido2(this);
-		mnCont = new MenuContraido2(this);
+		this.mnExp = mnExp;
+		this.mnCont = mnCont;
 		menuAtual = mnCont;
-		//tela.getContentPane().add(menuAtual, BorderLayout.WEST);
 		
 		tela.mudarMenu(menuAtual);
+		
+		this.mnExp.mostrarMenuContraido(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mostrarPanelCont();
+			}
+		});
+		
+		this.mnCont.mostrarMenuExpandido(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mostrarPanelExp();
+			}
+			
+		});
+		
+		
 	}
 	
 	public void mostrarPanelCont() {
 		menuAtual = mnCont;
 		tela.mudarMenu(menuAtual);
-		//tela.getContentPane().remove(menuAtual);
-		//tela.getContentPane().add(mnExp, BorderLayout.WEST);
-		//menuAtual = mnExp;
-		//tela.getContentPane().revalidate();
-		//tela.getContentPane().repaint();
 	}
 	
 	public void mostrarPanelExp() {
 		menuAtual = mnExp;
 		tela.mudarMenu(menuAtual);
-		//tela.getContentPane().remove(menuAtual);
-		//tela.getContentPane().add(mnCont, BorderLayout.WEST);
-		//menuAtual = mnCont;
-		//tela.getContentPane().revalidate();
-		//tela.getContentPane().repaint();
 	}
 	
 	public void removerMenu() {
@@ -60,7 +62,6 @@ public class Menu {
 	
 	
 	public void iniciar() {
-		//if (tela.getPanelTelas() instanceof Login || tela.getPanelTelas() instanceof CadastroUsuario) {
 		if(tela.getPanelAtual().equals("LOGIN") || tela.getPanelAtual().equals("CADASTRO")) {
 			removerMenu();
             tela.setVisible(true);
@@ -69,18 +70,6 @@ public class Menu {
 			menuAtual = mnCont;
 			tela.mudarMenu(menuAtual);
 		}
-		
 	}
-	
-	//public void cont() {
-	//	tela.mostrarPainelCont();
-	//}
-	
-	//public void exp() {
-	//	tela.mostrarPainelExp();
-	//}
-	
-	
-	
 
 }
