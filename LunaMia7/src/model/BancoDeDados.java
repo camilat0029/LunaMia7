@@ -9,7 +9,7 @@ public class BancoDeDados {
 	
     private static final String URL = "jdbc:mysql://localhost:3306/LunaMia"; // <-- substitua '/cadastro_db' pelo seu banco de dados
     private static final String USUARIO = "root"; // <-- Substitua pelo seu usuário
-    private static final String SENHA = "290710Cvt#";   // <-- Substitua pela sua senha
+    private static final String SENHA = "admin";   // <-- Substitua pela sua senha
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     // Método para obter uma conexão com o banco de dados

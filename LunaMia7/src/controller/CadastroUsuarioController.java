@@ -15,6 +15,7 @@ public class CadastroUsuarioController {
 	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
 	private boolean EmailRepetido;
+	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
 			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
@@ -40,8 +41,9 @@ public class CadastroUsuarioController {
 			} else {
 				
 				verificarEmail();
+				verificarUsuarioPerfil();
 				
-				if(EmailRepetido == false){
+				if(EmailRepetido == false && UsuarioRepetido == false){
 					
 					novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
 					novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
@@ -62,9 +64,13 @@ public class CadastroUsuarioController {
 					navegadorTelas2.navegarTela("LOGIN");
 					limparCamposTelaCadastro();
 					
-				}else {
+				}else if (EmailRepetido == true && UsuarioRepetido == true){
+					JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.", "Informação", 1);
+				} else if(EmailRepetido == true && UsuarioRepetido == false) {
 					JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
-				}
+				} else if(EmailRepetido == false && UsuarioRepetido == true) {
+					JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
+				} 
 			}
 			
 			System.out.println("clique");
@@ -89,6 +95,20 @@ public class CadastroUsuarioController {
 			
 			if(usuarioPerfil.getEmail().equals(cadastroUsuario.getTfEmail().getText())) {
 				EmailRepetido = true;
+				break;
+			}
+		}
+	}
+	
+	public void verificarUsuarioPerfil() {
+		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+		
+		UsuarioRepetido = false;
+		
+		for (UsuarioPerfil usuarioPerfil : usuarios) {
+			
+			if(usuarioPerfil.getNomeUsuario().equals(cadastroUsuario.getTfNomeUsuario().getText())) {
+				UsuarioRepetido = true;
 				break;
 			}
 		}
