@@ -55,7 +55,6 @@ public class CadastroUsuarioController {
 					novoUsuario.setFotoPerfil(null);
 					novoUsuario.setPercentualLucro(0);
 					novoUsuario.setPrecoHora(0);
-					
 
 					usuarioDAO.adicionarDados(novoUsuario);
 					
