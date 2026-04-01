@@ -70,22 +70,22 @@ public class Main {
 		
 		
 		Menu menu = new Menu(telaPrincipal2, menuExp, menuCont);
-		NavegadorTelas navegadorTelas2 = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
-		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas2, menu);
-		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas2, menu);
+		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
+		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, menu);
+		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		
 		
-		navegadorTelas2.setCadastroController(cadastroUsuarioController);
-		navegadorTelas2.setLoginController(loginController);
+		navegadorTelas.setCadastroController(cadastroUsuarioController);
+		navegadorTelas.setLoginController(loginController);
 		
-		navegadorTelas2.adicionarPainel("LOGIN", login);
+		navegadorTelas.adicionarPainel("LOGIN", login);
 		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
-		navegadorTelas2.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
-		//navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configuarPerfilAposCadastrar);
+		navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
+		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configurarPerfiAposCadastrar);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
-		navegadorTelas2.adicionarPainel("INICIO", inicio);
+		navegadorTelas.adicionarPainel("INICIO", inicio);
 		//navegadorTelas.adicionarPainel("INICIOPOSCADASTRO", inicioPosCadastro);
 		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
@@ -93,13 +93,13 @@ public class Main {
 		
 		
 		
-		navegadorTelas2.adicionarPainel("CADASTRO", cadastro);
+		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
 		
 		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas2.navegarTela("LOGIN");
+		navegadorTelas.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
 		
 		
 		menu.iniciar();

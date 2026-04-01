@@ -84,5 +84,33 @@ public class UsuarioPerfilDAO {
         }
         return usuarios;
     }
+    
+    
+    // UPDATE - Atualizar um usuário existente
+    public void atualizarUsuario(UsuarioPerfil usuarioPerfil) {
+        String sql = "UPDATE Perfil_Usuario SET email = ?, fotoPerfil = ?, senha = ?, nrTelefone = ?, nome = ?, "
+        		+ "precoHora = ?, endereco = ?, percentualLucro = ? WHERE nomeUsuario = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, usuarioPerfil.getEmail());
+            //pstm.setNString(2, usuarioPerfil.getFotoPerfil()); mudar para String aqui e no banco de dados para pegar o caminho da foto
+            pstm.setString(3, usuarioPerfil.getSenha());
+            pstm.setString(4, usuarioPerfil.getTelefone());
+            pstm.setString(5, usuarioPerfil.getNome());
+            pstm.setFloat(6, usuarioPerfil.getPrecoHora());
+            pstm.setString(7, usuarioPerfil.getEndereco());
+            pstm.setFloat(8, usuarioPerfil.getPercentualLucro());
+            pstm.setString(9, usuarioPerfil.getNomeUsuario());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	//BancoDeDados.desconectar(conexao);
+        }
+    }
 
 }

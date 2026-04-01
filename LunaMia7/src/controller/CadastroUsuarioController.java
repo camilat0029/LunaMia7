@@ -85,8 +85,12 @@ public class CadastroUsuarioController {
 		cadastroUsuario.getPfSenha().setText("");
 	}
 	
+	
+	
+	List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+	
 	public void verificarEmail() {
-		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+		
 		
 		EmailRepetido = false;
 		
@@ -100,7 +104,6 @@ public class CadastroUsuarioController {
 	}
 	
 	public void verificarUsuarioPerfil() {
-		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
 		
 		UsuarioRepetido = false;
 		
@@ -112,5 +115,10 @@ public class CadastroUsuarioController {
 			}
 		}
 	}
+	
+	public void atualizarCadastro() {
+		
+	}
+	
 	
 }

@@ -14,6 +14,7 @@ public class LoginController {
 	private UsuarioPerfilDAO usuarioDAO;
 	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
+	private String usuario;
 	
 	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
 		super();
@@ -45,7 +46,7 @@ public class LoginController {
 				
 				if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
 						usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
-
+					
 					 usuarioEncontrado = true;
 					 break;
 				}
@@ -53,6 +54,7 @@ public class LoginController {
 			}
 			
 			if (usuarioEncontrado) {
+				 usuario = login.getTfUsuarioLogin().getText();
 				 this.navegadorTelas2.navegarTela("INICIO");
 				 this.menu.mostrarPanelCont();	
 			}else {
