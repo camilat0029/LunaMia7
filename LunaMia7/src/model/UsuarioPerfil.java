@@ -4,14 +4,13 @@ import java.awt.Image;
 
 public class UsuarioPerfil {
 	
-	private String nome, nomeUsuario,email, senha, telefone, endereco;
+	private String nome, nomeUsuario,email, senha, telefone, endereco, fotoPerfil;
 	private float precoHora, percentualLucro;
-	private Image fotoPerfil;
 	
 	//construtor	
 	
 	public UsuarioPerfil(String nome, String nomeUsuario, String email, String senha, String telefone, String endereco,
-			float precoHora, float percentualLucro, Image fotoPerfil) {
+			float precoHora, float percentualLucro, String fotoPerfil) {
 		super();
 		this.nome = nome;
 		this.nomeUsuario = nomeUsuario;
@@ -122,12 +121,12 @@ public class UsuarioPerfil {
 	}
 
 
-	public Image getFotoPerfil() {
+	public String getFotoPerfil() {
 		return fotoPerfil;
 	}
 
 
-	public void setFotoPerfil(Image fotoPerfil) {
+	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
 	

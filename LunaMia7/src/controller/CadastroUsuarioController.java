@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -7,23 +9,28 @@ import javax.swing.JOptionPane;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
+import view.ConfigurarPerfilAposCadastrar;
 
-public class CadastroUsuarioController {
+public class CadastroUsuarioController extends ComponentAdapter{
 
 	private CadastroUsuario cadastroUsuario;
 	private UsuarioPerfilDAO usuarioDAO;
 	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
+	private ConfigurarPerfilAposCadastrar confPerfilAposCad;
+	private UsuarioPerfil usuarioCadastrado;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
-			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
+			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
+			ConfigurarPerfilAposCadastrar confPerfilAposCad) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
 		this.menu = menu;
 		this.navegadorTelas2 = navegadorTelas2;
+		this.confPerfilAposCad = confPerfilAposCad;
 
 		this.cadastroUsuario.cadastrar(e -> {
 			
@@ -52,15 +59,16 @@ public class CadastroUsuarioController {
 					novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
 					
 					novoUsuario.setEndereco("");
-					novoUsuario.setFotoPerfil(null);
+					novoUsuario.setFotoPerfil("");
 					novoUsuario.setPercentualLucro(0);
 					novoUsuario.setPrecoHora(0);
 
 					usuarioDAO.adicionarDados(novoUsuario);
+					this.usuarioCadastrado = novoUsuario;
 					
 					JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
 
-					navegadorTelas2.navegarTela("LOGIN");
+					navegadorTelas2.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
 					limparCamposTelaCadastro();
 					
 				}else if (EmailRepetido == true && UsuarioRepetido == true){
@@ -86,10 +94,9 @@ public class CadastroUsuarioController {
 	}
 	
 	
-	
-	List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
-	
 	public void verificarEmail() {
+		
+		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
 		
 		
 		EmailRepetido = false;
@@ -105,6 +112,8 @@ public class CadastroUsuarioController {
 	
 	public void verificarUsuarioPerfil() {
 		
+		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+		
 		UsuarioRepetido = false;
 		
 		for (UsuarioPerfil usuarioPerfil : usuarios) {
@@ -117,7 +126,32 @@ public class CadastroUsuarioController {
 	}
 	
 	public void atualizarCadastro() {
+		 
+		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
+		usuarioAtualizado.setFotoPerfil("");
+		usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
+		usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+		usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
+		usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfEnderecoCP().getText()));
+		usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+		
+		usuarioDAO.atualizarUsuario(usuarioAtualizado);
+		
+		
+	}
+	
+	public void componentShown(ComponentEvent e) {
+		this.informacoesJaCadastradas();
+	}
+	
+	
+	public void informacoesJaCadastradas() {
+		confPerfilAposCad.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
+		confPerfilAposCad.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
+		confPerfilAposCad.getLbEmailCad().setText(usuarioCadastrado.getEmail());
+		confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
+		confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
 	}
 	
 	

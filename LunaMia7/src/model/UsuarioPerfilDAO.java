@@ -17,8 +17,8 @@ public class UsuarioPerfilDAO {
 	
 	//MUDEI AQUI
     public void adicionarDados(UsuarioPerfil usuarioPerfil) {
-        String sql = "INSERT INTO Perfil_Usuario (email, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
-        		+ "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Perfil_Usuario (email, fotoPerfil, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
+        		+ "VALUES (?,?,?,?,?,?,?,?,?)";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -27,13 +27,14 @@ public class UsuarioPerfilDAO {
             pstm = conexao.prepareStatement(sql);
             //pstm.setString(1, usuarioPerfil.get());
             pstm.setString(1, usuarioPerfil.getEmail());
-            pstm.setString(2, usuarioPerfil.getSenha());
-            pstm.setString(3, usuarioPerfil.getTelefone());
-            pstm.setString(4, usuarioPerfil.getNomeUsuario());
-            pstm.setString(5, usuarioPerfil.getNome());
-            pstm.setFloat(6, usuarioPerfil.getPrecoHora());
-            pstm.setString(7, usuarioPerfil.getEndereco());
-            pstm.setFloat(8, usuarioPerfil.getPercentualLucro());         
+            pstm.setString(2, usuarioPerfil.getFotoPerfil());
+            pstm.setString(3, usuarioPerfil.getSenha());
+            pstm.setString(4, usuarioPerfil.getTelefone());
+            pstm.setString(5, usuarioPerfil.getNomeUsuario());
+            pstm.setString(6, usuarioPerfil.getNome());
+            pstm.setFloat(7, usuarioPerfil.getPrecoHora());
+            pstm.setString(8, usuarioPerfil.getEndereco());
+            pstm.setFloat(9, usuarioPerfil.getPercentualLucro());         
             pstm.executeUpdate();
             
         } catch (SQLException e) {
@@ -63,7 +64,7 @@ public class UsuarioPerfilDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, null);
+                UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, sql);
                 usuario.setNome(rset.getString("nome"));
                 usuario.setNomeUsuario(rset.getString("nomeUsuario"));
                 usuario.setEmail(rset.getString("email"));
@@ -72,7 +73,7 @@ public class UsuarioPerfilDAO {
                 usuario.setSenha(rset.getString("senha"));
                 usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
                 usuario.setPrecoHora(rset.getFloat("precoHora"));
-               // usuario.setFotoPerfil(blob);
+                usuario.setFotoPerfil(rset.getString("fotoPerfil"));
                 usuarios.add(usuario);
                 
             }
@@ -88,28 +89,47 @@ public class UsuarioPerfilDAO {
     
     // UPDATE - Atualizar um usuário existente
     public void atualizarUsuario(UsuarioPerfil usuarioPerfil) {
-        String sql = "UPDATE Perfil_Usuario SET email = ?, fotoPerfil = ?, senha = ?, nrTelefone = ?, nome = ?, "
-        		+ "precoHora = ?, endereco = ?, percentualLucro = ? WHERE nomeUsuario = ?";
+        String sql = "UPDATE Perfil_Usuario SET fotoPerfil = ?, senha = ?, nrTelefone = ?, nome = ?, "
+        		+ "precoHora = ?, endereco = ?, percentualLucro = ? WHERE nomeUsuario = ? AND email = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setString(1, usuarioPerfil.getEmail());
-            //pstm.setNString(2, usuarioPerfil.getFotoPerfil()); mudar para String aqui e no banco de dados para pegar o caminho da foto
-            pstm.setString(3, usuarioPerfil.getSenha());
-            pstm.setString(4, usuarioPerfil.getTelefone());
-            pstm.setString(5, usuarioPerfil.getNome());
-            pstm.setFloat(6, usuarioPerfil.getPrecoHora());
-            pstm.setString(7, usuarioPerfil.getEndereco());
-            pstm.setFloat(8, usuarioPerfil.getPercentualLucro());
-            pstm.setString(9, usuarioPerfil.getNomeUsuario());
+            pstm.setString(1, usuarioPerfil.getFotoPerfil()); 
+            pstm.setString(2, usuarioPerfil.getSenha());
+            pstm.setString(3, usuarioPerfil.getTelefone());
+            pstm.setString(4, usuarioPerfil.getNome());
+            pstm.setFloat(5, usuarioPerfil.getPrecoHora());
+            pstm.setString(6, usuarioPerfil.getEndereco());
+            pstm.setFloat(7, usuarioPerfil.getPercentualLucro());
+            pstm.setString(8, usuarioPerfil.getNomeUsuario());
+            pstm.setString(9, usuarioPerfil.getEmail());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+ // DELETE - Excluir um usuário pelo ID
+    public void excluirUsuario(String nomeUsuario, String email) {
+        String sql = "DELETE FROM usuarios WHERE nomeUsuario = ? AND email = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, nomeUsuario);
+            pstm.setString(2, email);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
         }
     }
 

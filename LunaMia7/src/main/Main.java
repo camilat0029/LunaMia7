@@ -71,8 +71,11 @@ public class Main {
 		
 		Menu menu = new Menu(telaPrincipal2, menuExp, menuCont);
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
-		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, menu);
+		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
+				menu, configurarPerfiAposCadastrar);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
+		
+		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		
 		
 		navegadorTelas.setCadastroController(cadastroUsuarioController);
@@ -99,7 +102,7 @@ public class Main {
 		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
+		navegadorTelas.navegarTela("LOGIN");
 		
 		
 		menu.iniciar();
