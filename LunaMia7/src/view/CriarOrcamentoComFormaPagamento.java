@@ -32,6 +32,7 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 	private JTextField tfDtPrevistaEntregaCOFP;
 	private JTextField tfDtConfirmacaoPedidoCOFP;
 	private JTextField tfValorFinalCOFP;
+	private JButton btConfirmarCOFP;
 
 	/**
 	 * Create the panel.
@@ -214,8 +215,11 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		panel_2.add(btConfirmarCOFP);
 		btConfirmarCOFP.setBorderPainted(false);
 		
-		
 
+	}
+	
+	public void confirmar(ActionListener actionListener) {
+		this.btConfirmarCOFP.addActionListener(actionListener);
 	}
 
 }
