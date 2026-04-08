@@ -83,6 +83,13 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			System.out.println("clique");
 
 		});
+		
+		this.confPerfilAposCad.salvarCadCompleto(e -> {
+			
+			atualizarCadastro();
+			JOptionPane.showMessageDialog(null, "Cadastro Atualizado com Sucesso", "Informação", 1);
+			
+		});
 	}
 	
 	public void limparCamposTelaCadastro() {
@@ -129,13 +136,20 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		 
 		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
-		usuarioAtualizado.setFotoPerfil("");
+		usuarioAtualizado.setFotoPerfil(null);
 		usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
 		usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
 		usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
-		usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfEnderecoCP().getText()));
+		usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
+		usuarioAtualizado.setEndereco(confPerfilAposCad.getTfEnderecoCP().getText() + ", " + 
+				confPerfilAposCad.getCbBairro().getSelectedItem() + "-" + 
+				confPerfilAposCad.getCbCidade().getSelectedItem() + "/" +
+				confPerfilAposCad.getCbEstadoCP().getSelectedItem());
 		usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+		usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
+		usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
 		
+	
 		usuarioDAO.atualizarUsuario(usuarioAtualizado);
 		
 		

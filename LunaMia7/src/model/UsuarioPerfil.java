@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Image;
 
+import javax.swing.JPanel;
+
 public class UsuarioPerfil {
 	
 	private String nome, nomeUsuario,email, senha, telefone, endereco, fotoPerfil;
@@ -56,8 +58,8 @@ public class UsuarioPerfil {
 	}
 
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setNomeUsuario(String jPanel) {
+		this.nomeUsuario = jPanel;
 	}
 
 
