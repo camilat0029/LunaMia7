@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.BancoDeDados;
+
 public class ClienteDAO {
 
 	public void adicionarDados(Cliente cliente) {
@@ -67,4 +69,40 @@ public class ClienteDAO {
         return clientes;
     }
 	
+	// UPDATE - Atualizar um usuário existente
+    public void atualizarCliente(Cliente cliente) {
+        String sql = "UPDATE Cliente SET nome = ?, telefone = ?, email = ? WHERE nome = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, cliente.getNome());
+            pstm.setString(2, cliente.getTelefone());
+            pstm.setString(3, cliente.getEmail());;
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	//BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+    public void excluirCliente(Cliente cliente) {
+        String sql = "DELETE FROM Cliente WHERE nome = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, cliente.getNome());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	//BancoDeDados.desconectar(conexao);
+        }
+    }
 }

@@ -74,4 +74,43 @@ public class OrcamentoDAO {
 		}
 		return orcamentos;
     }
+	
+	 public void atualizarOrcamentoe(Orcamento orcamento) {
+	        String sql = "UPDATE Orcamento SET tituloPedido = ?, QuantHorasPrevistas = ?,"
+	        		+ " maxDias = ?, descricaoPedido = ? WHERE tituloPedido = ?";
+	        Connection conexao = null;
+	        PreparedStatement pstm = null;
+
+	        try {
+	            conexao = BancoDeDados.conectar();
+	            pstm = conexao.prepareStatement(sql);
+				orcamento.setTituloPedido("tituloPedido");
+				orcamento.setQuantHorasPrevistas(0);
+				orcamento.setMaxDias(0);
+				orcamento.setDescricaoPedido("descricao");
+	            pstm.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	        	//BancoDeDados.desconectar(conexao);
+	        }
+	    }
+	    
+	    public void excluirOrcamento(Orcamento orcamento) {
+	        String sql = "DELETE FROM Orcamento WHERE tituloPedido = ?";
+	        Connection conexao = null;
+	        PreparedStatement pstm = null;
+
+	        try {
+	            conexao = BancoDeDados.conectar();
+	            pstm = conexao.prepareStatement(sql);
+	            pstm.setString(1, orcamento.getTituloPedido());
+	            pstm.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	        	//BancoDeDados.desconectar(conexao);
+	        }
+	    }
+	
 }

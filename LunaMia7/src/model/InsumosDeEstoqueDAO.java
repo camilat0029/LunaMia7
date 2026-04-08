@@ -77,5 +77,45 @@ public class InsumosDeEstoqueDAO {
         }
         return insumos;
     }
+    
+    public void atualizarInsumos(InsumosDeEstoque insumosDeEstoque) {
+        String sql = "UPDATE InsumosDeEstoque SET nome = ?, marca = ?, cor = ?, valor = ?"
+        		+ "unidadePorUnidade = ?, quantidadeDisponivel = ? WHERE nome = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, insumosDeEstoque.getNome());
+            pstm.setString(2, insumosDeEstoque.getMarca());
+            pstm.setString(3, insumosDeEstoque.getCor());
+            pstm.setFloat(4,insumosDeEstoque.getValor());
+            pstm.setFloat(5, insumosDeEstoque.getUnidadePorUnidade());
+            pstm.setInt(6, insumosDeEstoque.getQuantidadeDisponivel());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	//BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+    public void excluirInsumos(InsumosDeEstoque insumosDeEstoque) {
+        String sql = "DELETE FROM InsumosDeEstoque WHERE nome = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm.setString(1, insumosDeEstoque.getNome());
+
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	//BancoDeDados.desconectar(conexao);
+        }
+    }
 	
 }
