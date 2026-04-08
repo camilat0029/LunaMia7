@@ -36,6 +36,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JComboBox cbEstadoCP;
 	private JButton btSalvar;
 	private JButton btIgnorar;
+	private JButton btRedefinirSenha;
 
 	/**
 	 * Create the panel.
@@ -97,7 +98,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		panel_btRedefinirSenha.setBackground(new Color(234, 219, 247));
 		add(panel_btRedefinirSenha, "cell 5 5 4 2,alignx center,aligny center");
 		
-		JButton btRedefinirSenha = new JButton("Redefinir Senha");
+		btRedefinirSenha = new JButton("Redefinir Senha");
 		btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btRedefinirSenha.setBackground(new Color(193, 151, 232));
 		panel_btRedefinirSenha.add(btRedefinirSenha, "growx");
@@ -237,7 +238,14 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void ignorar(ActionListener actionListener) {
 		this.btIgnorar.addActionListener(actionListener);
 	}
+	
+	public void redefinirSenha(ActionListener actionListener) {
+		this.btRedefinirSenha.addActionListener(actionListener);
+	}
 
+	
+	
+	
 	public JTextField getTfNomeCompCP() {
 		return tfNomeCompCP;
 	}

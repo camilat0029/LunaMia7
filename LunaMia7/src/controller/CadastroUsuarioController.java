@@ -88,7 +88,16 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			atualizarCadastro();
 			JOptionPane.showMessageDialog(null, "Cadastro Atualizado com Sucesso", "Informação", 1);
+			navegadorTelas2.navegarTela("LOGIN");
 			
+		});
+		
+		this.confPerfilAposCad.ignorar(e -> {
+			navegadorTelas2.navegarTela("LOGIN");
+		});
+		
+		this.confPerfilAposCad.redefinirSenha(e -> {
+			navegadorTelas2.navegarTela("REDEFINIRSENHA");
 		});
 	}
 	
@@ -136,21 +145,36 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		 
 		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
-		usuarioAtualizado.setFotoPerfil(null);
-		usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
-		usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
-		usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
-		usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
-		usuarioAtualizado.setEndereco(confPerfilAposCad.getTfEnderecoCP().getText() + ", " + 
-				confPerfilAposCad.getCbBairro().getSelectedItem() + "-" + 
-				confPerfilAposCad.getCbCidade().getSelectedItem() + "/" +
-				confPerfilAposCad.getCbEstadoCP().getSelectedItem());
-		usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
-		usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
-		usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
+		if(confPerfilAposCad.getTfNomeCompCP().getText().isEmpty() ||
+				confPerfilAposCad.getTfEnderecoCP().getText().isEmpty() ||
+				confPerfilAposCad.getTfPercLucroCP().getText().isEmpty() ||
+				confPerfilAposCad.getTfPrecoHoraCP().getText().isEmpty() ||
+				confPerfilAposCad.getTfTelefoneCP().getText().isEmpty() ||
+				confPerfilAposCad.getPfSenhaCP().getText().isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
+			
+		} else {
+			
+			usuarioAtualizado.setFotoPerfil(null);
+			usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
+			usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+			usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
+			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
+			usuarioAtualizado.setEndereco(confPerfilAposCad.getTfEnderecoCP().getText() + ", " + 
+					confPerfilAposCad.getCbBairro().getSelectedItem() + "-" + 
+					confPerfilAposCad.getCbCidade().getSelectedItem() + "/" +
+					confPerfilAposCad.getCbEstadoCP().getSelectedItem());
+			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+			usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
+			usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
+			
 		
-	
-		usuarioDAO.atualizarUsuario(usuarioAtualizado);
+			usuarioDAO.atualizarUsuario(usuarioAtualizado);
+			
+		}
+		
+		
 		
 		
 	}

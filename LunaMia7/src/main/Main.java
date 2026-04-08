@@ -90,7 +90,7 @@ public class Main {
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
 		//navegadorTelas.adicionarPainel("INICIOPOSCADASTRO", inicioPosCadastro);
-		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
+		navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		
 		
