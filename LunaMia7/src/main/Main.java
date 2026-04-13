@@ -72,7 +72,7 @@ public class Main {
 		Menu menu = new Menu(telaPrincipal2, menuExp, menuCont);
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
-				menu, configurarPerfiAposCadastrar);
+				menu, configurarPerfiAposCadastrar, configurarPerfil);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
@@ -84,7 +84,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
 		navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
-		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configurarPerfiAposCadastrar);
+		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCADASTRAR", configurarPerfiAposCadastrar);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);

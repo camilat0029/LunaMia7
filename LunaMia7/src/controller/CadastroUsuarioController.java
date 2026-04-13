@@ -5,10 +5,12 @@ import java.awt.event.ComponentEvent;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
+import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
 
 public class CadastroUsuarioController extends ComponentAdapter{
@@ -18,68 +20,26 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
 	private ConfigurarPerfilAposCadastrar confPerfilAposCad;
+	private ConfigurarPerfil confPerfil;
 	private UsuarioPerfil usuarioCadastrado;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
 			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
-			ConfigurarPerfilAposCadastrar confPerfilAposCad) {
+			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil ) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
 		this.menu = menu;
 		this.navegadorTelas2 = navegadorTelas2;
 		this.confPerfilAposCad = confPerfilAposCad;
+		this.confPerfil = confPerfil;
 
 		this.cadastroUsuario.cadastrar(e -> {
 			
-			UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
-			
-			
-			if(cadastroUsuario.getTfNomeUsuario().getText().isEmpty() ||
-					cadastroUsuario.getTfNomeComp().getText().isEmpty() ||
-					cadastroUsuario.getTfEmail().getText().isEmpty() ||
-					cadastroUsuario.getTfTelefone().getText().isEmpty() ||
-					cadastroUsuario.getPfSenha().getText().isEmpty()) {
-				
-				JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Informação", 1);
-				
-			} else {
-				
-				verificarEmail();
-				verificarUsuarioPerfil();
-				
-				if(EmailRepetido == false && UsuarioRepetido == false){
-					
-					novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
-					novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
-					novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
-					novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());			
-					novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
-					
-					novoUsuario.setEndereco("");
-					novoUsuario.setFotoPerfil("");
-					novoUsuario.setPercentualLucro(0);
-					novoUsuario.setPrecoHora(0);
 
-					usuarioDAO.adicionarDados(novoUsuario);
-					this.usuarioCadastrado = novoUsuario;
-					
-					JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
-
-					navegadorTelas2.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
-					limparCamposTelaCadastro();
-					
-				}else if (EmailRepetido == true && UsuarioRepetido == true){
-					JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.", "Informação", 1);
-				} else if(EmailRepetido == true && UsuarioRepetido == false) {
-					JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
-				} else if(EmailRepetido == false && UsuarioRepetido == true) {
-					JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
-				} 
-			}
-			
+			cadastrarUsuario();
 			System.out.println("clique");
 
 		});
@@ -107,6 +67,55 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		cadastroUsuario.getTfEmail().setText("");
 		cadastroUsuario.getTfTelefone().setText("");
 		cadastroUsuario.getPfSenha().setText("");
+	}
+	
+	public void cadastrarUsuario() {
+		
+		UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
+		
+		
+		if(cadastroUsuario.getTfNomeUsuario().getText().isEmpty() ||
+				cadastroUsuario.getTfNomeComp().getText().isEmpty() ||
+				cadastroUsuario.getTfEmail().getText().isEmpty() ||
+				cadastroUsuario.getTfTelefone().getText().isEmpty() ||
+				cadastroUsuario.getPfSenha().getText().isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Informação", 1);
+			
+		} else {
+			
+			verificarEmail();
+			verificarUsuarioPerfil();
+			
+			if(EmailRepetido == false && UsuarioRepetido == false){
+				
+				novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
+				novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
+				novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
+				novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());			
+				novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
+				
+				novoUsuario.setEndereco("");
+				novoUsuario.setFotoPerfil("");
+				novoUsuario.setPercentualLucro(0);
+				novoUsuario.setPrecoHora(0);
+
+				usuarioDAO.adicionarDados(novoUsuario);
+				this.usuarioCadastrado = novoUsuario;
+				
+				JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
+
+				navegadorTelas2.navegarTela("CONFIGURARPERFILAPOSCADASTRAR");
+				limparCamposTelaCadastro();
+				
+			}else if (EmailRepetido == true && UsuarioRepetido == true){
+				JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.", "Informação", 1);
+			} else if(EmailRepetido == true && UsuarioRepetido == false) {
+				JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
+			} else if(EmailRepetido == false && UsuarioRepetido == true) {
+				JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
+			} 
+		}
 	}
 	
 	
@@ -145,6 +154,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		 
 		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
+		//ATUALIZAR AQUI PARA USAR ESTE MÉTODO NAS TELAS CONFG PERFIL E CONFG PERFIL APOS CADASTRAR
 		if(confPerfilAposCad.getTfNomeCompCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfEnderecoCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPercLucroCP().getText().isEmpty() ||
@@ -180,16 +190,31 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	}
 	
 	public void componentShown(ComponentEvent e) {
-		this.informacoesJaCadastradas();
+		this.informacoesJaCadastradas((JPanel) e.getComponent());
 	}
 	
-	
-	public void informacoesJaCadastradas() {
-		confPerfilAposCad.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
-		confPerfilAposCad.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
-		confPerfilAposCad.getLbEmailCad().setText(usuarioCadastrado.getEmail());
-		confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
-		confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+	//TESTAR TELA CONFPERFIL
+	public void informacoesJaCadastradas(JPanel tela) {
+		
+		if(tela == confPerfilAposCad) {
+			
+			confPerfilAposCad.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
+			confPerfilAposCad.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
+			confPerfilAposCad.getLbEmailCad().setText(usuarioCadastrado.getEmail());
+			confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
+			confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+			
+		}
+		
+		if(tela == confPerfil) {
+			
+			confPerfil.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
+			confPerfil.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
+			confPerfil.getLbEmailCad().setText(usuarioCadastrado.getEmail());
+			confPerfil.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
+			confPerfil.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+			
+		}
 	}
 	
 	

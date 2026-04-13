@@ -54,7 +54,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		tfNomeCompCP = new JTextField();
 		tfNomeCompCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeCompCP, "cell 3 2 6 1, width 72%,height 38px");
+		add(tfNomeCompCP, "cell 3 2 6 1, width 67%,height 38px");
 		tfNomeCompCP.setColumns(10);
 		
 		JLabel lbNomeUsuaCP = new JLabel("Nome de Usuário");
@@ -64,7 +64,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		JPanel panel_NomeUsuario = new JPanel();
 		panel_NomeUsuario.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_NomeUsuario.setBackground(new Color(255, 255, 255));
-		add(panel_NomeUsuario, "cell 3 3 6 1, width 72%, height 38!");
+		add(panel_NomeUsuario, "cell 3 3 6 1, width 67%, height 38!");
 		panel_NomeUsuario.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbNomeUsuarioCad = new JLabel("");
@@ -78,7 +78,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		JPanel panel_EmailCad = new JPanel();
 		panel_EmailCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_EmailCad.setBackground(new Color(255, 255, 255));
-		add(panel_EmailCad, "cell 3 4 6 1, width 72%, height 38!");
+		add(panel_EmailCad, "cell 3 4 6 1, width 67%, height 38!");
 		panel_EmailCad.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		
 		lbEmailCad = new JLabel("");
@@ -91,7 +91,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		pfSenhaCP = new JPasswordField();
 		pfSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(pfSenhaCP, "cell 3 5,width 30%,height 38px");
+		add(pfSenhaCP, "cell 3 5,width 18%,height 38px");
 		
 		JPanel panel_btRedefinirSenha = new JPanel();
 		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -109,7 +109,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		tfTelefoneCP = new JTextField();
 		tfTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfTelefoneCP, "cell 3 6,width 30%,height 38px");
+		add(tfTelefoneCP, "cell 3 6,width 18%,height 38px");
 		tfTelefoneCP.setColumns(10);
 		
 		JLabel lbEstadoCP = new JLabel("Estado");
@@ -119,7 +119,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		cbEstadoCP = new JComboBox();
 		cbEstadoCP.setModel(new DefaultComboBoxModel(new String[] {"SC"}));
 		cbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbEstadoCP, "cell 3 7, width 30%,height 38px");
+		add(cbEstadoCP, "cell 3 7, width 18%,height 38px");
 		
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -136,7 +136,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		tfEnderecoCP = new JTextField();
 		tfEnderecoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfEnderecoCP, "cell 3 8,width 30%,height 38px");
+		add(tfEnderecoCP, "cell 3 8,width 18%,height 38px");
 		tfEnderecoCP.setColumns(10);
 		
 		JLabel lbBairroCP = new JLabel("Bairro");
@@ -168,7 +168,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		tfPercLucroCP.setColumns(10);
 		
 		JPanel panel_foto = new JPanel();
-		add(panel_foto, "cell 3 10 1 3,width 30%, growy");
+		add(panel_foto, "cell 3 10 1 3,width 18%, growy");
 		
 		JLabel lbFotoPerfilCP = new JLabel("Foto de Perfil");
 		lbFotoPerfilCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
