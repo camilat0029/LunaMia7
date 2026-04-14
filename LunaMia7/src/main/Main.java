@@ -8,6 +8,7 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
 import controller.CadastroUsuarioController;
+import controller.InicioController;
 import controller.LoginController;
 import controller.Menu;
 import controller.NavegadorTelas;
@@ -20,7 +21,6 @@ import view.CriarOrcamento;
 import view.CriarOrcamentoAposCalcular;
 import view.CriarOrcamentoComFormaPagamento;
 import view.Inicio;
-import view.InicioPosCadastro;
 import view.Login;
 import view.MenuContraido;
 import view.MenuExpandido;
@@ -44,7 +44,7 @@ public class Main {
         manager.setReshowDelay(100);     // tempo para reaparecer rápido
 		
 		//JFrame
-		TelaPrincipal telaPrincipal2 = new TelaPrincipal();
+		TelaPrincipal telaPrincipal = new TelaPrincipal();
 		
 		
 		//Controller
@@ -60,7 +60,6 @@ public class Main {
 		CriarOrcamentoAposCalcular criarOrcamentoAposCalcular = new CriarOrcamentoAposCalcular();
 		CriarOrcamentoComFormaPagamento criarOrcamentoComFormaPagamento = new CriarOrcamentoComFormaPagamento();
 		Inicio inicio = new Inicio();
-		InicioPosCadastro inicioPosCadastro = new InicioPosCadastro();
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
 		Relatorios relatorios = new Relatorios();
 		MenuContraido menuCont = new MenuContraido();
@@ -69,17 +68,15 @@ public class Main {
 		
 		
 		
-		Menu menu = new Menu(telaPrincipal2, menuExp, menuCont);
-		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
+		Menu menu = new Menu(telaPrincipal, menuExp, menuCont);
+		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar, configurarPerfil);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
+		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
-		
-		
-		navegadorTelas.setCadastroController(cadastroUsuarioController);
-		navegadorTelas.setLoginController(loginController);
+		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
@@ -89,7 +86,6 @@ public class Main {
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
-		//navegadorTelas.adicionarPainel("INICIOPOSCADASTRO", inicioPosCadastro);
 		navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		

@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -36,9 +38,18 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.confPerfilAposCad = confPerfilAposCad;
 		this.confPerfil = confPerfil;
 
+		this.cadastroUsuario.voltar(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				navegadorTelas2.navegarTela("LOGIN");
+				limparCamposTelaCadastro();
+				menu.mostrarPanelCont();
+				menu.removerMenu();
+			}
+		});
+		
 		this.cadastroUsuario.cadastrar(e -> {
 			
-
 			cadastrarUsuario();
 			System.out.println("clique");
 
@@ -46,9 +57,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		
 		this.confPerfilAposCad.salvarCadCompleto(e -> {
 			
-			atualizarCadastro();
-			JOptionPane.showMessageDialog(null, "Cadastro Atualizado com Sucesso", "Informação", 1);
-			navegadorTelas2.navegarTela("LOGIN");
+			atualizarCadTelaConfPerfilPosCad();
 			
 		});
 		
@@ -59,8 +68,13 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.confPerfilAposCad.redefinirSenha(e -> {
 			navegadorTelas2.navegarTela("REDEFINIRSENHA");
 		});
+		
+		this.confPerfil.salvar(e -> {
+			atualizarCadTelaConfPerfilCad();
+		});
 	}
 	
+	//LIMPAR CAMPOS TELA DE CADASTRO
 	public void limparCamposTelaCadastro() {
 		cadastroUsuario.getTfNomeComp().setText("");
 		cadastroUsuario.getTfNomeUsuario().setText("");
@@ -69,6 +83,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		cadastroUsuario.getPfSenha().setText("");
 	}
 	
+	//CADASTRO DE USUARIO - TELA CADASTRO
 	public void cadastrarUsuario() {
 		
 		UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
@@ -96,7 +111,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 				novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
 				
 				novoUsuario.setEndereco("");
-				novoUsuario.setFotoPerfil("");
+				novoUsuario.setFotoPerfil(null);
 				novoUsuario.setPercentualLucro(0);
 				novoUsuario.setPrecoHora(0);
 
@@ -118,7 +133,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		}
 	}
 	
-	
+	//VERIFICAÇÃO EMAIL REPETIDO
 	public void verificarEmail() {
 		
 		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
@@ -135,6 +150,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		}
 	}
 	
+	//VERIFICAÇÃO USUARIO REPETIDO
 	public void verificarUsuarioPerfil() {
 		
 		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
@@ -149,12 +165,12 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			}
 		}
 	}
-	
-	public void atualizarCadastro() {
-		 
+
+	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL APÓS CADASTRAR
+	public void atualizarCadTelaConfPerfilPosCad() {
+		
 		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
-		//ATUALIZAR AQUI PARA USAR ESTE MÉTODO NAS TELAS CONFG PERFIL E CONFG PERFIL APOS CADASTRAR
 		if(confPerfilAposCad.getTfNomeCompCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfEnderecoCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPercLucroCP().getText().isEmpty() ||
@@ -182,18 +198,55 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		
 			usuarioDAO.atualizarUsuario(usuarioAtualizado);
 			
+			JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+			navegadorTelas2.navegarTela("LOGIN");
+			
 		}
-		
-		
-		
-		
 	}
 	
+	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL
+    public void atualizarCadTelaConfPerfilCad() {
+		
+		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
+		
+		if(confPerfil.getTfNomeCompCP().getText().isEmpty() ||
+				confPerfil.getTfEnderecoCP().getText().isEmpty() ||
+				confPerfil.getTfPercLucroCP().getText().isEmpty() ||
+				confPerfil.getTfPrecoHoraCP().getText().isEmpty() ||
+				confPerfil.getTfTelefoneCP().getText().isEmpty() ||
+				confPerfil.getPfSenhaCP().getText().isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
+			
+		} else {
+			
+			usuarioAtualizado.setFotoPerfil(null);
+			usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
+			usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
+			usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
+			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
+			usuarioAtualizado.setEndereco(confPerfil.getTfEnderecoCP().getText() + ", " + 
+					confPerfil.getCbBairro().getSelectedItem() + "-" + 
+					confPerfil.getCbCidade().getSelectedItem() + "/" +
+					confPerfil.getCbEstadoCP().getSelectedItem());
+			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
+			usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
+			usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+			
+		
+			usuarioDAO.atualizarUsuario(usuarioAtualizado);
+			
+			JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+			
+		}
+	}
+	
+    //ACIONA EVENTO AO APARECER UM JPANEL PARA CADASTRAR INFOS NA TELA JÁ CADASTRADAS
 	public void componentShown(ComponentEvent e) {
 		this.informacoesJaCadastradas((JPanel) e.getComponent());
 	}
 	
-	//TESTAR TELA CONFPERFIL
+	//INFORMAÇÕES JÁ CADASTRADAS QUE IRÃO SER MOSTRADAS NAS TELAS DE CONFIGURAÇÃO
 	public void informacoesJaCadastradas(JPanel tela) {
 		
 		if(tela == confPerfilAposCad) {
@@ -208,11 +261,15 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		
 		if(tela == confPerfil) {
 			
-			confPerfil.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
-			confPerfil.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
-			confPerfil.getLbEmailCad().setText(usuarioCadastrado.getEmail());
-			confPerfil.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
-			confPerfil.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+			UsuarioPerfil usuario = LoginController.usuarioLogado;
+			
+			
+			confPerfil.getTfNomeCompCP().setText(usuario.getNome());
+			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
+			confPerfil.getLbEmailCad().setText(usuario.getEmail());
+			confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
+			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
+			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			
 		}
 	}

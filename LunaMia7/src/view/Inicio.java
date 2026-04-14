@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 public class Inicio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton btConfigurarPerfil;
 
 	public Inicio() {
 		
@@ -28,7 +29,7 @@ public class Inicio extends JPanel {
 		lbPorOndeDesejaComecarIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbPorOndeDesejaComecarIn, "cell 2 1 3 1,alignx center");
 		
-		JButton btConfigurarPerfil = new JButton("Configurar Perfil");
+		btConfigurarPerfil = new JButton("Configurar Perfil");
 		btConfigurarPerfil.setBackground(new Color(193, 151, 232));
 		btConfigurarPerfil.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(btConfigurarPerfil, "cell 2 2 3 1,grow");
@@ -64,5 +65,9 @@ public class Inicio extends JPanel {
                 
             }
         });
+	}
+	
+	public void irParaConfigurarPerfil(ActionListener actionListener) {
+		this.btConfigurarPerfil.addActionListener(actionListener);
 	}
 }

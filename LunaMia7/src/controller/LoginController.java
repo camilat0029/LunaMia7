@@ -11,6 +11,7 @@ import view.Login;
 public class LoginController {
 	
 	private Login login;
+	public static UsuarioPerfil usuarioLogado;
 	private UsuarioPerfilDAO usuarioDAO;
 	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
@@ -27,8 +28,15 @@ public class LoginController {
 			verificarCadastroUsuario();
 			
 		});
+		
+		this.login.cadastrese(e -> {
+			navegadorTelas2.navegarTela("CADASTRO");
+			limparCamposLogin();
+			this.menu.removerMenu();
+		});
 	}
 	
+	//VERIFICAÇÃO DE USUÁRIO, VE SE JÁ ESTÁ CADASTRADO
 	public void verificarCadastroUsuario() {
 		
 		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
@@ -47,14 +55,15 @@ public class LoginController {
 				if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
 						usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
 					
+					 usuarioLogado = usuarioPerfil;
 					 usuarioEncontrado = true;
+					 
 					 break;
 				}
 				
 			}
 			
 			if (usuarioEncontrado) {
-				 usuario = login.getTfUsuarioLogin().getText();
 				 this.navegadorTelas2.navegarTela("INICIO");
 				 this.menu.mostrarPanelCont();	
 			}else {
@@ -70,5 +79,7 @@ public class LoginController {
 		login.getTfUsuarioLogin().setText("");
 		login.getPfSenhaLogin().setText("");
 	}
+	
+	
 
 }

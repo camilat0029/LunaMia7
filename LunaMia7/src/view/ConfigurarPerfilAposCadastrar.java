@@ -301,11 +301,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void setTfPercLucroCP(JTextField tfPercLucroCP) {
 		this.tfPercLucroCP = tfPercLucroCP;
 	}
-	
-	
-	public void adicionarOuvinte(ComponentListener listener) {
-		this.addComponentListener(listener);
-	}
 
 	public JLabel getLbNomeUsuarioCad() {
 		return lbNomeUsuarioCad;
@@ -340,5 +335,9 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	}
 	
 	
+	
+	public void adicionarOuvinte(ComponentListener listener) {
+		this.addComponentListener(listener);
+	}
 
 }
