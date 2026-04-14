@@ -9,6 +9,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -17,6 +19,12 @@ public class MenuExpandido extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lbMostrarMenuCont;
+	private JButton btInicio;
+	private JButton btPerfil;
+	private JButton btEstoque;
+	private JButton btRelatorios;
+	private JButton btOrcamentos;
+	
 	
 	public MenuExpandido() {
 		
@@ -45,38 +53,60 @@ public class MenuExpandido extends JPanel {
 		lbNomeUsuarioMN.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(lbNomeUsuarioMN, "cell 1 2,aligny center");
 		
-		JButton btInicio = new JButton("Início");
+		btInicio = new JButton("Início");
 		btInicio.setBackground(new Color(193, 151, 232));
 		btInicio.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(btInicio, "cell 1 4,growx");
 		
-		JButton btPerfil = new JButton("Perfil");
+		btPerfil = new JButton("Perfil");
 		btPerfil.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btPerfil.setBackground(new Color(193, 151, 232));
 		add(btPerfil, "cell 1 5,growx");
 		
-		JButton btOrcamento = new JButton("Orçamento");
-		btOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		btOrcamento.setBackground(new Color(193, 151, 232));
-		add(btOrcamento, "cell 1 6,growx");
+		btOrcamentos = new JButton("Orçamento");
+		btOrcamentos.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btOrcamentos.setBackground(new Color(193, 151, 232));
+		add(btOrcamentos, "cell 1 6,growx");
 		
-		JButton btEstoque = new JButton("Estoque");
+		btEstoque = new JButton("Estoque");
 		btEstoque.setBackground(new Color(193, 151, 232));
 		btEstoque.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(btEstoque, "cell 1 7,growx");
 		
-		JButton btRelatorios = new JButton("Relatórios");
+		btRelatorios = new JButton("Relatórios");
 		btRelatorios.setBackground(new Color(193, 151, 232));
 		btRelatorios.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(btRelatorios, "cell 1 8,growx");
 		
 		btInicio.setBorderPainted(false);
 		btPerfil.setBorderPainted(false);
-		btOrcamento.setBorderPainted(false);
+		btOrcamentos.setBorderPainted(false);
 		btEstoque.setBorderPainted(false);
 		btRelatorios.setBorderPainted(false);
 
 	}
+	
+	public void inicio(ActionListener actionListener) {
+		this.btInicio.addActionListener(actionListener);
+	}
+	
+	public void estoque(ActionListener actionListener) {
+		this.btEstoque.addActionListener(actionListener);
+	}
+	
+	public void perfil(ActionListener actionListener) {
+		this.btPerfil.addActionListener(actionListener);
+	}
+	
+	public void relatorios(ActionListener actionListener) {
+		this.btRelatorios.addActionListener(actionListener);
+	}
+	
+	public void orcamentos(ActionListener actionListener) {
+		this.btOrcamentos.addActionListener(actionListener);
+	}
+	
+	
 	
 	public void mostrarMenuContraido(MouseListener mouseListener) {
 		this.lbMostrarMenuCont.addMouseListener(mouseListener);

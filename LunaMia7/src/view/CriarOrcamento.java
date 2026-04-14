@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -15,14 +17,15 @@ import java.awt.Color;
 public class CriarOrcamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField tituloOrcamentoCO;
-	private JTextField tfNomeClienteCO;
-	private JTextField tfEmailCO;
-	private JTextField tfContatoCO;
-	private JTextField tfPrecoHoraCO;
-	private JTextField tfPercentualLucroCO;
+	private JTextField tituloOrcamento;
+	private JTextField tfNomeCliente;
+	private JTextField tfEmail;
+	private JTextField tfContato;
+	private JTextField tfPrecoHora;
+	private JTextField tfPercentualLucro;
 	private JTextField tfHorasPrevistas;
-	private JTextField tfQuantMaxDiasCO;
+	private JTextField tfQuantMaxDias;
+	private JButton btCalcular;
 
 	/**
 	 * Create the panel.
@@ -35,19 +38,19 @@ public class CriarOrcamento extends JPanel {
 		lbTituloOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbTituloOrcamento, "cell 2 1 3 1");
 		
-		tituloOrcamentoCO = new JTextField();
-		tituloOrcamentoCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		add(tituloOrcamentoCO, "cell 2 2 3 1,growx");
-		tituloOrcamentoCO.setColumns(10);
+		tituloOrcamento = new JTextField();
+		tituloOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		add(tituloOrcamento, "cell 2 2 3 1,growx");
+		tituloOrcamento.setColumns(10);
 		
 		JLabel lbNomeCliente = new JLabel("Nome do cliente");
 		lbNomeCliente.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbNomeCliente, "cell 2 4");
 		
-		tfNomeClienteCO = new JTextField();
-		tfNomeClienteCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		tfNomeClienteCO.setColumns(10);
-		add(tfNomeClienteCO, "cell 2 5 3 1,growx");
+		tfNomeCliente = new JTextField();
+		tfNomeCliente.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfNomeCliente.setColumns(10);
+		add(tfNomeCliente, "cell 2 5 3 1,growx");
 		
 		JLabel lbEmail = new JLabel("Email");
 		lbEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -57,15 +60,15 @@ public class CriarOrcamento extends JPanel {
 		lbContato.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbContato, "cell 4 7");
 		
-		tfEmailCO = new JTextField();
-		tfEmailCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		tfEmailCO.setColumns(10);
-		add(tfEmailCO, "cell 2 8,growx");
+		tfEmail = new JTextField();
+		tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfEmail.setColumns(10);
+		add(tfEmail, "cell 2 8,growx");
 		
-		tfContatoCO = new JTextField();
-		tfContatoCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		tfContatoCO.setColumns(10);
-		add(tfContatoCO, "cell 4 8,growx");
+		tfContato = new JTextField();
+		tfContato.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfContato.setColumns(10);
+		add(tfContato, "cell 4 8,growx");
 		
 		JLabel lbPrecoHora = new JLabel("Preço da hora");
 		lbPrecoHora.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -75,15 +78,15 @@ public class CriarOrcamento extends JPanel {
 		lbPercentualLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbPercentualLucro, "cell 4 10");
 		
-		tfPrecoHoraCO = new JTextField();
-		tfPrecoHoraCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		tfPrecoHoraCO.setColumns(10);
-		add(tfPrecoHoraCO, "cell 2 11,growx");
+		tfPrecoHora = new JTextField();
+		tfPrecoHora.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfPrecoHora.setColumns(10);
+		add(tfPrecoHora, "cell 2 11,growx");
 		
-		tfPercentualLucroCO = new JTextField();
-		tfPercentualLucroCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		tfPercentualLucroCO.setColumns(10);
-		add(tfPercentualLucroCO, "cell 4 11,growx");
+		tfPercentualLucro = new JTextField();
+		tfPercentualLucro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		tfPercentualLucro.setColumns(10);
+		add(tfPercentualLucro, "cell 4 11,growx");
 		
 		JLabel lblMateriais = new JLabel("Materiais");
 		lblMateriais.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -110,21 +113,28 @@ public class CriarOrcamento extends JPanel {
 		tfHorasPrevistas.setColumns(10);
 		add(tfHorasPrevistas, "cell 2 17,growx");
 		
-		tfQuantMaxDiasCO = new JTextField();
-		tfQuantMaxDiasCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		tfQuantMaxDiasCO.setColumns(10);
-		add(tfQuantMaxDiasCO, "cell 4 17,growx");
+		tfQuantMaxDias = new JTextField();
+		tfQuantMaxDias.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfQuantMaxDias.setColumns(10);
+		add(tfQuantMaxDias, "cell 4 17,growx");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(234, 219, 247));
 		add(panel_1, "cell 3 19,grow");
 		
-		JButton btCalcularCO = new JButton("Calcular");
-		btCalcularCO.setBackground(new Color(193, 151, 232));
-		btCalcularCO.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		panel_1.add(btCalcularCO);
-		btCalcularCO.setBorderPainted(false);
+		btCalcular = new JButton("Calcular");
+		btCalcular.setBackground(new Color(193, 151, 232));
+		btCalcular.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		panel_1.add(btCalcular);
+		btCalcular.setBorderPainted(false);
 
 	}
+	
+	public void calcular(ActionListener actionListener) {
+		this.btCalcular.addActionListener(actionListener);
+	}
+	
+	
+	
 
 }

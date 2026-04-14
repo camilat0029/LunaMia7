@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsumosDeEstoqueDAO {
+public class ProdutoEstoqueDAO {
 	
-	public void adicionarInsumos(InsumosDeEstoque insumosDeEstoque) {
+	public void adicionarInsumos(ProdutoEstoque insumosDeEstoque) {
 		
 		String sql = "INSERT INTO produtoestoque (unidadeMedida,"
 				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade)"
@@ -45,9 +45,9 @@ public class InsumosDeEstoqueDAO {
             }
         }
     }
-    public List<InsumosDeEstoque> listarInsumos() {
+    public List<ProdutoEstoque> listarInsumos() {
         String sql = "SELECT * FROM produtoEstoque";
-        List<InsumosDeEstoque> insumos = new ArrayList<>();
+        List<ProdutoEstoque> insumos = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
         ResultSet rset = null; // Objeto que guarda o resultado da consulta
@@ -58,7 +58,7 @@ public class InsumosDeEstoqueDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                InsumosDeEstoque insumo = new InsumosDeEstoque(sql, sql, sql, 0, 0, 0);
+                ProdutoEstoque insumo = new ProdutoEstoque(sql, sql, sql, 0, 0, 0);
                 insumo.setNome(rset.getString("nome"));
                 insumo.setMarca(rset.getString("marca"));
                 insumo.setCor(rset.getString("cor"));
@@ -78,8 +78,8 @@ public class InsumosDeEstoqueDAO {
         return insumos;
     }
     
-    public void atualizarInsumos(InsumosDeEstoque insumosDeEstoque) {
-        String sql = "UPDATE InsumosDeEstoque SET nome = ?, marca = ?, cor = ?, valor = ?"
+    public void atualizarInsumos(ProdutoEstoque insumosDeEstoque) {
+        String sql = "UPDATE produtoEstoque SET nome = ?, marca = ?, cor = ?, valor = ?"
         		+ "unidadePorUnidade = ?, quantidadeDisponivel = ? WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -101,8 +101,8 @@ public class InsumosDeEstoqueDAO {
         }
     }
     
-    public void excluirInsumos(InsumosDeEstoque insumosDeEstoque) {
-        String sql = "DELETE FROM InsumosDeEstoque WHERE nome = ?";
+    public void excluirInsumos(ProdutoEstoque insumosDeEstoque) {
+        String sql = "DELETE FROM produtoEstoque WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 

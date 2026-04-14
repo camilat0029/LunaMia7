@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,7 +17,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 
 	private CadastroUsuario cadastroUsuario;
 	private UsuarioPerfilDAO usuarioDAO;
-	private NavegadorTelas navegadorTelas2;
+	private NavegadorTelas navegadorTelas;
 	private Menu menu;
 	private ConfigurarPerfilAposCadastrar confPerfilAposCad;
 	private UsuarioPerfil usuarioCadastrado;
@@ -23,14 +25,24 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
-			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
+			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas, Menu menu, 
 			ConfigurarPerfilAposCadastrar confPerfilAposCad) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
 		this.menu = menu;
-		this.navegadorTelas2 = navegadorTelas2;
+		this.navegadorTelas = navegadorTelas;
 		this.confPerfilAposCad = confPerfilAposCad;
+		
+		this.cadastroUsuario.voltar(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				navegadorTelas.navegarTela("LOGIN");
+				limparCamposTelaCadastro();
+				menu.mostrarPanelCont();
+				menu.removerMenu();
+			}
+		});
 
 		this.cadastroUsuario.cadastrar(e -> {
 			
@@ -68,7 +80,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 					
 					JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
 
-					navegadorTelas2.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
+					navegadorTelas.navegarTela("CONFIGURARPERFILAPOSCASDASTRAR");
 					limparCamposTelaCadastro();
 					
 				}else if (EmailRepetido == true && UsuarioRepetido == true){

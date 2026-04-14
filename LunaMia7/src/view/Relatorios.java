@@ -15,7 +15,7 @@ public class Relatorios extends JPanel {
 	 * Create the panel.
 	 */
 	public Relatorios() {
-		setBackground(new Color(234, 219, 247));
+		setBackground(new Color(255, 255, 255));
 		setLayout(new MigLayout("", "[grow][][][grow]", "[grow][][][][][][][][grow]"));
 		
 		JLabel lbVisualizeRelatorioa = new JLabel("Visualize seus relatórios a\r\n partir do primeiro mês!");
@@ -23,7 +23,7 @@ public class Relatorios extends JPanel {
 		add(lbVisualizeRelatorioa, "cell 2 1");
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(234, 219, 247));
+		panel.setBackground(new Color(193, 151, 232));
 		add(panel, "cell 2 3,grow");
 		
 		JButton btRelatorioHT = new JButton("Relatório de Horas Trabalhadas");
@@ -32,7 +32,7 @@ public class Relatorios extends JPanel {
 		panel.add(btRelatorioHT);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(234, 219, 247));
+		panel_1.setBackground(new Color(193, 151, 232));
 		add(panel_1, "cell 2 5,grow");
 		
 		JButton btRelatorioLC = new JButton("Relatório de Lucros");
@@ -41,7 +41,7 @@ public class Relatorios extends JPanel {
 		panel_1.add(btRelatorioLC);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(234, 219, 247));
+		panel_2.setBackground(new Color(193, 151, 232));
 		add(panel_2, "cell 2 7,grow");
 		
 		JButton btRelatorioGT = new JButton("Relatório de Gastos");

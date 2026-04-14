@@ -16,40 +16,38 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class Orcamentos extends JPanel {
+public class ProdutoEstoque extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable tabelaOrcamentos;
-	private JButton btCriar;
+	private JButton btAdicionar;
 
 	/**
 	 * Create the panel.
 	 */
-	public Orcamentos() {
-		
-		//FAZER A TABELA EM STATIC PARA PODER EDITAR COM AS COISAS DO BANCO 
+	public ProdutoEstoque() {
 		
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("", "[grow][-60.00][][389.00][grow]", "[][][grow][]"));
 		
-		JLabel lbCrieNovoOrcamento = new JLabel("Crie um novo orçamento");
+		JLabel lbCrieNovoOrcamento = new JLabel("Adicione uma nova matéria prima");
 		lbCrieNovoOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbCrieNovoOrcamento, "cell 2 1,alignx center");
 		
-		btCriar = new JButton("Criar");
-		btCriar.setBackground(new Color(193, 151, 232));
-		btCriar.setBorderPainted(false);
-		btCriar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(btCriar, "cell 3 1,alignx right");
+		btAdicionar = new JButton("Adicionar");
+		btAdicionar.setBackground(new Color(193, 151, 232));
+		btAdicionar.setBorderPainted(false);
+		btAdicionar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(btAdicionar, "cell 3 1,alignx right");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
 		;
 		
-		String[] colunas = {"Orcamentos", "Status", "Data de Entrega", "Cliente", ""};
+		String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", ""};
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 		tabelaOrcamentos = new JTable(modelo);
 		
@@ -79,11 +77,10 @@ public class Orcamentos extends JPanel {
 		tabelaOrcamentos.getColumnModel().getColumn(1).setCellRenderer(center);
 		tabelaOrcamentos.getColumnModel().getColumn(2).setCellRenderer(center);
 		
-		tabelaOrcamentos.getColumnModel().getColumn(0).setPreferredWidth(200); // Orçamentos
-		tabelaOrcamentos.getColumnModel().getColumn(1).setPreferredWidth(200); // Status
-		tabelaOrcamentos.getColumnModel().getColumn(2).setPreferredWidth(200); // Data
-		tabelaOrcamentos.getColumnModel().getColumn(3).setPreferredWidth(200); // Cliente
-		tabelaOrcamentos.getColumnModel().getColumn(4).setPreferredWidth(50);  // Botão / mais
+		tabelaOrcamentos.getColumnModel().getColumn(0).setPreferredWidth(200); // Matérias Primas
+		tabelaOrcamentos.getColumnModel().getColumn(1).setPreferredWidth(200); // Quantidade
+		tabelaOrcamentos.getColumnModel().getColumn(2).setPreferredWidth(200); // Unidade de Medida
+		tabelaOrcamentos.getColumnModel().getColumn(3).setPreferredWidth(50);  // Botão / mais
 				
 		scrollPane.setViewportView(tabelaOrcamentos);
 				
@@ -91,7 +88,7 @@ public class Orcamentos extends JPanel {
 	}
 	
 	public void criar(ActionListener actionListener) {
-		this.btCriar.addActionListener(actionListener);
+		this.btAdicionar.addActionListener(actionListener);
 	}
 	//public void adicionarLinha(String tituloOrcamento, boolean status, String dataEntrega, String cliente, String mais) {
 	//	modelo.addRow(new Object[] {tituloOrcamento, status, dataEntrega, cliente, mais});

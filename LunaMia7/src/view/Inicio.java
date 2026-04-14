@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 public class Inicio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton btConfigurarPerfil;
+	private JButton btCriarEstoque;
+	private JButton btCriarOrcamento;
 
 	public Inicio() {
 		
@@ -24,29 +27,29 @@ public class Inicio extends JPanel {
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("gap 30", "[][grow][][][][grow]", "[grow][][][][][grow]"));
 		
-		JLabel lbPorOndeDesejaComecarIn = new JLabel("Por onde deseja começar?");
-		lbPorOndeDesejaComecarIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbPorOndeDesejaComecarIn, "cell 2 1 3 1,alignx center");
+		JLabel lbPorOndeDesejaComecar = new JLabel("Por onde deseja começar?");
+		lbPorOndeDesejaComecar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(lbPorOndeDesejaComecar, "cell 2 1 3 1,alignx center");
 		
-		JButton btConfigurarPerfil = new JButton("Configurar Perfil");
+		btConfigurarPerfil = new JButton("Configurar Perfil");
 		btConfigurarPerfil.setBackground(new Color(193, 151, 232));
 		btConfigurarPerfil.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(btConfigurarPerfil, "cell 2 2 3 1,grow");
 		
-		JButton btCriarEstoqueIn = new JButton("Criar estoque");
-		btCriarEstoqueIn.setBackground(new Color(193, 151, 232));
-		btCriarEstoqueIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(btCriarEstoqueIn, "cell 2 3 3 1, width 45%,height 38px");
+		btCriarEstoque = new JButton("Criar estoque");
+		btCriarEstoque.setBackground(new Color(193, 151, 232));
+		btCriarEstoque.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(btCriarEstoque, "cell 2 3 3 1, width 45%,height 38px");
 		
-		JButton btCriarOrcamentoIn = new JButton("Criar orçamento");
-		btCriarOrcamentoIn.setBackground(new Color(193, 151, 232));
-		btCriarOrcamentoIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(btCriarOrcamentoIn, "cell 2 4 3 1,grow");
+		btCriarOrcamento = new JButton("Criar orçamento");
+		btCriarOrcamento.setBackground(new Color(193, 151, 232));
+		btCriarOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		add(btCriarOrcamento, "cell 2 4 3 1,grow");
 		
 		
 		
-		btCriarOrcamentoIn.setBorderPainted(false);
-		btCriarEstoqueIn.setBorderPainted(false);
+		btCriarOrcamento.setBorderPainted(false);
+		btCriarEstoque.setBorderPainted(false);
 		btConfigurarPerfil.setBorderPainted(false);
 		
 		
@@ -57,12 +60,22 @@ public class Inicio extends JPanel {
                 // Calcula novo tamanho baseado na largura
                 int fonteProporcional = Math.max(20, Math.min(40, getWidth() / 30));
                 
-                lbPorOndeDesejaComecarIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
-                btCriarOrcamentoIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
-                btCriarEstoqueIn.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                lbPorOndeDesejaComecar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                btCriarOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                btCriarEstoque.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
         		btConfigurarPerfil.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
                 
             }
         });
+	}
+	
+	public void criarOrcamento(ActionListener actionListener) {
+		this.btCriarOrcamento.addActionListener(actionListener);
+	}
+	public void criarEstoque(ActionListener actionListener) {
+		this.btCriarEstoque.addActionListener(actionListener);
+	}
+	public void configurarPerfil(ActionListener actionListener) {
+		this.btConfigurarPerfil.addActionListener(actionListener);
 	}
 }

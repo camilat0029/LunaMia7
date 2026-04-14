@@ -1,6 +1,6 @@
 package model;
 
-public class InsumosDeEstoque {
+public class ProdutoEstoque {
 	
 	private String nome, marca,cor;
 	private float valor,unidadePorUnidade;
@@ -63,7 +63,7 @@ public class InsumosDeEstoque {
 		}
 		
 	}
-	public InsumosDeEstoque(String nome, String marca, String cor, float valor, float unidadePorUnidade,
+	public ProdutoEstoque(String nome, String marca, String cor, float valor, float unidadePorUnidade,
 			int quantidadeDisponivel) {
 		super();
 		this.nome = nome;

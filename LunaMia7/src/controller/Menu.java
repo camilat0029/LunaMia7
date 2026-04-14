@@ -16,11 +16,13 @@ public class Menu {
 	private MenuContraido mnCont;
 	private JPanel menuAtual;
 	private TelaPrincipal tela;
+	private NavegadorTelas navegadorTelas;
 	
-	public Menu(TelaPrincipal tela, MenuExpandido mnExp, MenuContraido mnCont) {
+	public Menu(TelaPrincipal tela, MenuExpandido mnExp, MenuContraido mnCont, NavegadorTelas navegadorTelas) {
 		this.tela = tela;
 		this.mnExp = mnExp;
 		this.mnCont = mnCont;
+		this.navegadorTelas = navegadorTelas;
 		menuAtual = mnCont;
 		
 		tela.mudarMenu(menuAtual);
@@ -40,8 +42,26 @@ public class Menu {
 			
 		});
 		
-		
+		this.mnExp.perfil(e ->{
+			navegadorTelas.navegarTela("CONFIGURARPERFIL");
+			removerMenu();
+		});
+		this.mnExp.estoque(e -> {
+			navegadorTelas.navegarTela("PRODUTO_ESTOQUE");
+		});
+		this.mnExp.inicio(e -> {
+			navegadorTelas.navegarTela("INICIO");
+		});
+		this.mnExp.orcamentos(e ->{
+			navegadorTelas.navegarTela("ORCAMENTOS");
+		});
+		this.mnExp.relatorios(e ->{
+			navegadorTelas.navegarTela("RELATORIOS");
+		});
+	
 	}
+	
+	 
 	
 	public void mostrarPanelCont() {
 		menuAtual = mnCont;

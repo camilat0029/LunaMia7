@@ -8,6 +8,7 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
 import controller.CadastroUsuarioController;
+import controller.InicioController;
 import controller.LoginController;
 import controller.Menu;
 import controller.NavegadorTelas;
@@ -22,11 +23,11 @@ import view.CriarOrcamento;
 import view.CriarOrcamentoAposCalcular;
 import view.CriarOrcamentoComFormaPagamento;
 import view.Inicio;
-import view.InicioPosCadastro;
 import view.Login;
 import view.MenuContraido;
 import view.MenuExpandido;
 import view.Orcamentos;
+import view.ProdutoEstoque;
 import view.RedefinirSenha;
 import view.Relatorios;
 import view.TelaPrincipal;
@@ -47,7 +48,7 @@ public class Main {
         manager.setReshowDelay(100);     // tempo para reaparecer rápido
 		
 		//JFrame
-		TelaPrincipal telaPrincipal2 = new TelaPrincipal();
+		TelaPrincipal telaPrincipal = new TelaPrincipal();
 		
 		
 		//Controller
@@ -63,54 +64,49 @@ public class Main {
 		CriarOrcamentoAposCalcular criarOrcamentoAposCalcular = new CriarOrcamentoAposCalcular();
 		CriarOrcamentoComFormaPagamento criarOrcamentoComFormaPagamento = new CriarOrcamentoComFormaPagamento();
 		Inicio inicio = new Inicio();
-		InicioPosCadastro inicioPosCadastro = new InicioPosCadastro();
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
 		Relatorios relatorios = new Relatorios();
 		MenuContraido menuCont = new MenuContraido();
 		MenuExpandido menuExp = new MenuExpandido();
+		ProdutoEstoque produtoEstoque = new ProdutoEstoque();
 		
 		//adicionei isso pra depois não esquecer
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		Orcamentos orcamentos = new Orcamentos();
 		
+		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
 		
-		Menu menu = new Menu(telaPrincipal2, menuExp, menuCont);
-		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal2, login, menu, cadastro);
+		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
+		
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		
 		//adicionei isso já, pra depois não esquecer
-		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal2, menu, navegadorTelas, orcamentos);
+		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
+		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		
 		
-		navegadorTelas.setCadastroController(cadastroUsuarioController);
-		navegadorTelas.setLoginController(loginController);
-		
 		navegadorTelas.adicionarPainel("LOGIN", login);
-		//navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
+		navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
 		navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
 		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configurarPerfiAposCadastrar);
 		navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
-		//navegadorTelas.adicionarPainel("INICIOPOSCADASTRO", inicioPosCadastro);
 		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
-		//navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
+		navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
-		
-		
+		navegadorTelas.adicionarPainel("PRODUTO_ESTOQUE", produtoEstoque);
 		
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
-		
-		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("ORCAMENTOS");
+		navegadorTelas.navegarTela("PRODUTO_ESTOQUE");
 		
 		
 		menu.iniciar();
