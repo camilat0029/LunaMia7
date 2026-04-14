@@ -11,18 +11,18 @@ import view.Login;
 public class LoginController {
 	
 	private Login login;
+	public static UsuarioPerfil usuarioLogado;
 	private UsuarioPerfilDAO usuarioDAO;
-	private NavegadorTelas navegadorTelas;
+	private NavegadorTelas navegadorTelas2;
 	private Menu menu;
 	private String usuario;
 	
-	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas, Menu menu) {
+	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
 		super();
 		this.login = login;
 		this.usuarioDAO = usuarioDAO;
-		this.navegadorTelas = navegadorTelas;
+		this.navegadorTelas2 = navegadorTelas2;
 		this.menu = menu;
-		
 		
 		this.login.entrar(e -> {
 			verificarCadastroUsuario();
@@ -30,12 +30,13 @@ public class LoginController {
 		});
 		
 		this.login.cadastrese(e -> {
-			navegadorTelas.navegarTela("CADASTRO");
+			navegadorTelas2.navegarTela("CADASTRO");
 			limparCamposLogin();
 			this.menu.removerMenu();
 		});
 	}
 	
+	//VERIFICAÇÃO DE USUÁRIO, VE SE JÁ ESTÁ CADASTRADO
 	public void verificarCadastroUsuario() {
 		
 		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
@@ -54,15 +55,16 @@ public class LoginController {
 				if(usuarioPerfil.getNomeUsuario().equals(login.getTfUsuarioLogin().getText()) && 
 						usuarioPerfil.getSenha().equals(login.getPfSenhaLogin().getText())) {
 					
+					 usuarioLogado = usuarioPerfil;
 					 usuarioEncontrado = true;
+					 
 					 break;
 				}
 				
 			}
 			
 			if (usuarioEncontrado) {
-				 usuario = login.getTfUsuarioLogin().getText();
-				 this.navegadorTelas.navegarTela("INICIO");
+				 this.navegadorTelas2.navegarTela("INICIO");
 				 this.menu.mostrarPanelCont();	
 			}else {
 				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);
@@ -70,11 +72,14 @@ public class LoginController {
 			
 		}
 		
+		
 	}
 	
 	public void limparCamposLogin() {
 		login.getTfUsuarioLogin().setText("");
 		login.getPfSenhaLogin().setText("");
 	}
+	
+	
 
 }

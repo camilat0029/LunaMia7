@@ -79,14 +79,15 @@ public class Main {
 		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
 		
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
-				menu, configurarPerfiAposCadastrar);
+				menu, configurarPerfiAposCadastrar, configurarPerfil);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		
 		//adicionei isso já, pra depois não esquecer
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
-		
+				
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
+		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
 		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);

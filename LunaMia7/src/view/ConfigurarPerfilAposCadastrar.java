@@ -7,6 +7,7 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -17,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ConfigurarPerfilAposCadastrar extends JPanel {
 
@@ -29,6 +31,12 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
 	private JLabel lbEmailCad;
+	private JComboBox cbBairro;
+	private JComboBox cbCidade;
+	private JComboBox cbEstadoCP;
+	private JButton btSalvar;
+	private JButton btIgnorar;
+	private JButton btRedefinirSenha;
 
 	/**
 	 * Create the panel.
@@ -38,7 +46,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
-		setLayout(new MigLayout("gap 15", "[grow][][][grow][][][][][][grow]", "[grow][][][grow][grow][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 16", "[grow][][][][][][][][][grow]", "[grow][][][][][][][][][][][][][][][grow]"));
 		
 		JLabel lbNomeCompCP = new JLabel("Nome Completo");
 		lbNomeCompCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -46,7 +54,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		tfNomeCompCP = new JTextField();
 		tfNomeCompCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfNomeCompCP, "cell 3 2 6 1, width 67%, wmax 1100px,height 38px");
+		add(tfNomeCompCP, "cell 3 2 6 1, width 67%,height 38px");
 		tfNomeCompCP.setColumns(10);
 		
 		JLabel lbNomeUsuaCP = new JLabel("Nome de Usuário");
@@ -90,7 +98,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		panel_btRedefinirSenha.setBackground(new Color(234, 219, 247));
 		add(panel_btRedefinirSenha, "cell 5 5 4 2,alignx center,aligny center");
 		
-		JButton btRedefinirSenha = new JButton("Redefinir Senha");
+		btRedefinirSenha = new JButton("Redefinir Senha");
 		btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btRedefinirSenha.setBackground(new Color(193, 151, 232));
 		panel_btRedefinirSenha.add(btRedefinirSenha, "growx");
@@ -108,17 +116,19 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbEstadoCP, "cell 1 7");
 		
-		JComboBox cbEstadoCP = new JComboBox();
+		cbEstadoCP = new JComboBox();
+		cbEstadoCP.setModel(new DefaultComboBoxModel(new String[] {"SC"}));
 		cbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbEstadoCP, "cell 3 7, width 18%,height 38px, height 38px");
+		add(cbEstadoCP, "cell 3 7, width 18%,height 38px");
 		
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbCidadeCP, "cell 5 7");
 		
-		JComboBox cbCidade = new JComboBox();
+		cbCidade = new JComboBox();
+		cbCidade.setModel(new DefaultComboBoxModel(new String[] {"A"}));
 		cbCidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbCidade, "cell 7 7 2 1,growx,width 18%,height 38px");
+		add(cbCidade, "cell 7 7 2 1,growx,height 38px");
 		
 		JLabel lbEnderecoCP = new JLabel("Endereço");
 		lbEnderecoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -133,9 +143,10 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbBairroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbBairroCP, "cell 5 8");
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(comboBox_1, "cell 7 8 2 1,growx,height 38px");
+		cbBairro = new JComboBox();
+		cbBairro.setModel(new DefaultComboBoxModel(new String[] {"B"}));
+		cbBairro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		add(cbBairro, "cell 7 8 2 1,growx,height 38px");
 		
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -144,7 +155,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		tfPrecoHoraCP = new JTextField();
 		tfPrecoHoraCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		tfPrecoHoraCP.setFont(new Font("Dialog", Font.PLAIN, 20));
-		add(tfPrecoHoraCP, "cell 3 9,width 18%,height 38px");
+		add(tfPrecoHoraCP, "cell 3 9,growx,height 38px");
 		tfPrecoHoraCP.setColumns(10);
 		
 		JLabel lbPercLucroCP = new JLabel("Percentual de Lucro");
@@ -166,18 +177,18 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		JPanel panel_btSalvar = new JPanel();
 		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
 		panel_btSalvar.setBackground(new Color(234, 219, 247));
-		add(panel_btSalvar, "cell 1 13 3 1,alignx center,gapy 30");
+		add(panel_btSalvar, "cell 1 13 3 1,alignx center,gapy 15");
 		
 		JPanel panel_btIgnorar = new JPanel();
 		panel_btIgnorar.setBackground(new Color(234, 219, 247));
-		add(panel_btIgnorar, "cell 5 13 4 1,gapy 30,grow");
+		add(panel_btIgnorar, "cell 5 13 4 1,growx,gapy 15");
 		
-		JButton btIgnorar = new JButton("Ignorar Por Enquanto ");
+		btIgnorar = new JButton("Ignorar Por Enquanto ");
 		btIgnorar.setBackground(new Color(193, 151, 232));
 		btIgnorar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_btIgnorar.add(btIgnorar);
 		
-		JButton btSalvar = new JButton("Salvar");
+		btSalvar = new JButton("Salvar");
 		btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btSalvar.setBackground(new Color(193, 151, 232));
 		panel_btSalvar.add(btSalvar, "cell 0 0,growx");
@@ -219,7 +230,22 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 
 	}
+	
+	public void salvarCadCompleto(ActionListener actionListener) {
+		this.btSalvar.addActionListener(actionListener);
+	}
+	
+	public void ignorar(ActionListener actionListener) {
+		this.btIgnorar.addActionListener(actionListener);
+	}
+	
+	public void redefinirSenha(ActionListener actionListener) {
+		this.btRedefinirSenha.addActionListener(actionListener);
+	}
 
+	
+	
+	
 	public JTextField getTfNomeCompCP() {
 		return tfNomeCompCP;
 	}
@@ -275,11 +301,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void setTfPercLucroCP(JTextField tfPercLucroCP) {
 		this.tfPercLucroCP = tfPercLucroCP;
 	}
-	
-	
-	public void adicionarOuvinte(ComponentListener listener) {
-		this.addComponentListener(listener);
-	}
 
 	public JLabel getLbNomeUsuarioCad() {
 		return lbNomeUsuarioCad;
@@ -288,9 +309,35 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void setLbNomeUsuarioCad(JLabel lbNomeUsuarioCad) {
 		this.lbNomeUsuarioCad = lbNomeUsuarioCad;
 	}
+
+	public JComboBox getCbBairro() {
+		return cbBairro;
+	}
+
+	public void setCbBairro(JComboBox cbBairro) {
+		this.cbBairro = cbBairro;
+	}
+
+	public JComboBox getCbCidade() {
+		return cbCidade;
+	}
+
+	public void setCbCidade(JComboBox cbCidade) {
+		this.cbCidade = cbCidade;
+	}
+
+	public JComboBox getCbEstadoCP() {
+		return cbEstadoCP;
+	}
+
+	public void setCbEstadoCP(JComboBox cbEstadoCP) {
+		this.cbEstadoCP = cbEstadoCP;
+	}
 	
 	
 	
-	
+	public void adicionarOuvinte(ComponentListener listener) {
+		this.addComponentListener(listener);
+	}
 
 }
