@@ -18,23 +18,24 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ConfigurarPerfil extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNomeCompCP;
-	private JPasswordField pfSenhaCP;
 	private JTextField tfTelefoneCP;
 	private JTextField tfEnderecoCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
 	private JLabel lbEmailCad;
+	private JLabel lbSenhaCad;
 	private JComboBox cbEstadoCP;
 	private JComboBox cbCidade;
 	private JComboBox cbBairro;
-	private JButton btVoltar;
 	private JButton btSalvar;
+	private JButton btVoltar;
 	private JButton btRedefinirSenha;
 	
 	/**
@@ -88,9 +89,15 @@ public class ConfigurarPerfil extends JPanel {
 		lbSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbSenhaCP, "cell 1 5");
 		
-		pfSenhaCP = new JPasswordField();
-		pfSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(pfSenhaCP, "cell 3 5,width 18%,height 38px");
+		JPanel panel_SenhaCad = new JPanel();
+		panel_SenhaCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
+		panel_SenhaCad.setBackground(new Color(255, 255, 255));
+		add(panel_SenhaCad, "cell 3 5, width 18%, height 38!");
+		panel_SenhaCad.setLayout(new MigLayout("", "[169.00]", "[]"));
+		
+		lbSenhaCad = new JLabel("");
+		lbSenhaCad.setFont(new Font("Dialog", Font.PLAIN, 20));
+		panel_SenhaCad.add(lbSenhaCad, "cell 0 0, alignx left, growy, aligny center");
 		
 		JPanel panel_btRedefinirSenha = new JPanel();
 		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -116,6 +123,7 @@ public class ConfigurarPerfil extends JPanel {
 		add(lbEstadoCP, "cell 1 7");
 		
 		cbEstadoCP = new JComboBox();
+		cbEstadoCP.setModel(new DefaultComboBoxModel(new String[] {"SC", "A", "B"}));
 		cbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbEstadoCP, "cell 3 7, width 18%,height 38px, height 38px");
 		
@@ -124,6 +132,7 @@ public class ConfigurarPerfil extends JPanel {
 		add(lbCidadeCP, "cell 5 7");
 		
 		cbCidade = new JComboBox();
+		cbCidade.setModel(new DefaultComboBoxModel(new String[] {"A", "C"}));
 		cbCidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbCidade, "cell 7 7 2 1,growx,width 18%,height 38px");
 		
@@ -141,6 +150,7 @@ public class ConfigurarPerfil extends JPanel {
 		add(lbBairroCP, "cell 5 8");
 		
 		cbBairro = new JComboBox();
+		cbBairro.setModel(new DefaultComboBoxModel(new String[] {"B", "K"}));
 		cbBairro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbBairro, "cell 7 8 2 1,growx,height 38px");
 		
@@ -180,18 +190,18 @@ public class ConfigurarPerfil extends JPanel {
 		panel_btEditar.setBackground(new Color(234, 219, 247));
 		add(panel_btEditar, "cell 5 13 4 1,alignx center,gapy 30");
 		
-		btVoltar = new JButton("Voltar");
-		btVoltar.setBackground(new Color(193, 151, 232));
-		btVoltar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		panel_btEditar.add(btVoltar, "growx");
-		
 		btSalvar = new JButton("Salvar");
-		btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		btSalvar.setBackground(new Color(193, 151, 232));
-		panel_btSalvar.add(btSalvar, "cell 0 0,growx");
+		btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		panel_btEditar.add(btSalvar, "growx");
 		
-		btSalvar.setBorderPainted(false);
+		btVoltar = new JButton("Voltar");
+		btVoltar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btVoltar.setBackground(new Color(193, 151, 232));
+		panel_btSalvar.add(btVoltar, "cell 0 0,growx");
+		
 		btVoltar.setBorderPainted(false);
+		btSalvar.setBorderPainted(false);
 		btRedefinirSenha.setBorderPainted(false);
 		
 		addComponentListener(new ComponentAdapter() {
@@ -212,25 +222,33 @@ public class ConfigurarPerfil extends JPanel {
                 lbPrecoHoraCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btVoltar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
+                btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
+                btVoltar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                                 
             }
         });	
 
 	}
 	
-	public void salvar(ActionListener actionListener) {
-		this.btSalvar.addActionListener(actionListener);
-	}
-	
 	public void voltar(ActionListener actionListener) {
 		this.btVoltar.addActionListener(actionListener);
 	}
 	
+	public void salvar(ActionListener actionListener) {
+		this.btSalvar.addActionListener(actionListener);
+	}
+	
 	public void redefinirSenha(ActionListener actionListener) {
 		this.btRedefinirSenha.addActionListener(actionListener);
+	}
+
+	public JLabel getLbSenhaCad() {
+		return lbSenhaCad;
+	}
+
+	public void setLbSenhaCad(JLabel lbSenhaCad) {
+		this.lbSenhaCad = lbSenhaCad;
 	}
 
 	public JTextField getTfNomeCompCP() {
@@ -239,14 +257,6 @@ public class ConfigurarPerfil extends JPanel {
 
 	public void setTfNomeCompCP(JTextField tfNomeCompCP) {
 		this.tfNomeCompCP = tfNomeCompCP;
-	}
-
-	public JPasswordField getPfSenhaCP() {
-		return pfSenhaCP;
-	}
-
-	public void setPfSenhaCP(JPasswordField pfSenhaCP) {
-		this.pfSenhaCP = pfSenhaCP;
 	}
 
 	public JTextField getTfTelefoneCP() {

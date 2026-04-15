@@ -24,13 +24,13 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNomeCompCP;
-	private JPasswordField pfSenhaCP;
 	private JTextField tfTelefoneCP;
 	private JTextField tfEnderecoCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
 	private JLabel lbEmailCad;
+	private JLabel lbSenhaCad;
 	private JComboBox cbBairro;
 	private JComboBox cbCidade;
 	private JComboBox cbEstadoCP;
@@ -89,9 +89,15 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbSenhaCP, "cell 1 5");
 		
-		pfSenhaCP = new JPasswordField();
-		pfSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(pfSenhaCP, "cell 3 5,width 18%,height 38px");
+		JPanel panel_SenhaCad = new JPanel();
+		panel_SenhaCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
+		panel_SenhaCad.setBackground(new Color(255, 255, 255));
+		add(panel_SenhaCad, "cell 3 5, width 18%, height 38!");
+		panel_SenhaCad.setLayout(new MigLayout("", "[169.00]", "[]"));
+		
+		lbSenhaCad = new JLabel("");
+		lbSenhaCad.setFont(new Font("Dialog", Font.PLAIN, 20));
+		panel_SenhaCad.add(lbSenhaCad, "cell 0 0, alignx left, growy, aligny center");
 		
 		JPanel panel_btRedefinirSenha = new JPanel();
 		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -262,12 +268,12 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		this.lbEmailCad = lbEmailCad;
 	}
 
-	public JPasswordField getPfSenhaCP() {
-		return pfSenhaCP;
+	public JLabel getLbSenhaCad() {
+		return lbSenhaCad;
 	}
 
-	public void setPfSenhaCP(JPasswordField pfSenhaCP) {
-		this.pfSenhaCP = pfSenhaCP;
+	public void setLbSenhaCad(JLabel lbSenhaCad) {
+		this.lbSenhaCad = lbSenhaCad;
 	}
 
 	public JTextField getTfTelefoneCP() {

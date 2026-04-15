@@ -116,7 +116,7 @@ public class UsuarioPerfilDAO {
     
  // DELETE - Excluir um usuário pelo ID
     public void excluirUsuario(String nomeUsuario, String email) {
-        String sql = "DELETE FROM usuarios WHERE nomeUsuario = ? AND email = ?";
+        String sql = "DELETE FROM Perfil_Usuario WHERE nomeUsuario = ? AND email = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -131,6 +131,34 @@ public class UsuarioPerfilDAO {
         } finally {
         	BancoDeDados.desconectar(conexao);
         }
+    }
+    
+    public String buscaUsuarioPelaChavePrim(String nomeUsuario, String email) {
+    	 String sql = "SELECT FROM Perfil_Usuario WHERE nomeUsuario = ? AND email = ?";
+         Connection conexao = null;
+         PreparedStatement pstm = null;
+         
+         ResultSet rset = null;
+         
+         String senha =  "";
+         
+         try {
+             conexao = BancoDeDados.conectar();
+             pstm = conexao.prepareStatement(sql);
+             pstm.setString(1, nomeUsuario);
+             pstm.setString(2, email);
+             pstm.executeUpdate();
+             
+             if(rset.next()) {
+            	 senha = rset.getString("senha");
+             }
+             
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } finally {
+         	BancoDeDados.desconectar(conexao);
+         }
+		 return  senha;
     }
 
 }

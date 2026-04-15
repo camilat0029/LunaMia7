@@ -72,6 +72,14 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.confPerfil.salvar(e -> {
 			atualizarCadTelaConfPerfilCad();
 		});
+		
+		this.confPerfil.voltar(e -> {
+			navegadorTelas2.navegarTela("INICIO");
+		});
+		
+		this.confPerfil.redefinirSenha(e -> {
+			navegadorTelas2.navegarTela("REDEFINIRSENHA");
+		});
 	}
 	
 	//LIMPAR CAMPOS TELA DE CADASTRO
@@ -175,15 +183,14 @@ public class CadastroUsuarioController extends ComponentAdapter{
 				confPerfilAposCad.getTfEnderecoCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPercLucroCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPrecoHoraCP().getText().isEmpty() ||
-				confPerfilAposCad.getTfTelefoneCP().getText().isEmpty() ||
-				confPerfilAposCad.getPfSenhaCP().getText().isEmpty()) {
+				confPerfilAposCad.getTfTelefoneCP().getText().isEmpty()) {
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
 		} else {
 			
 			usuarioAtualizado.setFotoPerfil(null);
-			usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
+			usuarioAtualizado.setSenha(usuarioCadastrado.getSenha());
 			usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
 			usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
 			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
@@ -208,20 +215,20 @@ public class CadastroUsuarioController extends ComponentAdapter{
     public void atualizarCadTelaConfPerfilCad() {
 		
 		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
+		UsuarioPerfil usuario = LoginController.usuarioLogado;
 		
 		if(confPerfil.getTfNomeCompCP().getText().isEmpty() ||
 				confPerfil.getTfEnderecoCP().getText().isEmpty() ||
 				confPerfil.getTfPercLucroCP().getText().isEmpty() ||
 				confPerfil.getTfPrecoHoraCP().getText().isEmpty() ||
-				confPerfil.getTfTelefoneCP().getText().isEmpty() ||
-				confPerfil.getPfSenhaCP().getText().isEmpty()) {
+				confPerfil.getTfTelefoneCP().getText().isEmpty()) {
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
 		} else {
 			
 			usuarioAtualizado.setFotoPerfil(null);
-			usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
+			usuarioAtualizado.setSenha(usuario.getSenha());
 			usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
 			usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
 			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
@@ -255,7 +262,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			confPerfilAposCad.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
 			confPerfilAposCad.getLbEmailCad().setText(usuarioCadastrado.getEmail());
 			confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
-			confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+			confPerfilAposCad.getLbSenhaCad().setText(usuarioCadastrado.getSenha().replaceAll(".", "•"));
 			
 		}
 		
@@ -268,7 +275,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
 			confPerfil.getLbEmailCad().setText(usuario.getEmail());
 			confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
-			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
+			confPerfil.getLbSenhaCad().setText(usuario.getSenha().replaceAll(".", "•"));
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			
 		}

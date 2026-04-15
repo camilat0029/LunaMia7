@@ -13,7 +13,9 @@ import controller.LoginController;
 import controller.Menu;
 import controller.NavegadorTelas;
 import controller.OrcamentoController;
+import controller.RedefinirSenhaController;
 import model.OrcamentoDAO;
+import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastrarProdutoEstoque;
 import view.CadastroUsuario;
@@ -51,8 +53,9 @@ public class Main {
 		TelaPrincipal telaPrincipal = new TelaPrincipal();
 		
 		
-		//Controller
+		//Model
 		UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
+		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
 		
 		//View
 		Login login = new Login();
@@ -85,20 +88,23 @@ public class Main {
 		//adicionei isso já, pra depois não esquecer
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
+		
+		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
 				
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
+		redefinirSenha.adicionarOuvinte(redefSenhaController);
 		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
 		navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
-		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configurarPerfiAposCadastrar);
+		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCADASTRAR", configurarPerfiAposCadastrar);
 		navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
 		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
-		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
+		navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
 		navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
 		navegadorTelas.adicionarPainel("PRODUTO_ESTOQUE", produtoEstoque);
@@ -107,7 +113,7 @@ public class Main {
 		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("PRODUTO_ESTOQUE");
+		navegadorTelas.navegarTela("LOGIN");
 		
 		
 		menu.iniciar();
