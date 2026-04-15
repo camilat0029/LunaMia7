@@ -5,12 +5,17 @@ import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class Relatorios extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	private JButton btRelatorioGT;
+	private JButton btRelatorioHT;
+	private JButton btRelatorioLC;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -26,7 +31,7 @@ public class Relatorios extends JPanel {
 		panel.setBackground(new Color(193, 151, 232));
 		add(panel, "cell 2 3,grow");
 		
-		JButton btRelatorioHT = new JButton("Relatório de Horas Trabalhadas");
+		btRelatorioHT = new JButton("Relatório de Horas Trabalhadas");
 		btRelatorioHT.setBackground(new Color(193, 151, 232));
 		btRelatorioHT.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel.add(btRelatorioHT);
@@ -35,7 +40,7 @@ public class Relatorios extends JPanel {
 		panel_1.setBackground(new Color(193, 151, 232));
 		add(panel_1, "cell 2 5,grow");
 		
-		JButton btRelatorioLC = new JButton("Relatório de Lucros");
+		btRelatorioLC = new JButton("Relatório de Lucros");
 		btRelatorioLC.setBackground(new Color(193, 151, 232));
 		btRelatorioLC.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_1.add(btRelatorioLC);
@@ -44,7 +49,7 @@ public class Relatorios extends JPanel {
 		panel_2.setBackground(new Color(193, 151, 232));
 		add(panel_2, "cell 2 7,grow");
 		
-		JButton btRelatorioGT = new JButton("Relatório de Gastos");
+		btRelatorioGT = new JButton("Relatório de Gastos");
 		btRelatorioGT.setBackground(new Color(193, 151, 232));
 		btRelatorioGT.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		panel_2.add(btRelatorioGT);
@@ -52,8 +57,17 @@ public class Relatorios extends JPanel {
 		btRelatorioHT.setBorderPainted(false);
 		btRelatorioLC.setBorderPainted(false);
 		btRelatorioGT.setBorderPainted(false);
-		
 
+	}
+	
+	public void relatorioHT(ActionListener actionListener) {
+		this.btRelatorioHT.addActionListener(actionListener);
+	}
+	public void relatorioGT(ActionListener actionListener) {
+		this.btRelatorioGT.addActionListener(actionListener);
+	}
+	public void relatorioLC(ActionListener actionListener) {
+		this.btRelatorioLC.addActionListener(actionListener);
 	}
 
 }

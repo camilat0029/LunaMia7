@@ -43,7 +43,7 @@ public class Menu {
 		});
 		
 		this.mnExp.perfil(e ->{
-			navegadorTelas.navegarTela("CONFIGURARPERFIL");
+			navegadorTelas.navegarTela("CONFIGURAR_PERFIL");
 			removerMenu();
 		});
 		this.mnExp.estoque(e -> {

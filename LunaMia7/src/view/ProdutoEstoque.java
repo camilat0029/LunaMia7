@@ -56,7 +56,7 @@ public class ProdutoEstoque extends JPanel {
 		JTableHeader header = tabelaOrcamentos.getTableHeader();
 		header.setBackground(new Color(234, 219, 247));
 		header.setForeground(new Color(103, 80, 125));
-		header.setFont(new Font("Bodoni Bk BT", Font.BOLD, 18));
+		header.setFont(new Font("Bodoni Bk BT", Font.BOLD, 20));
 		header.setReorderingAllowed(false); // impede arrastar colunas
 		
 		//Estilização das linhas e colunas
@@ -87,7 +87,7 @@ public class ProdutoEstoque extends JPanel {
 		
 	}
 	
-	public void criar(ActionListener actionListener) {
+	public void adicionar(ActionListener actionListener) {
 		this.btAdicionar.addActionListener(actionListener);
 	}
 	//public void adicionarLinha(String tituloOrcamento, boolean status, String dataEntrega, String cliente, String mais) {

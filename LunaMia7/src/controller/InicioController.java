@@ -15,15 +15,15 @@ public class InicioController {
 		this.menu = menu;
 		
 		this.inicio.criarOrcamento(e ->{
-			navegadorTelas.navegarTela("CRIARORCAMENTO");
+			navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 			menu.removerMenu();
 		});
 		this.inicio.criarEstoque(e ->{
-			navegadorTelas.navegarTela("CADASTROPRODUTO");
+			navegadorTelas.navegarTela("CADASTRO_PRODUTO");
 			menu.removerMenu();
 		});
 		this.inicio.configurarPerfil(e ->{
-			navegadorTelas.navegarTela("CONFIGURARPERFIL");
+			navegadorTelas.navegarTela("CONFIGURAR_PERFIL");
 			menu.removerMenu();
 		});
 	}

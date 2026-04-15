@@ -13,7 +13,10 @@ import controller.LoginController;
 import controller.Menu;
 import controller.NavegadorTelas;
 import controller.OrcamentoController;
+import controller.ProdutoEstoqueController;
+import controller.RelatoriosController;
 import model.OrcamentoDAO;
+import model.ProdutoEstoqueDAO;
 import model.UsuarioPerfilDAO;
 import view.CadastrarProdutoEstoque;
 import view.CadastroUsuario;
@@ -29,6 +32,9 @@ import view.MenuExpandido;
 import view.Orcamentos;
 import view.ProdutoEstoque;
 import view.RedefinirSenha;
+import view.RelatorioGastos;
+import view.RelatorioHorasTrabalhadas;
+import view.RelatorioLucros;
 import view.Relatorios;
 import view.TelaPrincipal;
 
@@ -47,14 +53,19 @@ public class Main {
         manager.setDismissDelay(3000);   // tempo que fica visível (ms)
         manager.setReshowDelay(100);     // tempo para reaparecer rápido
 		
-		//JFrame
+		//JFRAME
 		TelaPrincipal telaPrincipal = new TelaPrincipal();
 		
 		
-		//Controller
-		UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
+		//MODEL
 		
-		//View
+		UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
+		//adicionei isso pra depois não esquecer
+		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+		ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
+		
+		//VIEW
+		
 		Login login = new Login();
 		CadastroUsuario cadastro = new CadastroUsuario();
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
@@ -69,37 +80,39 @@ public class Main {
 		MenuContraido menuCont = new MenuContraido();
 		MenuExpandido menuExp = new MenuExpandido();
 		ProdutoEstoque produtoEstoque = new ProdutoEstoque();
-		
-		//adicionei isso pra depois não esquecer
-		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+		RelatorioLucros relatorioLucros = new RelatorioLucros();
+		RelatorioHorasTrabalhadas relatorioHorasTrabalhadas = new RelatorioHorasTrabalhadas();
+		RelatorioGastos relatorioGastos = new RelatorioGastos();
 		Orcamentos orcamentos = new Orcamentos();
 		
+		//CONTROLLER
+		
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
-		
 		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
-		
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar, configurarPerfil);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
-		
-		//adicionei isso já, pra depois não esquecer
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
+		ProdutoEstoqueController produtoEstoqueController = new ProdutoEstoqueController(produtoEstoque, navegadorTelas, menu, telaPrincipal, produtoEstoqueDAO);
+		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 				
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
 		
-		
 		navegadorTelas.adicionarPainel("LOGIN", login);
-		navegadorTelas.adicionarPainel("CADASTROPRODUTO", cadastroProduto);
-		navegadorTelas.adicionarPainel("CONFIGURARPERFIL", configurarPerfil);
-		navegadorTelas.adicionarPainel("CONFIGURARPERFILAPOSCASDASTRAR", configurarPerfiAposCadastrar);
-		navegadorTelas.adicionarPainel("CRIARORCAMENTO",criarOrcamento );
-		//navegadorTelas.adicionarPainel("CRIARORCAMENTOAPOSCALCULAR", criarOrcamentoAposCalcular);
-		//navegadorTelas.adicionarPainel("CRIARORCAMENTOCOMFORMAPAGAMENTO", criarOrcamentoComFormaPagamento);
+		navegadorTelas.adicionarPainel("CADASTRO_PRODUTO", cadastroProduto);
+		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
+		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CASDASTRAR", configurarPerfiAposCadastrar);
+		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO",criarOrcamento );
+		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_APOS_CALCULAR", criarOrcamentoAposCalcular);
+		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_COM_FORMA_PAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
-		//navegadorTelas.adicionarPainel("REDEFINIRSENHA", redefinirSenha);
+		navegadorTelas.adicionarPainel("REDEFINIR_SENHA", redefinirSenha);
 		navegadorTelas.adicionarPainel("RELATORIOS", relatorios);
+		navegadorTelas.adicionarPainel("RELATORIO_LUCROS", relatorioLucros);
+		navegadorTelas.adicionarPainel("RELATORIO_HORAS_TRABALHADAS", relatorioHorasTrabalhadas);
+		navegadorTelas.adicionarPainel("RELATORIO_GASTOS", relatorioGastos);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
 		navegadorTelas.adicionarPainel("PRODUTO_ESTOQUE", produtoEstoque);
 		
@@ -107,7 +120,7 @@ public class Main {
 		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("PRODUTO_ESTOQUE");
+		navegadorTelas.navegarTela("RELATORIOS");
 		
 		
 		menu.iniciar();

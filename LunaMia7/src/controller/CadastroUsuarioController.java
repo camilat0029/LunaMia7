@@ -66,7 +66,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		});
 		
 		this.confPerfilAposCad.redefinirSenha(e -> {
-			navegadorTelas2.navegarTela("REDEFINIRSENHA");
+			navegadorTelas2.navegarTela("REDEFINIR_SENHA");
 		});
 		
 		this.confPerfil.salvar(e -> {
@@ -120,7 +120,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 				
 				JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
 
-				navegadorTelas2.navegarTela("CONFIGURARPERFILAPOSCADASTRAR");
+				navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
 				limparCamposTelaCadastro();
 				
 			}else if (EmailRepetido == true && UsuarioRepetido == true){

@@ -22,7 +22,7 @@ public class OrcamentoController {
 		this.orcamentos = orcamentos;
 
 		this.orcamentos.criar(e -> {
-			navegadorTelas.navegarTela("CRIARORCAMENTO");
+			navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		});
 	}
 }
