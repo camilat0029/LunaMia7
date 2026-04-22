@@ -27,7 +27,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
-	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
+	public CadastroUsuarioController( CadastroUsuario cadastroUsuario,
 			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
 			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil ) {
 		super();
@@ -39,6 +39,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.confPerfil = confPerfil;
 
 		this.cadastroUsuario.voltar(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegadorTelas2.navegarTela("LOGIN");
@@ -72,8 +73,55 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.confPerfil.salvar(e -> {
 			atualizarCadTelaConfPerfilCad();
 		});
+		
+		//MUDANÇA PARA QUE SEPARE AS CIDADES CONFORME O ESTADO ESCOLHIDO. 
+		
+		this.confPerfil.getCbEstado().addActionListener(e -> {
+		    String estadoSelecionado = (String) confPerfil.getCbEstado().getSelectedItem();
+		    if (estadoSelecionado != null) {
+		        pesquisarCidades(estadoSelecionado);
+		    }
+		});
+		
+		adicionarEstado();
+		pesquisarCidades(null);
 	}
 	
+	//PREENCHE O COMBOBOX DOS ESTADOS - CONFIGURAR PERFIL
+	public void adicionarEstado() {
+	    
+	    List<String> lista = usuarioDAO.listarEstados(); 
+	    
+	    confPerfil.getCbEstado(); 
+	    
+	    for (String estado : lista) {
+	        confPerfil.getCbEstado().addItem(estado);
+	    }
+	}
+	
+//	public void adicionarCidade() {
+//		
+//		List<String> lista = usuarioDAO.listarCidades();
+//		
+//		confPerfil.getCbCidade();
+//		
+//		for(String cidade : lista) {
+//			confPerfil.getCbCidade().addItem(cidade);
+//		}
+//	}
+	
+	public void pesquisarCidades(String estado) {
+	    
+	    List<String> cidades = usuarioDAO.listarCidades(estado);
+	    
+	    confPerfil.getCbCidade().removeAllItems();
+	    if (cidades != null) {
+	        for (String cidade : cidades) {
+	            confPerfil.getCbCidade().addItem(cidade);
+	        }
+	    }
+	}
+
 	//LIMPAR CAMPOS TELA DE CADASTRO
 	public void limparCamposTelaCadastro() {
 		cadastroUsuario.getTfNomeComp().setText("");
@@ -81,6 +129,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		cadastroUsuario.getTfEmail().setText("");
 		cadastroUsuario.getTfTelefone().setText("");
 		cadastroUsuario.getPfSenha().setText("");
+		
 	}
 	
 	//CADASTRO DE USUARIO - TELA CADASTRO
@@ -228,7 +277,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			usuarioAtualizado.setEndereco(confPerfil.getTfEnderecoCP().getText() + ", " + 
 					confPerfil.getCbBairro().getSelectedItem() + "-" + 
 					confPerfil.getCbCidade().getSelectedItem() + "/" +
-					confPerfil.getCbEstadoCP().getSelectedItem());
+					confPerfil.getCbEstado().getSelectedItem());
 			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
 			usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
 			usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
@@ -263,13 +312,16 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			UsuarioPerfil usuario = LoginController.usuarioLogado;
 			
-			
 			confPerfil.getTfNomeCompCP().setText(usuario.getNome());
 			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
 			confPerfil.getLbEmailCad().setText(usuario.getEmail());
 			confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
 			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
+			
+			adicionarEstado();
+			
+			confPerfil.getCbEstado().setSelectedItem(usuario.getEndereco());
 			
 		}
 	}

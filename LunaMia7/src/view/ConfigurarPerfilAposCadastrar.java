@@ -33,7 +33,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JLabel lbEmailCad;
 	private JComboBox cbBairro;
 	private JComboBox cbCidade;
-	private JComboBox cbEstadoCP;
+	private JComboBox cbEstado;
 	private JButton btSalvar;
 	private JButton btIgnorar;
 	private JButton btRedefinirSenha;
@@ -116,10 +116,10 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbEstadoCP, "cell 1 7");
 		
-		cbEstadoCP = new JComboBox();
-		cbEstadoCP.setModel(new DefaultComboBoxModel(new String[] {"SC"}));
-		cbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbEstadoCP, "cell 3 7, width 18%,height 38px");
+		cbEstado = new JComboBox();
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"SC"}));
+		cbEstado.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		add(cbEstado, "cell 3 7, width 18%,height 38px");
 		
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -327,11 +327,11 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	}
 
 	public JComboBox getCbEstadoCP() {
-		return cbEstadoCP;
+		return cbEstado;
 	}
 
 	public void setCbEstadoCP(JComboBox cbEstadoCP) {
-		this.cbEstadoCP = cbEstadoCP;
+		this.cbEstado = cbEstadoCP;
 	}
 	
 	

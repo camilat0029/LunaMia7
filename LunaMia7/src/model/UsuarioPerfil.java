@@ -27,9 +27,6 @@ public class UsuarioPerfil {
 	
 	public void adicionarDados() {
 		
-		
-		
-		
 	}
 	
 	public void atualizarDados() {

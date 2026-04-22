@@ -30,7 +30,7 @@ public class ConfigurarPerfil extends JPanel {
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
 	private JLabel lbEmailCad;
-	private JComboBox cbEstadoCP;
+	private JComboBox cbEstado;
 	private JComboBox cbCidade;
 	private JComboBox cbBairro;
 	private JButton btVoltar;
@@ -115,9 +115,9 @@ public class ConfigurarPerfil extends JPanel {
 		lbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbEstadoCP, "cell 1 7");
 		
-		cbEstadoCP = new JComboBox();
-		cbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbEstadoCP, "cell 3 7, width 18%,height 38px, height 38px");
+		cbEstado = new JComboBox();
+		cbEstado.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		add(cbEstado, "cell 3 7, width 18%,height 38px, height 38px");
 		
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -297,12 +297,12 @@ public class ConfigurarPerfil extends JPanel {
 		this.lbEmailCad = lbEmailCad;
 	}
 
-	public JComboBox getCbEstadoCP() {
-		return cbEstadoCP;
+	public JComboBox getCbEstado() {
+		return cbEstado;
 	}
 
-	public void setCbEstadoCP(JComboBox cbEstadoCP) {
-		this.cbEstadoCP = cbEstadoCP;
+	public void setCbEstado(JComboBox cbEstado) {
+		this.cbEstado = cbEstado;
 	}
 
 	public JComboBox getCbCidade() {
@@ -320,9 +320,7 @@ public class ConfigurarPerfil extends JPanel {
 	public void setCbBairro(JComboBox cbBairro) {
 		this.cbBairro = cbBairro;
 	}
-	
-	
-	
+		
 	public void adicionarOuvinte(ComponentListener listener) {
 		this.addComponentListener(listener);
 	}
