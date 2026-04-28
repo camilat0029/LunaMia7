@@ -17,7 +17,7 @@ public class UsuarioPerfilDAO {
 	// MUDEI AQUI
 	public void adicionarDados(UsuarioPerfil usuarioPerfil) {
 		String sql = "INSERT INTO Perfil_Usuario (email, fotoPerfil, senha, nrTelefone, nomeUsuario, nome, precoHora, cidade, estado, percentualLucro) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?)";
+		           + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -40,7 +40,7 @@ public class UsuarioPerfilDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// BancoDeDados.desconectar(conexao);
+			BancoDeDados.desconectar(conexao);
 			if (pstm != null) {
 				try {
 					pstm.close();
@@ -70,7 +70,7 @@ public class UsuarioPerfilDAO {
 				usuario.setEmail(rset.getString("email"));
 				usuario.setCidade(rset.getString("cidade"));
 				usuario.setEstado(rset.getString("estado"));
-				usuario.setTelefone(rset.getString("senha"));
+				usuario.setTelefone(rset.getString("nrTelefone"));
 				usuario.setSenha(rset.getString("senha"));
 				usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
 				usuario.setPrecoHora(rset.getFloat("precoHora"));
@@ -81,10 +81,11 @@ public class UsuarioPerfilDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// BancoDeDados.desconectar(conexao);
+			BancoDeDados.desconectar(conexao);
 			// Fechar recursos
 		}
 		return usuarios;
+		
 	}
 
 	// UPDATE - Atualizar um usuário existente

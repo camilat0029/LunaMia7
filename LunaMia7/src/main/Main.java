@@ -120,7 +120,7 @@ public class Main {
 		
 		//telaPrincipal2.setVisible(true);
 		
-		navegadorTelas.navegarTela("CONFIGURAR_PERFIL");
+		navegadorTelas.navegarTela("LOGIN");
 		
 		
 		menu.iniciar();

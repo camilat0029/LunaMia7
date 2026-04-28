@@ -13,15 +13,15 @@ public class LoginController {
 	private Login login;
 	public static UsuarioPerfil usuarioLogado;
 	private UsuarioPerfilDAO usuarioDAO;
-	private NavegadorTelas navegadorTelas2;
+	private NavegadorTelas navegadorTelas;
 	private Menu menu;
 	private String usuario;
 	
-	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu) {
+	public LoginController(Login login, UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas, Menu menu) {
 		super();
 		this.login = login;
 		this.usuarioDAO = usuarioDAO;
-		this.navegadorTelas2 = navegadorTelas2;
+		this.navegadorTelas = navegadorTelas;
 		this.menu = menu;
 		
 		this.login.entrar(e -> {
@@ -30,7 +30,7 @@ public class LoginController {
 		});
 		
 		this.login.cadastrese(e -> {
-			navegadorTelas2.navegarTela("CADASTRO");
+			navegadorTelas.navegarTela("CADASTRO");
 			limparCamposLogin();
 			this.menu.removerMenu();
 		});
@@ -64,7 +64,8 @@ public class LoginController {
 			}
 			
 			if (usuarioEncontrado) {
-				 this.navegadorTelas2.navegarTela("INICIO");
+				 limparCamposLogin();
+				 this.navegadorTelas.navegarTela("INICIO");
 				 this.menu.mostrarPanelCont();	
 			}else {
 				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);

@@ -24,6 +24,7 @@ public class MenuExpandido extends JPanel {
 	private JButton btEstoque;
 	private JButton btRelatorios;
 	private JButton btOrcamentos;
+	private JButton btSair;
 	
 	
 	public MenuExpandido() {
@@ -31,7 +32,7 @@ public class MenuExpandido extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		
 		setPreferredSize(new Dimension(200,640));
-		setLayout(new MigLayout("gap 18", "[][][]", "[][][][][][][][][][]"));
+		setLayout(new MigLayout("gap 18", "[][][]", "[][][][][][][][][][grow][]"));
 		
 		lbMostrarMenuCont = new JLabel(""){
 		    @Override
@@ -83,6 +84,12 @@ public class MenuExpandido extends JPanel {
 		btOrcamentos.setBorderPainted(false);
 		btEstoque.setBorderPainted(false);
 		btRelatorios.setBorderPainted(false);
+		
+		btSair = new JButton("Sair");
+		btSair.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btSair.setBorderPainted(false);
+		btSair.setBackground(new Color(193, 151, 232));
+		add(btSair, "cell 1 10,alignx center,aligny center");
 
 	}
 	
@@ -106,8 +113,10 @@ public class MenuExpandido extends JPanel {
 		this.btOrcamentos.addActionListener(actionListener);
 	}
 	
-	
-	
+	public void sair(ActionListener actionListener) {
+	    this.btSair.addActionListener(actionListener);
+	}
+		
 	public void mostrarMenuContraido(MouseListener mouseListener) {
 		this.lbMostrarMenuCont.addMouseListener(mouseListener);
 	}

@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.MenuContraido;
@@ -57,6 +58,20 @@ public class Menu {
 		});
 		this.mnExp.relatorios(e ->{
 			navegadorTelas.navegarTela("RELATORIOS");
+		});
+		
+		this.mnExp.sair(e -> {
+		    int confirm = JOptionPane.showConfirmDialog(
+		        tela,
+		        "Deseja sair da conta?",
+		        "Sair",
+		        JOptionPane.YES_NO_OPTION
+		    );
+		    if (confirm == JOptionPane.YES_OPTION) {
+		        LoginController.usuarioLogado = null;
+		        removerMenu();
+		        navegadorTelas.navegarTela("LOGIN");
+		    }
 		});
 	
 	}
