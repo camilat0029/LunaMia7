@@ -22,13 +22,14 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
   `email` VARCHAR(64) NOT NULL,
-  `fotoPerfil` MEDIUMBLOB NULL,
+  `fotoPerfil` varchar(300) NULL,
   `senha` VARCHAR(12) NOT NULL,
-  `nrTelefone` VARCHAR(13) NOT NULL,
+  `nrTelefone` VARCHAR(15) NOT NULL,
   `nomeUsuario` VARCHAR(50) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
   `precoHora` DECIMAL NOT NULL,
-  `endereco` VARCHAR(200) NOT NULL,
+  `cidade` VARCHAR(100) NOT NULL,
+  `estado` VARCHAR(50) NOT NULL,
   `percentualLucro` DECIMAL NOT NULL,
   PRIMARY KEY (`email`, `nomeUsuario`));
 
@@ -94,6 +95,10 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     use lunamia;
     
     insert into Perfil_Usuario
-    values ('camila.t29@aluno.ifsc.edu.br', null, '29102007', '(47)999887766', 'camila.t29', 'Camila', 20, 'Rua A, 1', 5),
-    ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47)999554433', 'emanuela.z', 'Emanuela', 30, 'Rua B, 2', 30),
-    ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47)999876543', 'lara.cs', 'Lara', 25, 'Rua C, 3', 3);
+    values ('camila.t29@aluno.ifsc.edu.br', null, '29102007', '(47) 99988-7766', 'camila.t29', 'Camila', 20, 'Gaspar', 'SC', 5),
+    ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47) 99955-4433', 'emanuela.z', 'Emanuela', 30, 'Ilhota', 'SC', 30),
+    ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47) 99987-6543', 'lara.cs', 'Lara', 25, 'Gaspar', 'SC',  3);
+    
+    select * from Perfil_Usuario
+    
+   

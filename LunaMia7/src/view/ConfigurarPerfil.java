@@ -11,20 +11,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.text.ParseException;
 
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 public class ConfigurarPerfil extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNomeCompCP;
 	private JPasswordField pfSenhaCP;
-	private JTextField tfTelefoneCP;
+	private JFormattedTextField tfTelefoneCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
@@ -104,9 +107,17 @@ public class ConfigurarPerfil extends JPanel {
 		lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbTelefoneCP, "cell 1 6");
 		
-		tfTelefoneCP = new JTextField();
-		tfTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfTelefoneCP, "cell 3 6,width 18%,height 38px");
+		try {
+			MaskFormatter  mascaraTelefone = new MaskFormatter("## ##### ####");
+			mascaraTelefone.setPlaceholder(" ");
+			
+			tfTelefoneCP = new JFormattedTextField(mascaraTelefone);
+			tfTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+			add(tfTelefoneCP, "cell 3 6,width 18%,height 38px");
+		} catch(ParseException e) {
+			e.printStackTrace();
+		}
+		
 		tfTelefoneCP.setColumns(10);
 		
 		JLabel lbEstadoCP = new JLabel("Estado");
@@ -233,7 +244,7 @@ public class ConfigurarPerfil extends JPanel {
 	}
 
 	public void setTfTelefoneCP(JTextField tfTelefoneCP) {
-		this.tfTelefoneCP = tfTelefoneCP;
+		this.tfTelefoneCP = (JFormattedTextField) tfTelefoneCP;
 	}
 
 

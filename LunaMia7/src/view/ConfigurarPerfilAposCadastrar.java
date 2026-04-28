@@ -11,13 +11,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.text.ParseException;
 
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 
 public class ConfigurarPerfilAposCadastrar extends JPanel {
@@ -25,7 +28,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNomeCompCP;
 	private JPasswordField pfSenhaCP;
-	private JTextField tfTelefoneCP;
+	private JFormattedTextField tfTelefoneCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
@@ -34,7 +37,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JComboBox cbEstado;
 	private JButton btSalvar;
 	private JButton btIgnorar;
-	private JButton btRedefinirSenha;
 
 	/**
 	 * Create the panel.
@@ -91,23 +93,20 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		pfSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(pfSenhaCP, "cell 3 5,width 18%,height 38px");
 		
-		JPanel panel_btRedefinirSenha = new JPanel();
-		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
-		panel_btRedefinirSenha.setBackground(new Color(234, 219, 247));
-		add(panel_btRedefinirSenha, "cell 5 5 4 2,alignx center,aligny center");
-		
-		btRedefinirSenha = new JButton("Redefinir Senha");
-		btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		btRedefinirSenha.setBackground(new Color(193, 151, 232));
-		panel_btRedefinirSenha.add(btRedefinirSenha, "growx");
-		
 		JLabel lbTelefoneCP = new JLabel("Telefone");
 		lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbTelefoneCP, "cell 1 6");
 		
-		tfTelefoneCP = new JTextField();
-		tfTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfTelefoneCP, "cell 3 6,width 18%,height 38px");
+		try {
+			MaskFormatter  mascaraTelefone = new MaskFormatter("## ##### ####");
+			mascaraTelefone.setPlaceholder(" ");
+			
+			tfTelefoneCP = new JFormattedTextField(mascaraTelefone);
+			tfTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+			add(tfTelefoneCP, "cell 3 6,width 18%,height 38px");
+		} catch(ParseException e) {
+			e.printStackTrace();
+		}
 		tfTelefoneCP.setColumns(10);
 		
 		JLabel lbEstadoCP = new JLabel("Estado");
@@ -175,7 +174,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		btSalvar.setBorderPainted(false);
 		btIgnorar.setBorderPainted(false);
-		btRedefinirSenha.setBorderPainted(false);
 		
 		addComponentListener(new ComponentAdapter() {
             @Override
@@ -194,7 +192,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
                 lbSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 btIgnorar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 
                 lbNomeUsuarioCad.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
@@ -217,9 +214,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		this.btIgnorar.addActionListener(actionListener);
 	}
 	
-	public void redefinirSenha(ActionListener actionListener) {
-		this.btRedefinirSenha.addActionListener(actionListener);
-	}
 
 	public JTextField getTfNomeCompCP() {
 		return tfNomeCompCP;
@@ -250,7 +244,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	}
 
 	public void setTfTelefoneCP(JTextField tfTelefoneCP) {
-		this.tfTelefoneCP = tfTelefoneCP;
+		this.tfTelefoneCP = (JFormattedTextField) tfTelefoneCP;
 	}
 
 	public JTextField getTfPrecoHoraCP() {

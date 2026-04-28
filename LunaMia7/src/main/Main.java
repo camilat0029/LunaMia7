@@ -14,9 +14,11 @@ import controller.Menu;
 import controller.NavegadorTelas;
 import controller.OrcamentoController;
 import controller.ProdutoEstoqueController;
+import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import model.OrcamentoDAO;
 import model.ProdutoEstoqueDAO;
+import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastrarProdutoEstoque;
 import view.CadastroUsuario;
@@ -60,12 +62,11 @@ public class Main {
 		//MODEL
 		
 		UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
-		//adicionei isso pra depois não esquecer
+		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
 		
 		//VIEW
-		
 		Login login = new Login();
 		CadastroUsuario cadastro = new CadastroUsuario();
 		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
@@ -86,24 +87,25 @@ public class Main {
 		Orcamentos orcamentos = new Orcamentos();
 		
 		//CONTROLLER
-		
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
 		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
-				menu, configurarPerfiAposCadastrar, configurarPerfil);
+				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
 		ProdutoEstoqueController produtoEstoqueController = new ProdutoEstoqueController(produtoEstoque, navegadorTelas, menu, telaPrincipal, produtoEstoqueDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
-				
+		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
+		
+		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		navegadorTelas.adicionarPainel("CADASTRO_PRODUTO", cadastroProduto);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
-		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CASDASTRAR", configurarPerfiAposCadastrar);
+		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", configurarPerfiAposCadastrar);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO",criarOrcamento );
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_APOS_CALCULAR", criarOrcamentoAposCalcular);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_COM_FORMA_PAGAMENTO", criarOrcamentoComFormaPagamento);
@@ -115,14 +117,12 @@ public class Main {
 		navegadorTelas.adicionarPainel("RELATORIO_GASTOS", relatorioGastos);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
 		navegadorTelas.adicionarPainel("PRODUTO_ESTOQUE", produtoEstoque);
-		
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
-		//telaPrincipal2.setVisible(true);
+		
 		
 		navegadorTelas.navegarTela("LOGIN");
-		
-		
+
 		menu.iniciar();
 
 	}

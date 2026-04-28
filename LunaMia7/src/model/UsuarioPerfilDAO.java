@@ -118,7 +118,7 @@ public class UsuarioPerfilDAO {
 
 	// DELETE - Excluir um usuário pelo ID
 	public void excluirUsuario(String nomeUsuario, String email) {
-		String sql = "DELETE FROM usuarios WHERE nomeUsuario = ? AND email = ?";
+		String sql = "DELETE FROM Perfil_Usuario WHERE nomeUsuario = ? AND email = ?";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -177,5 +177,99 @@ public class UsuarioPerfilDAO {
 		}
 		return lista;
 	}
+	
+	 public String buscaUsuarioPelaChavePrim(String nomeUsuario, String email) {
+    	 String sql = "SELECT senha FROM Perfil_Usuario WHERE nomeUsuario = ? AND email = ?";
+         Connection conexao = null;
+         PreparedStatement pstm = null;
+         
+         ResultSet rset = null;
+         
+         String senha =  "";
+         
+         try {
+             conexao = BancoDeDados.conectar();
+             pstm = conexao.prepareStatement(sql);
+             pstm.setString(1, nomeUsuario);
+             pstm.setString(2, email);
+             
+             rset = pstm.executeQuery();
+             
+             if(rset.next()) {
+            	 senha = rset.getString("senha");
+             }
+             
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } finally {
+         	BancoDeDados.desconectar(conexao);
+         }
+		 return  senha;
+    }
+    
+    // UPDATE - Atualizar senha
+    public void atualizarSenha(String nomeUsuario, String email, String senha) {
+        String sql = "UPDATE Perfil_Usuario SET senha = ? WHERE nomeUsuario = ? AND email = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            
+            pstm.setString(1, senha);
+            pstm.setString(2, nomeUsuario);
+            pstm.setString(3, email);
+            
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+    //SELECT - buscar usuario por email
+    public UsuarioPerfil buscarUsuarioPorEmail(String email) {
+        String sql = "SELECT * FROM Perfil_Usuario WHERE email = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+        
+        ResultSet rset = null;
+
+        UsuarioPerfil usuario = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, email);
+            
+            rset = pstm.executeQuery();
+            
+            if(rset.next()) {
+            	
+            	 usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, sql, 0, 0, sql);
+            	 usuario.setNome(rset.getString("nome"));
+                 usuario.setNomeUsuario(rset.getString("nomeUsuario"));
+                 usuario.setEmail(rset.getString("email"));
+                 usuario.setCidade(rset.getString("cidade"));
+ 				 usuario.setEstado(rset.getString("estado"));
+                 usuario.setTelefone(rset.getString("nrTelefone"));
+                 usuario.setSenha(rset.getString("senha"));
+                 usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
+                 usuario.setPrecoHora(rset.getFloat("precoHora"));
+                 usuario.setFotoPerfil(rset.getString("fotoPerfil"));
+                 
+            }
+            
+      
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+        }
+        
+        return usuario;
+    }
 
 }

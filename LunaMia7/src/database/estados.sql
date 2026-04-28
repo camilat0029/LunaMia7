@@ -11,7 +11,7 @@ CREATE TABLE `estados` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `sigla` varchar(2) NOT NULL,
-  PRIMARY KEY (`id`,`sigla`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `sigla_UNIQUE` (`sigla`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

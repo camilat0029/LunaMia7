@@ -14,6 +14,7 @@ import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
+import view.RedefinirSenha;
 
 public class CadastroUsuarioController extends ComponentAdapter{
 
@@ -23,13 +24,15 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private Menu menu;
 	private ConfigurarPerfilAposCadastrar confPerfilAposCad;
 	private ConfigurarPerfil confPerfil;
+	private RedefinirSenha redefinirSenha;
 	private UsuarioPerfil usuarioCadastrado;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController( CadastroUsuario cadastroUsuario,
 			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas, Menu menu, 
-			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil ) {
+			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil, 
+			RedefinirSenha redefinirSenha) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
@@ -37,6 +40,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.navegadorTelas2 = navegadorTelas;
 		this.confPerfilAposCad = confPerfilAposCad;
 		this.confPerfil = confPerfil;
+		this.redefinirSenha = redefinirSenha;
 
 		this.cadastroUsuario.voltar(new MouseAdapter() {
 			
@@ -66,12 +70,19 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			navegadorTelas.navegarTela("LOGIN");
 		});
 		
-		this.confPerfilAposCad.redefinirSenha(e -> {
-			navegadorTelas.navegarTela("REDEFINIR_SENHA");
-		});
-		
 		this.confPerfil.salvar(e -> {
 			atualizarCadTelaConfPerfilCad();
+		});
+		
+		
+		this.confPerfil.redefinirSenha(e -> {
+			
+			informacoesSenhaParaTelaRedefinir();
+		});
+		
+		this.confPerfil.voltar(e -> {
+			navegadorTelas2.navegarTela("INICIO");
+			menu.mostrarPanelCont();
 		});
 		
 		//MUDANÇASSSSS
@@ -140,40 +151,46 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 		} else {
 			
-			verificarEmail();
-			verificarUsuarioPerfil();
+			emailPermitido(cadastroUsuario.getTfEmail().getText());
 			
-			if(EmailRepetido == false && UsuarioRepetido == false){
+			if(!emailPermitido(cadastroUsuario.getTfEmail().getText())) {
+				JOptionPane.showMessageDialog(null, "Email Inválido!", "Informação", 1);
+			} else {
+				verificarEmail();
+				verificarUsuarioPerfil();
 				
-				UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
-				
-				novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
-				novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
-				novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
-				novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());			
-				novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
-				
-				novoUsuario.setCidade("");
-				novoUsuario.setEstado("");
-				novoUsuario.setFotoPerfil(null);
-				novoUsuario.setPercentualLucro(0);
-				novoUsuario.setPrecoHora(0);
+				if(EmailRepetido == false && UsuarioRepetido == false){
+					
+					UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+					
+					novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
+					novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
+					novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
+					novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());			
+					novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
+					
+					novoUsuario.setCidade("");
+					novoUsuario.setEstado("");
+					novoUsuario.setFotoPerfil("");
+					novoUsuario.setPercentualLucro(0);
+					novoUsuario.setPrecoHora(0);
 
-				usuarioDAO.adicionarDados(novoUsuario);
-				this.usuarioCadastrado = novoUsuario;
-				
-				JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
+					usuarioDAO.adicionarDados(novoUsuario);
+					this.usuarioCadastrado = novoUsuario;
+					
+					JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
 
-				navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
-				limparCamposTelaCadastro();
-				
-			}else if (EmailRepetido == true && UsuarioRepetido == true){
-				JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.", "Informação", 1);
-			} else if(EmailRepetido == true && UsuarioRepetido == false) {
-				JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
-			} else if(EmailRepetido == false && UsuarioRepetido == true) {
-				JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
-			} 
+					navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
+					limparCamposTelaCadastro();
+					
+				}else if (EmailRepetido == true && UsuarioRepetido == true){
+					JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.", "Informação", 1);
+				} else if(EmailRepetido == true && UsuarioRepetido == false) {
+					JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
+				} else if(EmailRepetido == false && UsuarioRepetido == true) {
+					JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
+				} 
+			}
 		}
 	}
 	
@@ -194,6 +211,12 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		}
 	}
 	
+	//VALIDAÇÃO DE EMAIL COM @ APARECENDO, ENTRE OUTROS
+	public boolean emailPermitido(String email) {
+		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+		return email.matches(emailValido);
+	}
+	
 	//VERIFICAÇÃO USUARIO REPETIDO
 	public void verificarUsuarioPerfil() {
 		
@@ -209,6 +232,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			}
 		}
 	}
+	
 
 	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL APÓS CADASTRAR
 	public void atualizarCadTelaConfPerfilPosCad() {
@@ -229,26 +253,36 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
 		} else {
+			String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText();
+			String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText();
 			
-			usuarioAtualizado.setFotoPerfil(null);
-			usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
-			usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
-			usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
-			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
-			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
-			usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
-			usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
+			precoHoraPermitido(precoHoraValido);
+			percentualLucroPermitido(percentualLucroValido);
 			
-            usuarioAtualizado.setEstado((String) confPerfilAposCad.getCbEstadoCP().getSelectedItem());
-            usuarioAtualizado.setCidade((String) confPerfilAposCad.getCbCidade().getSelectedItem());
-		
-			usuarioDAO.atualizarUsuario(usuarioAtualizado);
+			if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
+				
+				usuarioAtualizado.setFotoPerfil(null);
+				usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
+				usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+				usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
+				usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
+				usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+				usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
+				usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
+				
+	            usuarioAtualizado.setEstado((String) confPerfilAposCad.getCbEstadoCP().getSelectedItem());
+	            usuarioAtualizado.setCidade((String) confPerfilAposCad.getCbCidade().getSelectedItem());
 			
-			JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
-			navegadorTelas2.navegarTela("LOGIN");
-			
+				usuarioDAO.atualizarUsuario(usuarioAtualizado);
+				
+				JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+				navegadorTelas2.navegarTela("LOGIN");
+			} else {
+				JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+			}
 		}
 	}
+	
 	
 	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL
     public void atualizarCadTelaConfPerfilCad() {
@@ -268,26 +302,57 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 		} else {
 			
-			UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
-			usuarioAtualizado.setFotoPerfil(null);
-			usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
-			usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
-			usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
-			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
-			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
-			usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
-			usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+			String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText();
+			String percentualLucroValido = confPerfil.getTfPercLucroCP().getText();
 			
-            usuarioAtualizado.setEstado((String) confPerfil.getCbEstado().getSelectedItem());
-            usuarioAtualizado.setCidade((String) confPerfil.getCbCidade().getSelectedItem());
+			precoHoraPermitido(precoHoraValido);
+			percentualLucroPermitido(percentualLucroValido);
 			
-		
-			usuarioDAO.atualizarUsuario(usuarioAtualizado);
+			if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
+				UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+				usuarioAtualizado.setFotoPerfil(null);
+				usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
+				usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
+				usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
+				usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
+				usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
+				usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
+				usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+				
+	            usuarioAtualizado.setEstado((String) confPerfil.getCbEstado().getSelectedItem());
+	            usuarioAtualizado.setCidade((String) confPerfil.getCbCidade().getSelectedItem());
+				
 			
-			JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
-			
+				usuarioDAO.atualizarUsuario(usuarioAtualizado);
+				
+				JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+			} else {
+				JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+			}
 		}
 	}
+    
+   //VALIDAÇÃO PRECO HORA PARA NUMEROS
+  	public boolean precoHoraPermitido(String precoHoraValido) {
+  		boolean valido;
+  		if (!precoHoraValido.matches("\\d+(\\.\\d{1,2})?")) {
+  			valido = false;
+  		} else { 
+  			valido = true;
+  		}
+  		return valido;
+  	}
+  	
+  	//VALIDAÇÃO PERCENTUAL DE LUCRO PARA NUMEROS
+  	public boolean percentualLucroPermitido(String percentualLucroValido) {
+  		boolean valido;
+  		if (!percentualLucroValido.matches("\\d+(\\.\\d{1,2})?")) {
+  			valido = false;
+  		} else { 
+  			valido = true;
+  		}
+  		return valido;
+  	}
 	
     //ACIONA EVENTO AO APARECER UM JPANEL PARA CADASTRAR INFOS NA TELA JÁ CADASTRADAS
 	public void componentShown(ComponentEvent e) {
@@ -311,6 +376,10 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			UsuarioPerfil usuario = LoginController.usuarioLogado;
 			
+			usuario = usuarioDAO.buscarUsuarioPorEmail(usuario.getEmail());
+			LoginController.usuarioLogado = usuario;
+			
+			
 			confPerfil.getTfNomeCompCP().setText(usuario.getNome());
 			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
 			confPerfil.getLbEmailCad().setText(usuario.getEmail());
@@ -322,6 +391,16 @@ public class CadastroUsuarioController extends ComponentAdapter{
             confPerfil.getCbCidade().setSelectedItem(usuario.getCidade());
 			
 		}
+		
+	}
+	
+	public void informacoesSenhaParaTelaRedefinir() {
+		
+		
+		UsuarioPerfil usuario = LoginController.usuarioLogado;
+		redefinirSenha.getLbSenha().setText(usuario.getSenha());
+		navegadorTelas2.navegarTela("REDEFINIR_SENHA");
+		
 	}
 	
 	
