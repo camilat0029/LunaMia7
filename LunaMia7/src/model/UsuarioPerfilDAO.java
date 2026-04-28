@@ -136,7 +136,6 @@ public class UsuarioPerfilDAO {
 	}
 
 	// MUDANÇA
-
 	// LISTA OS ESTADOS
 	public List<String> listarEstados() {
 		List<String> lista = new ArrayList<>();

@@ -114,7 +114,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		add(lbEstadoCP, "cell 1 7");
 		
 		cbEstado = new JComboBox();
-		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"SC"}));
 		cbEstado.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbEstado, "cell 3 7, width 18%,height 38px");
 		
@@ -123,7 +122,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		add(lbCidadeCP, "cell 5 7");
 		
 		cbCidade = new JComboBox();
-		cbCidade.setModel(new DefaultComboBoxModel(new String[] {"A"}));
 		cbCidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbCidade, "cell 7 7 2 1,growx,height 38px");
 		
@@ -287,9 +285,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void setCbEstadoCP(JComboBox cbEstadoCP) {
 		this.cbEstado = cbEstadoCP;
 	}
-	
-	
-	
+		
 	public void adicionarOuvinte(ComponentListener listener) {
 		this.addComponentListener(listener);
 	}

@@ -61,7 +61,6 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		});
 		
 		this.confPerfilAposCad.salvarCadCompleto(e -> {
-			
 			atualizarCadTelaConfPerfilPosCad();
 			
 		});
@@ -76,7 +75,6 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		
 		
 		this.confPerfil.redefinirSenha(e -> {
-			
 			informacoesSenhaParaTelaRedefinir();
 		});
 		
@@ -90,17 +88,28 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		adicionarEstado();
 		
 		this.confPerfil.getCbEstado().addActionListener(e -> {
+			
 		    String estadoSelecionado = (String) confPerfil.getCbEstado().getSelectedItem();
 		    if (estadoSelecionado != null) {
 		        pesquisarCidades(estadoSelecionado);
 		    }
 		});
 		
+		this.confPerfilAposCad.getCbEstadoCP().addActionListener(e -> {
+			
+		    String estadoSelecionado = (String) confPerfilAposCad.getCbEstadoCP().getSelectedItem();
+		    if (estadoSelecionado != null) {
+		        pesquisarCidades(estadoSelecionado);
+		    }
+		});
+		
 	    String primeiroEstado = (String) confPerfil.getCbEstado().getSelectedItem();
+	    confPerfilAposCad.getCbEstadoCP().getSelectedItem();
 	    if (primeiroEstado != null) {
 	        pesquisarCidades(primeiroEstado);
+	        
 	    }
-
+	    
 	}
 	
 	//PREENCHE O COMBOBOX DOS ESTADOS
@@ -109,9 +118,11 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	    List<String> lista = usuarioDAO.listarEstados(); 
 	    
 	    confPerfil.getCbEstado(); 
+	    confPerfilAposCad.getCbEstadoCP();
 	    
 	    for (String estado : lista) {
 	        confPerfil.getCbEstado().addItem(estado);
+	        confPerfilAposCad.getCbEstadoCP().addItem(estado);
 	    }
 	}
 	
@@ -121,12 +132,14 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	    List<String> cidades = usuarioDAO.listarCidades(estado);
 	    
 	    confPerfil.getCbCidade().removeAllItems();
+	    confPerfilAposCad.getCbCidade().removeAllItems();
 	    if (cidades != null) {
 	        for (String cidade : cidades) {
 	            confPerfil.getCbCidade().addItem(cidade);
+	            confPerfilAposCad.getCbCidade().addItem(cidade);
 	        }
 	    }
-	}
+	}	
 
 	//LIMPAR CAMPOS TELA DE CADASTRO
 	public void limparCamposTelaCadastro() {
