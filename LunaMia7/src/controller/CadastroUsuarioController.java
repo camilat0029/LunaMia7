@@ -14,6 +14,7 @@ import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
+import view.RedefinirSenha;
 
 public class CadastroUsuarioController extends ComponentAdapter{
 
@@ -24,12 +25,14 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private ConfigurarPerfilAposCadastrar confPerfilAposCad;
 	private ConfigurarPerfil confPerfil;
 	private UsuarioPerfil usuarioCadastrado;
+	private RedefinirSenha redefinirSenha;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario,
 			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
-			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil ) {
+			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil,
+			RedefinirSenha redefinirSenha ) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
@@ -37,6 +40,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		this.navegadorTelas2 = navegadorTelas2;
 		this.confPerfilAposCad = confPerfilAposCad;
 		this.confPerfil = confPerfil;
+		this.redefinirSenha = redefinirSenha;
 
 		this.cadastroUsuario.voltar(new MouseAdapter() {
 			@Override
@@ -65,9 +69,6 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			navegadorTelas2.navegarTela("LOGIN");
 		});
 		
-		this.confPerfilAposCad.redefinirSenha(e -> {
-			navegadorTelas2.navegarTela("REDEFINIRSENHA");
-		});
 		
 		this.confPerfil.salvar(e -> {
 			atualizarCadTelaConfPerfilCad();
@@ -75,10 +76,12 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		
 		this.confPerfil.voltar(e -> {
 			navegadorTelas2.navegarTela("INICIO");
+			menu.mostrarPanelCont();
 		});
 		
 		this.confPerfil.redefinirSenha(e -> {
-			navegadorTelas2.navegarTela("REDEFINIRSENHA");
+			
+			informacoesSenhaParaTelaRedefinir();
 		});
 	}
 	
@@ -270,6 +273,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			UsuarioPerfil usuario = LoginController.usuarioLogado;
 			
+			usuario = usuarioDAO.buscarUsuarioPorEmail(usuario.getEmail());
+			LoginController.usuarioLogado = usuario;
 			
 			confPerfil.getTfNomeCompCP().setText(usuario.getNome());
 			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
@@ -279,6 +284,15 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			
 		}
+	}
+	
+	public void informacoesSenhaParaTelaRedefinir() {
+		
+		
+		UsuarioPerfil usuario = LoginController.usuarioLogado;
+		redefinirSenha.getLbSenha().setText(usuario.getSenha());
+		navegadorTelas2.navegarTela("REDEFINIRSENHA");
+		
 	}
 	
 	

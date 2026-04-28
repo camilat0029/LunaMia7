@@ -36,7 +36,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JComboBox cbEstadoCP;
 	private JButton btSalvar;
 	private JButton btIgnorar;
-	private JButton btRedefinirSenha;
 
 	/**
 	 * Create the panel.
@@ -98,16 +97,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbSenhaCad = new JLabel("");
 		lbSenhaCad.setFont(new Font("Dialog", Font.PLAIN, 20));
 		panel_SenhaCad.add(lbSenhaCad, "cell 0 0, alignx left, growy, aligny center");
-		
-		JPanel panel_btRedefinirSenha = new JPanel();
-		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
-		panel_btRedefinirSenha.setBackground(new Color(234, 219, 247));
-		add(panel_btRedefinirSenha, "cell 5 5 4 2,alignx center,aligny center");
-		
-		btRedefinirSenha = new JButton("Redefinir Senha");
-		btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		btRedefinirSenha.setBackground(new Color(193, 151, 232));
-		panel_btRedefinirSenha.add(btRedefinirSenha, "growx");
 		
 		JLabel lbTelefoneCP = new JLabel("Telefone");
 		lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -201,7 +190,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		btSalvar.setBorderPainted(false);
 		btIgnorar.setBorderPainted(false);
-		btRedefinirSenha.setBorderPainted(false);
 		
 		addComponentListener(new ComponentAdapter() {
             @Override
@@ -222,7 +210,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
                 lbSenhaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbTelefoneCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 btIgnorar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btRedefinirSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 btSalvar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 
                 lbNomeUsuarioCad.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
@@ -244,11 +231,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public void ignorar(ActionListener actionListener) {
 		this.btIgnorar.addActionListener(actionListener);
 	}
-	
-	public void redefinirSenha(ActionListener actionListener) {
-		this.btRedefinirSenha.addActionListener(actionListener);
-	}
-
 	
 	
 	

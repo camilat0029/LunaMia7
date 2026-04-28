@@ -69,7 +69,7 @@ public class UsuarioPerfilDAO {
                 usuario.setNomeUsuario(rset.getString("nomeUsuario"));
                 usuario.setEmail(rset.getString("email"));
                 usuario.setEndereco(rset.getString ("endereco"));
-                usuario.setTelefone(rset.getString("senha"));
+                usuario.setTelefone(rset.getString("nrTelefone"));
                 usuario.setSenha(rset.getString("senha"));
                 usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
                 usuario.setPrecoHora(rset.getFloat("precoHora"));
@@ -80,7 +80,7 @@ public class UsuarioPerfilDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
- //       	BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
             // Fechar recursos
         }
         return usuarios;
@@ -160,5 +160,71 @@ public class UsuarioPerfilDAO {
          }
 		 return  senha;
     }
+    
+    // UPDATE - Atualizar senha
+    public void atualizarSenha(String nomeUsuario, String email, String senha) {
+        String sql = "UPDATE Perfil_Usuario SET senha = ? WHERE nomeUsuario = ? AND email = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            
+            pstm.setString(1, senha);
+            pstm.setString(2, nomeUsuario);
+            pstm.setString(3, email);
+            
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+    //SELECT - buscar usuario por email
+    public UsuarioPerfil buscarUsuarioPorEmail(String email) {
+        String sql = "SELECT * FROM Perfil_Usuario WHERE email = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+        
+        ResultSet rset = null;
+
+        UsuarioPerfil usuario = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, email);
+            
+            rset = pstm.executeQuery();
+            
+            if(rset.next()) {
+            	
+            	 usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, sql);
+            	 usuario.setNome(rset.getString("nome"));
+                 usuario.setNomeUsuario(rset.getString("nomeUsuario"));
+                 usuario.setEmail(rset.getString("email"));
+                 usuario.setEndereco(rset.getString ("endereco"));
+                 usuario.setTelefone(rset.getString("nrTelefone"));
+                 usuario.setSenha(rset.getString("senha"));
+                 usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
+                 usuario.setPrecoHora(rset.getFloat("precoHora"));
+                 usuario.setFotoPerfil(rset.getString("fotoPerfil"));
+                 
+            }
+            
+      
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+        }
+        
+        return usuario;
+    }
+    
+    
 
 }

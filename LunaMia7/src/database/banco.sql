@@ -1,6 +1,4 @@
-DROP DATABASE IF EXISTS `LunaMia`;
-
-CREATE DATABASE `LunaMia`;
+CREATE DATABASE IF NOT EXISTS `LunaMia`;
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`ProdutoEstoque` (
   `id_estoque` INT AUTO_INCREMENT NOT NULL,
@@ -22,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
   `email` VARCHAR(64) NOT NULL,
-  `fotoPerfil` MEDIUMBLOB NULL,
+  `fotoPerfil` VARCHAR(300) NULL,
   `senha` VARCHAR(12) NOT NULL,
   `nrTelefone` VARCHAR(13) NOT NULL,
   `nomeUsuario` VARCHAR(50) NOT NULL,
@@ -40,17 +38,15 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `quantHrs` DECIMAL NOT NULL,
   `quantDiasPedido` INT NOT NULL,
   `Perfil_Usuario_email` VARCHAR(64) NOT NULL,
-  `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,
   `Cliente_id_cliente` INT NOT NULL,
   `descricao` VARCHAR(500) NULL,
   PRIMARY KEY (`id_orcamento`),
   
   INDEX `fk_Orcamento_Perfil_Usuario1_idx` (`Perfil_Usuario_email` ASC) ,
-  INDEX `fk_Orcamento_Perfil_Usuario1_idy` (`Perfil_Usuario_nomeUsuario` ASC) ,
   INDEX `fk_Orcamento_Cliente1_idx` (`Cliente_id_cliente` ASC) ,
   CONSTRAINT `fk_Orcamento_Perfil_Usuario1`
-    FOREIGN KEY (`Perfil_Usuario_email`, `Perfil_Usuario_nomeUsuario`)
-    REFERENCES `LunaMia`.`Perfil_Usuario` (`email`, `nomeUsuario`)
+    FOREIGN KEY (`Perfil_Usuario_email`)
+    REFERENCES `LunaMia`.`Perfil_Usuario` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Orcamento_Cliente1`
@@ -95,5 +91,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     
     insert into Perfil_Usuario
     values ('camila.t29@aluno.ifsc.edu.br', null, '29102007', '(47)999887766', 'camila.t29', 'Camila', 20, 'Rua A, 1', 5),
-    ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47)999554433', 'emanuela.z', 'Emanuela', 30, 'Rua B, 2', 30),
+    ('emanuela.z@aluno.ifsc.edu.br', null, '11222007', '(47)999554433', 'emanuela.z', 'Emanuela', 15, 'Rua B, 2', 10),
     ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47)999876543', 'lara.cs', 'Lara', 25, 'Rua C, 3', 3);
+    
+    select * from Perfil_Usuario;

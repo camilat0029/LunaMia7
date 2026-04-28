@@ -82,7 +82,7 @@ public class Main {
 		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
 		
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
-				menu, configurarPerfiAposCadastrar, configurarPerfil);
+				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		
 		//adicionei isso já, pra depois não esquecer
@@ -93,7 +93,6 @@ public class Main {
 				
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
-		redefinirSenha.adicionarOuvinte(redefSenhaController);
 		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);

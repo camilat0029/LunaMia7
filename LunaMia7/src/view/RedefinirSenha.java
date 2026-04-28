@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -19,10 +20,10 @@ public class RedefinirSenha extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPasswordField pfNovaSenhaRS;
-	private JPasswordField pfSenhaRS;
 	private JPasswordField pfConfirmarNovaSenhaRS;
 	private JButton btConfirmarRS;
 	private JButton btCancelarRS;
+	private JLabel lbSenha;
 
 	/**
 	 * Create the panel.
@@ -37,9 +38,15 @@ public class RedefinirSenha extends JPanel {
 		lbSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
 		add(lbSenhaRS, "cell 1 1 3 1,alignx center");
 		
-		pfSenhaRS = new JPasswordField();
-		pfSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		add(pfSenhaRS, "cell 1 2 3 1,growx,width 30%,height 38px");
+		JPanel panel_Senha = new JPanel();
+		panel_Senha.setBackground(new Color(255, 255, 255));
+		panel_Senha.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
+		add(panel_Senha, "cell 1 2 3 1,growx,width 30%,height 38px");
+		panel_Senha.setLayout(new MigLayout("", "[90px]", "[26px]"));
+		
+		lbSenha = new JLabel("");
+		lbSenha.setFont(new Font("Dialog", Font.PLAIN, 20));
+		panel_Senha.add(lbSenha, "cell 0 0,alignx left,aligny center");
 		
 		JLabel lbNovaSenhaRS = new JLabel("Nova Senha");
 		lbNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -115,14 +122,6 @@ public class RedefinirSenha extends JPanel {
 		this.pfNovaSenhaRS = pfNovaSenhaRS;
 	}
 
-	public JPasswordField getPfSenhaRS() {
-		return pfSenhaRS;
-	}
-
-	public void setPfSenhaRS(JPasswordField pfSenhaRS) {
-		this.pfSenhaRS = pfSenhaRS;
-	}
-
 	public JPasswordField getPfConfirmarNovaSenhaRS() {
 		return pfConfirmarNovaSenhaRS;
 	}
@@ -131,9 +130,14 @@ public class RedefinirSenha extends JPanel {
 		this.pfConfirmarNovaSenhaRS = pfConfirmarNovaSenhaRS;
 	}
 
-	
-	public void adicionarOuvinte(ComponentListener listener) {
-		this.addComponentListener(listener);
+	public JLabel getLbSenha() {
+		return lbSenha;
 	}
+
+	public void setLbSenha(JLabel lbSenha) {
+		this.lbSenha = lbSenha;
+	}
+
+
 
 }
