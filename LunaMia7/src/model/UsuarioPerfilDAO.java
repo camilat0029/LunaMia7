@@ -16,7 +16,7 @@ public class UsuarioPerfilDAO {
 
 	// MUDEI AQUI
 	public void adicionarDados(UsuarioPerfil usuarioPerfil) {
-		String sql = "INSERT INTO Perfil_Usuario (email, fotoPerfil, senha, nrTelefone, nomeUsuario, nome, precoHora, endereco, percentualLucro) "
+		String sql = "INSERT INTO Perfil_Usuario (email, fotoPerfil, senha, nrTelefone, nomeUsuario, nome, precoHora, cidade, estado, percentualLucro) "
 				+ "VALUES (?,?,?,?,?,?,?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
@@ -32,8 +32,9 @@ public class UsuarioPerfilDAO {
 			pstm.setString(5, usuarioPerfil.getNomeUsuario());
 			pstm.setString(6, usuarioPerfil.getNome());
 			pstm.setFloat(7, usuarioPerfil.getPrecoHora());
-			pstm.setString(8, usuarioPerfil.getEndereco());
-			pstm.setFloat(9, usuarioPerfil.getPercentualLucro());
+			pstm.setString(8, usuarioPerfil.getCidade());
+			pstm.setString(9, usuarioPerfil.getEstado());
+			pstm.setFloat(10, usuarioPerfil.getPercentualLucro());
 			pstm.executeUpdate();
 
 		} catch (SQLException e) {
@@ -63,11 +64,12 @@ public class UsuarioPerfilDAO {
 			rset = pstm.executeQuery();
 
 			while (rset.next()) {
-				UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, 0, 0, sql);
+				UsuarioPerfil usuario = new UsuarioPerfil(sql, sql, sql, sql, sql, sql, sql, 0, 0, sql);
 				usuario.setNome(rset.getString("nome"));
 				usuario.setNomeUsuario(rset.getString("nomeUsuario"));
 				usuario.setEmail(rset.getString("email"));
-				usuario.setEndereco(rset.getString("endereco"));
+				usuario.setCidade(rset.getString("cidade"));
+				usuario.setEstado(rset.getString("estado"));
 				usuario.setTelefone(rset.getString("senha"));
 				usuario.setSenha(rset.getString("senha"));
 				usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
@@ -88,7 +90,7 @@ public class UsuarioPerfilDAO {
 	// UPDATE - Atualizar um usuário existente
 	public void atualizarUsuario(UsuarioPerfil usuarioPerfil) {
 		String sql = "UPDATE Perfil_Usuario SET fotoPerfil = ?, senha = ?, nrTelefone = ?, nome = ?, "
-				+ "precoHora = ?, endereco = ?, percentualLucro = ? WHERE nomeUsuario = ? AND email = ?";
+				+ "precoHora = ?, cidade = ?, estado = ?, percentualLucro = ? WHERE nomeUsuario = ? AND email = ?";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -100,10 +102,11 @@ public class UsuarioPerfilDAO {
 			pstm.setString(3, usuarioPerfil.getTelefone());
 			pstm.setString(4, usuarioPerfil.getNome());
 			pstm.setFloat(5, usuarioPerfil.getPrecoHora());
-			pstm.setString(6, usuarioPerfil.getEndereco());
-			pstm.setFloat(7, usuarioPerfil.getPercentualLucro());
-			pstm.setString(8, usuarioPerfil.getNomeUsuario());
-			pstm.setString(9, usuarioPerfil.getEmail());
+			pstm.setString(6, usuarioPerfil.getCidade());
+			pstm.setString(7, usuarioPerfil.getEstado());
+			pstm.setFloat(8, usuarioPerfil.getPercentualLucro());
+			pstm.setString(9, usuarioPerfil.getNomeUsuario());
+			pstm.setString(10, usuarioPerfil.getEmail());
 			pstm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,6 +135,7 @@ public class UsuarioPerfilDAO {
 	}
 
 	// MUDANÇA
+
 	// LISTA OS ESTADOS
 	public List<String> listarEstados() {
 		List<String> lista = new ArrayList<>();
@@ -153,18 +157,19 @@ public class UsuarioPerfilDAO {
 	public List<String> listarCidades(String estado) {
 
 		List<String> lista = new ArrayList<>();
-		String sql = "SELECT nome FROM cidades WHERE estados = ?";
-		
 
+		String sql = "SELECT c.nome FROM cidades c " + 
+					 "INNER JOIN estados e ON c.estados_id = e.id "
+				   + "WHERE e.nome = ? ORDER BY c.nome";
 
-		try (Connection conn = BancoDeDados.conectarCidades();
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rset = stmt.executeQuery()) {
-			
+		try (Connection conn = BancoDeDados.conectarEstados(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
 			stmt.setString(1, estado);
 
-			while (rset.next()) {
-				lista.add(rset.getString("nome"));
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					lista.add(rset.getString("nome"));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

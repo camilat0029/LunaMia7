@@ -28,13 +28,13 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private boolean UsuarioRepetido;
 
 	public CadastroUsuarioController( CadastroUsuario cadastroUsuario,
-			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas2, Menu menu, 
+			UsuarioPerfilDAO usuarioDAO, NavegadorTelas navegadorTelas, Menu menu, 
 			ConfigurarPerfilAposCadastrar confPerfilAposCad, ConfigurarPerfil confPerfil ) {
 		super();
 		this.cadastroUsuario = cadastroUsuario;
 		this.usuarioDAO = usuarioDAO;
 		this.menu = menu;
-		this.navegadorTelas2 = navegadorTelas2;
+		this.navegadorTelas2 = navegadorTelas;
 		this.confPerfilAposCad = confPerfilAposCad;
 		this.confPerfil = confPerfil;
 
@@ -42,7 +42,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				navegadorTelas2.navegarTela("LOGIN");
+				navegadorTelas.navegarTela("LOGIN");
 				limparCamposTelaCadastro();
 				menu.mostrarPanelCont();
 				menu.removerMenu();
@@ -63,18 +63,20 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		});
 		
 		this.confPerfilAposCad.ignorar(e -> {
-			navegadorTelas2.navegarTela("LOGIN");
+			navegadorTelas.navegarTela("LOGIN");
 		});
 		
 		this.confPerfilAposCad.redefinirSenha(e -> {
-			navegadorTelas2.navegarTela("REDEFINIR_SENHA");
+			navegadorTelas.navegarTela("REDEFINIR_SENHA");
 		});
 		
 		this.confPerfil.salvar(e -> {
 			atualizarCadTelaConfPerfilCad();
 		});
 		
-		//MUDANÇA PARA QUE SEPARE AS CIDADES CONFORME O ESTADO ESCOLHIDO. 
+		//MUDANÇASSSSS
+		
+		adicionarEstado();
 		
 		this.confPerfil.getCbEstado().addActionListener(e -> {
 		    String estadoSelecionado = (String) confPerfil.getCbEstado().getSelectedItem();
@@ -83,11 +85,14 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		    }
 		});
 		
-		adicionarEstado();
-		pesquisarCidades(null);
+	    String primeiroEstado = (String) confPerfil.getCbEstado().getSelectedItem();
+	    if (primeiroEstado != null) {
+	        pesquisarCidades(primeiroEstado);
+	    }
+
 	}
 	
-	//PREENCHE O COMBOBOX DOS ESTADOS - CONFIGURAR PERFIL
+	//PREENCHE O COMBOBOX DOS ESTADOS
 	public void adicionarEstado() {
 	    
 	    List<String> lista = usuarioDAO.listarEstados(); 
@@ -99,17 +104,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	    }
 	}
 	
-//	public void adicionarCidade() {
-//		
-//		List<String> lista = usuarioDAO.listarCidades();
-//		
-//		confPerfil.getCbCidade();
-//		
-//		for(String cidade : lista) {
-//			confPerfil.getCbCidade().addItem(cidade);
-//		}
-//	}
-	
+	//PREENCHE COMBOBOX DAS CIDADES
 	public void pesquisarCidades(String estado) {
 	    
 	    List<String> cidades = usuarioDAO.listarCidades(estado);
@@ -133,10 +128,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	}
 	
 	//CADASTRO DE USUARIO - TELA CADASTRO
-	public void cadastrarUsuario() {
-		
-		UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
-		
+	public void cadastrarUsuario() {	
 		
 		if(cadastroUsuario.getTfNomeUsuario().getText().isEmpty() ||
 				cadastroUsuario.getTfNomeComp().getText().isEmpty() ||
@@ -153,13 +145,16 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 			if(EmailRepetido == false && UsuarioRepetido == false){
 				
+				UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+				
 				novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
 				novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
 				novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
 				novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());			
 				novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
 				
-				novoUsuario.setEndereco("");
+				novoUsuario.setCidade("");
+				novoUsuario.setEstado("");
 				novoUsuario.setFotoPerfil(null);
 				novoUsuario.setPercentualLucro(0);
 				novoUsuario.setPrecoHora(0);
@@ -218,14 +213,18 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL APÓS CADASTRAR
 	public void atualizarCadTelaConfPerfilPosCad() {
 		
-		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
+		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+		
+	    String cidade = (String) confPerfilAposCad.getCbCidade().getSelectedItem();
+	    String estado = (String) confPerfilAposCad.getCbEstadoCP().getSelectedItem();
 		
 		if(confPerfilAposCad.getTfNomeCompCP().getText().isEmpty() ||
-				confPerfilAposCad.getTfEnderecoCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPercLucroCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfPrecoHoraCP().getText().isEmpty() ||
 				confPerfilAposCad.getTfTelefoneCP().getText().isEmpty() ||
-				confPerfilAposCad.getPfSenhaCP().getText().isEmpty()) {
+				confPerfilAposCad.getPfSenhaCP().getText().isEmpty() ||
+				cidade == null || cidade.isEmpty()  ||
+				estado == null || estado.isEmpty()) {
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
@@ -236,14 +235,12 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
 			usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
 			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
-			usuarioAtualizado.setEndereco(confPerfilAposCad.getTfEnderecoCP().getText() + ", " + 
-					confPerfilAposCad.getCbBairro().getSelectedItem() + "-" + 
-					confPerfilAposCad.getCbCidade().getSelectedItem() + "/" +
-					confPerfilAposCad.getCbEstadoCP().getSelectedItem());
 			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
 			usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
 			usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
 			
+            usuarioAtualizado.setEstado((String) confPerfilAposCad.getCbEstadoCP().getSelectedItem());
+            usuarioAtualizado.setCidade((String) confPerfilAposCad.getCbCidade().getSelectedItem());
 		
 			usuarioDAO.atualizarUsuario(usuarioAtualizado);
 			
@@ -255,32 +252,34 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	
 	//ATUALIZANDO CADASTRO USUÁRIO PELA TELA CONF PERFIL
     public void atualizarCadTelaConfPerfilCad() {
+    	
+    	String cidade = (String) confPerfil.getCbCidade().getSelectedItem();
+	    String estado = (String) confPerfil.getCbEstado().getSelectedItem();
 		
-		UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, 0, 0, null);
-		
-		if(confPerfil.getTfNomeCompCP().getText().isEmpty() ||
-				confPerfil.getTfEnderecoCP().getText().isEmpty() ||
+		if(confPerfil.getTfNomeCompCP().getText().isEmpty() ||				 
 				confPerfil.getTfPercLucroCP().getText().isEmpty() ||
 				confPerfil.getTfPrecoHoraCP().getText().isEmpty() ||
 				confPerfil.getTfTelefoneCP().getText().isEmpty() ||
-				confPerfil.getPfSenhaCP().getText().isEmpty()) {
+				confPerfil.getPfSenhaCP().getText().isEmpty() ||
+				cidade == null || cidade.isEmpty()  ||
+				estado == null || estado.isEmpty()) {
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
 		} else {
 			
+			UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 			usuarioAtualizado.setFotoPerfil(null);
 			usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
 			usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
 			usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
 			usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
-			usuarioAtualizado.setEndereco(confPerfil.getTfEnderecoCP().getText() + ", " + 
-					confPerfil.getCbBairro().getSelectedItem() + "-" + 
-					confPerfil.getCbCidade().getSelectedItem() + "/" +
-					confPerfil.getCbEstado().getSelectedItem());
 			usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
 			usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
 			usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+			
+            usuarioAtualizado.setEstado((String) confPerfil.getCbEstado().getSelectedItem());
+            usuarioAtualizado.setCidade((String) confPerfil.getCbCidade().getSelectedItem());
 			
 		
 			usuarioDAO.atualizarUsuario(usuarioAtualizado);
@@ -319,9 +318,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			
-			adicionarEstado();
-			
-			confPerfil.getCbEstado().setSelectedItem(usuario.getEndereco());
+            confPerfil.getCbEstado().setSelectedItem(usuario.getEstado());
+            confPerfil.getCbCidade().setSelectedItem(usuario.getCidade());
 			
 		}
 	}

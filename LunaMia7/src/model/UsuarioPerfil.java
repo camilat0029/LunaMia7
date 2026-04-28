@@ -4,12 +4,12 @@ import java.awt.Image;
 
 public class UsuarioPerfil {
 	
-	private String nome, nomeUsuario,email, senha, telefone, endereco, fotoPerfil;
+	private String nome, nomeUsuario,email, senha, telefone, cidade,  estado, fotoPerfil;
 	private float precoHora, percentualLucro;
 	
 	//construtor	
 	
-	public UsuarioPerfil(String nome, String nomeUsuario, String email, String senha, String telefone, String endereco,
+	public UsuarioPerfil(String nome, String nomeUsuario, String email, String senha, String telefone, String cidade, String estado,
 			float precoHora, float percentualLucro, String fotoPerfil) {
 		super();
 		this.nome = nome;
@@ -17,7 +17,8 @@ public class UsuarioPerfil {
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
-		this.endereco = endereco;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.precoHora = precoHora;
 		this.percentualLucro = percentualLucro;
 		this.fotoPerfil = fotoPerfil;
@@ -86,17 +87,24 @@ public class UsuarioPerfil {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	
 
-
-	public String getEndereco() {
-		return endereco;
+	public String getCidade() {
+		return cidade;
 	}
 
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
 	public float getPrecoHora() {
 		return precoHora;

@@ -26,12 +26,10 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JTextField tfNomeCompCP;
 	private JPasswordField pfSenhaCP;
 	private JTextField tfTelefoneCP;
-	private JTextField tfEnderecoCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
 	private JLabel lbEmailCad;
-	private JComboBox cbBairro;
 	private JComboBox cbCidade;
 	private JComboBox cbEstado;
 	private JButton btSalvar;
@@ -46,7 +44,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
-		setLayout(new MigLayout("gap 16", "[grow][][][][][][][][][grow]", "[grow][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 16", "[grow][][][][][][][][][grow]", "[grow][][][][][][][][][][][][][][grow]"));
 		
 		JLabel lbNomeCompCP = new JLabel("Nome Completo");
 		lbNomeCompCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
@@ -130,58 +128,40 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		cbCidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		add(cbCidade, "cell 7 7 2 1,growx,height 38px");
 		
-		JLabel lbEnderecoCP = new JLabel("Endereço");
-		lbEnderecoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbEnderecoCP, "cell 1 8");
-		
-		tfEnderecoCP = new JTextField();
-		tfEnderecoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfEnderecoCP, "cell 3 8,width 18%,height 38px");
-		tfEnderecoCP.setColumns(10);
-		
-		JLabel lbBairroCP = new JLabel("Bairro");
-		lbBairroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbBairroCP, "cell 5 8");
-		
-		cbBairro = new JComboBox();
-		cbBairro.setModel(new DefaultComboBoxModel(new String[] {"B"}));
-		cbBairro.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(cbBairro, "cell 7 8 2 1,growx,height 38px");
-		
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbPrecoHoraCP, "cell 1 9");
+		add(lbPrecoHoraCP, "cell 1 8");
 		
 		tfPrecoHoraCP = new JTextField();
 		tfPrecoHoraCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
 		tfPrecoHoraCP.setFont(new Font("Dialog", Font.PLAIN, 20));
-		add(tfPrecoHoraCP, "cell 3 9,growx,height 38px");
+		add(tfPrecoHoraCP, "cell 3 8,growx,height 38px");
 		tfPrecoHoraCP.setColumns(10);
 		
 		JLabel lbPercLucroCP = new JLabel("Percentual de Lucro");
 		lbPercLucroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbPercLucroCP, "cell 5 9");
+		add(lbPercLucroCP, "cell 5 8");
 		
 		tfPercLucroCP = new JTextField();
 		tfPercLucroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
-		add(tfPercLucroCP, "cell 7 9 2 1,growx,height 38px");
+		add(tfPercLucroCP, "cell 7 8 2 1,growx,height 38px");
 		tfPercLucroCP.setColumns(10);
 		
 		JPanel panel_foto = new JPanel();
-		add(panel_foto, "cell 3 10 1 3,width 18%, growy");
+		add(panel_foto, "cell 3 9 1 3,width 18%,growy");
 		
 		JLabel lbFotoPerfilCP = new JLabel("Foto de Perfil");
 		lbFotoPerfilCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
-		add(lbFotoPerfilCP, "cell 1 11");
+		add(lbFotoPerfilCP, "cell 1 10");
 		
 		JPanel panel_btSalvar = new JPanel();
 		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
 		panel_btSalvar.setBackground(new Color(234, 219, 247));
-		add(panel_btSalvar, "cell 1 13 3 1,alignx center,gapy 15");
+		add(panel_btSalvar, "cell 1 12 3 1,alignx center,gapy 15");
 		
 		JPanel panel_btIgnorar = new JPanel();
 		panel_btIgnorar.setBackground(new Color(234, 219, 247));
-		add(panel_btIgnorar, "cell 5 13 4 1,growx,gapy 15");
+		add(panel_btIgnorar, "cell 5 12 4 1,growx,gapy 15");
 		
 		btIgnorar = new JButton("Ignorar Por Enquanto ");
 		btIgnorar.setBackground(new Color(193, 151, 232));
@@ -205,10 +185,8 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 
                 lbNomeCompCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbNomeUsuaCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbEmailCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbBairroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbEnderecoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
+                lbEmailCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));                
+                lbCidadeCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));                
                 lbEstadoCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbFotoPerfilCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
                 lbPercLucroCP.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
@@ -243,9 +221,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		this.btRedefinirSenha.addActionListener(actionListener);
 	}
 
-	
-	
-	
 	public JTextField getTfNomeCompCP() {
 		return tfNomeCompCP;
 	}
@@ -278,14 +253,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		this.tfTelefoneCP = tfTelefoneCP;
 	}
 
-	public JTextField getTfEnderecoCP() {
-		return tfEnderecoCP;
-	}
-
-	public void setTfEnderecoCP(JTextField tfEnderecoCP) {
-		this.tfEnderecoCP = tfEnderecoCP;
-	}
-
 	public JTextField getTfPrecoHoraCP() {
 		return tfPrecoHoraCP;
 	}
@@ -310,13 +277,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		this.lbNomeUsuarioCad = lbNomeUsuarioCad;
 	}
 
-	public JComboBox getCbBairro() {
-		return cbBairro;
-	}
-
-	public void setCbBairro(JComboBox cbBairro) {
-		this.cbBairro = cbBairro;
-	}
 
 	public JComboBox getCbCidade() {
 		return cbCidade;
