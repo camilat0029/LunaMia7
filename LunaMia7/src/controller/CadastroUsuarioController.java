@@ -273,32 +273,39 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
 			
 		} else {
-			String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText();
-			String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText();
 			
-			precoHoraPermitido(precoHoraValido);
-			percentualLucroPermitido(percentualLucroValido);
+			nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText());
 			
-			if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
-				
-				usuarioAtualizado.setFotoPerfil(null);
-				usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
-				usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
-				usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
-				usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
-				usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
-				usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
-				usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
-				
-	            usuarioAtualizado.setEstado((String) confPerfilAposCad.getCbEstadoCP().getSelectedItem());
-	            usuarioAtualizado.setCidade((String) confPerfilAposCad.getCbCidade().getSelectedItem());
-			
-				usuarioDAO.atualizarUsuario(usuarioAtualizado);
-				
-				JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
-				navegadorTelas2.navegarTela("LOGIN");
+			if(!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
+				JOptionPane.showMessageDialog(null, "Nome Inválido! \n(A-Z, a-z, .)", "Informação", 1);
 			} else {
-				JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+				String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText();
+				String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText();
+				
+				precoHoraPermitido(precoHoraValido);
+				percentualLucroPermitido(percentualLucroValido);
+				
+				if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
+					
+					usuarioAtualizado.setFotoPerfil(null);
+					usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
+					usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+					usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
+					usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
+					usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+					usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
+					usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
+					
+		            usuarioAtualizado.setEstado((String) confPerfilAposCad.getCbEstadoCP().getSelectedItem());
+		            usuarioAtualizado.setCidade((String) confPerfilAposCad.getCbCidade().getSelectedItem());
+				
+					usuarioDAO.atualizarUsuario(usuarioAtualizado);
+					
+					JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+					navegadorTelas2.navegarTela("LOGIN");
+				} else {
+					JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+				}
 			}
 		}
 	}
@@ -322,32 +329,41 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			
 		} else {
 			
-			String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText();
-			String percentualLucroValido = confPerfil.getTfPercLucroCP().getText();
+			nomePermitido(confPerfil.getTfNomeCompCP().getText());
 			
-			precoHoraPermitido(precoHoraValido);
-			percentualLucroPermitido(percentualLucroValido);
-			
-			if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
-				UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
-				usuarioAtualizado.setFotoPerfil(null);
-				usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
-				usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
-				usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
-				usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
-				usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
-				usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
-				usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+			if(!nomePermitido(confPerfil.getTfNomeCompCP().getText())) {
 				
-	            usuarioAtualizado.setEstado((String) confPerfil.getCbEstado().getSelectedItem());
-	            usuarioAtualizado.setCidade((String) confPerfil.getCbCidade().getSelectedItem());
+				JOptionPane.showMessageDialog(null, "Nome Inválido! \n(A-Z, a-z, .)", "Informação", 1);
 				
-			
-				usuarioDAO.atualizarUsuario(usuarioAtualizado);
-				
-				JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
 			} else {
-				JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+				
+				String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText();
+				String percentualLucroValido = confPerfil.getTfPercLucroCP().getText();
+				
+				precoHoraPermitido(precoHoraValido);
+				percentualLucroPermitido(percentualLucroValido);
+				
+				if(precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
+					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+					usuarioAtualizado.setFotoPerfil(null);
+					usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
+					usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
+					usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
+					usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
+					usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
+					usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
+					usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
+					
+		            usuarioAtualizado.setEstado((String) confPerfil.getCbEstado().getSelectedItem());
+		            usuarioAtualizado.setCidade((String) confPerfil.getCbCidade().getSelectedItem());
+					
+				
+					usuarioDAO.atualizarUsuario(usuarioAtualizado);
+					
+					JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
+				} else {
+					JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+				}
 			}
 		}
 	}
@@ -406,6 +422,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
 			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
+			confPerfil.getTfPrecoHoraCP().setText(String.valueOf(usuario.getPrecoHora()));
 			
             confPerfil.getCbEstado().setSelectedItem(usuario.getEstado());
             confPerfil.getCbCidade().setSelectedItem(usuario.getCidade());
