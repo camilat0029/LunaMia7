@@ -46,7 +46,7 @@ public class CadastroUsuario extends JPanel {
 		};
 		
 		lbIconeVoltar.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
-		lbIconeVoltar.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lbIconeVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 27));
 		add(lbIconeVoltar, "cell 0 0 2 1");
 		
 		lbIconeVoltar.setToolTipText("Voltar");
@@ -56,34 +56,34 @@ public class CadastroUsuario extends JPanel {
 		add(lbLunaMia, "cell 3 2 4 1,alignx center,aligny center");
 		
 		JLabel lbNomeComp = new JLabel("Nome Completo");
-		lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbNomeComp.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNomeComp, "cell 3 4");
 		
 		tfNomeComp = new JTextField();
-		tfNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		tfNomeComp.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(tfNomeComp, "cell 5 4 2 1,width 27%,alignx left,height 38px");
 		tfNomeComp.setColumns(10);
 				
 		JLabel lbNomeUsuario = new JLabel("Nome de Usuário");
-		lbNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbNomeUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNomeUsuario, "cell 3 5");
 		
 		tfNomeUsuario = new JTextField();
-		tfNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		tfNomeUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(tfNomeUsuario, "cell 5 5 2 1,width 27%,height 38px");
 		tfNomeUsuario.setColumns(10);
 		
 		JLabel lbEmail = new JLabel("Email");
-		lbEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbEmail.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbEmail, "cell 3 6");
 		
 		tfEmail = new JTextField();
-		tfEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		tfEmail.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(tfEmail, "cell 5 6 2 1,width 27%,height 38px");
 		tfEmail.setColumns(10);
 		
 		JLabel lbTelefone = new JLabel("Telefone");
-		lbTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbTelefone.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbTelefone, "cell 3 7");
 		
 
@@ -92,7 +92,7 @@ public class CadastroUsuario extends JPanel {
 			mascaraTelefone.setPlaceholder(" ");
 			
 			tfTelefone = new JFormattedTextField(mascaraTelefone);
-			tfTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+			tfTelefone.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 			add(tfTelefone, "cell 5 7 2 1,width 27%,height 38px");
 		} catch(ParseException e) {
 			e.printStackTrace();
@@ -102,11 +102,11 @@ public class CadastroUsuario extends JPanel {
 		tfTelefone.setColumns(10);
 		
 		JLabel lbSenha = new JLabel("Senha");
-		lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbSenha.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbSenha, "cell 3 8");
 		
 		pfSenha = new JPasswordField();
-		pfSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		pfSenha.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(pfSenha, "cell 5 8 2 1,width 27%,height 38px");
 		
 		JPanel panel = new JPanel();
@@ -116,7 +116,7 @@ public class CadastroUsuario extends JPanel {
 		
 		btCadastrar = new JButton("Cadastrar");
 		
-		btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btCadastrar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btCadastrar.setBackground(new Color(193, 151, 232));
 		panel.add(btCadastrar);
 		
@@ -128,12 +128,12 @@ public class CadastroUsuario extends JPanel {
                 // Calcula novo tamanho baseado na largura
                 int novaFonte = Math.max(20, Math.min(40, getWidth() / 30));
 
-                lbEmail.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbNomeComp.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbNomeUsuario.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbTelefone.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbSenha.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btCadastrar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
+                lbEmail.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbNomeComp.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbNomeUsuario.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbTelefone.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbSenha.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                btCadastrar.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                                 
             }
         });	

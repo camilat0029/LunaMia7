@@ -35,13 +35,13 @@ public class Orcamentos extends JPanel {
 		setLayout(new MigLayout("", "[grow][-60.00][][389.00][grow]", "[][][grow][]"));
 		
 		JLabel lbCrieNovoOrcamento = new JLabel("Crie um novo orçamento");
-		lbCrieNovoOrcamento.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbCrieNovoOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbCrieNovoOrcamento, "cell 2 1,alignx center");
 		
 		btCriar = new JButton("Criar");
 		btCriar.setBackground(new Color(193, 151, 232));
 		btCriar.setBorderPainted(false);
-		btCriar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btCriar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btCriar, "cell 3 1,alignx right");
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -58,13 +58,13 @@ public class Orcamentos extends JPanel {
 		JTableHeader header = tabelaOrcamentos.getTableHeader();
 		header.setBackground(new Color(234, 219, 247));
 		header.setForeground(new Color(103, 80, 125));
-		header.setFont(new Font("Bodoni Bk BT", Font.BOLD, 18));
+		header.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		header.setReorderingAllowed(false); // impede arrastar colunas
 		
 		//Estilização das linhas e colunas
 		
 		tabelaOrcamentos.setRowHeight(35);
-		tabelaOrcamentos.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		tabelaOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		tabelaOrcamentos.setGridColor(new Color(220, 220, 220));
 		tabelaOrcamentos.setShowVerticalLines(false);
 		tabelaOrcamentos.setSelectionBackground(new Color(193, 151, 232));

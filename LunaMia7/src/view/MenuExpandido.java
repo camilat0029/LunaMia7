@@ -47,36 +47,36 @@ public class MenuExpandido extends JPanel {
 		lbMostrarMenuCont.setToolTipText("Fechar Menu");
 		
 		JLabel lbImagem = new JLabel("Imagem");
-		lbImagem.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
+		lbImagem.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		add(lbImagem, "cell 1 1");
 		
 		JLabel lbNomeUsuarioMN = new JLabel("Nome de Usuário");
-		lbNomeUsuarioMN.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		lbNomeUsuarioMN.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(lbNomeUsuarioMN, "cell 1 2,aligny center");
 		
 		btInicio = new JButton("Início");
 		btInicio.setBackground(new Color(193, 151, 232));
-		btInicio.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btInicio.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btInicio, "cell 1 4,growx");
 		
 		btPerfil = new JButton("Perfil");
-		btPerfil.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btPerfil.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btPerfil.setBackground(new Color(193, 151, 232));
 		add(btPerfil, "cell 1 5,growx");
 		
 		btOrcamentos = new JButton("Orçamento");
-		btOrcamentos.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btOrcamentos.setBackground(new Color(193, 151, 232));
 		add(btOrcamentos, "cell 1 6,growx");
 		
 		btEstoque = new JButton("Estoque");
 		btEstoque.setBackground(new Color(193, 151, 232));
-		btEstoque.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btEstoque.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btEstoque, "cell 1 7,growx");
 		
 		btRelatorios = new JButton("Relatórios");
 		btRelatorios.setBackground(new Color(193, 151, 232));
-		btRelatorios.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btRelatorios.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btRelatorios, "cell 1 8,growx");
 		
 		btInicio.setBorderPainted(false);
@@ -86,10 +86,10 @@ public class MenuExpandido extends JPanel {
 		btRelatorios.setBorderPainted(false);
 		
 		btSair = new JButton("Sair");
-		btSair.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btSair.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btSair.setBorderPainted(false);
 		btSair.setBackground(new Color(193, 151, 232));
-		add(btSair, "cell 1 10,alignx center,aligny center");
+		add(btSair, "cell 1 10,growx,aligny center");
 
 	}
 	

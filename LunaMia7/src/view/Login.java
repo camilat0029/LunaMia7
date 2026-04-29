@@ -37,20 +37,20 @@ public class Login extends JPanel {
 		add(lbLunaEMiaLogin, "cell 1 1 4 1,aligny center");
 		
 		JLabel lbUsuarioLogin = new JLabel("Usuário");
-		lbUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbUsuarioLogin.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbUsuarioLogin, "cell 1 2 4 1");
 		
 		tfUsuarioLogin = new JTextField();
-		tfUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
+		tfUsuarioLogin.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		tfUsuarioLogin.setColumns(10);
 		add(tfUsuarioLogin, "cell 1 3 4 1,width 35%,height 38px");
 		
 		JLabel lbSenhaLogin = new JLabel("Senha");
-		lbSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbSenhaLogin.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbSenhaLogin, "cell 1 5 4 1,alignx center");
 		
 		pfSenhaLogin = new JPasswordField();
-		pfSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 18));
+		pfSenhaLogin.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		add(pfSenhaLogin, "cell 1 6 4 1,width 35%,height 38px");
 		
 		JPanel panel = new JPanel();
@@ -60,12 +60,12 @@ public class Login extends JPanel {
 		btEntrarLogin = new JButton("Entrar");
 		btEntrarLogin.setBackground(new Color(193, 151, 232));
 		btEntrarLogin.setForeground(new Color(0, 0, 0));
-		btEntrarLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btEntrarLogin.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panel.add(btEntrarLogin);
 		btEntrarLogin.setBorderPainted(false);
 		
 		JLabel lbNaoTemContaLogin = new JLabel("Não tem conta?");
-		lbNaoTemContaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 20));
+		lbNaoTemContaLogin.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(lbNaoTemContaLogin, "cell 1 10 3 1, gapx 60");
 		
 		JPanel panel_2 = new JPanel();
@@ -74,7 +74,7 @@ public class Login extends JPanel {
 		
 		btCadastreseLogin = new JButton("Cadastre-se");
 		btCadastreseLogin.setBackground(new Color(193, 151, 232));
-		btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		btCadastreseLogin.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		panel_2.add(btCadastreseLogin);
 		btCadastreseLogin.setBorderPainted(false);
 		
@@ -85,12 +85,12 @@ public class Login extends JPanel {
                 int fonteProporcional = Math.max(20, Math.min(40, getWidth() / 30));
                 int fonteProporcional2 = Math.max(10, Math.min(30, getWidth() / 30));
                 
-                lbUsuarioLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
-                lbSenhaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
-                btEntrarLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional));
+                lbUsuarioLogin.setFont(new Font("Times New Roman", Font.PLAIN, fonteProporcional));
+                lbSenhaLogin.setFont(new Font("Times New Roman", Font.PLAIN, fonteProporcional));
+                btEntrarLogin.setFont(new Font("Times New Roman", Font.PLAIN, fonteProporcional));
                 
-                lbNaoTemContaLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional2));
-                btCadastreseLogin.setFont(new Font("Bodoni Bk BT", Font.PLAIN, fonteProporcional2));
+                lbNaoTemContaLogin.setFont(new Font("Times New Roman", Font.PLAIN, fonteProporcional2));
+                btCadastreseLogin.setFont(new Font("Times New Roman", Font.PLAIN, fonteProporcional2));
             }
         });
 

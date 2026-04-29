@@ -31,57 +31,57 @@ public class CadastrarProdutoEstoque extends JPanel {
 		add(lblNewLabel, "flowx,cell 0 0");
 		
 		JLabel lbNomeProduto = new JLabel("Nome do Produto");
-		lbNomeProduto.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbNomeProduto.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNomeProduto, "cell 2 1");
 		
 		tfNomeProduto = new JTextField();
-		tfNomeProduto.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfNomeProduto.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfNomeProduto, "cell 2 2 3 1,growx");
 		tfNomeProduto.setColumns(10);
 		
 		JLabel lbValor = new JLabel("Valor");
-		lbValor.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValor, "cell 2 4");
 		
 		tfValor = new JTextField();
 		tfValor.setText("R$");
-		tfValor.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfValor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfValor, "cell 2 5 3 1,growx");
 		tfValor.setColumns(10);
 		
 		JLabel lbQtdDisponivel = new JLabel("Quantidade Disponível");
-		lbQtdDisponivel.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQtdDisponivel, "cell 2 7");
 		
 		tfQtdDisponivel = new JTextField();
-		tfQtdDisponivel.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfQtdDisponivel, "cell 2 8,growx");
 		tfQtdDisponivel.setColumns(10);
 		
 		JLabel lbMarca = new JLabel("Marca");
-		lbMarca.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbMarca.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbMarca, "cell 2 10");
 		
 		JLabel lbCor = new JLabel("Cor");
-		lbCor.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbCor, "cell 4 10");
 		
 		tfMarca = new JTextField();
-		tfMarca.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfMarca.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfMarca, "cell 2 11,growx");
 		tfMarca.setColumns(10);
 		
 		tfCor = new JTextField();
-		tfCor.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfCor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfCor, "cell 4 11,growx");
 		tfCor.setColumns(10);
 		
 		JLabel lbUnidadeMed = new JLabel("Unidade de Medida");
-		lbUnidadeMed.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbUnidadeMed.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbUnidadeMed, "cell 2 13");
 		
 		JLabel lbQtdUnidade = new JLabel("Quantidade Por Unidade");
-		lbQtdUnidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQtdUnidade, "cell 4 13");
 		
 		JComboBox cbUnidadeMed = new JComboBox();

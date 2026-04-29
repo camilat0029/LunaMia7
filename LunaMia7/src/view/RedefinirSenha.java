@@ -35,7 +35,7 @@ public class RedefinirSenha extends JPanel {
 		setLayout(new MigLayout("gap 7", "[grow][][][][grow]", "[grow][][][][][][][][][][][grow]"));
 		
 		JLabel lbSenhaRS = new JLabel("Senha");
-		lbSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbSenhaRS, "cell 1 1 3 1,alignx center");
 		
 		JPanel panel_Senha = new JPanel();
@@ -45,23 +45,23 @@ public class RedefinirSenha extends JPanel {
 		panel_Senha.setLayout(new MigLayout("", "[90px]", "[26px]"));
 		
 		lbSenha = new JLabel("");
-		lbSenha.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lbSenha.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_Senha.add(lbSenha, "cell 0 0,alignx left,aligny center");
 		
 		JLabel lbNovaSenhaRS = new JLabel("Nova Senha");
-		lbNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNovaSenhaRS, "cell 1 4 3 1,alignx center, gapy 30");
 		
 		pfNovaSenhaRS = new JPasswordField();
-		pfNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		pfNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(pfNovaSenhaRS, "cell 1 5 3 1,growx,width 30%,height 38px");
 		
 		JLabel lbConfirmarNovaSenhaRS = new JLabel("Confirmar nova senha");
-		lbConfirmarNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		lbConfirmarNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbConfirmarNovaSenhaRS, "cell 1 7 3 1,alignx center, gapy 30");
 		
 		pfConfirmarNovaSenhaRS = new JPasswordField();
-		pfConfirmarNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		pfConfirmarNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(pfConfirmarNovaSenhaRS, "cell 1 8 3 1,growx,width 30%,height 38px");
 		
 		JPanel panelCancelarRS = new JPanel();
@@ -70,7 +70,7 @@ public class RedefinirSenha extends JPanel {
 		
 		btCancelarRS = new JButton("Cancelar");
 		btCancelarRS.setBackground(new Color(193, 151, 232));
-		btCancelarRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btCancelarRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panelCancelarRS.add(btCancelarRS);
 		btCancelarRS.setBorderPainted(false);
 		
@@ -80,7 +80,7 @@ public class RedefinirSenha extends JPanel {
 		
 		btConfirmarRS = new JButton("Confirmar");
 		btConfirmarRS.setBackground(new Color(193, 151, 232));
-		btConfirmarRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btConfirmarRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panelConfirmarRS.add(btConfirmarRS);
 		btConfirmarRS.setBorderPainted(false);
 		
@@ -91,11 +91,11 @@ public class RedefinirSenha extends JPanel {
             	int largura = getTopLevelAncestor().getWidth();
                 int novaFonte = Math.max(25, Math.min(35, largura / 35));
                 
-                lbSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                lbConfirmarNovaSenhaRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btCancelarRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
-                btConfirmarRS.setFont(new Font("Bodoni Bk BT", Font.PLAIN, novaFonte));
+                lbSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbConfirmarNovaSenhaRS.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                btCancelarRS.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                btConfirmarRS.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                 
                 repaint();
                 revalidate();
