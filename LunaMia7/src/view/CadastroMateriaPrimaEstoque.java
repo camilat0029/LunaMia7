@@ -6,24 +6,27 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.MouseListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-public class CadastrarProdutoEstoque extends JPanel {
+public class CadastroMateriaPrimaEstoque extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField tfNomeProduto;
+	private JTextField tfNomeMateriaPrima;
 	private JTextField tfValor;
 	private JTextField tfQtdDisponivel;
 	private JTextField tfMarca;
 	private JTextField tfCor;
 	private JTextField tfQtdUnidade;
+	private JLabel lbIconeVoltar;
 
 	/**
 	 * Create the panel.
 	 */
-	public CadastrarProdutoEstoque() {
+	public CadastroMateriaPrimaEstoque() {
 		setBackground(new Color(234, 219, 247));
 		setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][][][][][][][][][][][][grow]"));
 		
@@ -34,10 +37,10 @@ public class CadastrarProdutoEstoque extends JPanel {
 		lbNomeProduto.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNomeProduto, "cell 2 1");
 		
-		tfNomeProduto = new JTextField();
-		tfNomeProduto.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfNomeProduto, "cell 2 2 3 1,growx");
-		tfNomeProduto.setColumns(10);
+		tfNomeMateriaPrima = new JTextField();
+		tfNomeMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfNomeMateriaPrima, "cell 2 2 3 1,growx");
+		tfNomeMateriaPrima.setColumns(10);
 		
 		JLabel lbValor = new JLabel("Valor");
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -88,8 +91,6 @@ public class CadastrarProdutoEstoque extends JPanel {
 		cbUnidadeMed.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		add(cbUnidadeMed, "cell 2 14,growx");
 		
-		
-		
 		tfQtdUnidade = new JTextField();
 		tfQtdUnidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
 		add(tfQtdUnidade, "cell 4 14,growx");
@@ -106,10 +107,16 @@ public class CadastrarProdutoEstoque extends JPanel {
 		
 		btConfirmar.setBorderPainted(false);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(CadastrarProdutoEstoque.class.getResource("/imagensIcones/Icone_Seta2.png")));
-		add(lblNewLabel_1, "cell 0 0");
+		lbIconeVoltar = new JLabel("");
+		lbIconeVoltar.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		add(lbIconeVoltar, "cell 0 0");
 
 	}
+	
+	public void voltar(MouseListener mouseListener) {
+		this.lbIconeVoltar.addMouseListener(mouseListener);
+	}
+	
+	
 
 }

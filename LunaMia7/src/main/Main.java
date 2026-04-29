@@ -10,17 +10,17 @@ import javax.swing.UIManager;
 import controller.CadastroUsuarioController;
 import controller.InicioController;
 import controller.LoginController;
+import controller.MateriaPEstoqueController;
 import controller.Menu;
 import controller.NavegadorTelas;
 import controller.OrcamentoController;
-import controller.ProdutoEstoqueController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import model.OrcamentoDAO;
-import model.ProdutoEstoqueDAO;
+import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
-import view.CadastrarProdutoEstoque;
+import view.CadastroMateriaPrimaEstoque;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
@@ -32,7 +32,7 @@ import view.Login;
 import view.MenuContraido;
 import view.MenuExpandido;
 import view.Orcamentos;
-import view.ProdutoEstoque;
+import view.MateriaPrima;
 import view.RedefinirSenha;
 import view.RelatorioGastos;
 import view.RelatorioHorasTrabalhadas;
@@ -64,12 +64,12 @@ public class Main {
 		UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
 		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-		ProdutoEstoqueDAO produtoEstoqueDAO = new ProdutoEstoqueDAO();
+		MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
 		
 		//VIEW
 		Login login = new Login();
 		CadastroUsuario cadastro = new CadastroUsuario();
-		CadastrarProdutoEstoque cadastroProduto = new CadastrarProdutoEstoque();
+		CadastroMateriaPrimaEstoque cadastroMateriaPrimaEstoque = new CadastroMateriaPrimaEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
 		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
 		CriarOrcamento criarOrcamento = new CriarOrcamento();
@@ -80,7 +80,7 @@ public class Main {
 		Relatorios relatorios = new Relatorios();
 		MenuContraido menuCont = new MenuContraido();
 		MenuExpandido menuExp = new MenuExpandido();
-		ProdutoEstoque produtoEstoque = new ProdutoEstoque();
+		MateriaPrima materiaPrima = new MateriaPrima();
 		RelatorioLucros relatorioLucros = new RelatorioLucros();
 		RelatorioHorasTrabalhadas relatorioHorasTrabalhadas = new RelatorioHorasTrabalhadas();
 		RelatorioGastos relatorioGastos = new RelatorioGastos();
@@ -94,7 +94,7 @@ public class Main {
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
-		ProdutoEstoqueController produtoEstoqueController = new ProdutoEstoqueController(produtoEstoque, navegadorTelas, menu, telaPrincipal, produtoEstoqueDAO);
+		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrima, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
 		
@@ -103,7 +103,7 @@ public class Main {
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
-		navegadorTelas.adicionarPainel("CADASTRO_PRODUTO", cadastroProduto);
+		navegadorTelas.adicionarPainel("CADASTRO_MATERIA_PRIMA", cadastroMateriaPrimaEstoque);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", configurarPerfiAposCadastrar);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO",criarOrcamento );
@@ -116,10 +116,8 @@ public class Main {
 		navegadorTelas.adicionarPainel("RELATORIO_HORAS_TRABALHADAS", relatorioHorasTrabalhadas);
 		navegadorTelas.adicionarPainel("RELATORIO_GASTOS", relatorioGastos);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
-		navegadorTelas.adicionarPainel("PRODUTO_ESTOQUE", produtoEstoque);
+		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrima);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
-		
-		
 		
 		navegadorTelas.navegarTela("LOGIN");
 

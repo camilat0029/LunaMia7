@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoEstoqueDAO {
+public class MateriaPrimaDAO {
 	
-	public void adicionarInsumos(ProdutoEstoque insumosDeEstoque) {
+	public void adicionarInsumos(MateriaPrima materiaPrimaEstoque) {
 		
-		String sql = "INSERT INTO produtoestoque (unidadeMedida,"
+		String sql = "INSERT INTO MateriaPrima (unidadeMedida,"
 				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade)"
 				+ "VALUES (?,?,?,?,?,?,?,?)";
 		
@@ -23,12 +23,12 @@ public class ProdutoEstoqueDAO {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
 
-            pstm.setFloat(1, insumosDeEstoque.getUnidadePorUnidade());
-            pstm.setFloat(2, insumosDeEstoque.getValor());
-            pstm.setString(3, insumosDeEstoque.getMarca());
-            pstm.setString(4, insumosDeEstoque.getCor());
-            pstm.setFloat(5, insumosDeEstoque.getQuantidadeDisponivel());
-            pstm.setString(6, insumosDeEstoque.getNome());
+            pstm.setFloat(1, materiaPrimaEstoque.getUnidadePorUnidade());
+            pstm.setFloat(2, materiaPrimaEstoque.getValor());
+            pstm.setString(3, materiaPrimaEstoque.getMarca());
+            pstm.setString(4, materiaPrimaEstoque.getCor());
+            pstm.setFloat(5, materiaPrimaEstoque.getQuantidadeDisponivel());
+            pstm.setString(6, materiaPrimaEstoque.getNome());
             
             pstm.executeUpdate();
             
@@ -45,9 +45,10 @@ public class ProdutoEstoqueDAO {
             }
         }
     }
-    public List<ProdutoEstoque> listarInsumos() {
-        String sql = "SELECT * FROM produtoEstoque";
-        List<ProdutoEstoque> insumos = new ArrayList<>();
+    public List<MateriaPrima> listarInsumos() {
+    	
+        String sql = "SELECT * FROM MateriaPrima";
+        List<MateriaPrima> insumos = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
         ResultSet rset = null; // Objeto que guarda o resultado da consulta
@@ -58,7 +59,7 @@ public class ProdutoEstoqueDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                ProdutoEstoque insumo = new ProdutoEstoque(sql, sql, sql, 0, 0, 0);
+                MateriaPrima insumo = new MateriaPrima(sql, sql, sql, 0, 0, 0);
                 insumo.setNome(rset.getString("nome"));
                 insumo.setMarca(rset.getString("marca"));
                 insumo.setCor(rset.getString("cor"));
@@ -78,8 +79,8 @@ public class ProdutoEstoqueDAO {
         return insumos;
     }
     
-    public void atualizarInsumos(ProdutoEstoque insumosDeEstoque) {
-        String sql = "UPDATE produtoEstoque SET nome = ?, marca = ?, cor = ?, valor = ?"
+    public void atualizarInsumos(MateriaPrima insumosDeEstoque) {
+        String sql = "UPDATE MateriaPrima SET nome = ?, marca = ?, cor = ?, valor = ?"
         		+ "unidadePorUnidade = ?, quantidadeDisponivel = ? WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -101,8 +102,8 @@ public class ProdutoEstoqueDAO {
         }
     }
     
-    public void excluirInsumos(ProdutoEstoque insumosDeEstoque) {
-        String sql = "DELETE FROM produtoEstoque WHERE nome = ?";
+    public void excluirInsumos(MateriaPrima insumosDeEstoque) {
+        String sql = "DELETE FROM MateriaPrima WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 

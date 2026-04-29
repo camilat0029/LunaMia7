@@ -25,7 +25,7 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 	private JTextField tfPercentualLucro;
 	private JTextField tfHorasPrevistas;
 	private JTextField tfQuantMaxDias;
-	private JTextField tfValorSemLuvro;
+	private JTextField tfValorSemLucro;
 	private JTextField tfValorLucro;
 	private JTextField tfTotalGastos;
 	private JTextField tfValorDeVenda;
@@ -50,22 +50,22 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		add(tfTituloOrcamento, "cell 2 2 3 1,growx");
 		tfTituloOrcamento.setColumns(10);
 		
-		JLabel lbNomeClienteCOFP = new JLabel("Nome do cliente");
-		lbNomeClienteCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbNomeClienteCOFP, "cell 2 4");
+		JLabel lbNomeCliente = new JLabel("Nome do cliente");
+		lbNomeCliente.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbNomeCliente, "cell 2 4");
 		
 		tfNomeCliente = new JTextField();
 		tfNomeCliente.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfNomeCliente.setColumns(10);
 		add(tfNomeCliente, "cell 2 5 3 1,growx");
 		
-		JLabel lbEmailCOFP = new JLabel("Email");
-		lbEmailCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbEmailCOFP, "cell 2 7");
+		JLabel lbEmail = new JLabel("Email");
+		lbEmail.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbEmail, "cell 2 7");
 		
-		JLabel lbContatoCOFP = new JLabel("Contato");
-		lbContatoCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbContatoCOFP, "cell 4 7");
+		JLabel lbContato = new JLabel("Contato");
+		lbContato.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbContato, "cell 4 7");
 		
 		tfEmail = new JTextField();
 		tfEmail.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -77,13 +77,13 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfContato.setColumns(10);
 		add(tfContato, "cell 4 8,growx");
 		
-		JLabel lbPrecoHoraCOFP = new JLabel("Preço da hora");
-		lbPrecoHoraCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPrecoHoraCOFP, "cell 2 10");
+		JLabel lbPrecoHora = new JLabel("Preço da hora");
+		lbPrecoHora.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbPrecoHora, "cell 2 10");
 		
-		JLabel lbPercentualLucroCOFP = new JLabel("Percentual de lucro");
-		lbPercentualLucroCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPercentualLucroCOFP, "cell 4 10");
+		JLabel lbPercentualLucro = new JLabel("Percentual de lucro");
+		lbPercentualLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbPercentualLucro, "cell 4 10");
 		
 		tfPrecoHora = new JTextField();
 		tfPrecoHora.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -95,25 +95,25 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfPercentualLucro.setColumns(10);
 		add(tfPercentualLucro, "cell 4 11,growx");
 		
-		JLabel lbMateriaisCOFP = new JLabel("Materiais");
-		lbMateriaisCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMateriaisCOFP, "cell 2 13");
+		JLabel lbMateriais = new JLabel("Materiais");
+		lbMateriais.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbMateriais, "cell 2 13");
 		
-		JPanel panelMateriaisCOFP = new JPanel();
-		panelMateriaisCOFP.setBackground(new Color(234, 219, 247));
-		add(panelMateriaisCOFP, "cell 2 14,grow");
+		JPanel panelMateriais = new JPanel();
+		panelMateriais.setBackground(new Color(234, 219, 247));
+		add(panelMateriais, "cell 2 14,grow");
 		
-		JComboBox cbMateriaisCOFP = new JComboBox();
-		cbMateriaisCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		panelMateriaisCOFP.add(cbMateriaisCOFP);
+		JComboBox cbMateriais = new JComboBox();
+		cbMateriais.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		panelMateriais.add(cbMateriais);
 		
-		JLabel lbHorasPrevistasCOFP = new JLabel("Horas previstas");
-		lbHorasPrevistasCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbHorasPrevistasCOFP, "cell 2 16");
+		JLabel lbHorasPrevistas = new JLabel("Horas previstas");
+		lbHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbHorasPrevistas, "cell 2 16");
 		
-		JLabel lbQuantMaxDiasCOFP = new JLabel("Quantidade máxima de dias");
-		lbQuantMaxDiasCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQuantMaxDiasCOFP, "cell 4 16");
+		JLabel lbQuantMaxDias = new JLabel("Quantidade máxima de dias");
+		lbQuantMaxDias.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbQuantMaxDias, "cell 4 16");
 		
 		tfHorasPrevistas = new JTextField();
 		tfHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -125,19 +125,19 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfQuantMaxDias.setColumns(10);
 		add(tfQuantMaxDias, "cell 4 17,growx");
 		
-		JLabel lbValorSemLucroCOFP = new JLabel("Valor sem lucro");
-		lbValorSemLucroCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorSemLucroCOFP, "cell 2 19");
+		JLabel lbValorSemLucro = new JLabel("Valor sem lucro");
+		lbValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValorSemLucro, "cell 2 19");
 		
-		JLabel lbValorLucroCOFP = new JLabel("Valor do lucro");
-		lbValorLucroCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorLucroCOFP, "cell 4 19");
+		JLabel lbValorLucro = new JLabel("Valor do lucro");
+		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValorLucro, "cell 4 19");
 		
-		tfValorSemLuvro = new JTextField();
-		tfValorSemLuvro.setText("R$");
-		tfValorSemLuvro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		tfValorSemLuvro.setColumns(10);
-		add(tfValorSemLuvro, "cell 2 20,growx");
+		tfValorSemLucro = new JTextField();
+		tfValorSemLucro.setText("R$");
+		tfValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		tfValorSemLucro.setColumns(10);
+		add(tfValorSemLucro, "cell 2 20,growx");
 		
 		tfValorLucro = new JTextField();
 		tfValorLucro.setText("R$");
@@ -145,13 +145,13 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfValorLucro.setColumns(10);
 		add(tfValorLucro, "cell 4 20,growx");
 		
-		JLabel lbTotalGastosCOFP = new JLabel("Total de gastos");
-		lbTotalGastosCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbTotalGastosCOFP, "cell 2 22");
+		JLabel lbTotalGastos = new JLabel("Total de gastos");
+		lbTotalGastos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbTotalGastos, "cell 2 22");
 		
-		JLabel lbValorDeVendaCOFP = new JLabel("Valor de venda");
-		lbValorDeVendaCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorDeVendaCOFP, "cell 4 22");
+		JLabel lbValorDeVenda = new JLabel("Valor de venda");
+		lbValorDeVenda.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValorDeVenda, "cell 4 22");
 		
 		tfTotalGastos = new JTextField();
 		tfTotalGastos.setText("R$");
@@ -165,13 +165,13 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfValorDeVenda.setColumns(10);
 		add(tfValorDeVenda, "cell 4 23,growx");
 		
-		JLabel lbDtPrevistaEntregaCOFP = new JLabel("Data prevista de entrega");
-		lbDtPrevistaEntregaCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbDtPrevistaEntregaCOFP, "cell 2 25");
+		JLabel lbDtPrevistaEntrega = new JLabel("Data prevista de entrega");
+		lbDtPrevistaEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbDtPrevistaEntrega, "cell 2 25");
 		
-		JLabel lbDtConfirmacaoPedidoCOFP = new JLabel("Data da confirmação do pedido");
-		lbDtConfirmacaoPedidoCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbDtConfirmacaoPedidoCOFP, "cell 4 25");
+		JLabel lbDtConfirmacaoPedido = new JLabel("Data da confirmação do pedido");
+		lbDtConfirmacaoPedido.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbDtConfirmacaoPedido, "cell 4 25");
 		
 		tfDtPrevistaEntrega = new JTextField();
 		tfDtPrevistaEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -183,21 +183,21 @@ public class CriarOrcamentoComFormaPagamento extends JPanel {
 		tfDtConfirmacaoPedido.setColumns(10);
 		add(tfDtConfirmacaoPedido, "cell 4 26,growx");
 		
-		JLabel lbFormaPagamentoCOFP = new JLabel("Forma de pagamento");
-		lbFormaPagamentoCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbFormaPagamentoCOFP, "cell 2 28");
+		JLabel lbFormaPagamento = new JLabel("Forma de pagamento");
+		lbFormaPagamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbFormaPagamento, "cell 2 28");
 		
-		JLabel lbValorFinalCOFP = new JLabel("Valor final");
-		lbValorFinalCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorFinalCOFP, "cell 4 28");
+		JLabel lbValorFinal = new JLabel("Valor final");
+		lbValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValorFinal, "cell 4 28");
 		
-		JPanel panelFormaPagamentoCOFP = new JPanel();
-		panelFormaPagamentoCOFP.setBackground(new Color(234, 219, 247));
-		add(panelFormaPagamentoCOFP, "cell 2 29,grow");
+		JPanel panelFormaPagamento = new JPanel();
+		panelFormaPagamento.setBackground(new Color(234, 219, 247));
+		add(panelFormaPagamento, "cell 2 29,grow");
 		
-		JComboBox cbFormaPagamentoCOFP = new JComboBox();
-		cbFormaPagamentoCOFP.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		panelFormaPagamentoCOFP.add(cbFormaPagamentoCOFP);
+		JComboBox cbFormaPagamento = new JComboBox();
+		cbFormaPagamento.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		panelFormaPagamento.add(cbFormaPagamento);
 		
 		tfValorFinal = new JTextField();
 		tfValorFinal.setText("R$");

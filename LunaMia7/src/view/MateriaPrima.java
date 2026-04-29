@@ -16,16 +16,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class ProdutoEstoque extends JPanel {
+public class MateriaPrima extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTable tabelaOrcamentos;
+	private JTable tabelaMateriaPrima;
 	private JButton btAdicionar;
 
 	/**
 	 * Create the panel.
 	 */
-	public ProdutoEstoque() {
+	public MateriaPrima() {
 		
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
@@ -49,11 +49,11 @@ public class ProdutoEstoque extends JPanel {
 		
 		String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", ""};
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-		tabelaOrcamentos = new JTable(modelo);
+		tabelaMateriaPrima = new JTable(modelo);
 		
 		//Estilização do cabeçalho
 		
-		JTableHeader header = tabelaOrcamentos.getTableHeader();
+		JTableHeader header = tabelaMateriaPrima.getTableHeader();
 		header.setBackground(new Color(234, 219, 247));
 		header.setForeground(new Color(103, 80, 125));
 		header.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -61,28 +61,28 @@ public class ProdutoEstoque extends JPanel {
 		
 		//Estilização das linhas e colunas
 		
-		tabelaOrcamentos.setRowHeight(35);
-		tabelaOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		tabelaOrcamentos.setGridColor(new Color(220, 220, 220));
-		tabelaOrcamentos.setShowVerticalLines(false);
-		tabelaOrcamentos.setSelectionBackground(new Color(193, 151, 232));
-		tabelaOrcamentos.setSelectionForeground(Color.WHITE);
+		tabelaMateriaPrima.setRowHeight(35);
+		tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		tabelaMateriaPrima.setGridColor(new Color(220, 220, 220));
+		tabelaMateriaPrima.setShowVerticalLines(false);
+		tabelaMateriaPrima.setSelectionBackground(new Color(193, 151, 232));
+		tabelaMateriaPrima.setSelectionForeground(Color.WHITE);
 		
 		scrollPane.setBorder(null);
-		tabelaOrcamentos.setBorder(null);
+		tabelaMateriaPrima.setBorder(null);
 		
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
 		center.setHorizontalAlignment(JLabel.CENTER);
 
-		tabelaOrcamentos.getColumnModel().getColumn(1).setCellRenderer(center);
-		tabelaOrcamentos.getColumnModel().getColumn(2).setCellRenderer(center);
+		tabelaMateriaPrima.getColumnModel().getColumn(1).setCellRenderer(center);
+		tabelaMateriaPrima.getColumnModel().getColumn(2).setCellRenderer(center);
 		
-		tabelaOrcamentos.getColumnModel().getColumn(0).setPreferredWidth(200); // Matérias Primas
-		tabelaOrcamentos.getColumnModel().getColumn(1).setPreferredWidth(200); // Quantidade
-		tabelaOrcamentos.getColumnModel().getColumn(2).setPreferredWidth(200); // Unidade de Medida
-		tabelaOrcamentos.getColumnModel().getColumn(3).setPreferredWidth(50);  // Botão / mais
+		tabelaMateriaPrima.getColumnModel().getColumn(0).setPreferredWidth(200); // Matérias Primas
+		tabelaMateriaPrima.getColumnModel().getColumn(1).setPreferredWidth(200); // Quantidade
+		tabelaMateriaPrima.getColumnModel().getColumn(2).setPreferredWidth(200); // Unidade de Medida
+		tabelaMateriaPrima.getColumnModel().getColumn(3).setPreferredWidth(50);  // Botão / mais
 				
-		scrollPane.setViewportView(tabelaOrcamentos);
+		scrollPane.setViewportView(tabelaMateriaPrima);
 				
 		
 	}
@@ -90,9 +90,5 @@ public class ProdutoEstoque extends JPanel {
 	public void adicionar(ActionListener actionListener) {
 		this.btAdicionar.addActionListener(actionListener);
 	}
-	//public void adicionarLinha(String tituloOrcamento, boolean status, String dataEntrega, String cliente, String mais) {
-	//	modelo.addRow(new Object[] {tituloOrcamento, status, dataEntrega, cliente, mais});
-		
-	//}
 
 }

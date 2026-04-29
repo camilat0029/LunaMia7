@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS `LunaMia`;
 
 CREATE DATABASE `LunaMia`;
 
-CREATE TABLE IF NOT EXISTS `LunaMia`.`ProdutoEstoque` (
+CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
   `id_estoque` INT AUTO_INCREMENT NOT NULL,
   `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'mililitro', 'unidade') NOT NULL,
   `valor` DECIMAL NOT NULL,

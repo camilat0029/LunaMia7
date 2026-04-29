@@ -96,17 +96,17 @@ public class CriarOrcamento extends JPanel {
 		panel.setBackground(new Color(234, 219, 247));
 		add(panel, "cell 2 14,grow");
 		
-		JComboBox cbMateriaisCO = new JComboBox();
-		cbMateriaisCO.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		panel.add(cbMateriaisCO);
+		JComboBox cbMateriais = new JComboBox();
+		cbMateriais.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		panel.add(cbMateriais);
 		
 		JLabel lbHorasPrevistas = new JLabel("Horas previstas");
 		lbHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbHorasPrevistas, "cell 2 16");
 		
-		JLabel lbQuantMaxDiasCO = new JLabel("Quantidade máxima de dias");
-		lbQuantMaxDiasCO.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(lbQuantMaxDiasCO, "cell 4 16");
+		JLabel lbQuantMaxDias = new JLabel("Quantidade máxima de dias");
+		lbQuantMaxDias.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		add(lbQuantMaxDias, "cell 4 16");
 		
 		tfHorasPrevistas = new JTextField();
 		tfHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 22));

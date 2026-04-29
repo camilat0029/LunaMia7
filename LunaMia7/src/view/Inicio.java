@@ -44,14 +44,11 @@ public class Inicio extends JPanel {
 		btCriarOrcamento = new JButton("Criar orçamento");
 		btCriarOrcamento.setBackground(new Color(193, 151, 232));
 		btCriarOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btCriarOrcamento, "cell 2 4 3 1,grow");
-		
-		
+		add(btCriarOrcamento, "cell 2 4 3 1,grow");		
 		
 		btCriarOrcamento.setBorderPainted(false);
 		btCriarEstoque.setBorderPainted(false);
 		btConfigurarPerfil.setBorderPainted(false);
-		
 		
 		
 		addComponentListener(new ComponentAdapter() {

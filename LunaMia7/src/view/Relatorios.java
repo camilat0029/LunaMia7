@@ -23,9 +23,9 @@ public class Relatorios extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		setLayout(new MigLayout("", "[grow][][][grow]", "[grow][][][][][][][][grow]"));
 		
-		JLabel lbVisualizeRelatorioa = new JLabel("Visualize seus relatórios a\r\n partir do primeiro mês!");
-		lbVisualizeRelatorioa.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbVisualizeRelatorioa, "cell 2 1");
+		JLabel lbVisualizeRelatorio = new JLabel("Visualize seus relatórios a\r\n partir do primeiro mês!");
+		lbVisualizeRelatorio.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbVisualizeRelatorio, "cell 2 1");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(193, 151, 232));

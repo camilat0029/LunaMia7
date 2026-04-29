@@ -9,6 +9,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,6 +29,7 @@ public class Login extends JPanel {
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("", "[grow][center][][center][267.00,center][grow]", "[grow][][][][][][][][][][][grow]"));
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		add(lblNewLabel, "cell 0 0");
@@ -123,6 +125,10 @@ public class Login extends JPanel {
 
 	public void setPfSenhaLogin(JPasswordField pfSenhaLogin) {
 		this.pfSenhaLogin = pfSenhaLogin;
+	}
+	
+	public String getTitulo() {
+		return "Login";
 	}
 	
 	
