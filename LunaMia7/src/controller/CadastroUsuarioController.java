@@ -165,9 +165,10 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		} else {
 			
 			emailPermitido(cadastroUsuario.getTfEmail().getText());
+			nomePermitido(cadastroUsuario.getTfNomeComp().getText());
 			
-			if(!emailPermitido(cadastroUsuario.getTfEmail().getText())) {
-				JOptionPane.showMessageDialog(null, "Email Inválido!", "Informação", 1);
+			if(!emailPermitido(cadastroUsuario.getTfEmail().getText()) || !nomePermitido(cadastroUsuario.getTfNomeComp().getText())) {
+				JOptionPane.showMessageDialog(null, "Email ou Nome Inválido!", "Informação", 1);
 			} else {
 				verificarEmail();
 				verificarUsuarioPerfil();
@@ -228,6 +229,12 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	public boolean emailPermitido(String email) {
 		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 		return email.matches(emailValido);
+	}
+	
+	//VALIDAÇÃO DE NOME
+	public boolean nomePermitido(String nome) {
+		String nomeValido = "^[A-Za-z.]+$";
+		return nome.matches(nomeValido);
 	}
 	
 	//VERIFICAÇÃO USUARIO REPETIDO
