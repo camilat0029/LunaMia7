@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.BorderLayout;
 
 public class TelaPrincipal extends JFrame {
@@ -42,8 +43,8 @@ public class TelaPrincipal extends JFrame {
 		
 
 	}
-	public void adicionarTela(String nome, JPanel tela){
-		this.panelTelas.add(tela, nome);
+	public void adicionarTela(String nome, Component componente){
+		this.panelTelas.add(componente, nome);
 	}
 	
 	public void mostrarTela(String nome) {

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -39,7 +40,8 @@ public class CriarOrcamentoAposCalcular extends JPanel {
 	 */
 	public CriarOrcamentoAposCalcular() {
 		setBackground(new Color(234, 219, 247));
-		setLayout(new MigLayout("", "[grow][][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][grow]"));
+		setPreferredSize(new Dimension(1020, 1123));
+		setLayout(new MigLayout("", "[grow][][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][grow]"));
 		
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");
 		lbTituloOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -177,7 +179,7 @@ public class CriarOrcamentoAposCalcular extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(234, 219, 247));
-		add(panel_2, "cell 3 27,grow");
+		add(panel_2, "cell 3 36,grow");
 		
 		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setBackground(new Color(193, 151, 232));
