@@ -5,66 +5,24 @@ public class MateriaPrima {
 	private String nome, marca,cor;
 	private float valor,unidadePorUnidade;
 	private int quantidadeDisponivel;
-	private enum UnidadeMedida{
+	private UnidadeMedida unidadeMedida;
+	
+	
+	private static final long serialVersionUID = 1L;
+	
+
+	public enum UnidadeMedida{
+		
 		
 		CENTIMETROS, METROS,UNIDADE,MILIMETROS,LITROS;
 		
-		private float centimetros,metros,milimetros,litros;
-		private int unidade;
-		
 		UnidadeMedida(){
-		
-			this.centimetros = centimetros;
-			this.metros = metros;
-			this.milimetros = milimetros;
-			this.litros = litros;
-			this.unidade = unidade;
-			
-		}
 
-		public float getCentimetros() {
-			return centimetros;
-		}
-
-		public void setCentimetros(float centimetros) {
-			this.centimetros = centimetros;
-		}
-
-		public float getMetros() {
-			return metros;
-		}
-
-		public void setMetros(float metros) {
-			this.metros = metros;
-		}
-
-		public float getMilimetros() {
-			return milimetros;
-		}
-
-		public void setMilimetros(float milimetros) {
-			this.milimetros = milimetros;
-		}
-
-		public float getLitros() {
-			return litros;
-		}
-
-		public void setLitros(float litros) {
-			this.litros = litros;
-		}
-
-		public int getUnidade() {
-			return unidade;
-		}
-
-		public void setUnidade(int unidade) {
-			this.unidade = unidade;
 		}
 		
 	}
 	public MateriaPrima(String nome, String marca, String cor, float valor, float unidadePorUnidade,
-			int quantidadeDisponivel) {
+			int quantidadeDisponivel, UnidadeMedida unidadeMedida) {
 		super();
 		this.nome = nome;
 		this.marca = marca;
@@ -72,7 +30,9 @@ public class MateriaPrima {
 		this.valor = valor;
 		this.unidadePorUnidade = unidadePorUnidade;
 		this.quantidadeDisponivel = quantidadeDisponivel;
+		this.unidadeMedida = unidadeMedida;
 	}
+	
 	
 	//métodos
 	
@@ -124,6 +84,18 @@ public class MateriaPrima {
 	public void setQuantidadeDisponivel(int quantidadeDisponivel) {
 		this.quantidadeDisponivel = quantidadeDisponivel;
 	}
+
+
+	public UnidadeMedida getUnidadeMedida() {
+		return unidadeMedida;
+	}
+
+
+	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
+	}
+	
+	
 	
 
 }

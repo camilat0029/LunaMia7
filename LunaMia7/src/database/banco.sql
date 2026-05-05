@@ -79,16 +79,16 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
   `id_orcamento` INT NOT NULL,
   `id_estoque` INT NOT NULL,
   PRIMARY KEY (`id_estoque`, `id_orcamento`),
-  INDEX `fk_Confirmacao_de_orcamento_has_ProdutoEstoque_ProdutoEstoq_idx` (`id_estoque` ASC),
-  INDEX `fk_Confirmacao_de_orcamento_has_ProdutoEstoque_Confirmacao__idx` (`id_orcamento` ASC),
-  CONSTRAINT `fk_Confirmacao_de_orcamento_has_ProdutoEstoque_Confirmacao_de1`
+  INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_MateriaPrima_idx` (`id_estoque` ASC),
+  INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_Confirmacao__idx` (`id_orcamento` ASC),
+  CONSTRAINT `fk_Confirmacao_de_orcamento_has_MateriaPrima_Confirmacao_de1`
     FOREIGN KEY (`id_orcamento`)
     REFERENCES `LunaMia`.`Confirmacao_de_orcamento` (`id_orcamento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Confirmacao_de_orcamento_has_ProdutoEstoque_ProdutoEstoque1`
+  CONSTRAINT `fk_Confirmacao_de_orcamento_has_MateriaPrima_MateriaPrima1`
     FOREIGN KEY (`id_estoque`)
-    REFERENCES `LunaMia`.`ProdutoEstoque` (`id_estoque`)
+    REFERENCES `LunaMia`.`MateriaPrima` (`id_estoque`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION); 
     
@@ -99,6 +99,4 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47) 99955-4433', 'emanuela.z', 'Emanuela', 30, 'Ilhota', 'SC', 30),
     ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47) 99987-6543', 'lara.cs', 'Lara', 25, 'Gaspar', 'SC',  3);
     
-    select * from Perfil_Usuario
-    
-   
+    select * from Perfil_Usuario;

@@ -6,6 +6,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JComboBox;
@@ -22,6 +23,9 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	private JTextField tfCor;
 	private JTextField tfQtdUnidade;
 	private JLabel lbIconeVoltar;
+	JButton btConfirmar;
+	
+	private JComboBox<model.MateriaPrima.UnidadeMedida> cbUnidadeMedida;
 
 	/**
 	 * Create the panel.
@@ -87,9 +91,10 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQtdUnidade, "cell 4 13");
 		
-		JComboBox cbUnidadeMed = new JComboBox();
-		cbUnidadeMed.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
-		add(cbUnidadeMed, "cell 2 14,growx");
+		cbUnidadeMedida = new JComboBox<>(model.MateriaPrima.UnidadeMedida.values());		
+		cbUnidadeMedida.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		add(cbUnidadeMedida, "cell 2 14,growx");
+
 		
 		tfQtdUnidade = new JTextField();
 		tfQtdUnidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
@@ -100,9 +105,9 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		panel.setBackground(new Color(234, 219, 247));
 		add(panel, "cell 2 16 3 1,grow");
 		
-		JButton btConfirmar = new JButton("Confirmar");
+		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setBackground(new Color(193, 151, 232));
-		btConfirmar.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 25));
+		btConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panel.add(btConfirmar);
 		
 		btConfirmar.setBorderPainted(false);
@@ -116,6 +121,67 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	public void voltar(MouseListener mouseListener) {
 		this.lbIconeVoltar.addMouseListener(mouseListener);
 	}
+	
+	public void confirmar(ActionListener actionListener) {
+		this.btConfirmar.addActionListener(actionListener);
+	}
+
+	public JTextField getTfNomeMateriaPrima() {
+		return tfNomeMateriaPrima;
+	}
+
+	public void setTfNomeMateriaPrima(JTextField tfNomeMateriaPrima) {
+		this.tfNomeMateriaPrima = tfNomeMateriaPrima;
+	}
+
+	public JTextField getTfValor() {
+		return tfValor;
+	}
+
+	public void setTfValor(JTextField tfValor) {
+		this.tfValor = tfValor;
+	}
+
+	public JTextField getTfQtdDisponivel() {
+		return tfQtdDisponivel;
+	}
+
+	public void setTfQtdDisponivel(JTextField tfQtdDisponivel) {
+		this.tfQtdDisponivel = tfQtdDisponivel;
+	}
+
+	public JTextField getTfMarca() {
+		return tfMarca;
+	}
+
+	public void setTfMarca(JTextField tfMarca) {
+		this.tfMarca = tfMarca;
+	}
+
+	public JTextField getTfCor() {
+		return tfCor;
+	}
+
+	public void setTfCor(JTextField tfCor) {
+		this.tfCor = tfCor;
+	}
+
+	public JTextField getTfQtdUnidade() {
+		return tfQtdUnidade;
+	}
+
+	public void setTfQtdUnidade(JTextField tfQtdUnidade) {
+		this.tfQtdUnidade = tfQtdUnidade;
+	}
+
+	public JComboBox<model.MateriaPrima.UnidadeMedida> getCbUnidadeMedida() {
+		return cbUnidadeMedida;
+	}
+
+	public void setCbUnidadeMedida(JComboBox<model.MateriaPrima.UnidadeMedida> cbUnidadeMedida) {
+		this.cbUnidadeMedida = cbUnidadeMedida;
+	}
+	
 	
 	
 

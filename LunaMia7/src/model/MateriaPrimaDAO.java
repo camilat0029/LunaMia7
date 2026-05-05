@@ -59,7 +59,7 @@ public class MateriaPrimaDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                MateriaPrima insumo = new MateriaPrima(sql, sql, sql, 0, 0, 0);
+                MateriaPrima insumo = new MateriaPrima(sql, sql, sql, 0, 0, 0, null);
                 insumo.setNome(rset.getString("nome"));
                 insumo.setMarca(rset.getString("marca"));
                 insumo.setCor(rset.getString("cor"));

@@ -13,8 +13,8 @@ public class NavegadorTelas {
 		this.telaPrincipal = telaPrincipal;
 	}
 
-	public void adicionarPainel(String nome, JPanel tela) {
-		this.telaPrincipal.adicionarTela(nome, tela);
+	public void adicionarPainel(String nome, java.awt.Component componente) {
+		this.telaPrincipal.adicionarTela(nome, componente);
 	}
 
 	public void navegarTela(String nome) {

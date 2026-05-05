@@ -48,7 +48,7 @@ public class Menu {
 			removerMenu();
 		});
 		this.mnExp.estoque(e -> {
-			navegadorTelas.navegarTela("PRODUTO_ESTOQUE");
+			navegadorTelas.navegarTela("MATERIA_PRIMA");
 		});
 		this.mnExp.inicio(e -> {
 			navegadorTelas.navegarTela("INICIO");

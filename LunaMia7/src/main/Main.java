@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.JScrollPane;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
@@ -11,6 +12,7 @@ import controller.CadastroUsuarioController;
 import controller.InicioController;
 import controller.LoginController;
 import controller.MateriaPEstoqueController;
+import controller.MateriaPrimaController;
 import controller.Menu;
 import controller.NavegadorTelas;
 import controller.OrcamentoController;
@@ -97,7 +99,9 @@ public class Main {
 		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrima, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
+		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque);
 		
+		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
@@ -106,7 +110,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("CADASTRO_MATERIA_PRIMA", cadastroMateriaPrimaEstoque);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", configurarPerfiAposCadastrar);
-		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO",criarOrcamento );
+		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO", scrollPaneOrcamento );
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_APOS_CALCULAR", criarOrcamentoAposCalcular);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_COM_FORMA_PAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
@@ -119,7 +123,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrima);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
-		navegadorTelas.navegarTela("LOGIN");
+		navegadorTelas.navegarTela("MATERIA_PRIMA");
 
 		menu.iniciar();
 
