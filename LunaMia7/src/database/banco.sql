@@ -36,14 +36,13 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `id_orcamento` INT AUTO_INCREMENT NOT NULL,
   `tituloPedido` VARCHAR(45) NOT NULL,
-  `statusPedido` ENUM('Concluido', 'Andamento', 'Pendente') NOT NULL,
+  `statusPedido` ENUM('concluido', 'andamento', 'pendente') NOT NULL,
   `precoHora` DECIMAL NOT NULL,
   `quantHrs` DECIMAL NOT NULL,
   `quantDiasPedido` INT NOT NULL,
   `Perfil_Usuario_email` VARCHAR(64) NOT NULL,
   `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,
   `Cliente_id_cliente` INT NOT NULL,
-  `descricao` VARCHAR(500) NULL,
   PRIMARY KEY (`id_orcamento`),
   
   INDEX `fk_Orcamento_Perfil_Usuario1_idx` (`Perfil_Usuario_email` ASC) ,

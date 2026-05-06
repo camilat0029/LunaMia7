@@ -19,6 +19,7 @@ import controller.OrcamentoController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import model.OrcamentoDAO;
+import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
@@ -34,7 +35,7 @@ import view.Login;
 import view.MenuContraido;
 import view.MenuExpandido;
 import view.Orcamentos;
-import view.MateriaPrima;
+import view.MateriaPrimaView;
 import view.RedefinirSenha;
 import view.RelatorioGastos;
 import view.RelatorioHorasTrabalhadas;
@@ -67,6 +68,7 @@ public class Main {
 		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
+		MateriaPrima materiaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
 		
 		//VIEW
 		Login login = new Login();
@@ -82,7 +84,7 @@ public class Main {
 		Relatorios relatorios = new Relatorios();
 		MenuContraido menuCont = new MenuContraido();
 		MenuExpandido menuExp = new MenuExpandido();
-		MateriaPrima materiaPrima = new MateriaPrima();
+		MateriaPrimaView materiaPrimaView = new MateriaPrimaView();
 		RelatorioLucros relatorioLucros = new RelatorioLucros();
 		RelatorioHorasTrabalhadas relatorioHorasTrabalhadas = new RelatorioHorasTrabalhadas();
 		RelatorioGastos relatorioGastos = new RelatorioGastos();
@@ -96,10 +98,10 @@ public class Main {
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu);
-		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrima, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
+		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrimaView, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
-		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque);
+		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque, materiaPrimaView);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
@@ -120,7 +122,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("RELATORIO_HORAS_TRABALHADAS", relatorioHorasTrabalhadas);
 		navegadorTelas.adicionarPainel("RELATORIO_GASTOS", relatorioGastos);
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
-		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrima);
+		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrimaView);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
 		navegadorTelas.navegarTela("MATERIA_PRIMA");

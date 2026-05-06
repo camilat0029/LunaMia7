@@ -50,8 +50,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValor, "cell 2 4");
 		
-		tfValor = new JTextField();
-		tfValor.setText("R$");
+				tfValor = new JTextField();
 		tfValor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfValor, "cell 2 5 3 1,growx");
 		tfValor.setColumns(10);
@@ -92,12 +91,11 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		add(lbQtdUnidade, "cell 4 13");
 		
 		cbUnidadeMedida = new JComboBox<>(model.MateriaPrima.UnidadeMedida.values());		
-		cbUnidadeMedida.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		cbUnidadeMedida.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbUnidadeMedida, "cell 2 14,growx");
-
 		
 		tfQtdUnidade = new JTextField();
-		tfQtdUnidade.setFont(new Font("Bodoni Bk BT", Font.PLAIN, 22));
+		tfQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfQtdUnidade, "cell 4 14,growx");
 		tfQtdUnidade.setColumns(10);
 		

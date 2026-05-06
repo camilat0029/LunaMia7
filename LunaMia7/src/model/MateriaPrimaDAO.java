@@ -14,7 +14,8 @@ public class MateriaPrimaDAO {
 		
 		String sql = "INSERT INTO MateriaPrima (unidadeMedida,"
 				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade)"
-				+ "VALUES (?,?,?,?,?,?,?,?)";
+				+ "VALUES (?,?,?,?,?,?,?)";
+	
 		
 		Connection conexao = null;
 		PreparedStatement pstm = null;
@@ -23,12 +24,13 @@ public class MateriaPrimaDAO {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
 
-            pstm.setFloat(1, materiaPrimaEstoque.getUnidadePorUnidade());
+            pstm.setString(1, materiaPrimaEstoque.getUnidadeMedida().name().toLowerCase());
             pstm.setFloat(2, materiaPrimaEstoque.getValor());
             pstm.setString(3, materiaPrimaEstoque.getMarca());
             pstm.setString(4, materiaPrimaEstoque.getCor());
             pstm.setFloat(5, materiaPrimaEstoque.getQuantidadeDisponivel());
             pstm.setString(6, materiaPrimaEstoque.getNome());
+            pstm.setFloat(7, materiaPrimaEstoque.getQtdPorUnidade());
             
             pstm.executeUpdate();
             
@@ -48,7 +50,7 @@ public class MateriaPrimaDAO {
     public List<MateriaPrima> listarInsumos() {
     	
         String sql = "SELECT * FROM MateriaPrima";
-        List<MateriaPrima> insumos = new ArrayList<>();
+        List<MateriaPrima> materiasPrimas = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
         ResultSet rset = null; // Objeto que guarda o resultado da consulta
@@ -59,63 +61,65 @@ public class MateriaPrimaDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                MateriaPrima insumo = new MateriaPrima(sql, sql, sql, 0, 0, 0, null);
-                insumo.setNome(rset.getString("nome"));
-                insumo.setMarca(rset.getString("marca"));
-                insumo.setCor(rset.getString("cor"));
-                insumo.setUnidadePorUnidade(rset.getFloat(0));
-                insumo.setQuantidadeDisponivel(rset.getInt(0));
-                insumo.setValor(rset.getFloat(0));
-
-                insumos.add(insumo);
+                MateriaPrima materiaPrima = new MateriaPrima(sql, sql, sql, 0, 0, 0, null);
+                materiaPrima.setNome(rset.getString("nome"));
+                materiaPrima.setMarca(rset.getString("marca"));
+                materiaPrima.setCor(rset.getString("cor"));
+                materiaPrima.setQtdPorUnidade(rset.getFloat("qtdPorUnidade"));
+                materiaPrima.setQuantidadeDisponivel(rset.getInt("qtdDisponivel"));
+                materiaPrima.setValor(rset.getFloat("valor"));
+                materiaPrima.setUnidadeMedida(MateriaPrima.UnidadeMedida.valueOf(rset.getString("unidadeMedida").toLowerCase()));
+    
+                materiasPrimas.add(materiaPrima);
                 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
- //       	BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
             // Fechar recursos
         }
-        return insumos;
+        return materiasPrimas;
     }
     
-    public void atualizarInsumos(MateriaPrima insumosDeEstoque) {
-        String sql = "UPDATE MateriaPrima SET nome = ?, marca = ?, cor = ?, valor = ?"
-        		+ "unidadePorUnidade = ?, quantidadeDisponivel = ? WHERE nome = ?";
+    public void atualizarMateriasPrimas(MateriaPrima materiaPrima) {
+        String sql = "UPDATE MateriaPrima SET nome = ?, marca = ?, cor = ?, valor = ?,"
+        		+ "qtdPorUnidade = ?, quantidadeDisponivel = ?, unidadeMedida =? WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setString(1, insumosDeEstoque.getNome());
-            pstm.setString(2, insumosDeEstoque.getMarca());
-            pstm.setString(3, insumosDeEstoque.getCor());
-            pstm.setFloat(4,insumosDeEstoque.getValor());
-            pstm.setFloat(5, insumosDeEstoque.getUnidadePorUnidade());
-            pstm.setInt(6, insumosDeEstoque.getQuantidadeDisponivel());
+            pstm.setString(1, materiaPrima.getNome());
+            pstm.setString(2, materiaPrima.getMarca());
+            pstm.setString(3, materiaPrima.getCor());
+            pstm.setFloat(4,materiaPrima.getValor());
+            pstm.setFloat(5, materiaPrima.getQtdPorUnidade());
+            pstm.setInt(6, materiaPrima.getQuantidadeDisponivel());
+            pstm.setString(7, materiaPrima.getUnidadeMedida().name().toLowerCase());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
         }
     }
     
-    public void excluirInsumos(MateriaPrima insumosDeEstoque) {
+    public void excluirMateriasPrimas(MateriaPrima materiasPrimas) {
         String sql = "DELETE FROM MateriaPrima WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
-            pstm.setString(1, insumosDeEstoque.getNome());
+            pstm.setString(1, materiasPrimas.getNome());
 
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
         }
     }
 	

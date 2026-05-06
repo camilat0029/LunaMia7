@@ -3,32 +3,42 @@ package model;
 public class MateriaPrima {
 	
 	private String nome, marca,cor;
-	private float valor,unidadePorUnidade;
+	private float valor,qtdPorUnidade;
 	private int quantidadeDisponivel;
 	private UnidadeMedida unidadeMedida;
 	
 	
 	private static final long serialVersionUID = 1L;
 	
-
 	public enum UnidadeMedida{
 		
+		METRO("Metros"),
+		CENTIMETRO("Centímetros"),
+		LITRO("Litros"),
+		MILIMETRO("Milímetros"),
+		UNIDADE("Unidade");
 		
-		CENTIMETROS, METROS,UNIDADE,MILIMETROS,LITROS;
+		private String unidMed;
 		
-		UnidadeMedida(){
-
+		UnidadeMedida(String unidMed){
+			this.unidMed=unidMed;
+		}
+		
+		@Override 
+		public String toString() {
+			return unidMed;
 		}
 		
 	}
-	public MateriaPrima(String nome, String marca, String cor, float valor, float unidadePorUnidade,
+	
+	public MateriaPrima(String nome, String marca, String cor, float valor, float qtdPorUnidade,
 			int quantidadeDisponivel, UnidadeMedida unidadeMedida) {
 		super();
 		this.nome = nome;
 		this.marca = marca;
 		this.cor = cor;
 		this.valor = valor;
-		this.unidadePorUnidade = unidadePorUnidade;
+		this.qtdPorUnidade = qtdPorUnidade;
 		this.quantidadeDisponivel = quantidadeDisponivel;
 		this.unidadeMedida = unidadeMedida;
 	}
@@ -36,15 +46,6 @@ public class MateriaPrima {
 	
 	//métodos
 	
-	public void adicionarInsumos() {
-		
-	}
-	public void atualizarInsumos() {
-		
-	}
-	public void excluirInsumos(){
-		
-	}
 	
 	//getters and setters
 	
@@ -72,11 +73,11 @@ public class MateriaPrima {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	public float getUnidadePorUnidade() {
-		return unidadePorUnidade;
+	public float getQtdPorUnidade() {
+		return qtdPorUnidade;
 	}
-	public void setUnidadePorUnidade(float unidadePorUnidade) {
-		this.unidadePorUnidade = unidadePorUnidade;
+	public void setQtdPorUnidade(float qtdPorUnidade) {
+		this.qtdPorUnidade = qtdPorUnidade;
 	}
 	public int getQuantidadeDisponivel() {
 		return quantidadeDisponivel;

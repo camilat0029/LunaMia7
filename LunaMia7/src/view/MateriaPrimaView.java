@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class MateriaPrima extends JPanel {
+public class MateriaPrimaView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable tabelaMateriaPrima;
@@ -25,7 +25,7 @@ public class MateriaPrima extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MateriaPrima() {
+	public MateriaPrimaView() {
 		
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
