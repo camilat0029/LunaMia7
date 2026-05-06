@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.Dimension;
 
+import model.Cliente;
+import model.ClienteDAO;
 import model.OrcamentoDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
@@ -14,18 +16,21 @@ public class OrcamentoController {
 	private Menu menu;
 	private TelaPrincipal telaPrincipal;
 	private OrcamentoDAO orcamentoDAO;
+	private ClienteDAO clienteDAO;
 	private NavegadorTelas navegadorTelas;
 	private Orcamentos orcamentos;
 	private CriarOrcamento criarOrcamento;
 
 	public OrcamentoController(OrcamentoDAO orcamentoDAO, TelaPrincipal telaPrincipal, Menu menu,
-			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento) {
+			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento,
+			ClienteDAO clienteDAO) {
 		this.orcamentoDAO = orcamentoDAO;
 		this.telaPrincipal = telaPrincipal;
 		this.menu = menu;
 		this.navegadorTelas = navegadorTelas;
 		this.orcamentos = orcamentos;
 		this.criarOrcamento = criarOrcamento;
+		this.clienteDAO = clienteDAO;
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -39,6 +44,10 @@ public class OrcamentoController {
 				
 			}
 			
+		});
+		
+		this.criarOrcamento.salvarValor(e -> {
+			salvarInformacoes();
 		});
 		
 	}
@@ -61,10 +70,21 @@ public class OrcamentoController {
 		criarOrcamento.getLbGastos().setVisible(false);
 		criarOrcamento.getLbValorLucro().setVisible(false);
 		
+		criarOrcamento.getLbDtConfPedido().setVisible(false);
+		criarOrcamento.getTfDataConfPedido().setVisible(false);
+		criarOrcamento.getLbDtPrevEntrega().setVisible(false);
+		criarOrcamento.getTfDtPrevEntrega().setVisible(false);
+		
+		criarOrcamento.getLbFormaPaga().setVisible(false);
+		criarOrcamento.getCbFormaPaga().setVisible(false);
+		criarOrcamento.getLbValorFinal().setVisible(false);
+		criarOrcamento.getTfValorFinal().setVisible(false);
+		
 		criarOrcamento.getBtConfirmar().setVisible(false);
+		criarOrcamento.getBtSalvar().setVisible(false);
 		
 		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020,640));
+		criarOrcamento.setPreferredSize(new Dimension(1020,790));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 	}
@@ -72,10 +92,11 @@ public class OrcamentoController {
 	//CALCULANDO VALORES
 	public void calcular() {
 		
-		criarOrcamento.setPreferredSize(new Dimension(1020,890));
+		criarOrcamento.setPreferredSize(new Dimension(1020,1010));
 		
 		criarOrcamento.getTfQuantMaxDias().setEditable(false);
 		criarOrcamento.getTfHorasPrevistas().setEditable(false);
+		criarOrcamento.getTfCustoAdicional().setEditable(false);
 		
 		criarOrcamento.getLbValorCalcSemLucro().setVisible(true);
 		criarOrcamento.getLbValorCalVenda().setVisible(true);
@@ -87,7 +108,7 @@ public class OrcamentoController {
 		criarOrcamento.getLbGastos().setVisible(true);
 		criarOrcamento.getLbValorLucro().setVisible(true);
 		
-		criarOrcamento.getBtConfirmar().setVisible(true);
+		criarOrcamento.getBtSalvar().setVisible(true);
 
 		criarOrcamento.getBtCalcEdi().setText("Editar");
 		
@@ -98,6 +119,36 @@ public class OrcamentoController {
 	public void editarValores() {
 		
 		criarOrcamento.getBtCalcEdi().setText("Calcular");
+	}
+	
+	public void salvarInformacoes() {
+		
+		criarOrcamento.setPreferredSize(new Dimension(1020,1310));
+		
+		criarOrcamento.getLbDtConfPedido().setVisible(true);
+		criarOrcamento.getTfDataConfPedido().setVisible(true);
+		criarOrcamento.getLbDtPrevEntrega().setVisible(true);
+		criarOrcamento.getTfDtPrevEntrega().setVisible(true);
+		
+		criarOrcamento.getLbFormaPaga().setVisible(true);
+		criarOrcamento.getCbFormaPaga().setVisible(true);
+		criarOrcamento.getLbValorFinal().setVisible(true);
+		criarOrcamento.getTfValorFinal().setVisible(true);
+		
+		criarOrcamento.getBtConfirmar().setVisible(true);
+		criarOrcamento.getBtCalcEdi().setVisible(false);
+		criarOrcamento.getBtSalvar().setVisible(false);
+		
+		//Do cliente
+//		Cliente cliente = new Cliente(null, null, null);
+//		
+//		cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
+//		cliente.setEmail(criarOrcamento.getTfEmail().getText());
+//		cliente.setTelefone(criarOrcamento.getTfContato().getText());
+//		
+		//clienteDAO.adicionarDados(cliente);
+		
+		//Demais informações de cálculo
 	}
 	
 	

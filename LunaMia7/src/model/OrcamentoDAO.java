@@ -15,8 +15,8 @@ public class OrcamentoDAO {
 
 	public void adicionarDados(Orcamento orcamento) {
 
-		String sql = "INSERT INTO orcamento (tituloPedido, statusPedido, precoHora, "
-				+ " quantHrs, quantDiasPedido, descricao) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO Orcamento (tituloPedido, statusPedido, precoHora, "
+				+ " quantHrs, quantDiasPedido) VALUES (?,?,?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -24,8 +24,8 @@ public class OrcamentoDAO {
 			conexao = BancoDeDados.conectar();
 			pstm = conexao.prepareStatement(sql);
 			pstm.setString(1, orcamento.getTituloPedido());
-			// pstm.setString(2, orcamento.getStatus());
-			pstm.setString(6, orcamento.getDescricaoPedido());
+			pstm.setString(2, orcamento.getStatus().name());
+			pstm.setFloat(3, orcamento.getPrecoHora());
 			pstm.setFloat(4, orcamento.getQuantHorasPrevistas());
 			pstm.setFloat(5, orcamento.getMaxDias());
 
@@ -33,7 +33,7 @@ public class OrcamentoDAO {
 			e.printStackTrace();
 		} finally {
 
-			// BancoDeDados.desconectar(conexao);
+			BancoDeDados.desconectar(conexao);
 			if (pstm != null) {
 				try {
 					pstm.close();
@@ -45,7 +45,7 @@ public class OrcamentoDAO {
 	}
 
 	public List<Orcamento> listarOrcamentos() {
-		String sql = "SELECT * FROM orcamento";
+		String sql = "SELECT * FROM Orcamento";
 		List<Orcamento> orcamentos = new ArrayList<>();
 		Connection conexao = null;
 		PreparedStatement pstm = null;
@@ -58,41 +58,46 @@ public class OrcamentoDAO {
 
 			while (rset.next()) {
 
-				Orcamento orcamento = new Orcamento(sql, sql, sql, 0, 0, null, null);
+				Orcamento orcamento = new Orcamento(sql, sql, 0, 0, 0, null, null, null);
 				orcamento.setTituloPedido(rset.getString("tituloPedido"));
-				orcamento.setTituloPedido("tituloPedido");
-				orcamento.setQuantHorasPrevistas(0);
-				orcamento.setMaxDias(0);
-				orcamento.setDescricaoPedido("descricao");
+				orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido")));
+				orcamento.setPrecoHora(rset.getFloat("precoHora"));
+				orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
+				orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
 				orcamentos.add(orcamento);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-//			BancoDeDados.desconectar(conexao);
+			BancoDeDados.desconectar(conexao);
 			// Fechar recursos
 		}
 		return orcamentos;
     }
 	
+	//ARRUMAR
 	 public void atualizarOrcamentoe(Orcamento orcamento) {
-	        String sql = "UPDATE Orcamento SET tituloPedido = ?, QuantHorasPrevistas = ?,"
-	        		+ " maxDias = ?, descricaoPedido = ? WHERE tituloPedido = ?";
+	        String sql = "UPDATE Orcamento SET tituloPedido = ?, statusPedido = ?, precoHora = ?, quantHrs = ?,"
+	        		+ " quantDiasPedido = ? WHERE id_orcamento = ?";
 	        Connection conexao = null;
 	        PreparedStatement pstm = null;
 
 	        try {
 	            conexao = BancoDeDados.conectar();
 	            pstm = conexao.prepareStatement(sql);
-				orcamento.setTituloPedido("tituloPedido");
-				orcamento.setQuantHorasPrevistas(0);
-				orcamento.setMaxDias(0);
-				orcamento.setDescricaoPedido("descricao");
+				pstm.setString(1, orcamento.getTituloPedido());
+				pstm.setString(2, orcamento.getStatus().name().toLowerCase());
+				pstm.setFloat(3, orcamento.getPrecoHora());
+				pstm.setFloat(4, orcamento.getQuantHorasPrevistas());
+				pstm.setInt(5, orcamento.getMaxDias());
+				//pstm.setString(6, orcamento.get);
+	            
+	            
 	            pstm.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        } finally {
-	        	//BancoDeDados.desconectar(conexao);
+	        	BancoDeDados.desconectar(conexao);
 	        }
 	    }
 	    
@@ -109,7 +114,7 @@ public class OrcamentoDAO {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        } finally {
-	        	//BancoDeDados.desconectar(conexao);
+	        	BancoDeDados.desconectar(conexao);
 	        }
 	    }
 	

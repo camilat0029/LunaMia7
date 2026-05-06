@@ -16,29 +16,33 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.DefaultComboBoxModel;
 
 public class CriarOrcamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField tituloOrcamento;
-	private JTextField tfNomeCliente;
-	private JTextField tfEmail;
-	private JTextField tfContato;
-	private JTextField tfHorasPrevistas;
-	private JTextField tfQuantMaxDias;
+	
+	private JTextField tituloOrcamento, tfNomeCliente, tfEmail, tfContato,tfHorasPrevistas, tfQuantMaxDias;
+	private JTextField tfDataConfPedido, tfDtPrevEntrega, tfValorFinal, tfCustoAdicional;
+	
 	private JLabel lbPrecoHoraUsuario, lbPercLucroUsuario, lbValorCalcSemLucro, lbCalcLucro, lbCalcGastos, lbValorCalVenda;
-	private JLabel lbValorSemLucro, lbValorLucro, lbGastos, lbValorVenda;
-	private JButton btCalcEdi;
-	private JButton btConfirmar;
+	private JLabel lbValorSemLucro, lbValorLucro, lbGastos, lbValorVenda, lbDtConfPedido, lbDtPrevEntrega;
+	private JLabel lbFormaPaga, lbValorFinal, lbCustoAdicional, lbStatus;
+	
+	private JButton btCalcEdi, btSalvar, btConfirmar;
+	
+	private JComboBox cbFormaPaga;
+	
+	private JComboBox<model.Orcamento.Status> cbStatus;
 
 	/**
 	 * Create the panel.
 	 */
 	public CriarOrcamento() {
 		setBackground(new Color(239, 239, 239));
-		setPreferredSize(new Dimension(1020, 890));
+		setPreferredSize(new Dimension(1020, 1117));
 		
-		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 15", "[grow][207.00,grow][][207.00,grow][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][][][][][][grow]"));
 		
 		
 		
@@ -99,7 +103,7 @@ public class CriarOrcamento extends JPanel {
 		add(lblMateriais, "cell 1 9");
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(234, 219, 247));
+		panel.setBackground(new Color(239, 239, 239));
 		add(panel, "cell 1 10,grow");
 		
 		JComboBox cbMateriais = new JComboBox();
@@ -124,49 +128,109 @@ public class CriarOrcamento extends JPanel {
 		tfQuantMaxDias.setColumns(10);
 		add(tfQuantMaxDias, "cell 3 12,growx");
 		
+		lbCustoAdicional = new JLabel("Custo Adicional");
+		lbCustoAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbCustoAdicional, "cell 1 13");
+		
+		lbStatus = new JLabel("Status do Pedido");
+		lbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbStatus, "cell 3 13");
+		
+		tfCustoAdicional = new JTextField();
+		tfCustoAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfCustoAdicional, "cell 1 14,growx");
+		tfCustoAdicional.setColumns(10);
+		
+		cbStatus = new JComboBox();
+		cbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(cbStatus, "cell 3 14,growx");
+		
 		btCalcEdi = new JButton("Calcular");
 		btCalcEdi.setBackground(new Color(193, 151, 232));
 		btCalcEdi.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btCalcEdi, "cell 2 13,growx,aligny center");
+		add(btCalcEdi, "cell 2 15,growx,aligny center");
 		
 		lbValorSemLucro = new JLabel("Valor sem lucro");
 		lbValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorSemLucro, "cell 1 14");
+		add(lbValorSemLucro, "cell 1 16");
 		
 		lbValorLucro = new JLabel("Valor do lucro");
 		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorLucro, "cell 3 14");
+		add(lbValorLucro, "cell 3 16");
 		
 		lbValorCalcSemLucro = new JLabel("R$");
-		lbValorCalcSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorCalcSemLucro, "cell 1 15");
+		lbValorCalcSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbValorCalcSemLucro, "cell 1 17");
 		
 		lbCalcLucro = new JLabel("R$");
-		lbCalcLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCalcLucro, "cell 3 15");
+		lbCalcLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbCalcLucro, "cell 3 17");
 		
 		lbGastos = new JLabel("Total de Gastos");
 		lbGastos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbGastos, "cell 1 16");
+		add(lbGastos, "cell 1 18");
 		
 		lbValorVenda = new JLabel("Valor de venda");
 		lbValorVenda.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorVenda, "cell 3 16");
+		add(lbValorVenda, "cell 3 18");
 		
 		lbCalcGastos = new JLabel("R$");
-		lbCalcGastos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCalcGastos, "cell 1 17");
+		lbCalcGastos.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbCalcGastos, "cell 1 19");
 		
 		lbValorCalVenda = new JLabel("R$");
-		lbValorCalVenda.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorCalVenda, "cell 3 17");
+		lbValorCalVenda.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbValorCalVenda, "cell 3 19");
+		
+		btSalvar = new JButton("Salvar");
+		btSalvar.setBackground(new Color(193, 151, 232));
+		btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(btSalvar, "cell 2 20,growx");
+		
+		
+		lbDtConfPedido = new JLabel("Data de confirmação do pedido");
+		lbDtConfPedido.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbDtConfPedido, "cell 1 21");
+		
+		lbDtPrevEntrega = new JLabel("Data prevista de entrega");
+		lbDtPrevEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbDtPrevEntrega, "cell 3 21");
+		
+		tfDataConfPedido = new JTextField();
+		tfDataConfPedido.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfDataConfPedido, "cell 1 22,growx");
+		tfDataConfPedido.setColumns(10);
+		
+		tfDtPrevEntrega = new JTextField();
+		tfDtPrevEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfDtPrevEntrega, "cell 3 22,growx");
+		tfDtPrevEntrega.setColumns(10);
+		
+		lbFormaPaga = new JLabel("Forma de pagamento");
+		lbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbFormaPaga, "cell 1 23");
+		
+		lbValorFinal = new JLabel("Valor final");
+		lbValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValorFinal, "cell 3 23");
+		
+		cbFormaPaga = new JComboBox();
+		cbFormaPaga.setModel(new DefaultComboBoxModel(new String[] {"Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro"}));
+		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(cbFormaPaga, "cell 1 24,growx");
+		
+		tfValorFinal = new JTextField();
+		tfValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(tfValorFinal, "cell 3 24,growx");
+		tfValorFinal.setColumns(10);
 		
 		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setBackground(new Color(193, 151, 232));
 		btConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btConfirmar, "cell 2 18");
+		add(btConfirmar, "cell 2 25,growx");
 		
 		btCalcEdi.setBorderPainted(false);
+		btSalvar.setBorderPainted(false);
 		btConfirmar.setBorderPainted(false);
 
 	}
@@ -176,7 +240,11 @@ public class CriarOrcamento extends JPanel {
 		this.btCalcEdi.addActionListener(actionListener);
 	}
 	
-	public void confirmarValor(ActionListener actionListener) {
+	public void salvarValor(ActionListener actionListener) {
+		this.btSalvar.addActionListener(actionListener);
+	}
+	
+	public void confirmar(ActionListener actionListener) {
 		this.btConfirmar.addActionListener(actionListener);
 	}
 
@@ -349,12 +417,136 @@ public class CriarOrcamento extends JPanel {
 	public void setLbValorVenda(JLabel lbValorVenda) {
 		this.lbValorVenda = lbValorVenda;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	public JButton getBtSalvar() {
+		return btSalvar;
+	}
+
+
+	public void setBtSalvar(JButton btSalvar) {
+		this.btSalvar = btSalvar;
+	}
+
+
+	public JLabel getLbDtConfPedido() {
+		return lbDtConfPedido;
+	}
+
+
+	public void setLbDtConfPedido(JLabel lbDtConfPedido) {
+		this.lbDtConfPedido = lbDtConfPedido;
+	}
+
+
+	public JLabel getLbDtPrevEntrega() {
+		return lbDtPrevEntrega;
+	}
+
+
+	public void setLbDtPrevEntrega(JLabel lbDtPrevEntrega) {
+		this.lbDtPrevEntrega = lbDtPrevEntrega;
+	}
+
+
+	public JTextField getTfDataConfPedido() {
+		return tfDataConfPedido;
+	}
+
+
+	public void setTfDataConfPedido(JTextField tfDataConfPedido) {
+		this.tfDataConfPedido = tfDataConfPedido;
+	}
+
+
+	public JTextField getTfDtPrevEntrega() {
+		return tfDtPrevEntrega;
+	}
+
+
+	public void setTfDtPrevEntrega(JTextField tfDtPrevEntrega) {
+		this.tfDtPrevEntrega = tfDtPrevEntrega;
+	}
+
+
+	public JLabel getLbFormaPaga() {
+		return lbFormaPaga;
+	}
+
+
+	public void setLbFormaPaga(JLabel lbFormaPaga) {
+		this.lbFormaPaga = lbFormaPaga;
+	}
+
+
+	public JLabel getLbValorFinal() {
+		return lbValorFinal;
+	}
+
+
+	public void setLbValorFinal(JLabel lbValorFinal) {
+		this.lbValorFinal = lbValorFinal;
+	}
+
+
+	public JComboBox getCbFormaPaga() {
+		return cbFormaPaga;
+	}
+
+
+	public void setCbFormaPaga(JComboBox cbFormaPaga) {
+		this.cbFormaPaga = cbFormaPaga;
+	}
+
+
+	public JTextField getTfValorFinal() {
+		return tfValorFinal;
+	}
+
+
+	public void setTfValorFinal(JTextField tfValorFinal) {
+		this.tfValorFinal = tfValorFinal;
+	}
+
+
+	public JLabel getLbCustoAdicional() {
+		return lbCustoAdicional;
+	}
+
+
+	public void setLbCustoAdicional(JLabel lbCustoAdicional) {
+		this.lbCustoAdicional = lbCustoAdicional;
+	}
+
+
+	public JLabel getLbStatus() {
+		return lbStatus;
+	}
+
+
+	public void setLbStatus(JLabel lbStatus) {
+		this.lbStatus = lbStatus;
+	}
+
+
+	public JTextField getTfCustoAdicional() {
+		return tfCustoAdicional;
+	}
+
+
+	public void setTfCustoAdicional(JTextField tfCustoAdicional) {
+		this.tfCustoAdicional = tfCustoAdicional;
+	}
+
+
+	public JComboBox getCbStatus() {
+		return cbStatus;
+	}
+
+
+	public void setCbStatus(JComboBox cbStatus) {
+		this.cbStatus = cbStatus;
+	}
 	
 
 }

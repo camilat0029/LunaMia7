@@ -19,6 +19,7 @@ import controller.OrcamentoController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import model.OrcamentoDAO;
+import model.ClienteDAO;
 import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
@@ -67,6 +68,7 @@ public class Main {
 		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 		OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 		MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
+		ClienteDAO clienteDAO = new ClienteDAO();
 		
 		//VIEW
 		Login login = new Login();
@@ -94,7 +96,7 @@ public class Main {
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
-		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento);
+		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento, clienteDAO);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento);
 		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrima, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);

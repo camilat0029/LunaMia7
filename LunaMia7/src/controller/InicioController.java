@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Dimension;
+
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
 import view.Inicio;
@@ -48,9 +50,21 @@ public class InicioController {
 		criarOrcamento.getLbGastos().setVisible(false);
 		criarOrcamento.getLbValorLucro().setVisible(false);
 		
+		criarOrcamento.getLbDtConfPedido().setVisible(false);
+		criarOrcamento.getTfDataConfPedido().setVisible(false);
+		criarOrcamento.getLbDtPrevEntrega().setVisible(false);
+		criarOrcamento.getTfDtPrevEntrega().setVisible(false);
+		
+		criarOrcamento.getLbFormaPaga().setVisible(false);
+		criarOrcamento.getCbFormaPaga().setVisible(false);
+		criarOrcamento.getLbValorFinal().setVisible(false);
+		criarOrcamento.getTfValorFinal().setVisible(false);
+		
 		criarOrcamento.getBtConfirmar().setVisible(false);
+		criarOrcamento.getBtSalvar().setVisible(false);
 		
 		menu.removerMenu();
+		criarOrcamento.setPreferredSize(new Dimension(1020,790));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 	}

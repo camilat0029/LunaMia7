@@ -14,7 +14,7 @@ public class ClienteDAO {
 
 	public void adicionarDados(Cliente cliente) {
 
-		String sql = "INSERT INTO cliente (nomeCliente, telefone, email" + "VALUES (?,?,?)";
+		String sql = "INSERT INTO Cliente (nomeCliente, telefone, email" + "VALUES (?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
@@ -29,7 +29,7 @@ public class ClienteDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// BancoDeDados.desconectar(conexao);
+			BancoDeDados.desconectar(conexao);
 			if (pstm != null) {
 				try {
 					pstm.close();
@@ -40,7 +40,7 @@ public class ClienteDAO {
 		}
 	}
 	public List<Cliente> listarClientes() {
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM Cliente";
         List<Cliente> clientes = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -63,7 +63,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
- //       	BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
             // Fechar recursos
         }
         return clientes;
@@ -85,7 +85,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
         }
     }
     
@@ -102,7 +102,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//BancoDeDados.desconectar(conexao);
+        	BancoDeDados.desconectar(conexao);
         }
     }
 }

@@ -4,62 +4,53 @@ import java.time.LocalDate;
 
 public class Orcamento {
 	
-	private String tituloPedido, descricaoPedido, pagamento;
-	private float quantHorasPrevistas;
+	private String tituloPedido, pagamento;
+	private float quantHorasPrevistas, precoHora;
 	private int maxDias;
 	private LocalDate dataPrevistaEntrega, dataConfirmacao;
 	private Cliente cliente;
+	public Status status;
 	
-	private enum status{
-		CONCLUIDO,ANDAMENTO,PENDENTE;
+	public enum Status{
+		CONCLUIDO("Concluído"),
+		ANDAMENTO("Em andamento"),
+		PENDENTE("Pendente");
 		
-		private boolean concluido,andamento,pendente;
+		private String status;
 		
-		status(){
-			this.concluido = concluido;
-			this.andamento = andamento;
-			this.pendente = pendente;
+		Status(String status){
+			this.status = status;
 		}
-
-		public boolean isConcluido() {
-			return concluido;
-		}
-
-		public void setConcluido(boolean concluido) {
-			this.concluido = concluido;
-		}
-
-		public boolean isAndamento() {
-			return andamento;
-		}
-
-		public void setAndamento(boolean andamento) {
-			this.andamento = andamento;
-		}
-
-		public boolean isPendente() {
-			return pendente;
-		}
-
-		public void setPendente(boolean pendente) {
-			this.pendente = pendente;
+		
+		@Override
+		public String toString() {
+			return status;
 		}
 		
 		
 	}
 	
-	public Orcamento(String tituloPedido, String descricaoPedido, String pagamento, float quantHorasPrevistas,
-			int maxDias, LocalDate dataPrevistaEntrega, LocalDate dataConfirmacao) {
+	public Orcamento(String tituloPedido, String pagamento, float quantHorasPrevistas, float precoHora,
+			int maxDias, LocalDate dataPrevistaEntrega, LocalDate dataConfirmacao, Status status) {
 		super();
 		this.tituloPedido = tituloPedido;
-		this.descricaoPedido = descricaoPedido;
 		this.pagamento = pagamento;
 		this.quantHorasPrevistas = quantHorasPrevistas;
+		this.precoHora = precoHora;
 		this.maxDias = maxDias;
 		this.dataPrevistaEntrega = dataPrevistaEntrega;
 		this.dataConfirmacao = dataConfirmacao;
+		this.status = status;
 	}
 	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public void adicionarDados() {
 		
 	}
@@ -95,12 +86,7 @@ public class Orcamento {
 	public void setTituloPedido(String tituloPedido) {
 		this.tituloPedido = tituloPedido;
 	}
-	public String getDescricaoPedido() {
-		return descricaoPedido;
-	}
-	public void setDescricaoPedido(String descricaoPedido) {
-		this.descricaoPedido = descricaoPedido;
-	}
+	
 	public String getPagamento() {
 		return pagamento;
 	}
@@ -113,6 +99,16 @@ public class Orcamento {
 	public void setQuantHorasPrevistas(float quantHorasPrevistas) {
 		this.quantHorasPrevistas = quantHorasPrevistas;
 	}
+	
+	
+	public float getPrecoHora() {
+		return precoHora;
+	}
+
+	public void setPrecoHora(float precoHora) {
+		this.precoHora = precoHora;
+	}
+
 	public int getMaxDias() {
 		return maxDias;
 	}
