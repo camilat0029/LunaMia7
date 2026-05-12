@@ -1,9 +1,14 @@
 package controller;
 
 import java.awt.Dimension;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
 import model.ClienteDAO;
+import model.MateriaPrima;
+import model.MateriaPrimaDAO;
 import model.OrcamentoDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
@@ -17,13 +22,14 @@ public class OrcamentoController {
 	private TelaPrincipal telaPrincipal;
 	private OrcamentoDAO orcamentoDAO;
 	private ClienteDAO clienteDAO;
+	private MateriaPrimaDAO materiaPrimaDAO;
 	private NavegadorTelas navegadorTelas;
 	private Orcamentos orcamentos;
 	private CriarOrcamento criarOrcamento;
 
 	public OrcamentoController(OrcamentoDAO orcamentoDAO, TelaPrincipal telaPrincipal, Menu menu,
 			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento,
-			ClienteDAO clienteDAO) {
+			ClienteDAO clienteDAO, MateriaPrimaDAO materiaPrimaDAO) {
 		this.orcamentoDAO = orcamentoDAO;
 		this.telaPrincipal = telaPrincipal;
 		this.menu = menu;
@@ -31,6 +37,9 @@ public class OrcamentoController {
 		this.orcamentos = orcamentos;
 		this.criarOrcamento = criarOrcamento;
 		this.clienteDAO = clienteDAO;
+		this.materiaPrimaDAO = materiaPrimaDAO;
+		
+		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -48,6 +57,10 @@ public class OrcamentoController {
 		
 		this.criarOrcamento.salvarValor(e -> {
 			salvarInformacoes();
+		});
+		
+		this.criarOrcamento.adicionar(e -> {
+			adicionar();
 		});
 		
 	}
@@ -84,19 +97,63 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 		
 		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020,790));
+		criarOrcamento.setPreferredSize(new Dimension(1020,920));
+		
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		criarOrcamento.tabModeloOrcam = (DefaultTableModel) criarOrcamento.getTabMateriaisOrcam().getModel();
+		//criarOrcamento.tabModeloEstoque = (DefaultTableModel) criarOrcamento.getTabMateriaisEstoque().getModel();
+		criarOrcamento.tabModeloEstoque.limpar();
+		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
+		
+		for (MateriaPrima materiaPrima : listaMateriasPrimas) {
+			
+			criarOrcamento.tabModeloEstoque.adicionarMatPrima(materiaPrima);
+			
+//			Object[] informacoes = {materiaPrima.getNome(), materiaPrima.getValor(), materiaPrima.getQuantidadeDisponivel()};
+//			
+//			criarOrcamento.tabModeloEstoque.addRow(informacoes);
+			
+		}
+		
+		
+		
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
+		
+		
+	}
+	
+	public void adicionar() {
+		
+		int linhaSelecionada = criarOrcamento.getTabMateriaisEstoque().getSelectedRow();
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		criarOrcamento.tabModeloOrcam = (DefaultTableModel) criarOrcamento.getTabMateriaisOrcam().getModel();
+		
+		if (linhaSelecionada >= 0) {
+			MateriaPrima matPrima = criarOrcamento.tabModeloEstoque.getMatPrima(linhaSelecionada);
+			int idMateriaPrima = matPrima.getIdMateriaPrima();
+			
+			for (MateriaPrima materiaPrima : listaMateriasPrimas) {
+				if(materiaPrima.getIdMateriaPrima() == idMateriaPrima) {
+					Object[] informacoes = {materiaPrima.getNome(), materiaPrima.getValor(), materiaPrima.getQuantidadeDisponivel()};
+					criarOrcamento.tabModeloOrcam.addRow(informacoes);
+					break;
+				}
+			}
+			
+		}
 		
 	}
 	
 	//CALCULANDO VALORES
 	public void calcular() {
 		
-		criarOrcamento.setPreferredSize(new Dimension(1020,1010));
+		criarOrcamento.setPreferredSize(new Dimension(1020,1150));
 		
 		criarOrcamento.getTfQuantMaxDias().setEditable(false);
 		criarOrcamento.getTfHorasPrevistas().setEditable(false);
 		criarOrcamento.getTfCustoAdicional().setEditable(false);
+		criarOrcamento.getBtAdicionar().setVisible(false);
+		criarOrcamento.getBtRemover().setVisible(false);
 		
 		criarOrcamento.getLbValorCalcSemLucro().setVisible(true);
 		criarOrcamento.getLbValorCalVenda().setVisible(true);
@@ -123,7 +180,7 @@ public class OrcamentoController {
 	
 	public void salvarInformacoes() {
 		
-		criarOrcamento.setPreferredSize(new Dimension(1020,1310));
+		criarOrcamento.setPreferredSize(new Dimension(1020,1520));
 		
 		criarOrcamento.getLbDtConfPedido().setVisible(true);
 		criarOrcamento.getTfDataConfPedido().setVisible(true);

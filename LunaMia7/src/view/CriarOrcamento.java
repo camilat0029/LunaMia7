@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import model.MateriaPrimaTableModel;
+
 public class CriarOrcamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -44,6 +46,8 @@ public class CriarOrcamento extends JPanel {
 	private JTable tabMateriaisOrcam;
 	private JButton btAdicionar;
 	private JButton btRemover;
+	public MateriaPrimaTableModel tabModeloEstoque = new MateriaPrimaTableModel();
+	public DefaultTableModel tabModeloOrcam;
 
 	/**
 	 * Create the panel.
@@ -119,14 +123,14 @@ public class CriarOrcamento extends JPanel {
 		scrollPane = new JScrollPane();
 		add(scrollPane, "cell 1 11 1 2,grow");
 		
-		tabMateriaisEstoque = new JTable();
-		tabMateriaisEstoque.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nome", "Valor", "Quantia"
-			}
-		));
+		tabMateriaisEstoque = new JTable(tabModeloEstoque);
+//		tabMateriaisEstoque.setModel(new DefaultTableModel(
+//			new Object[][] {
+//			},
+//			new String[] {
+//				"Nome", "Valor", "Quantia"
+//			}
+//		));
 		scrollPane.setViewportView(tabMateriaisEstoque);
 		
 		scrollPane_1 = new JScrollPane();
@@ -293,7 +297,7 @@ public class CriarOrcamento extends JPanel {
 		add(lbValorFinal, "cell 3 26");
 		
 		cbFormaPaga = new JComboBox();
-		cbFormaPaga.setModel(new DefaultComboBoxModel(new String[] {"Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro"}));
+		cbFormaPaga.setModel(new DefaultComboBoxModel(new String[] {"", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro"}));
 		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbFormaPaga, "cell 1 27,growx");
 		
@@ -635,6 +639,50 @@ public class CriarOrcamento extends JPanel {
 	public void setCbStatus(JComboBox cbStatus) {
 		this.cbStatus = cbStatus;
 	}
+
+
+	public JButton getBtAdicionar() {
+		return btAdicionar;
+	}
+
+
+	public void setBtAdicionar(JButton btAdicionar) {
+		this.btAdicionar = btAdicionar;
+	}
+
+
+	public JButton getBtRemover() {
+		return btRemover;
+	}
+
+
+	public void setBtRemover(JButton btRemover) {
+		this.btRemover = btRemover;
+	}
+
+
+	public JTable getTabMateriaisEstoque() {
+		return tabMateriaisEstoque;
+	}
+
+
+	public void setTabMateriaisEstoque(JTable tabMateriaisEstoque) {
+		this.tabMateriaisEstoque = tabMateriaisEstoque;
+	}
+
+
+	public JTable getTabMateriaisOrcam() {
+		return tabMateriaisOrcam;
+	}
+
+
+	public void setTabMateriaisOrcam(JTable tabMateriaisOrcam) {
+		this.tabMateriaisOrcam = tabMateriaisOrcam;
+	}
+	
+	
+	
+	
 	
 
 }

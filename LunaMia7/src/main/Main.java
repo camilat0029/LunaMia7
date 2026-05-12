@@ -96,7 +96,8 @@ public class Main {
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
-		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento, clienteDAO);
+		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, 
+				criarOrcamento, clienteDAO, materiaPrimaDAO);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento);
 		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrima, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);

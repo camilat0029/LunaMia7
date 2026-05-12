@@ -3,88 +3,49 @@ package model;
 public class MateriaPrima {
 	
 	private String nome, marca,cor;
-	private float valor,unidadePorUnidade;
-	private int quantidadeDisponivel;
-	private enum UnidadeMedida{
+	private float valor,qtdPorUnidade;
+	private int quantidadeDisponivel, idMateriaPrima;
+	private UnidadeMedida unidadeMedida;
+	
+	
+	private static final long serialVersionUID = 1L;
+	
+	public enum UnidadeMedida{
 		
-		CENTIMETROS, METROS,UNIDADE,MILIMETROS,LITROS;
+		METRO("Metros"),
+		CENTIMETRO("Centímetros"),
+		LITRO("Litros"),
+		MILIMETRO("Milímetros"),
+		UNIDADE("Unidade");
 		
-		private float centimetros,metros,milimetros,litros;
-		private int unidade;
+		private String unidMed;
 		
-		UnidadeMedida(){
+		UnidadeMedida(String unidMed){
+			this.unidMed=unidMed;
+		}
 		
-			this.centimetros = centimetros;
-			this.metros = metros;
-			this.milimetros = milimetros;
-			this.litros = litros;
-			this.unidade = unidade;
-			
-		}
-
-		public float getCentimetros() {
-			return centimetros;
-		}
-
-		public void setCentimetros(float centimetros) {
-			this.centimetros = centimetros;
-		}
-
-		public float getMetros() {
-			return metros;
-		}
-
-		public void setMetros(float metros) {
-			this.metros = metros;
-		}
-
-		public float getMilimetros() {
-			return milimetros;
-		}
-
-		public void setMilimetros(float milimetros) {
-			this.milimetros = milimetros;
-		}
-
-		public float getLitros() {
-			return litros;
-		}
-
-		public void setLitros(float litros) {
-			this.litros = litros;
-		}
-
-		public int getUnidade() {
-			return unidade;
-		}
-
-		public void setUnidade(int unidade) {
-			this.unidade = unidade;
+		@Override 
+		public String toString() {
+			return unidMed;
 		}
 		
 	}
-	public MateriaPrima(String nome, String marca, String cor, float valor, float unidadePorUnidade,
-			int quantidadeDisponivel) {
+	
+	public MateriaPrima(String nome, String marca, String cor, float valor, float qtdPorUnidade,
+			int quantidadeDisponivel, UnidadeMedida unidadeMedida) {
 		super();
 		this.nome = nome;
 		this.marca = marca;
 		this.cor = cor;
 		this.valor = valor;
-		this.unidadePorUnidade = unidadePorUnidade;
+		this.qtdPorUnidade = qtdPorUnidade;
 		this.quantidadeDisponivel = quantidadeDisponivel;
+		this.unidadeMedida = unidadeMedida;
 	}
+	
 	
 	//métodos
 	
-	public void adicionarInsumos() {
-		
-	}
-	public void atualizarInsumos() {
-		
-	}
-	public void excluirInsumos(){
-		
-	}
 	
 	//getters and setters
 	
@@ -112,11 +73,11 @@ public class MateriaPrima {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	public float getUnidadePorUnidade() {
-		return unidadePorUnidade;
+	public float getQtdPorUnidade() {
+		return qtdPorUnidade;
 	}
-	public void setUnidadePorUnidade(float unidadePorUnidade) {
-		this.unidadePorUnidade = unidadePorUnidade;
+	public void setQtdPorUnidade(float qtdPorUnidade) {
+		this.qtdPorUnidade = qtdPorUnidade;
 	}
 	public int getQuantidadeDisponivel() {
 		return quantidadeDisponivel;
@@ -124,6 +85,27 @@ public class MateriaPrima {
 	public void setQuantidadeDisponivel(int quantidadeDisponivel) {
 		this.quantidadeDisponivel = quantidadeDisponivel;
 	}
+
+	public int getIdMateriaPrima() {
+		return idMateriaPrima;
+	}
+
+
+	public void setIdMateriaPrima(int idMateriaPrima) {
+		this.idMateriaPrima = idMateriaPrima;
+	}
+
+
+	public UnidadeMedida getUnidadeMedida() {
+		return unidadeMedida;
+	}
+
+
+	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
+	}
+	
+	
 	
 
 }

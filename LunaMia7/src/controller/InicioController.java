@@ -64,7 +64,7 @@ public class InicioController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 		
 		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020,790));
+		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 	}
