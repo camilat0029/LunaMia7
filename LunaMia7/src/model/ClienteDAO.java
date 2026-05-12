@@ -14,17 +14,23 @@ public class ClienteDAO {
 
 	public void adicionarDados(Cliente cliente) {
 
-		String sql = "INSERT INTO Cliente (nomeCliente, telefone, email" + "VALUES (?,?,?)";
+		String sql = "INSERT INTO Cliente (nomeCliente, telefone, email) VALUES (?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 
 		try {
 			conexao = BancoDeDados.conectar();
-			pstm = conexao.prepareStatement(sql);
+			pstm = conexao.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, cliente.getNome());
 			pstm.setString(2, cliente.getTelefone());
 			pstm.setString(3, cliente.getEmail());
 			pstm.executeUpdate();
+			
+			ResultSet rs = pstm.getGeneratedKeys();
+			
+			if(rs.next()) {
+				cliente.setIdCliente(rs.getInt(1));
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,6 +63,8 @@ public class ClienteDAO {
                 cliente.setTelefone(rset.getString("telefone"));
                 cliente.setEmail(rset.getString("email"));
                 
+                cliente.setIdCliente(rset.getInt("id_cliente"));
+                
                 clientes.add(cliente);
                 
             }
@@ -71,7 +79,7 @@ public class ClienteDAO {
 	
 	// UPDATE - Atualizar um usuário existente
     public void atualizarCliente(Cliente cliente) {
-        String sql = "UPDATE Cliente SET nome = ?, telefone = ?, email = ? WHERE nome = ?";
+        String sql = "UPDATE Cliente SET nomeCliente = ?, telefone = ?, email = ? WHERE id_cliente = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -81,6 +89,7 @@ public class ClienteDAO {
             pstm.setString(1, cliente.getNome());
             pstm.setString(2, cliente.getTelefone());
             pstm.setString(3, cliente.getEmail());;
+            pstm.setInt(4, cliente.getIdCliente());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,14 +99,14 @@ public class ClienteDAO {
     }
     
     public void excluirCliente(Cliente cliente) {
-        String sql = "DELETE FROM Cliente WHERE nome = ?";
+        String sql = "DELETE FROM Cliente WHERE id_cliente = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setString(1, cliente.getNome());
+            pstm.setInt(1, cliente.getIdCliente());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

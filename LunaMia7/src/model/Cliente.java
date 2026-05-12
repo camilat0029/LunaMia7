@@ -3,6 +3,7 @@ package model;
 public class Cliente {
 	
 	private String nome, email, telefone;
+	private int idCliente;
 
 	public Cliente(String nome, String email, String telefone) {
 		super();
@@ -44,6 +45,16 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+	
+	
 	
 	
 
