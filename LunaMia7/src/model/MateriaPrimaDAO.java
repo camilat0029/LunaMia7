@@ -19,10 +19,11 @@ public class MateriaPrimaDAO {
 		
 		Connection conexao = null;
 		PreparedStatement pstm = null;
+		ResultSet rs =null;
 		
         try {
             conexao = BancoDeDados.conectar();
-            pstm = conexao.prepareStatement(sql);
+            pstm = conexao.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstm.setString(1, materiaPrimaEstoque.getUnidadeMedida().name().toLowerCase());
             pstm.setFloat(2, materiaPrimaEstoque.getValor());
@@ -34,6 +35,10 @@ public class MateriaPrimaDAO {
             
             pstm.executeUpdate();
             
+            rs = pstm.getGeneratedKeys();
+            if(rs.next()) {
+            	materiaPrimaEstoque.setIdMateriaPrima(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -47,7 +52,7 @@ public class MateriaPrimaDAO {
             }
         }
     }
-    public List<MateriaPrima> listarInsumos() {
+    public List<MateriaPrima> listarMateriaPrima() {
     	
         String sql = "SELECT * FROM MateriaPrima";
         List<MateriaPrima> materiasPrimas = new ArrayList<>();
@@ -61,7 +66,8 @@ public class MateriaPrimaDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                MateriaPrima materiaPrima = new MateriaPrima(sql, sql, sql, 0, 0, 0, null);
+                MateriaPrima materiaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
+                materiaPrima.setIdMateriaPrima(rset.getInt("id_estoque"));
                 materiaPrima.setNome(rset.getString("nome"));
                 materiaPrima.setMarca(rset.getString("marca"));
                 materiaPrima.setCor(rset.getString("cor"));

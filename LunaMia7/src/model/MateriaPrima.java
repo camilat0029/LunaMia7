@@ -4,7 +4,7 @@ public class MateriaPrima {
 	
 	private String nome, marca,cor;
 	private float valor,qtdPorUnidade;
-	private int quantidadeDisponivel;
+	private int quantidadeDisponivel, idMateriaPrima;
 	private UnidadeMedida unidadeMedida;
 	
 	
@@ -84,6 +84,15 @@ public class MateriaPrima {
 	}
 	public void setQuantidadeDisponivel(int quantidadeDisponivel) {
 		this.quantidadeDisponivel = quantidadeDisponivel;
+	}
+
+	public int getIdMateriaPrima() {
+		return idMateriaPrima;
+	}
+
+
+	public void setIdMateriaPrima(int idMateriaPrima) {
+		this.idMateriaPrima = idMateriaPrima;
 	}
 
 

@@ -180,7 +180,4 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		this.cbUnidadeMedida = cbUnidadeMedida;
 	}
 	
-	
-	
-
 }

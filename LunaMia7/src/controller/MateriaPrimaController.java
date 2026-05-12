@@ -39,7 +39,6 @@ public class MateriaPrimaController {
 			
 		});
 			
-			
 		this.cadastroMateriaPrima.voltar(new MouseAdapter() {
 				
 			@Override
@@ -103,6 +102,14 @@ public class MateriaPrimaController {
 		cadastroMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
 		
 	}
+	
+//	public void carregarTabela() {
+//		
+//		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima(){
+//			
+//		}
+//	}
+	
 	
 	public boolean qtdDisponivelPermitida(String qtdDisponivelValida) {
 		boolean valido;

@@ -60,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
     ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Confirmacao_de_orcamento` (
-  `formaPagam` INT NOT NULL,
+  `formaPagam` INT NULL,
   `dataPrevisaoEnt` VARCHAR(45) NULL,
-  `dataConfirmacao` VARCHAR(45) NOT NULL,
+  `dataConfirmacao` VARCHAR(45) NULL,
   `id_orcamento` INT NOT NULL,
   `valorVenda` float not null,
   `lucroTotalObtido` float not null,
