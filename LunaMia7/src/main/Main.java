@@ -125,7 +125,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrimaView);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		
-		navegadorTelas.navegarTela("LOGIN");
+		navegadorTelas.navegarTela("MATERIA_PRIMA");
 
 		menu.iniciar();
 

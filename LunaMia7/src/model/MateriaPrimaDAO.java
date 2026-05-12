@@ -52,7 +52,8 @@ public class MateriaPrimaDAO {
             }
         }
     }
-    public List<MateriaPrima> listarMateriaPrima() {
+	
+    public static List<MateriaPrima> listarMateriaPrima() {
     	
         String sql = "SELECT * FROM MateriaPrima";
         List<MateriaPrima> materiasPrimas = new ArrayList<>();
@@ -71,10 +72,10 @@ public class MateriaPrimaDAO {
                 materiaPrima.setNome(rset.getString("nome"));
                 materiaPrima.setMarca(rset.getString("marca"));
                 materiaPrima.setCor(rset.getString("cor"));
-                materiaPrima.setQtdPorUnidade(rset.getFloat("qtdPorUnidade"));
-                materiaPrima.setQuantidadeDisponivel(rset.getInt("qtdDisponivel"));
+                materiaPrima.setQtdPorUnidade(rset.getFloat("qntPorUnidade"));
+                materiaPrima.setQuantidadeDisponivel(rset.getInt("qntDisponivel"));
                 materiaPrima.setValor(rset.getFloat("valor"));
-                materiaPrima.setUnidadeMedida(MateriaPrima.UnidadeMedida.valueOf(rset.getString("unidadeMedida").toLowerCase()));
+                materiaPrima.setUnidadeMedida(MateriaPrima.UnidadeMedida.valueOf(rset.getString("unidadeMedida").toUpperCase()));
     
                 materiasPrimas.add(materiaPrima);
                 
@@ -90,7 +91,7 @@ public class MateriaPrimaDAO {
     
     public void atualizarMateriasPrimas(MateriaPrima materiaPrima) {
         String sql = "UPDATE MateriaPrima SET nome = ?, marca = ?, cor = ?, valor = ?,"
-        		+ "qtdPorUnidade = ?, quantidadeDisponivel = ?, unidadeMedida =? WHERE nome = ?";
+        		+ "qntPorUnidade = ?, qntDisponivel = ?, unidadeMedida =? WHERE nome = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 

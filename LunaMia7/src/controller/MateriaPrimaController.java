@@ -3,8 +3,10 @@ package controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import model.MateriaPrimaDAO;
 import view.CadastroMateriaPrimaEstoque;
@@ -84,7 +86,7 @@ public class MateriaPrimaController {
 			this.materiaPrima = novaMateriaPrima;
 			
 			limparCamposMP();
-			
+			carregarTabela();
 			JOptionPane.showMessageDialog(null, "Matéria Prima cadastrada com sucesso!", "Ação realizada com sucesso",1);
 			
 		}
@@ -103,12 +105,17 @@ public class MateriaPrimaController {
 		
 	}
 	
-//	public void carregarTabela() {
-//		
-//		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima(){
-//			
-//		}
-//	}
+	public void carregarTabela() {
+		
+		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima();
+		materiaPrimaView.tabelaModeloMateriaPrima=(DefaultTableModel) materiaPrimaView.getTabelaMateriaPrima().getModel();
+		
+			for(MateriaPrima mp : lista) {
+				Object[] materiasPrimas = {mp.getNome(), mp.getQuantidadeDisponivel(), mp.getUnidadeMedida()};
+				materiaPrimaView.tabelaModeloMateriaPrima.addRow(materiasPrimas);
+			}
+			
+		}
 	
 	
 	public boolean qtdDisponivelPermitida(String qtdDisponivelValida) {

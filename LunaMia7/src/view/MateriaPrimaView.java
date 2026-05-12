@@ -21,6 +21,8 @@ public class MateriaPrimaView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable tabelaMateriaPrima;
 	private JButton btAdicionar;
+	public DefaultTableModel tabelaModeloMateriaPrima;
+	
 
 	/**
 	 * Create the panel.
@@ -46,6 +48,7 @@ public class MateriaPrimaView extends JPanel {
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
 		String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", ""};
+		
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 		tabelaMateriaPrima = new JTable(modelo);
 		
@@ -88,5 +91,15 @@ public class MateriaPrimaView extends JPanel {
 	public void adicionar(ActionListener actionListener) {
 		this.btAdicionar.addActionListener(actionListener);
 	}
+
+	public JTable getTabelaMateriaPrima() {
+		return tabelaMateriaPrima;
+	}
+
+	public void setTabelaMateriaPrima(JTable tabelaMateriaPrima) {
+		this.tabelaMateriaPrima = tabelaMateriaPrima;
+	}
+	
+	
 
 }

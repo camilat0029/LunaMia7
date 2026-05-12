@@ -19,7 +19,7 @@ public class InicioController {
 			menu.removerMenu();
 		});
 		this.inicio.criarEstoque(e ->{
-			navegadorTelas.navegarTela("CADASTRO_MATERIA_PRIMA");
+			navegadorTelas.navegarTela("MATERIA_PRIMA");
 			menu.removerMenu();
 		});
 		this.inicio.configurarPerfil(e ->{

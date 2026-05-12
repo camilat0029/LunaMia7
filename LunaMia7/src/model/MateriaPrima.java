@@ -1,12 +1,14 @@
 package model;
 
+import javax.swing.table.DefaultTableModel;
+
 public class MateriaPrima {
 	
 	private String nome, marca,cor;
 	private float valor,qtdPorUnidade;
 	private int quantidadeDisponivel, idMateriaPrima;
 	private UnidadeMedida unidadeMedida;
-	
+
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -90,7 +92,6 @@ public class MateriaPrima {
 		return idMateriaPrima;
 	}
 
-
 	public void setIdMateriaPrima(int idMateriaPrima) {
 		this.idMateriaPrima = idMateriaPrima;
 	}
@@ -104,6 +105,7 @@ public class MateriaPrima {
 	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
+	
 	
 	
 	
