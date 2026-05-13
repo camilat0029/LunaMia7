@@ -96,18 +96,21 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 		return listaMateriasPrimas.get(linha);
 	}
 	
+	//INSERE UMA LISTA
 	public void setLista(List<MateriaPrima> lista) {
 		this.listaMateriasPrimas = lista;
 		fireTableDataChanged();
 	}
 	
+	//LIMPA A LISTA
 	public void limpar() {
 		listaMateriasPrimas.clear();
 		fireTableDataChanged();
 	}  
 	
-	
+	//PROCURA UMA MATERIA PRIMA PELO SEU ID
 	public int procurarId(int idMateriaPrima) {
+		
 		for (int i = 0; i < listaMateriasPrimas.size(); i++) {
 			
 			if (listaMateriasPrimas.get(i).getIdMateriaPrima() == idMateriaPrima) {
@@ -117,6 +120,12 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 		
 		return -1;
 	}
+
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return false;
+	}
+	
 	
 	
 	

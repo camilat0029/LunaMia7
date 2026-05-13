@@ -17,6 +17,7 @@ public class ClienteDAO {
 		String sql = "INSERT INTO Cliente (nomeCliente, telefone, email) VALUES (?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
+		ResultSet rs = null;
 
 		try {
 			conexao = BancoDeDados.conectar();
@@ -26,7 +27,7 @@ public class ClienteDAO {
 			pstm.setString(3, cliente.getEmail());
 			pstm.executeUpdate();
 			
-			ResultSet rs = pstm.getGeneratedKeys();
+			rs = pstm.getGeneratedKeys();
 			
 			if(rs.next()) {
 				cliente.setIdCliente(rs.getInt(1));
@@ -35,7 +36,12 @@ public class ClienteDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			BancoDeDados.desconectar(conexao);
+			try {
+		        if (rs != null) rs.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
 			if (pstm != null) {
 				try {
 					pstm.close();
@@ -43,6 +49,8 @@ public class ClienteDAO {
 					e.printStackTrace();
 				}
 			}
+			
+			BancoDeDados.desconectar(conexao);
 		}
 	}
 	public List<Cliente> listarClientes() {
@@ -58,7 +66,7 @@ public class ClienteDAO {
             rset = pstm.executeQuery();
 
             while (rset.next()) {
-                Cliente cliente = new Cliente(sql, sql, sql);
+                Cliente cliente = new Cliente(null, null, null);
                 cliente.setNome(rset.getString("nomeCliente"));
                 cliente.setTelefone(rset.getString("telefone"));
                 cliente.setEmail(rset.getString("email"));

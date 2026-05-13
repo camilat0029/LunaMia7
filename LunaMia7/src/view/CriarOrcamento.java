@@ -22,13 +22,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import model.MateriaPrimaTableModel;
+import model.Orcamento;
 
 public class CriarOrcamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField tituloOrcamento, tfNomeCliente, tfEmail, tfContato,tfHorasPrevistas, tfQuantMaxDias;
-	private JTextField tfDataConfPedido, tfDtPrevEntrega, tfValorFinal, tfCustoAdicional;
+	private JTextField tfDataConfPedido, tfDtPrevEntrega, tfCustoAdicional;
 	
 	private JLabel lbPrecoHoraUsuario, lbPercLucroUsuario, lbValorCalcSemLucro, lbCalcLucro, lbCalcGastos, lbValorCalVenda;
 	private JLabel lbValorSemLucro, lbValorLucro, lbGastos, lbValorVenda, lbDtConfPedido, lbDtPrevEntrega;
@@ -48,6 +49,7 @@ public class CriarOrcamento extends JPanel {
 	private JButton btRemover;
 	public MateriaPrimaTableModel tabModeloEstoque = new MateriaPrimaTableModel();
 	public MateriaPrimaTableModel tabModeloOrcam = new MateriaPrimaTableModel();
+	private JLabel lbValorFinalCad;
 
 	/**
 	 * Create the panel.
@@ -130,7 +132,7 @@ public class CriarOrcamento extends JPanel {
 		scrollPane_1 = new JScrollPane();
 		add(scrollPane_1, "cell 3 11 1 4,grow");
 		
-		tabMateriaisOrcam = new JTable();
+		tabMateriaisOrcam = new JTable(tabModeloOrcam);
 		scrollPane_1.setViewportView(tabMateriaisOrcam);
 		
 		//Estilização do cabeçalho
@@ -212,7 +214,8 @@ public class CriarOrcamento extends JPanel {
 		add(tfCustoAdicional, "cell 1 18,growx");
 		tfCustoAdicional.setColumns(10);
 		
-		cbStatus = new JComboBox();
+		cbStatus = new JComboBox<>(model.Orcamento.Status.values());
+		cbStatus.setSelectedItem(Orcamento.Status.PENDENTE);
 		cbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbStatus, "cell 3 18,growx");
 		
@@ -290,10 +293,9 @@ public class CriarOrcamento extends JPanel {
 		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbFormaPaga, "cell 1 28,growx");
 		
-		tfValorFinal = new JTextField();
-		tfValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(tfValorFinal, "cell 3 28,growx");
-		tfValorFinal.setColumns(10);
+		lbValorFinalCad = new JLabel("R$");
+		lbValorFinalCad.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbValorFinalCad, "cell 3 28");
 		
 		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setBackground(new Color(193, 151, 232));
@@ -303,6 +305,9 @@ public class CriarOrcamento extends JPanel {
 		btCalcEdi.setBorderPainted(false);
 		btSalvar.setBorderPainted(false);
 		btConfirmar.setBorderPainted(false);
+		
+		
+		
 
 	}
 	
@@ -577,14 +582,13 @@ public class CriarOrcamento extends JPanel {
 		this.cbFormaPaga = cbFormaPaga;
 	}
 
-
-	public JTextField getTfValorFinal() {
-		return tfValorFinal;
+	public JLabel getLbValorFinalCad() {
+		return lbValorFinalCad;
 	}
 
 
-	public void setTfValorFinal(JTextField tfValorFinal) {
-		this.tfValorFinal = tfValorFinal;
+	public void setLbValorFinalCad(JLabel lbValorFinalCad) {
+		this.lbValorFinalCad = lbValorFinalCad;
 	}
 
 
@@ -618,13 +622,13 @@ public class CriarOrcamento extends JPanel {
 	}
 
 
-	public JComboBox getCbStatus() {
-		return cbStatus;
+	public JComboBox<model.Orcamento.Status> getCbStatus() {
+	    return cbStatus;
 	}
 
 
-	public void setCbStatus(JComboBox cbStatus) {
-		this.cbStatus = cbStatus;
+	public void setCbStatus(JComboBox<model.Orcamento.Status> cbStatus) {
+	    this.cbStatus = cbStatus;
 	}
 
 
@@ -666,6 +670,20 @@ public class CriarOrcamento extends JPanel {
 	public void setTabMateriaisOrcam(JTable tabMateriaisOrcam) {
 		this.tabMateriaisOrcam = tabMateriaisOrcam;
 	}
+
+
+	public JTextField getTituloOrcamento() {
+		return tituloOrcamento;
+	}
+
+
+	public void setTituloOrcamento(JTextField tituloOrcamento) {
+		this.tituloOrcamento = tituloOrcamento;
+	}
+	
+	
+	
+	
 	
 	
 	

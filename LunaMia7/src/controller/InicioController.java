@@ -40,7 +40,23 @@ public class InicioController {
 	
 	public void irParaTelaCriarOrc() {
 		
-UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		ativandoDesativandoComp();
+		
+		menu.removerMenu();
+		criarOrcamento.setPreferredSize(new Dimension(1020,920));
+		
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		criarOrcamento.tabModeloEstoque.limpar();
+		criarOrcamento.tabModeloOrcam.limpar();
+		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
+	
+		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
+		
+	}
+
+	public void ativandoDesativandoComp() {
+		
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 		
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
@@ -63,24 +79,10 @@ UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 		criarOrcamento.getLbFormaPaga().setVisible(false);
 		criarOrcamento.getCbFormaPaga().setVisible(false);
 		criarOrcamento.getLbValorFinal().setVisible(false);
-		criarOrcamento.getTfValorFinal().setVisible(false);
+		criarOrcamento.getLbValorFinalCad().setVisible(false);
 		
 		criarOrcamento.getBtConfirmar().setVisible(false);
 		criarOrcamento.getBtSalvar().setVisible(false);
-		
-		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020,920));
-		
-		
-		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
-		criarOrcamento.tabModeloEstoque.limpar();
-		criarOrcamento.tabModeloOrcam.limpar();
-		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
-	
-		
-		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
-		
 	}
 
 }

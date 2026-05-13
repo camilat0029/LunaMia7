@@ -11,6 +11,7 @@ import model.Cliente;
 import model.ClienteDAO;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
+import model.Orcamento;
 import model.OrcamentoDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
@@ -53,7 +54,7 @@ public class OrcamentoController {
 			if(criarOrcamento.getBtCalcEdi().getText().equals("Calcular")) {
 				calcular();
 			} else if (criarOrcamento.getBtCalcEdi().getText().equals("Editar")) {
-				
+				editarValores();
 			}
 			
 		});
@@ -68,6 +69,10 @@ public class OrcamentoController {
 		
 		this.criarOrcamento.remover(e -> {
 			remover();
+		});
+		
+		this.criarOrcamento.confirmar(e -> {
+			//FALTA ISSO
 		});
 		
 	}
@@ -98,7 +103,7 @@ public class OrcamentoController {
 		criarOrcamento.getLbFormaPaga().setVisible(false);
 		criarOrcamento.getCbFormaPaga().setVisible(false);
 		criarOrcamento.getLbValorFinal().setVisible(false);
-		criarOrcamento.getTfValorFinal().setVisible(false);
+		criarOrcamento.getLbValorFinalCad().setVisible(false);
 		
 		criarOrcamento.getBtConfirmar().setVisible(false);
 		criarOrcamento.getBtSalvar().setVisible(false);
@@ -187,10 +192,7 @@ public class OrcamentoController {
 					criarOrcamento.tabModeloOrcam.removerMatPrima(linhaSelecionada);
 					
 				}
-				
 			}
-			
-			
 		} else {
 			JOptionPane.showMessageDialog(null, "Selecione uma linha para remover", "Informação", 1);
 		}
@@ -198,6 +200,99 @@ public class OrcamentoController {
 	
 	//CALCULANDO VALORES
 	public void calcular() {
+		
+		ativandoDevativandoComp();
+		
+		float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText());
+		float custoAdicional = Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText());
+		float horasPrevistas = Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText());
+		float precoHora =  Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText());
+		
+		float valorTrabalho = horasPrevistas * precoHora;
+		
+		int totalLinhas = criarOrcamento.tabModeloOrcam.getRowCount();
+		
+		float somaProdutos = 0;
+		
+		for (int i = 0; i < totalLinhas; i++) {
+			
+			float valorProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 1).toString());
+			float quantProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 2).toString());
+			
+			float valorPorProduto = valorProduto * quantProduto;
+			
+			somaProdutos += valorPorProduto;
+			
+		}
+		
+		//VALORES QUE VÃO PARA OS LABELS
+		float totalGastos = custoAdicional + somaProdutos;
+		float valorSemLucro = custoAdicional + somaProdutos + valorTrabalho;
+		float valorVenda = valorSemLucro + (valorSemLucro * (percLucro/100));
+		float lucroAdicional = valorVenda - valorSemLucro;
+		float lucro = lucroAdicional + valorTrabalho;
+		
+		//LABELS RECEBENDO OS VALORES
+		criarOrcamento.getLbCalcGastos().setText(String.valueOf(totalGastos));
+		criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(valorSemLucro));
+		criarOrcamento.getLbValorCalVenda().setText(String.valueOf(valorVenda));
+		criarOrcamento.getLbCalcLucro().setText(String.valueOf(lucro));
+	}
+
+	
+	//EDITANDO VALORES
+	public void editarValores() {
+		
+		criarOrcamento.getBtCalcEdi().setText("Calcular");
+		
+		criarOrcamento.getTfQuantMaxDias().setEditable(true);
+		criarOrcamento.getTfHorasPrevistas().setEditable(true);
+		criarOrcamento.getTfCustoAdicional().setEditable(true);
+		criarOrcamento.getBtAdicionar().setVisible(true);
+		criarOrcamento.getBtRemover().setVisible(true);
+	}
+	
+	public void salvarInformacoes() {
+		
+		ativDesativCompAoSalvar();
+		
+		//DO CLIENTE
+		Cliente cliente = new Cliente(null, null, null);
+		
+		cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
+		cliente.setEmail(criarOrcamento.getTfEmail().getText());
+		cliente.setTelefone(criarOrcamento.getTfContato().getText());		
+		clienteDAO.adicionarDados(cliente);
+		
+		//DO ORÇAMENTO
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		Orcamento novoOrcamento = new Orcamento(null, null, 0, 0, 0, null, null, null);
+		
+		novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
+		novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
+		novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
+		novoOrcamento.setQuantHorasPrevistas(Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText()));
+		novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
+		novoOrcamento.setUsuarioPerfil(usuarioLogado);;
+		novoOrcamento.setCliente(cliente);;
+		orcamentoDAO.adicionarDados(novoOrcamento);
+		
+		//DE CONFIRMAÇÃO DO ORCAMENTO
+		
+		//PROVAVELEMNTE TERÁ DE CRIAR UMA CLASSE NO MODEL E TAMBÉM SEU DAO
+		
+		
+	}
+	
+	public void confirmar() {
+		
+		//AO CLICAR ATUALIZA A CLASSE DE CONFIRMAÇÃO DE ORÇAMENTO, ATUALIZA DE QUALQUER FORMA PARA GARANTIR,
+		//POIS TEM O VALOR FINAL(QUE É O VALOR DE VENDA)
+		//MUDAR VALOR FINAL NA CLASSE DE 
+		
+	}
+	
+	public void ativandoDevativandoComp() {
 		
 		criarOrcamento.setPreferredSize(new Dimension(1020,1150));
 		
@@ -220,18 +315,9 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(true);
 
 		criarOrcamento.getBtCalcEdi().setText("Editar");
-		
-		
 	}
 	
-	//EDITANDO VALORES
-	public void editarValores() {
-		
-		criarOrcamento.getBtCalcEdi().setText("Calcular");
-	}
-	
-	public void salvarInformacoes() {
-		
+	public void ativDesativCompAoSalvar() {
 		criarOrcamento.setPreferredSize(new Dimension(1020,1520));
 		
 		criarOrcamento.getLbDtConfPedido().setVisible(true);
@@ -242,22 +328,11 @@ public class OrcamentoController {
 		criarOrcamento.getLbFormaPaga().setVisible(true);
 		criarOrcamento.getCbFormaPaga().setVisible(true);
 		criarOrcamento.getLbValorFinal().setVisible(true);
-		criarOrcamento.getTfValorFinal().setVisible(true);
+		criarOrcamento.getLbValorFinalCad().setVisible(true);
 		
 		criarOrcamento.getBtConfirmar().setVisible(true);
 		criarOrcamento.getBtCalcEdi().setVisible(false);
 		criarOrcamento.getBtSalvar().setVisible(false);
-		
-		//Do cliente
-//		Cliente cliente = new Cliente(null, null, null);
-//		
-//		cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
-//		cliente.setEmail(criarOrcamento.getTfEmail().getText());
-//		cliente.setTelefone(criarOrcamento.getTfContato().getText());
-//		
-		//clienteDAO.adicionarDados(cliente);
-		
-		//Demais informações de cálculo
 	}
 	
 	

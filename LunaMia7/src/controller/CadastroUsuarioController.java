@@ -360,6 +360,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 				
 					usuarioDAO.atualizarUsuario(usuarioAtualizado);
 					
+					LoginController.usuarioLogado = usuarioAtualizado;
+					
 					JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação", 1);
 				} else {
 					JOptionPane.showInternalMessageDialog(null, "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
