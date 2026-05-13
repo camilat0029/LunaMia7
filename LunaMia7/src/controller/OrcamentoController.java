@@ -1,8 +1,10 @@
 package controller;
 
 import java.awt.Dimension;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
@@ -40,6 +42,7 @@ public class OrcamentoController {
 		this.materiaPrimaDAO = materiaPrimaDAO;
 		
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
+		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -61,6 +64,10 @@ public class OrcamentoController {
 		
 		this.criarOrcamento.adicionar(e -> {
 			adicionar();
+		});
+		
+		this.criarOrcamento.remover(e -> {
+			remover();
 		});
 		
 	}
@@ -99,49 +106,94 @@ public class OrcamentoController {
 		menu.removerMenu();
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		
+		
+		
 		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
-		criarOrcamento.tabModeloOrcam = (DefaultTableModel) criarOrcamento.getTabMateriaisOrcam().getModel();
-		//criarOrcamento.tabModeloEstoque = (DefaultTableModel) criarOrcamento.getTabMateriaisEstoque().getModel();
 		criarOrcamento.tabModeloEstoque.limpar();
+		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
-		
-		for (MateriaPrima materiaPrima : listaMateriasPrimas) {
-			
-			criarOrcamento.tabModeloEstoque.adicionarMatPrima(materiaPrima);
-			
-//			Object[] informacoes = {materiaPrima.getNome(), materiaPrima.getValor(), materiaPrima.getQuantidadeDisponivel()};
-//			
-//			criarOrcamento.tabModeloEstoque.addRow(informacoes);
-			
-		}
-		
-		
+	
 		
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 		
 	}
 	
+	//ADICIONANDO DA TABELA DE ESTOQUE PARA ORÇAMENTO
 	public void adicionar() {
 		
 		int linhaSelecionada = criarOrcamento.getTabMateriaisEstoque().getSelectedRow();
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
-		criarOrcamento.tabModeloOrcam = (DefaultTableModel) criarOrcamento.getTabMateriaisOrcam().getModel();
 		
 		if (linhaSelecionada >= 0) {
 			MateriaPrima matPrima = criarOrcamento.tabModeloEstoque.getMatPrima(linhaSelecionada);
+			int quantidadeEstoque = matPrima.getQuantidadeDisponivel();
 			int idMateriaPrima = matPrima.getIdMateriaPrima();
 			
-			for (MateriaPrima materiaPrima : listaMateriasPrimas) {
-				if(materiaPrima.getIdMateriaPrima() == idMateriaPrima) {
-					Object[] informacoes = {materiaPrima.getNome(), materiaPrima.getValor(), materiaPrima.getQuantidadeDisponivel()};
-					criarOrcamento.tabModeloOrcam.addRow(informacoes);
-					break;
-				}
+			if(quantidadeEstoque <= 0) {
+				JOptionPane.showMessageDialog(null, "Não tem mais itens no estoque", "Informação", 1);
+				return;
 			}
 			
+			int linha = criarOrcamento.tabModeloOrcam.procurarId(idMateriaPrima);
+			
+			if(linha >= 0) {
+				
+				MateriaPrima matPrimaOrcam = criarOrcamento.tabModeloOrcam.getMatPrima(linha);
+				
+				int novaQuantidadeOrcam = matPrimaOrcam.getQuantidadeDisponivel() + 1;
+				
+				criarOrcamento.tabModeloOrcam.setValueAt(novaQuantidadeOrcam, linha, 2);
+				
+			} else {
+				
+				MateriaPrima matPrimaNova = new MateriaPrima(null, null, null, linha, linha, linha, null);
+				
+				matPrimaNova.setIdMateriaPrima(matPrima.getIdMateriaPrima());
+				matPrimaNova.setNome(matPrima.getNome());
+				matPrimaNova.setValor(matPrima.getValor());
+				matPrimaNova.setQuantidadeDisponivel(1);
+				
+				criarOrcamento.tabModeloOrcam.adicionarMatPrima(matPrimaNova);
+			}
+			
+			criarOrcamento.tabModeloEstoque.setValueAt(quantidadeEstoque - 1, linhaSelecionada, 2);
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Selecione uma linha para adicionar", "Informação", 1);
 		}
 		
+	}
+	
+	//REMOVENDO DA LISTA DE ORÇAMENTO PARA ESTOQUE
+	public void remover() {
+		int linhaSelecionada = criarOrcamento.getTabMateriaisOrcam().getSelectedRow();
+		
+		if (linhaSelecionada >= 0) {
+			
+			MateriaPrima matPrima = criarOrcamento.tabModeloOrcam.getMatPrima(linhaSelecionada);
+			int idMateriaPrima = matPrima.getIdMateriaPrima();
+			int linha = criarOrcamento.tabModeloEstoque.procurarId(idMateriaPrima);
+			
+			if(matPrima.getQuantidadeDisponivel() > 0) {
+				
+				criarOrcamento.tabModeloOrcam.setValueAt(matPrima.getQuantidadeDisponivel() - 1, linhaSelecionada, 2);
+				
+				MateriaPrima matPrimaEstoque = criarOrcamento.tabModeloEstoque.getMatPrima(linha);
+				int novaQuantidadeEstoque = matPrimaEstoque.getQuantidadeDisponivel() + 1;
+				criarOrcamento.tabModeloEstoque.setValueAt(novaQuantidadeEstoque, linha, 2);
+				
+				if(matPrima.getQuantidadeDisponivel() == 0) {
+					
+					criarOrcamento.tabModeloOrcam.removerMatPrima(linhaSelecionada);
+					
+				}
+				
+			}
+			
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Selecione uma linha para remover", "Informação", 1);
+		}
 	}
 	
 	//CALCULANDO VALORES

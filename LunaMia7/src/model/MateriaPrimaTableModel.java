@@ -53,6 +53,29 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 		
 	}
 	
+	@Override
+	public void setValueAt(Object value, int row, int column) {
+
+	    MateriaPrima materiaPrima = listaMateriasPrimas.get(row);
+
+	    switch (column) {
+
+	        case 0:
+	            materiaPrima.setNome((String) value);
+	            break;
+
+	        case 1:
+	            materiaPrima.setValor((Float) value);
+	            break;
+
+	        case 2:
+	            materiaPrima.setQuantidadeDisponivel((Integer) value);
+	            break;
+	    }
+
+	    fireTableCellUpdated(row, column);
+	}
+	
 	// ADIOCIONA UM ITEM NA LISTA
 	public void adicionarMatPrima(MateriaPrima matPrima) {
 		listaMateriasPrimas.add(matPrima);
@@ -81,6 +104,18 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 	public void limpar() {
 		listaMateriasPrimas.clear();
 		fireTableDataChanged();
+	}  
+	
+	
+	public int procurarId(int idMateriaPrima) {
+		for (int i = 0; i < listaMateriasPrimas.size(); i++) {
+			
+			if (listaMateriasPrimas.get(i).getIdMateriaPrima() == idMateriaPrima) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 	
 	

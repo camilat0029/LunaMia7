@@ -1,7 +1,10 @@
 package controller;
 
 import java.awt.Dimension;
+import java.util.List;
 
+import model.MateriaPrima;
+import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
 import view.Inicio;
@@ -12,13 +15,15 @@ public class InicioController {
 	private NavegadorTelas navegadorTelas;
 	private Menu menu;
 	private CriarOrcamento criarOrcamento;
+	private MateriaPrimaDAO materiaPrimaDAO;
 	
-	public InicioController(Inicio inicio, NavegadorTelas navegadorTelas, Menu menu, CriarOrcamento criarOrcamento) {
+	public InicioController(Inicio inicio, NavegadorTelas navegadorTelas, Menu menu, CriarOrcamento criarOrcamento, MateriaPrimaDAO materiaPrimaDAO) {
 		super();
 		this.inicio = inicio;
 		this.navegadorTelas = navegadorTelas;
 		this.menu = menu;
 		this.criarOrcamento = criarOrcamento;
+		this.materiaPrimaDAO = materiaPrimaDAO;
 		
 		this.inicio.criarOrcamento(e ->{
 			irParaTelaCriarOrc();
@@ -35,7 +40,7 @@ public class InicioController {
 	
 	public void irParaTelaCriarOrc() {
 		
-		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 		
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
@@ -65,6 +70,15 @@ public class InicioController {
 		
 		menu.removerMenu();
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
+		
+		
+		
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		criarOrcamento.tabModeloEstoque.limpar();
+		criarOrcamento.tabModeloOrcam.limpar();
+		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
+	
+		
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 	}

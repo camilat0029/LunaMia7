@@ -4,7 +4,7 @@ CREATE DATABASE `LunaMia`;
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
   `id_estoque` INT AUTO_INCREMENT NOT NULL,
-  `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'mililitro', 'unidade') NOT NULL,
+  `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'milimetro', 'unidade') NOT NULL,
   `valor` DECIMAL NOT NULL,
   `marca` VARCHAR(45) NULL,
   `cor` VARCHAR(45) NULL,
@@ -60,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
     ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Confirmacao_de_orcamento` (
-  `formaPagam` INT NOT NULL,
+  `formaPagam` INT NULL,
   `dataPrevisaoEnt` VARCHAR(45) NULL,
-  `dataConfirmacao` VARCHAR(45) NOT NULL,
+  `dataConfirmacao` VARCHAR(45) NULL,
   `id_orcamento` INT NOT NULL,
   `valorVenda` float not null,
   `lucroTotalObtido` float not null,
@@ -98,4 +98,13 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47) 99955-4433', 'emanuela.z', 'Emanuela', 30, 'Ilhota', 'SC', 30),
     ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47) 99987-6543', 'lara.cs', 'Lara', 25, 'Gaspar', 'SC',  3);
     
-    select * from Orcamento;
+    insert into MateriaPrima
+    values(null, 'metro', 10, 'Circulo', 'azul', 5, 'Linha', 100),
+    (null, 'metro', 15, 'Circulo2', 'azul2', 10, 'Linha2', 200),
+    (null, 'centimetro', 20, 'Circulo3', 'azul3', 15, 'Linha3', 300),
+    (null, 'milimetro', 25, 'Circulo4', 'azul4', 20, 'Linha4', 400),
+    (null, 'metro', 30, 'Circulo5', 'azul5', 25, 'Linha5', 500),
+    (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 600),
+    (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 700);
+    
+    select * from MateriaPrima;
