@@ -9,9 +9,11 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -23,6 +25,7 @@ import javax.swing.table.JTableHeader;
 
 import model.MateriaPrimaTableModel;
 import model.Orcamento;
+import javax.swing.ImageIcon;
 
 public class CriarOrcamento extends JPanel {
 
@@ -171,13 +174,23 @@ public class CriarOrcamento extends JPanel {
 		scrollPane_1.setBorder(null);
 		tabMateriaisOrcam.setBorder(null);
 		
-		btAdicionar = new JButton("Adicionar >>");
+		btAdicionar = new JButton("Adicionar");
+		ImageIcon iconAdd = new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/8.png"));
+		Image imgAdd = iconAdd.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btAdicionar.setIcon(new ImageIcon(imgAdd));
+		btAdicionar.setHorizontalTextPosition(SwingConstants.LEFT);
 		btAdicionar.setBackground(new Color(208, 176, 238));
 		btAdicionar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(btAdicionar, "cell 2 13,alignx center");
+		
+		
+		
 		btAdicionar.setBorderPainted(false);
 		
-		btRemover = new JButton("<<Remover");
+		btRemover = new JButton("Remover");
+		ImageIcon iconRem = new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/7.png"));
+		Image imgRem = iconRem.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btRemover.setIcon(new ImageIcon(imgRem));
 		btRemover.setBackground(new Color(208, 176, 238));
 		btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(btRemover, "cell 2 14,alignx center");

@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
 import model.ClienteDAO;
+import model.ConfirOrcam;
+import model.ConfirOrcamDAO;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.Orcamento;
@@ -25,14 +29,18 @@ public class OrcamentoController {
 	private TelaPrincipal telaPrincipal;
 	private OrcamentoDAO orcamentoDAO;
 	private ClienteDAO clienteDAO;
+	private ConfirOrcamDAO confirOrcamDAO;
 	private MateriaPrimaDAO materiaPrimaDAO;
 	private NavegadorTelas navegadorTelas;
 	private Orcamentos orcamentos;
 	private CriarOrcamento criarOrcamento;
+	
+	private ConfirOrcam confirOrcamAtual;
+    private Orcamento orcamentoAtual;
 
 	public OrcamentoController(OrcamentoDAO orcamentoDAO, TelaPrincipal telaPrincipal, Menu menu,
 			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento,
-			ClienteDAO clienteDAO, MateriaPrimaDAO materiaPrimaDAO) {
+			ClienteDAO clienteDAO, MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO) {
 		this.orcamentoDAO = orcamentoDAO;
 		this.telaPrincipal = telaPrincipal;
 		this.menu = menu;
@@ -277,19 +285,32 @@ public class OrcamentoController {
 		novoOrcamento.setCliente(cliente);;
 		orcamentoDAO.adicionarDados(novoOrcamento);
 		
+		this.orcamentoAtual = novoOrcamento;
+		
 		//DE CONFIRMAÇÃO DO ORCAMENTO
+		ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
 		
-		//PROVAVELEMNTE TERÁ DE CRIAR UMA CLASSE NO MODEL E TAMBÉM SEU DAO
+		confirOrcam.setFormPagamento(null);
+		confirOrcam.setDataPrevistaEntrega(null);
+		confirOrcam.setDataConfirmacao(null);
+		confirOrcam.setOrcamento(novoOrcamento);
+		confirOrcam.setValorVenda(0);
+		confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+		confirOrcamDAO.adicionarDados(confirOrcam);
 		
+		this.confirOrcamAtual = confirOrcam;
 		
 	}
 	
 	public void confirmar() {
 		
-		//AO CLICAR ATUALIZA A CLASSE DE CONFIRMAÇÃO DE ORÇAMENTO, ATUALIZA DE QUALQUER FORMA PARA GARANTIR,
-		//POIS TEM O VALOR FINAL(QUE É O VALOR DE VENDA)
-		//MUDAR VALOR FINAL NA CLASSE DE 
-		
+		confirOrcamAtual.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
+		confirOrcamAtual.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		confirOrcamAtual.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorFinalCad().getText()));
+		confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+		confirOrcamAtual.setOrcamento(orcamentoAtual);
+		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
 	}
 	
 	public void ativandoDevativandoComp() {
