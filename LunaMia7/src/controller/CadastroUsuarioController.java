@@ -233,7 +233,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	
 	//VALIDAÇÃO DE NOME
 	public boolean nomePermitido(String nome) {
-		String nomeValido = "^[A-Za-z.]+$";
+		String nomeValido = "^[A-Za-z. ]+$";
 		return nome.matches(nomeValido);
 	}
 	
@@ -279,8 +279,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			if(!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
 				JOptionPane.showMessageDialog(null, "Nome Inválido! \n(A-Z, a-z, .)", "Informação", 1);
 			} else {
-				String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText();
-				String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText();
+				String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText().replace(",", ".");
+				String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText().replace(",", ".");
 				
 				precoHoraPermitido(precoHoraValido);
 				percentualLucroPermitido(percentualLucroValido);
@@ -291,8 +291,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 					usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
 					usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
 					usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
-					usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfilAposCad.getTfPrecoHoraCP().getText()));
-					usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfilAposCad.getTfPercLucroCP().getText()));
+					usuarioAtualizado.setPrecoHora(Float.parseFloat(precoHoraValido));
+					usuarioAtualizado.setPercentualLucro(Float.parseFloat(percentualLucroValido));
 					usuarioAtualizado.setNomeUsuario(confPerfilAposCad.getLbNomeUsuarioCad().getText());
 					usuarioAtualizado.setEmail(confPerfilAposCad.getLbEmailCad().getText());
 					
@@ -337,8 +337,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 				
 			} else {
 				
-				String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText();
-				String percentualLucroValido = confPerfil.getTfPercLucroCP().getText();
+				String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText().replace(",", ".");
+				String percentualLucroValido = confPerfil.getTfPercLucroCP().getText().replace(",", ".");
 				
 				precoHoraPermitido(precoHoraValido);
 				percentualLucroPermitido(percentualLucroValido);
@@ -349,8 +349,8 @@ public class CadastroUsuarioController extends ComponentAdapter{
 					usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
 					usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
 					usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
-					usuarioAtualizado.setPrecoHora(Float.parseFloat(confPerfil.getTfPrecoHoraCP().getText()));
-					usuarioAtualizado.setPercentualLucro(Float.parseFloat(confPerfil.getTfPercLucroCP().getText()));
+					usuarioAtualizado.setPrecoHora(Float.parseFloat(precoHoraValido));
+					usuarioAtualizado.setPercentualLucro(Float.parseFloat(percentualLucroValido));
 					usuarioAtualizado.setNomeUsuario(confPerfil.getLbNomeUsuarioCad().getText());
 					usuarioAtualizado.setEmail(confPerfil.getLbEmailCad().getText());
 					

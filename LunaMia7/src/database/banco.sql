@@ -4,7 +4,7 @@ CREATE DATABASE `LunaMia`;
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
   `id_estoque` INT AUTO_INCREMENT NOT NULL,
-  `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'mililitro', 'unidade') NOT NULL,
+  `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'milimetro', 'unidade') NOT NULL,
   `valor` DECIMAL NOT NULL,
   `marca` VARCHAR(45) NULL,
   `cor` VARCHAR(45) NULL,
@@ -60,12 +60,12 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
     ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Confirmacao_de_orcamento` (
-  `formaPagam` INT NULL,
-  `dataPrevisaoEnt` VARCHAR(45) NULL,
-  `dataConfirmacao` VARCHAR(45) NULL,
+  `formaPagam` VARCHAR(45) NULL,
+  `dataPrevisaoEnt` DATE NULL,
+  `dataConfirmacao` DATE NULL,
   `id_orcamento` INT NOT NULL,
-  `valorVenda` float not null,
-  `lucroTotalObtido` float not null,
+  `valorVenda` DECIMAL not null,
+  `lucroTotalObtido` DECIMAL not null,
    
   PRIMARY KEY (`id_orcamento`),
   CONSTRAINT `fk_Confirmação_de_orcaçamento_Orcamento`
@@ -77,6 +77,8 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Confirmacao_de_orcamento` (
 CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
   `id_orcamento` INT NOT NULL,
   `id_estoque` INT NOT NULL,
+  `quantidade` INT NOT NULL,
+  
   PRIMARY KEY (`id_estoque`, `id_orcamento`),
   INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_MateriaPrima_idx` (`id_estoque` ASC),
   INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_Confirmacao__idx` (`id_orcamento` ASC),
