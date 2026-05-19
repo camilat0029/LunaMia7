@@ -112,8 +112,7 @@ public class OrcamentoController {
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		
 		
-		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(null);
 		criarOrcamento.tabModeloEstoque.limpar();
 		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
@@ -279,7 +278,7 @@ public class OrcamentoController {
 		
 		//DE CONFIRMAÇÃO DO ORCAMENTO
 		
-		//PROVAVELEMNTE TERÁ DE CRIAR UMA CLASSE NO MODEL E TAMBÉM SEU DAO
+		//PROVAVELEMENTE TERÁ DE CRIAR UMA CLASSE NO MODEL E TAMBÉM SEU DAO
 		
 		
 	}

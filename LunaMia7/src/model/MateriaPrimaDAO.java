@@ -13,8 +13,8 @@ public class MateriaPrimaDAO {
 	public void adicionarInsumos(MateriaPrima materiaPrimaEstoque) {
 		
 		String sql = "INSERT INTO MateriaPrima (unidadeMedida,"
-				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade)"
-				+ "VALUES (?,?,?,?,?,?,?)";
+				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade,usuario_email)"
+				+ "VALUES (?,?,?,?,?,?,?,?)";
 	
 		
 		Connection conexao = null;
@@ -32,7 +32,7 @@ public class MateriaPrimaDAO {
             pstm.setFloat(5, materiaPrimaEstoque.getQuantidadeDisponivel());
             pstm.setString(6, materiaPrimaEstoque.getNome());
             pstm.setFloat(7, materiaPrimaEstoque.getQtdPorUnidade());
-            
+            pstm.setString(8, materiaPrimaEstoque.getUsuario().getEmail());
             pstm.executeUpdate();
             
             rs = pstm.getGeneratedKeys();
@@ -53,9 +53,9 @@ public class MateriaPrimaDAO {
         }
     }
 	
-    public static List<MateriaPrima> listarMateriaPrima() {
+	public static List<MateriaPrima> listarMateriaPrima(String emailUsuario) {
     	
-        String sql = "SELECT * FROM MateriaPrima";
+        String sql = "SELECT * FROM MateriaPrima WHERE usuario_email = ?";
         List<MateriaPrima> materiasPrimas = new ArrayList<>();
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -64,6 +64,7 @@ public class MateriaPrimaDAO {
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
+            pstm.setString(1, emailUsuario);
             rset = pstm.executeQuery();
 
             while (rset.next()) {

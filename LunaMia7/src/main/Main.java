@@ -107,6 +107,8 @@ public class Main {
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
+		materiaPrimaView.adicionarOuvinte(materiaPrimaController);
+		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		navegadorTelas.adicionarPainel("CADASTRO_MATERIA_PRIMA", cadastroMateriaPrimaEstoque);

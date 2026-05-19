@@ -8,6 +8,7 @@ public class MateriaPrima {
 	private float valor,qtdPorUnidade;
 	private int quantidadeDisponivel, idMateriaPrima;
 	private UnidadeMedida unidadeMedida;
+	private UsuarioPerfil usuario;
 
 	
 	private static final long serialVersionUID = 1L;
@@ -106,6 +107,13 @@ public class MateriaPrima {
 		this.unidadeMedida = unidadeMedida;
 	}
 	
+	public UsuarioPerfil getUsuario() {
+	    return usuario;
+	}
+
+	public void setUsuario(UsuarioPerfil usuario) {
+	    this.usuario = usuario;
+	}
 	
 	
 	

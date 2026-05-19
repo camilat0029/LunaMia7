@@ -8,6 +8,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -98,6 +99,10 @@ public class MateriaPrimaView extends JPanel {
 
 	public void setTabelaMateriaPrima(JTable tabelaMateriaPrima) {
 		this.tabelaMateriaPrima = tabelaMateriaPrima;
+	}
+	
+	public void adicionarOuvinte(ComponentListener listener) {
+		this.addComponentListener(listener);
 	}
 	
 	

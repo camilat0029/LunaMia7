@@ -45,7 +45,7 @@ public class InicioController {
 		menu.removerMenu();
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(null);
 		criarOrcamento.tabModeloEstoque.limpar();
 		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);

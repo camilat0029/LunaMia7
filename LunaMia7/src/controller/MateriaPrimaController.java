@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -9,11 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.MateriaPrimaDAO;
+import model.UsuarioPerfil;
 import view.CadastroMateriaPrimaEstoque;
 import view.MateriaPrimaView;
 import model.MateriaPrima;
 
-public class MateriaPrimaController {
+public class MateriaPrimaController extends ComponentAdapter {
 	
 	private MateriaPrima materiaPrima;
 	private MateriaPrimaView materiaPrimaView;
@@ -71,9 +74,11 @@ public class MateriaPrimaController {
 			
 		} else {
 			
+			UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 			
 			MateriaPrima novaMateriaPrima = new MateriaPrima (null,null,null, 0,0,0, null);
 			
+			novaMateriaPrima.setUsuario(usuarioLogado);
 			novaMateriaPrima.setNome(cadastroMateriaPrima.getTfNomeMateriaPrima().getText());
 			novaMateriaPrima.setCor(cadastroMateriaPrima.getTfCor().getText());
 			novaMateriaPrima.setMarca(cadastroMateriaPrima.getTfMarca().getText());
@@ -107,8 +112,12 @@ public class MateriaPrimaController {
 	
 	public void carregarTabela() {
 		
-		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima();
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		
+		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		materiaPrimaView.tabelaModeloMateriaPrima=(DefaultTableModel) materiaPrimaView.getTabelaMateriaPrima().getModel();
+		
+		materiaPrimaView.tabelaModeloMateriaPrima.setRowCount(0);
 		
 			for(MateriaPrima mp : lista) {
 				Object[] materiasPrimas = {mp.getNome(), mp.getQuantidadeDisponivel(), mp.getUnidadeMedida()};
@@ -150,6 +159,10 @@ public class MateriaPrimaController {
 			valido=true;
 		}
 		return valido;
+	}
+	
+	public void componentShown(ComponentEvent e) {
+		this.carregarTabela();
 	}
 
 }

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
   `qntDisponivel` INT NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
   `qntPorUnidade` DECIMAL NOT NULL,
+  `usuario_email` VASRCHAR(255);
   PRIMARY KEY (`id_estoque`));
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
