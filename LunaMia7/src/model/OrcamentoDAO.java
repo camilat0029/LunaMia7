@@ -75,7 +75,7 @@ public class OrcamentoDAO {
 
 			while (rset.next()) {
 
-				Orcamento orcamento = new Orcamento(null, null, 0, 0, 0, null, null, null);
+				Orcamento orcamento = new Orcamento(null, 0, 0, 0, null);
 				orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
 				orcamento.setTituloPedido(rset.getString("tituloPedido"));
 				orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido").toUpperCase()));

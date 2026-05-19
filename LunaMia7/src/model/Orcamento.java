@@ -4,10 +4,9 @@ import java.time.LocalDate;
 
 public class Orcamento {
 	
-	private String tituloPedido, pagamento;
+	private String tituloPedido;
 	private float quantHorasPrevistas, precoHora;
 	private int maxDias, idOrcamento;
-	private LocalDate dataPrevistaEntrega, dataConfirmacao;
 	private Cliente cliente;
 	private UsuarioPerfil usuarioPerfil;
 	public Status status;
@@ -29,16 +28,13 @@ public class Orcamento {
 		}
 	}
 	
-	public Orcamento(String tituloPedido, String pagamento, float quantHorasPrevistas, float precoHora,
-			int maxDias, LocalDate dataPrevistaEntrega, LocalDate dataConfirmacao, Status status) {
+	public Orcamento(String tituloPedido, float quantHorasPrevistas, float precoHora,
+			int maxDias, Status status) {
 		super();
 		this.tituloPedido = tituloPedido;
-		this.pagamento = pagamento;
 		this.quantHorasPrevistas = quantHorasPrevistas;
 		this.precoHora = precoHora;
 		this.maxDias = maxDias;
-		this.dataPrevistaEntrega = dataPrevistaEntrega;
-		this.dataConfirmacao = dataConfirmacao;
 		this.status = status;
 	}
 	
@@ -87,14 +83,6 @@ public class Orcamento {
 		this.tituloPedido = tituloPedido;
 	}
 	
-	public String getPagamento() {
-		return pagamento;
-	}
-	
-	public void setPagamento(String pagamento) {
-		this.pagamento = pagamento;
-	}
-	
 	public float getQuantHorasPrevistas() {
 		return quantHorasPrevistas;
 	}
@@ -118,22 +106,6 @@ public class Orcamento {
 	
 	public void setMaxDias(int maxDias) {
 		this.maxDias = maxDias;
-	}
-	
-	public LocalDate getDataPrevistaEntrega() {
-		return dataPrevistaEntrega;
-	}
-	
-	public void setDataPrevistaEntrega(LocalDate dataPrevistaEntrega) {
-		this.dataPrevistaEntrega = dataPrevistaEntrega;
-	}
-	
-	public LocalDate getDataConfirmacao() {
-		return dataConfirmacao;
-	}
-	
-	public void setDataConfirmacao(LocalDate dataConfirmacao) {
-		this.dataConfirmacao = dataConfirmacao;
 	}
 
 	public int getIdOrcamento() {

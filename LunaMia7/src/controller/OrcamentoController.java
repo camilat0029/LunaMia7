@@ -266,7 +266,7 @@ public class OrcamentoController {
 		
 		//DO ORÇAMENTO
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-		Orcamento novoOrcamento = new Orcamento(null, null, 0, 0, 0, null, null, null);
+		Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null);
 		
 		novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
 		novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
