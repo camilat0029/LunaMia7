@@ -33,6 +33,8 @@ public class MateriaPrimaController extends ComponentAdapter {
 		this.cadastroMateriaPrima = cadastroMateriaPrima;
 		this.menu = menu;
 		this.materiaPrimaView = materiaPrimaView;
+		
+		materiaPrimaView.getTabelaMateriaPrima().setModel(materiaPrimaView.tabelaModeloMateriaPrima);		
 
 		this.cadastroMateriaPrima.confirmar(e -> {
 
@@ -127,15 +129,8 @@ public class MateriaPrimaController extends ComponentAdapter {
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 
 		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
-		materiaPrimaView.tabelaModeloMateriaPrima = (DefaultTableModel) materiaPrimaView.getTabelaMateriaPrima()
-				.getModel();
-
-		materiaPrimaView.tabelaModeloMateriaPrima.setRowCount(0);
-
-		for (MateriaPrima mp : lista) {
-			Object[] materiasPrimas = { mp.getNome(), mp.getQuantidadeDisponivel(), mp.getUnidadeMedida() };
-			materiaPrimaView.tabelaModeloMateriaPrima.addRow(materiasPrimas);
-		}
+		materiaPrimaView.tabelaModeloMateriaPrima.limpar();
+		materiaPrimaView.tabelaModeloMateriaPrima.setLista(lista);
 
 	}
 

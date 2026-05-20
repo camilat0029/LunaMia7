@@ -17,12 +17,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import model.MateriaPrimaViewTableModel;
+
 public class MateriaPrimaView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable tabelaMateriaPrima;
 	private JButton btAdicionar;
-	public DefaultTableModel tabelaModeloMateriaPrima;
+	public MateriaPrimaViewTableModel tabelaModeloMateriaPrima =new MateriaPrimaViewTableModel();
 	
 
 	/**
@@ -48,23 +50,9 @@ public class MateriaPrimaView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
-		
-		
-		
-		DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+		tabelaMateriaPrima = new JTable(tabelaModeloMateriaPrima);
+		scrollPane.setViewportView(tabelaMateriaPrima);
 			
-			@Override
-			public boolean isCellEditable(int column, int row) {
-				return column ==3;
-				
-			}
-			
-		};
-		
-		tabelaMateriaPrima = new JTable(modelo);
-		
-
-		
 		//Estilização do cabeçalho
 		
 		JTableHeader header = tabelaMateriaPrima.getTableHeader();
