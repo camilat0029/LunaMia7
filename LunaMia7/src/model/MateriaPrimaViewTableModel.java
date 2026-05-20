@@ -5,32 +5,27 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-public class MateriaPrimaTableModel extends AbstractTableModel{
+public class MateriaPrimaViewTableModel extends AbstractTableModel{
 	
 	private List<MateriaPrima> listaMateriasPrimas = new ArrayList<>();
 	
-	private String[] colunas = {"Nome", "Valor", "Quantia"};
+	private String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", "..."};
 
-	// QUANTAS LINHAS TEM A TABELA
 	@Override
 	public int getRowCount() {
 		return listaMateriasPrimas.size();
 	}
 
-	// QUANTAS COLUNAS TEM A TABELA
 	@Override
 	public int getColumnCount() {
 		return colunas.length;
 	}
 	
-	// DEFINE O NOME DO TOPO DA TABELA
 	@Override
-	public String getColumnName(int colunm) {
-		return colunas[colunm];
+	public String getColumnName(int column) {
+		return colunas[column];
 	}
-	
-	
-	// DEFINE OQUE APARECE EM CADA CÉDULA DA TABELA
+
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		
@@ -42,38 +37,14 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 			return materiaPrima.getNome();
 			
 		case 1:
-			return materiaPrima.getValor();
+			return materiaPrima.getQuantidadeDisponivel();
 			
 		case 2:
-			return materiaPrima.getQuantidadeDisponivel();
+			return materiaPrima.getUnidadeMedida();
 			
 		default:
 			return null;
 		}
-		
-	}
-	
-	@Override
-	public void setValueAt(Object value, int row, int column) {
-
-	    MateriaPrima materiaPrima = listaMateriasPrimas.get(row);
-
-	    switch (column) {
-
-	        case 0:
-	            materiaPrima.setNome((String) value);
-	            break;
-
-	        case 1:
-	            materiaPrima.setValor((Float) value);
-	            break;
-
-	        case 2:
-	            materiaPrima.setQuantidadeDisponivel((Integer) value);
-	            break;
-	    }
-
-	    fireTableCellUpdated(row, column);
 	}
 	
 	// ADICIONA UM ITEM NA LISTA
@@ -126,8 +97,4 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 		return false;
 	}
 	
-	
-	
-	
-
 }
