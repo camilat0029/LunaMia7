@@ -92,7 +92,7 @@ public class MateriaPrimaDAO {
     
     public void atualizarMateriasPrimas(MateriaPrima materiaPrima) {
         String sql = "UPDATE MateriaPrima SET nome = ?, marca = ?, cor = ?, valor = ?,"
-        		+ "qntPorUnidade = ?, qntDisponivel = ?, unidadeMedida =? WHERE nome = ?";
+        		+ "qntPorUnidade = ?, qntDisponivel = ?, unidadeMedida =? WHERE id_estoque = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -106,6 +106,25 @@ public class MateriaPrimaDAO {
             pstm.setFloat(5, materiaPrima.getQtdPorUnidade());
             pstm.setInt(6, materiaPrima.getQuantidadeDisponivel());
             pstm.setString(7, materiaPrima.getUnidadeMedida().name().toLowerCase());
+            pstm.setInt(8, materiaPrima.getIdMateriaPrima());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+        }
+    }
+    
+    public void atualizarQuantMP(int idMateriaPrima, int quantidade) {
+        String sql = "UPDATE MateriaPrima SET qntDisponivel = ? WHERE id_estoque = ?";
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, quantidade);
+            pstm.setInt(2, idMateriaPrima);
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
