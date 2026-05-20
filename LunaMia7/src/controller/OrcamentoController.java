@@ -1,6 +1,10 @@
 package controller;
 
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
 import model.ClienteDAO;
+import model.ConfirOrcam;
+import model.ConfirOrcamDAO;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.Orcamento;
@@ -25,14 +31,18 @@ public class OrcamentoController {
 	private TelaPrincipal telaPrincipal;
 	private OrcamentoDAO orcamentoDAO;
 	private ClienteDAO clienteDAO;
+	private ConfirOrcamDAO confirOrcamDAO;
 	private MateriaPrimaDAO materiaPrimaDAO;
 	private NavegadorTelas navegadorTelas;
 	private Orcamentos orcamentos;
 	private CriarOrcamento criarOrcamento;
+	
+	private ConfirOrcam confirOrcamAtual;
+    private Orcamento orcamentoAtual;
 
 	public OrcamentoController(OrcamentoDAO orcamentoDAO, TelaPrincipal telaPrincipal, Menu menu,
 			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento,
-			ClienteDAO clienteDAO, MateriaPrimaDAO materiaPrimaDAO) {
+			ClienteDAO clienteDAO, MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO) {
 		this.orcamentoDAO = orcamentoDAO;
 		this.telaPrincipal = telaPrincipal;
 		this.menu = menu;
@@ -41,12 +51,21 @@ public class OrcamentoController {
 		this.criarOrcamento = criarOrcamento;
 		this.clienteDAO = clienteDAO;
 		this.materiaPrimaDAO = materiaPrimaDAO;
+		this.confirOrcamDAO = confirOrcamDAO;
 		
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
+		//orcamentos.getta
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
+		});
+		
+		this.criarOrcamento.voltar(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				navegadorTelas.navegarTela("ORCAMENTOS");
+			}
 		});
 		
 		this.criarOrcamento.calcEdita(e -> {
@@ -72,7 +91,7 @@ public class OrcamentoController {
 		});
 		
 		this.criarOrcamento.confirmar(e -> {
-			//FALTA ISSO
+			confirmar();
 		});
 		
 	}
@@ -112,7 +131,8 @@ public class OrcamentoController {
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		
 		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(null);
+		
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		criarOrcamento.tabModeloEstoque.limpar();
 		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
@@ -255,6 +275,8 @@ public class OrcamentoController {
 		
 		ativDesativCompAoSalvar();
 		
+		criarOrcamento.getLbValorFinalCad().setText(criarOrcamento.getLbValorCalVenda().getText());
+		
 		//DO CLIENTE
 		Cliente cliente = new Cliente(null, null, null);
 		
@@ -275,19 +297,41 @@ public class OrcamentoController {
 		novoOrcamento.setUsuarioPerfil(usuarioLogado);;
 		novoOrcamento.setCliente(cliente);;
 		orcamentoDAO.adicionarDados(novoOrcamento);
+		this.orcamentoAtual = novoOrcamento;
 		
 		//DE CONFIRMAÇÃO DO ORCAMENTO
+		ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
 		
-		//PROVAVELEMENTE TERÁ DE CRIAR UMA CLASSE NO MODEL E TAMBÉM SEU DAO
+		confirOrcam.setFormPagamento(null);
+		confirOrcam.setDataPrevistaEntrega(null);
+		confirOrcam.setDataConfirmacao(null);
+		confirOrcam.setOrcamento(novoOrcamento);
+		confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
+		confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+		confirOrcamDAO.adicionarDados(confirOrcam);
+		this.confirOrcamAtual = confirOrcam;
 		
+		atualizarQuantMP();
 		
 	}
 	
 	public void confirmar() {
 		
-		//AO CLICAR ATUALIZA A CLASSE DE CONFIRMAÇÃO DE ORÇAMENTO, ATUALIZA DE QUALQUER FORMA PARA GARANTIR,
-		//POIS TEM O VALOR FINAL(QUE É O VALOR DE VENDA)
-		//MUDAR VALOR FINAL NA CLASSE DE 
+		confirOrcamAtual.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
+		confirOrcamAtual.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		confirOrcamAtual.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
+		confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+		confirOrcamAtual.setOrcamento(orcamentoAtual);
+		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
+		
+		JOptionPane.showMessageDialog(null, "Orçamento Confirmado com Sucesso", "informação", 1);
+		navegadorTelas.navegarTela("ORCAMENTOS");
+		
+		carregarTabelaOrcamentos();
+		
+		//CRIAR E COLOCAR METODO DE LIMPAR A TELA
+		//FAZER VALIDAÇÕES
 		
 	}
 	
@@ -316,6 +360,18 @@ public class OrcamentoController {
 		criarOrcamento.getBtCalcEdi().setText("Editar");
 	}
 	
+	public void atualizarQuantMP() {
+		
+		int totalLinhas = criarOrcamento.tabModeloEstoque.getRowCount();
+		
+		
+		for (int i = 0; i < totalLinhas; i++) {
+			MateriaPrima materiaPrima = criarOrcamento.tabModeloEstoque.getMatPrima(i);
+			materiaPrimaDAO.atualizarQuantMP(materiaPrima.getIdMateriaPrima(), materiaPrima.getQuantidadeDisponivel());
+		}
+		
+	}
+	
 	public void ativDesativCompAoSalvar() {
 		criarOrcamento.setPreferredSize(new Dimension(1020,1520));
 		
@@ -334,5 +390,18 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 	}
 	
+	public void carregarTabelaOrcamentos() {
+		
+		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos();
+		
+		orcamentos.tabelaModeloOrcamentos = (DefaultTableModel) orcamentos.getTabelaOrcamentos().getModel();
+		
+		orcamentos.tabelaModeloOrcamentos.setRowCount(0);
+
+		for(Orcamento orcam : orcamentosCad) {
+			Object[] informacoes = {orcam.getTituloPedido(), orcam.getStatus(), orcam.getCliente().getNome()};
+			orcamentos.tabelaModeloOrcamentos.addRow(informacoes);
+		}
+	}
 	
 }

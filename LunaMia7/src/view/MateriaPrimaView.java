@@ -48,10 +48,22 @@ public class MateriaPrimaView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
-		String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", ""};
+		String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", "..."};
 		
-		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+		
+		DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+			
+			@Override
+			public boolean isCellEditable(int column, int row) {
+				return column ==3;
+				
+			}
+			
+		};
+		
 		tabelaMateriaPrima = new JTable(modelo);
+		
+
 		
 		//Estilização do cabeçalho
 		

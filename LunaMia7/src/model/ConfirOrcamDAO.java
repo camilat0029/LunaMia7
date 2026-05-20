@@ -22,8 +22,19 @@ public class ConfirOrcamDAO {
 			conexao = BancoDeDados.conectar();
 			pstm = conexao.prepareStatement(sql);
 			pstm.setString(1, confirOrcam.getFormPagamento());
-			pstm.setDate(2, java.sql.Date.valueOf(confirOrcam.getDataPrevistaEntrega()));
-			pstm.setDate(3, java.sql.Date.valueOf(confirOrcam.getDataConfirmacao()));
+			
+			if(confirOrcam.getDataPrevistaEntrega() != null) {
+				pstm.setDate(2, java.sql.Date.valueOf(confirOrcam.getDataPrevistaEntrega()));
+			} else {
+				pstm.setNull(2, java.sql.Types.DATE);
+			}
+			
+			if(confirOrcam.getDataConfirmacao() != null) {
+				pstm.setDate(3, java.sql.Date.valueOf(confirOrcam.getDataConfirmacao()));
+			} else {
+				pstm.setNull(3, java.sql.Types.DATE);
+			}
+			
 			pstm.setInt(4, confirOrcam.getOrcamento().getIdOrcamento());
 			pstm.setFloat(5, confirOrcam.getValorVenda());
 			pstm.setFloat(6, confirOrcam.getLucro());

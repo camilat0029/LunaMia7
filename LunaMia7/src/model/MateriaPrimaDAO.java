@@ -13,7 +13,7 @@ public class MateriaPrimaDAO {
 	public void adicionarInsumos(MateriaPrima materiaPrimaEstoque) {
 		
 		String sql = "INSERT INTO MateriaPrima (unidadeMedida,"
-				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade,usuario_email)"
+				+ " valor, marca, cor, qntDisponivel, nome, qntPorUnidade, usuario_email)"
 				+ "VALUES (?,?,?,?,?,?,?,?)";
 	
 		

@@ -40,12 +40,14 @@ public class InicioController {
 	
 	public void irParaTelaCriarOrc() {
 		
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		
 		ativandoDesativandoComp();
 		
 		menu.removerMenu();
 		criarOrcamento.setPreferredSize(new Dimension(1020,920));
 		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(null);
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		criarOrcamento.tabModeloEstoque.limpar();
 		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
