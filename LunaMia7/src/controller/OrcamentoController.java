@@ -55,6 +55,7 @@ public class OrcamentoController {
 		
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
+		//orcamentos.getta
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -131,7 +132,7 @@ public class OrcamentoController {
 		
 		
 		
-		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima();
+		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		criarOrcamento.tabModeloEstoque.limpar();
 		criarOrcamento.tabModeloOrcam.limpar();
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
@@ -327,6 +328,8 @@ public class OrcamentoController {
 		JOptionPane.showMessageDialog(null, "Orçamento Confirmado com Sucesso", "informação", 1);
 		navegadorTelas.navegarTela("ORCAMENTOS");
 		
+		carregarTabelaOrcamentos();
+		
 		//CRIAR E COLOCAR METODO DE LIMPAR A TELA
 		//FAZER VALIDAÇÕES
 		
@@ -387,5 +390,18 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 	}
 	
+	public void carregarTabelaOrcamentos() {
+		
+		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos();
+		
+		orcamentos.tabelaModeloOrcamentos = (DefaultTableModel) orcamentos.getTabelaOrcamentos().getModel();
+		
+		orcamentos.tabelaModeloOrcamentos.setRowCount(0);
+
+		for(Orcamento orcam : orcamentosCad) {
+			Object[] informacoes = {orcam.getTituloPedido(), orcam.getStatus(), orcam.getCliente().getNome()};
+			orcamentos.tabelaModeloOrcamentos.addRow(informacoes);
+		}
+	}
 	
 }

@@ -62,37 +62,53 @@ public class OrcamentoDAO {
 	}
 
 	public List<Orcamento> listarOrcamentos() {
-		String sql = "SELECT * FROM Orcamento";
-		List<Orcamento> orcamentos = new ArrayList<>();
-		Connection conexao = null;
-		PreparedStatement pstm = null;
-		ResultSet rset = null; // Objeto que guarda o resultado da consulta
 
-		try {
-			conexao = BancoDeDados.conectar();
-			pstm = conexao.prepareStatement(sql);
-			rset = pstm.executeQuery();
+	    String sql = "SELECT o.*, c.* FROM Orcamento o INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente";
 
-			while (rset.next()) {
+	    List<Orcamento> orcamentos = new ArrayList<>();
 
-				Orcamento orcamento = new Orcamento(null, 0, 0, 0, null);
-				orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
-				orcamento.setTituloPedido(rset.getString("tituloPedido"));
-				orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido").toUpperCase()));
-				orcamento.setPrecoHora(rset.getFloat("precoHora"));
-				orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
-				orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
-				
-				orcamentos.add(orcamento);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			BancoDeDados.desconectar(conexao);
-			// Fechar recursos
-		}
-		return orcamentos;
-    }
+	    Connection conexao = null;
+	    PreparedStatement pstm = null;
+	    ResultSet rset = null;
+
+	    try {
+
+	        conexao = BancoDeDados.conectar();
+
+	        pstm = conexao.prepareStatement(sql);
+
+	        rset = pstm.executeQuery();
+
+	        while (rset.next()) {
+
+	            Orcamento orcamento = new Orcamento(null, 0, 0, 0, null);
+
+	            orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
+	            orcamento.setTituloPedido(rset.getString("tituloPedido"));
+	            orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido").toUpperCase()));
+	            orcamento.setPrecoHora(rset.getFloat("precoHora"));
+	            orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
+	            orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
+	            
+	            Cliente cliente =new Cliente(null, null, null);
+	            
+	            cliente.setNome(rset.getString("nomeCliente"));
+	            orcamento.setCliente(cliente);
+	            
+	            orcamentos.add(orcamento);
+	        }
+
+	    } catch (SQLException e) {
+
+	        e.printStackTrace();
+
+	    } finally {
+
+	        BancoDeDados.desconectar(conexao);
+	    }
+
+	    return orcamentos;
+	}
 	
 	 public void atualizarOrcamento(Orcamento orcamento) {
 	        String sql = "UPDATE Orcamento SET tituloPedido = ?, statusPedido = ?, precoHora = ?, quantHrs = ?,"

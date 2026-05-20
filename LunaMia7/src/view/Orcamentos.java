@@ -16,11 +16,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import model.MateriaPrimaTableModel;
+
 public class Orcamentos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable tabelaOrcamentos;
 	private JButton btCriar;
+	public DefaultTableModel tabelaModeloOrcamentos;
+	//public MateriaPrimaTableModel tabModeloOrcamentos = new MateriaPrimaTableModel();
 
 	/**
 	 * Create the panel.
@@ -49,7 +53,7 @@ public class Orcamentos extends JPanel {
 		
 		;
 		
-		String[] colunas = {"Orcamentos", "Status", "Data de Entrega", "Cliente", ""};
+		String[] colunas = {"Orcamentos", "Status", "Cliente", ""};
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 		tabelaOrcamentos = new JTable(modelo);
 		
@@ -83,7 +87,7 @@ public class Orcamentos extends JPanel {
 		tabelaOrcamentos.getColumnModel().getColumn(1).setPreferredWidth(200); // Status
 		tabelaOrcamentos.getColumnModel().getColumn(2).setPreferredWidth(200); // Data
 		tabelaOrcamentos.getColumnModel().getColumn(3).setPreferredWidth(200); // Cliente
-		tabelaOrcamentos.getColumnModel().getColumn(4).setPreferredWidth(50);  // Botão / mais
+		//tabelaOrcamentos.getColumnModel().getColumn(4).setPreferredWidth(50);  // Botão / mais
 				
 		scrollPane.setViewportView(tabelaOrcamentos);
 				
@@ -93,9 +97,15 @@ public class Orcamentos extends JPanel {
 	public void criar(ActionListener actionListener) {
 		this.btCriar.addActionListener(actionListener);
 	}
-	//public void adicionarLinha(String tituloOrcamento, boolean status, String dataEntrega, String cliente, String mais) {
-	//	modelo.addRow(new Object[] {tituloOrcamento, status, dataEntrega, cliente, mais});
-		
-	//}
+
+	public JTable getTabelaOrcamentos() {
+		return tabelaOrcamentos;
+	}
+
+	public void setTabelaOrcamentos(JTable tabelaOrcamentos) {
+		this.tabelaOrcamentos = tabelaOrcamentos;
+	}
+	
+	
 
 }
