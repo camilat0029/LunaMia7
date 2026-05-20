@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,
   `Cliente_id_cliente` INT NOT NULL,
   PRIMARY KEY (`id_orcamento`),
-  
+ 
   INDEX `fk_Orcamento_Perfil_Usuario1_idx` (`Perfil_Usuario_email` ASC) ,
   INDEX `fk_Orcamento_Perfil_Usuario1_idy` (`Perfil_Usuario_nomeUsuario` ASC) ,
   INDEX `fk_Orcamento_Cliente1_idx` (`Cliente_id_cliente` ASC) ,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
   `id_orcamento` INT NOT NULL,
   `id_estoque` INT NOT NULL,
   `quantidade` INT NOT NULL,
-  
+ 
   PRIMARY KEY (`id_estoque`, `id_orcamento`),
   INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_MateriaPrima_idx` (`id_estoque` ASC),
   INDEX `fk_Confirmacao_de_orcamento_has_MateriaPrima_Confirmacao__idx` (`id_orcamento` ASC),
@@ -91,13 +91,22 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     FOREIGN KEY (`id_estoque`)
     REFERENCES `LunaMia`.`MateriaPrima` (`id_estoque`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION); 
-    
+    ON UPDATE NO ACTION);
+   
     use lunamia;
-    
+   
     insert into Perfil_Usuario
     values ('camila.t29@aluno.ifsc.edu.br', null, '29102007', '(47) 99988-7766', 'camila.t29', 'Camila', 20, 'Gaspar', 'SC', 5),
     ('emanuela.z@aluno.ifsc.edu.br', null, '22112007', '(47) 99955-4433', 'emanuela.z', 'Emanuela', 30, 'Ilhota', 'SC', 30),
     ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47) 99987-6543', 'lara.cs', 'Lara', 25, 'Gaspar', 'SC',  3);
-    
-    select * from Perfil_Usuario;
+   
+    insert into MateriaPrima
+    values(null, 'metro', 10, 'Circulo', 'azul', 5, 'Linha', 100),
+    (null, 'metro', 15, 'Circulo2', 'azul2', 10, 'Linha2', 200),
+    (null, 'centimetro', 20, 'Circulo3', 'azul3', 15, 'Linha3', 300),
+    (null, 'milimetro', 25, 'Circulo4', 'azul4', 20, 'Linha4', 400),
+    (null, 'metro', 30, 'Circulo5', 'azul5', 25, 'Linha5', 500),
+    (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 600),
+    (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 700);
+   
+    select * from MateriaPrima;

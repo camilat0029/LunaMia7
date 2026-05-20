@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -49,12 +51,20 @@ public class OrcamentoController {
 		this.criarOrcamento = criarOrcamento;
 		this.clienteDAO = clienteDAO;
 		this.materiaPrimaDAO = materiaPrimaDAO;
+		this.confirOrcamDAO = confirOrcamDAO;
 		
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
+		});
+		
+		this.criarOrcamento.voltar(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				navegadorTelas.navegarTela("ORCAMENTOS");
+			}
 		});
 		
 		this.criarOrcamento.calcEdita(e -> {
@@ -80,7 +90,7 @@ public class OrcamentoController {
 		});
 		
 		this.criarOrcamento.confirmar(e -> {
-			//FALTA ISSO
+			confirmar();
 		});
 		
 	}
@@ -264,6 +274,8 @@ public class OrcamentoController {
 		
 		ativDesativCompAoSalvar();
 		
+		criarOrcamento.getLbValorFinalCad().setText(criarOrcamento.getLbValorCalVenda().getText());
+		
 		//DO CLIENTE
 		Cliente cliente = new Cliente(null, null, null);
 		
@@ -284,7 +296,6 @@ public class OrcamentoController {
 		novoOrcamento.setUsuarioPerfil(usuarioLogado);;
 		novoOrcamento.setCliente(cliente);;
 		orcamentoDAO.adicionarDados(novoOrcamento);
-		
 		this.orcamentoAtual = novoOrcamento;
 		
 		//DE CONFIRMAÇÃO DO ORCAMENTO
@@ -294,11 +305,12 @@ public class OrcamentoController {
 		confirOrcam.setDataPrevistaEntrega(null);
 		confirOrcam.setDataConfirmacao(null);
 		confirOrcam.setOrcamento(novoOrcamento);
-		confirOrcam.setValorVenda(0);
+		confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
 		confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
 		confirOrcamDAO.adicionarDados(confirOrcam);
-		
 		this.confirOrcamAtual = confirOrcam;
+		
+		atualizarQuantMP();
 		
 	}
 	
@@ -307,10 +319,17 @@ public class OrcamentoController {
 		confirOrcamAtual.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
 		confirOrcamAtual.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 		confirOrcamAtual.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorFinalCad().getText()));
+		confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
 		confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
 		confirOrcamAtual.setOrcamento(orcamentoAtual);
 		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
+		
+		JOptionPane.showMessageDialog(null, "Orçamento Confirmado com Sucesso", "informação", 1);
+		navegadorTelas.navegarTela("ORCAMENTOS");
+		
+		//CRIAR E COLOCAR METODO DE LIMPAR A TELA
+		//FAZER VALIDAÇÕES
+		
 	}
 	
 	public void ativandoDevativandoComp() {
@@ -336,6 +355,18 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(true);
 
 		criarOrcamento.getBtCalcEdi().setText("Editar");
+	}
+	
+	public void atualizarQuantMP() {
+		
+		int totalLinhas = criarOrcamento.tabModeloEstoque.getRowCount();
+		
+		
+		for (int i = 0; i < totalLinhas; i++) {
+			MateriaPrima materiaPrima = criarOrcamento.tabModeloEstoque.getMatPrima(i);
+			materiaPrimaDAO.atualizarQuantMP(materiaPrima.getIdMateriaPrima(), materiaPrima.getQuantidadeDisponivel());
+		}
+		
 	}
 	
 	public void ativDesativCompAoSalvar() {
