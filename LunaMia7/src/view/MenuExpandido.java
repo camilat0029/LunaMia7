@@ -25,6 +25,7 @@ public class MenuExpandido extends JPanel {
 	private JButton btRelatorios;
 	private JButton btOrcamentos;
 	private JButton btSair;
+	private JLabel lbNomeUsuarioMN;
 	
 	
 	public MenuExpandido() {
@@ -50,7 +51,7 @@ public class MenuExpandido extends JPanel {
 		lbImagem.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		add(lbImagem, "cell 1 1");
 		
-		JLabel lbNomeUsuarioMN = new JLabel("Nome de Usuário");
+		lbNomeUsuarioMN = new JLabel("Nome de Usuário");
 		lbNomeUsuarioMN.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(lbNomeUsuarioMN, "cell 1 2,aligny center");
 		
@@ -120,5 +121,15 @@ public class MenuExpandido extends JPanel {
 	public void mostrarMenuContraido(MouseListener mouseListener) {
 		this.lbMostrarMenuCont.addMouseListener(mouseListener);
 	}
+
+	public JLabel getLbNomeUsuarioMN() {
+		return lbNomeUsuarioMN;
+	}
+
+	public void setNomeUsuario(String nome) {
+	    lbNomeUsuarioMN.setText(nome);
+	}
+	
+	
 
 }

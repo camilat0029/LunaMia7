@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -17,88 +16,101 @@ import view.MateriaPrimaView;
 import model.MateriaPrima;
 
 public class MateriaPrimaController extends ComponentAdapter {
-	
+
 	private MateriaPrima materiaPrima;
 	private MateriaPrimaView materiaPrimaView;
 	private MateriaPrimaDAO materiaPrimaDAO;
 	private NavegadorTelas navegador;
 	private CadastroMateriaPrimaEstoque cadastroMateriaPrima;
 	private Menu menu;
-	private boolean nomeMateria;
-	private boolean marca;
 
-	public MateriaPrimaController( MateriaPrima materiaPrima, 
-			MateriaPrimaDAO materiaPrimaDAO, NavegadorTelas navegador, Menu menu,
-			CadastroMateriaPrimaEstoque cadastroMateriaPrima, MateriaPrimaView materiaPrimaView) {
-		
+	public MateriaPrimaController(MateriaPrima materiaPrima, MateriaPrimaDAO materiaPrimaDAO, NavegadorTelas navegador,
+			Menu menu, CadastroMateriaPrimaEstoque cadastroMateriaPrima, MateriaPrimaView materiaPrimaView) {
+
 		this.materiaPrima = materiaPrima;
 		this.materiaPrimaDAO = materiaPrimaDAO;
 		this.navegador = navegador;
 		this.cadastroMateriaPrima = cadastroMateriaPrima;
 		this.menu = menu;
 		this.materiaPrimaView = materiaPrimaView;
-		
-		this.cadastroMateriaPrima.confirmar(e ->{
-			
+
+		this.cadastroMateriaPrima.confirmar(e -> {
+
 			cadastrarMateriaPrima();
-			
+
 		});
-			
+
 		this.cadastroMateriaPrima.voltar(new MouseAdapter() {
-				
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegador.navegarTela("MATERIA_PRIMA");
 				menu.mostrarPanelCont();
-		
+
 			}
 		});
-		
-		
-		this.materiaPrimaView.adicionar(e->{
+
+		this.materiaPrimaView.adicionar(e -> {
 			navegador.navegarTela("CADASTRO_MATERIA_PRIMA");
 			menu.removerMenu();
 		});
-		
-	}
-	
-	public void cadastrarMateriaPrima() {
-		
-		if(cadastroMateriaPrima.getTfNomeMateriaPrima().getText().isEmpty() ||
-				cadastroMateriaPrima.getTfQtdDisponivel().getText().isEmpty() ||
-				cadastroMateriaPrima.getTfQtdUnidade().getText().isEmpty() || 
-				cadastroMateriaPrima.getTfValor().getText().isEmpty()) {
-			
-			JOptionPane.showMessageDialog(null,"Você precisa preencher os campos obrigatórios!", "Informação",1);
-			menu.removerMenu();
-			
-		} else {
-			
-			UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-			
-			MateriaPrima novaMateriaPrima = new MateriaPrima (null,null,null, 0,0,0, null);
-			
-			novaMateriaPrima.setUsuario(usuarioLogado);
-			novaMateriaPrima.setNome(cadastroMateriaPrima.getTfNomeMateriaPrima().getText());
-			novaMateriaPrima.setCor(cadastroMateriaPrima.getTfCor().getText());
-			novaMateriaPrima.setMarca(cadastroMateriaPrima.getTfMarca().getText());
-			novaMateriaPrima.setQuantidadeDisponivel(Integer.parseInt(cadastroMateriaPrima.getTfQtdDisponivel().getText()));
-			novaMateriaPrima.setQtdPorUnidade(Float.parseFloat(cadastroMateriaPrima.getTfQtdUnidade().getText()));
-			novaMateriaPrima.setValor(Float.parseFloat(cadastroMateriaPrima.getTfValor().getText()));
-			novaMateriaPrima.setUnidadeMedida((MateriaPrima.UnidadeMedida) cadastroMateriaPrima.getCbUnidadeMedida().getSelectedItem());
-			
-			materiaPrimaDAO.adicionarInsumos(novaMateriaPrima);
-			this.materiaPrima = novaMateriaPrima;
-			
-			limparCamposMP();
-			carregarTabela();
-			JOptionPane.showMessageDialog(null, "Matéria Prima cadastrada com sucesso!", "Ação realizada com sucesso",1);
-			
-		}
-		
 
 	}
-	
+
+	public void cadastrarMateriaPrima() {
+
+		String nome = cadastroMateriaPrima.getTfNomeMateriaPrima().getText();
+		String cor = cadastroMateriaPrima.getTfCor().getText();
+		String marca = cadastroMateriaPrima.getTfMarca().getText();
+		String qtdDisponivelStr = cadastroMateriaPrima.getTfQtdDisponivel().getText();
+		String qtdUnidadeStr = cadastroMateriaPrima.getTfQtdUnidade().getText();
+		String valorStr = cadastroMateriaPrima.getTfValor().getText();
+
+		if (nome.isEmpty() || qtdDisponivelStr.isEmpty() || qtdUnidadeStr.isEmpty() || valorStr.isEmpty()) {
+
+			JOptionPane.showMessageDialog(null, "Você precisa preencher os campos obrigatórios!", "Informação",
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+
+		if (!qtdDisponivelPermitida(qtdDisponivelStr) || !qtdUnidadePermitida(qtdUnidadeStr)
+				|| !valorPermitido(valorStr)) {
+
+			JOptionPane.showMessageDialog(null, "Valores numéricos inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		try {
+			
+			UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+
+			MateriaPrima novaMateriaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
+
+			novaMateriaPrima.setUsuario(usuarioLogado);
+			novaMateriaPrima.setNome(nome);
+			novaMateriaPrima.setCor(cor);
+			novaMateriaPrima.setMarca(marca);
+
+			novaMateriaPrima.setQuantidadeDisponivel(Integer.parseInt(qtdDisponivelStr));
+			novaMateriaPrima.setQtdPorUnidade(Float.parseFloat(qtdUnidadeStr));
+			novaMateriaPrima.setValor(Float.parseFloat(valorStr));
+
+			novaMateriaPrima.setUnidadeMedida((MateriaPrima.UnidadeMedida) cadastroMateriaPrima.getCbUnidadeMedida().getSelectedItem());
+
+			materiaPrimaDAO.adicionarInsumos(novaMateriaPrima);
+
+			this.materiaPrima = novaMateriaPrima;
+
+			limparCamposMP();
+			carregarTabela();
+
+			JOptionPane.showMessageDialog(null, "Matéria Prima cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 	public void limparCamposMP() {
 		cadastroMateriaPrima.getTfNomeMateriaPrima().setText("");
 		cadastroMateriaPrima.getTfCor().setText("");
@@ -107,60 +119,57 @@ public class MateriaPrimaController extends ComponentAdapter {
 		cadastroMateriaPrima.getTfQtdUnidade().setText("");
 		cadastroMateriaPrima.getTfValor().setText("");
 		cadastroMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
-		
+
 	}
-	
+
 	public void carregarTabela() {
-		
+
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-		
+
 		List<MateriaPrima> lista = MateriaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
-		materiaPrimaView.tabelaModeloMateriaPrima=(DefaultTableModel) materiaPrimaView.getTabelaMateriaPrima().getModel();
-		
+		materiaPrimaView.tabelaModeloMateriaPrima = (DefaultTableModel) materiaPrimaView.getTabelaMateriaPrima()
+				.getModel();
+
 		materiaPrimaView.tabelaModeloMateriaPrima.setRowCount(0);
-		
-			for(MateriaPrima mp : lista) {
-				Object[] materiasPrimas = {mp.getNome(), mp.getQuantidadeDisponivel(), mp.getUnidadeMedida()};
-				materiaPrimaView.tabelaModeloMateriaPrima.addRow(materiasPrimas);
-			}
-			
+
+		for (MateriaPrima mp : lista) {
+			Object[] materiasPrimas = { mp.getNome(), mp.getQuantidadeDisponivel(), mp.getUnidadeMedida() };
+			materiaPrimaView.tabelaModeloMateriaPrima.addRow(materiasPrimas);
 		}
-	
-	
+
+	}
+
 	public boolean qtdDisponivelPermitida(String qtdDisponivelValida) {
 		boolean valido;
-		if(!qtdDisponivelValida.matches("\\d+")) {
-			valido=false;
-		}
-		else {
-			valido=true;
-		}
-		return valido;
-	} 
-	
-	public boolean qtdUnidadePermitida(String qtdUnidadeValida) {
-		
-		boolean valido;
-		if(!qtdUnidadeValida.matches("\\d+")) {
-			valido=false;
-		}
-		else {
-			valido=true;
+		if (!qtdDisponivelValida.matches("\\d+")) {
+			valido = false;
+		} else {
+			valido = true;
 		}
 		return valido;
 	}
-	
+
+	public boolean qtdUnidadePermitida(String qtdUnidadeValida) {
+
+		boolean valido;
+		if (!qtdUnidadeValida.matches("\\d+")) {
+			valido = false;
+		} else {
+			valido = true;
+		}
+		return valido;
+	}
+
 	public boolean valorPermitido(String valorValido) {
 		boolean valido;
-		if(!valorValido.matches("\\d+(\\.\\d{1,2})?")){
-			valido=false;
-		}
-		else {
-			valido=true;
+		if (!valorValido.matches("\\d+(\\.\\d{1,2})?")) {
+			valido = false;
+		} else {
+			valido = true;
 		}
 		return valido;
 	}
-	
+
 	public void componentShown(ComponentEvent e) {
 		this.carregarTabela();
 	}
