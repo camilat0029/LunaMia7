@@ -115,9 +115,10 @@ public class Main {
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
 		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque, materiaPrimaView);
-		BotoesLateralController botoesLateralController = new BotoesLateralController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal);
+		BotoesLateralController botoesLateralController = new BotoesLateralController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal, visualizarOrcamento, visualizarMateriaPrima, menu);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
@@ -140,7 +141,7 @@ public class Main {
 		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrimaView);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		navegadorTelas.adicionarPainel("VISUALIZAR_MATERIA_PRIMA", visualizarMateriaPrima);
-		navegadorTelas.adicionarPainel("VISUALIZAR_ORCAMENTO", visualizarOrcamento);
+		navegadorTelas.adicionarPainel("VISUALIZAR_ORCAMENTO", scrollPaneVisualizarOrcamento);
 		
 		navegadorTelas.navegarTela("LOGIN");
 

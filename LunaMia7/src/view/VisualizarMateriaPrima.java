@@ -22,6 +22,7 @@ public class VisualizarMateriaPrima extends JPanel {
 	private JLabel lbIconeVoltar;
 	private JPanel panel_materiaPrima, panel_marca, panel_cor, panel_UnidadeMedida, panel_QuantPorUnidade,
 			panel_QuantDispo, panel_valor;
+	
 
 	/**
 	 * Create the panel.
