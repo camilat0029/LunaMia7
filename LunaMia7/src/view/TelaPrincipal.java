@@ -19,6 +19,7 @@ public class TelaPrincipal extends JFrame {
 	JPanel panelTelas = new JPanel();
 	JPanel panelMenu;
 	JPanel panelBotoesMateriaPrima;
+	JPanel panelBotoesOrcamento;
 	
 	private String panelAtual;
 
@@ -40,6 +41,9 @@ public class TelaPrincipal extends JFrame {
 		
 		panelBotoesMateriaPrima = new JPanel(new BorderLayout());
 		contentPane.add(panelBotoesMateriaPrima, BorderLayout.EAST);
+		
+		panelBotoesOrcamento = new JPanel(new BorderLayout());
+		contentPane.add(panelBotoesOrcamento, BorderLayout.EAST);
 
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
@@ -99,6 +103,15 @@ public class TelaPrincipal extends JFrame {
 	public void setPanelBotoesMateriaPrima(JPanel panelBotoesMateriaPrima) {
 		this.panelBotoesMateriaPrima = panelBotoesMateriaPrima;
 	}
+
+	public JPanel getPanelBotoesOrcamento() {
+		return panelBotoesOrcamento;
+	}
+
+	public void setPanelBotoesOrcamento(JPanel panelBotoesOrcamento) {
+		this.panelBotoesOrcamento = panelBotoesOrcamento;
+	}
+	
 	
 	
 

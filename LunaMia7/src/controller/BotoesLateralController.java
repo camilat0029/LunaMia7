@@ -3,8 +3,7 @@ package controller;
 import view.BotoesMateriaPrima;
 import view.BotoesOrcamento;
 import view.TelaPrincipal;
-import view.VisualizarMateriaPrima;
-import view.VisualizarOrcamento;
+
 
 public class BotoesLateralController {
 
@@ -55,9 +54,13 @@ public class BotoesLateralController {
 		tela.getPanelBotoesMateriaPrima();
 
 	}
+	public void mostrarBotoesOrcamento() {
+		tela.getPanelBotoesOrcamento();
+	}
 
 	public void removerBotoes() {
 		tela.getPanelBotoesMateriaPrima().removeAll();
+		tela.getPanelBotoesOrcamento().removeAll();
 		tela.revalidate();
 		tela.repaint();
 	}
