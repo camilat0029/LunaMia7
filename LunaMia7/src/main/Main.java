@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
+import controller.BotoesLateralController;
 import controller.CadastroUsuarioController;
 import controller.InicioController;
 import controller.LoginController;
@@ -25,6 +26,8 @@ import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
+import view.BotoesMateriaPrima;
+import view.BotoesOrcamento;
 import view.CadastroMateriaPrimaEstoque;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
@@ -44,6 +47,8 @@ import view.RelatorioHorasTrabalhadas;
 import view.RelatorioLucros;
 import view.Relatorios;
 import view.TelaPrincipal;
+import view.VisualizarMateriaPrima;
+import view.VisualizarOrcamento;
 
 public class Main {
 
@@ -93,6 +98,10 @@ public class Main {
 		RelatorioHorasTrabalhadas relatorioHorasTrabalhadas = new RelatorioHorasTrabalhadas();
 		RelatorioGastos relatorioGastos = new RelatorioGastos();
 		Orcamentos orcamentos = new Orcamentos();
+		BotoesMateriaPrima botoesMateriaPrima = new BotoesMateriaPrima();
+		BotoesOrcamento botoesOrcamento = new BotoesOrcamento();
+		VisualizarMateriaPrima visualizarMateriaPrima = new VisualizarMateriaPrima();
+		VisualizarOrcamento visualizarOrcamento = new VisualizarOrcamento();
 		
 		//CONTROLLER
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
@@ -106,13 +115,13 @@ public class Main {
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
 		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque, materiaPrimaView);
+		BotoesLateralController botoesLateralController = new BotoesLateralController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
 		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
 		materiaPrimaView.adicionarOuvinte(materiaPrimaController);
-		
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		navegadorTelas.adicionarPainel("CADASTRO_MATERIA_PRIMA", cadastroMateriaPrimaEstoque);
@@ -130,10 +139,13 @@ public class Main {
 		navegadorTelas.adicionarPainel("ORCAMENTOS", orcamentos);
 		navegadorTelas.adicionarPainel("MATERIA_PRIMA", materiaPrimaView);
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
+		navegadorTelas.adicionarPainel("VISUALIZAR_MATERIA_PRIMA", visualizarMateriaPrima);
+		navegadorTelas.adicionarPainel("VISUALIZAR_ORCAMENTO", visualizarOrcamento);
 		
 		navegadorTelas.navegarTela("LOGIN");
 
 		menu.iniciar();
+		
 
 	}
 

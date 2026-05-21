@@ -9,20 +9,21 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class BotoesMateriaPrima extends JPanel {
+public class BotoesOrcamento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JButton btVisualizar, btEditar, btExcluir;
+	private JButton btVisualizar, btEditar, btExcluir, btCancelar;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public BotoesMateriaPrima() {
+	public BotoesOrcamento() {
 		setBackground(new Color(239, 239, 239));
 
 		setPreferredSize(new Dimension(200, 640));
 		setMinimumSize(new Dimension(200, 640)); // Tamanho minimo
-		setLayout(new MigLayout("gap 18", "[][][]", "[grow][][][][grow]"));
+		setLayout(new MigLayout("gap 18", "[][][]", "[grow][][][][][grow]"));
 
 		btVisualizar = new JButton("Visualizar");
 		btVisualizar.setBackground(new Color(193, 151, 232));
@@ -35,11 +36,17 @@ public class BotoesMateriaPrima extends JPanel {
 		btEditar.setBackground(new Color(193, 151, 232));
 		add(btEditar, "cell 1 2,growx");
 		btEditar.setBorderPainted(false);
+		
+		btCancelar = new JButton("Editar");
+		btCancelar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btCancelar.setBorderPainted(false);
+		btCancelar.setBackground(new Color(193, 151, 232));
+		add(btCancelar, "cell 1 3,growx");
 
 		btExcluir = new JButton("Excluir");
 		btExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btExcluir.setBackground(new Color(193, 151, 232));
-		add(btExcluir, "cell 1 3,growx");
+		add(btExcluir, "cell 1 4,growx");
 		btExcluir.setBorderPainted(false);
 
 	}
@@ -49,6 +56,9 @@ public class BotoesMateriaPrima extends JPanel {
 	}
 	public void editar(ActionListener actionListener) {
 		btEditar.addActionListener(actionListener);
+	}
+	public void cancelar(ActionListener actionListener) {
+		btCancelar.addActionListener(actionListener);
 	}
 	public void excluir(ActionListener actionListener) {
 		btExcluir.addActionListener(actionListener);

@@ -18,6 +18,8 @@ public class TelaPrincipal extends JFrame {
 	private CardLayout cardLayout;
 	JPanel panelTelas = new JPanel();
 	JPanel panelMenu;
+	JPanel panelBotoesMateriaPrima;
+	
 	private String panelAtual;
 
 	public TelaPrincipal() {
@@ -35,6 +37,10 @@ public class TelaPrincipal extends JFrame {
 
 		contentPane.add(panelTelas, BorderLayout.CENTER);
 		panelTelas.setLayout(cardLayout);
+		
+		panelBotoesMateriaPrima = new JPanel(new BorderLayout());
+		contentPane.add(panelBotoesMateriaPrima, BorderLayout.EAST);
+
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
 		setIconImage(icon.getImage()); //muda a logo para a de gatinho
@@ -85,5 +91,15 @@ public class TelaPrincipal extends JFrame {
 	public void setPanelTelas(JPanel panelTelas) {
 		this.panelTelas = panelTelas;
 	}
+
+	public JPanel getPanelBotoesMateriaPrima() {
+		return panelBotoesMateriaPrima;
+	}
+
+	public void setPanelBotoesMateriaPrima(JPanel panelBotoesMateriaPrima) {
+		this.panelBotoesMateriaPrima = panelBotoesMateriaPrima;
+	}
+	
+	
 
 }

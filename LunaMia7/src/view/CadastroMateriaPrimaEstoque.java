@@ -25,7 +25,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	private JTextField tfQtdUnidade;
 	private JLabel lbIconeVoltar;
 	JButton btConfirmar;
-	
+
 	private JComboBox<model.MateriaPrima.UnidadeMedida> cbUnidadeMedida;
 
 	/**
@@ -33,126 +33,118 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	 */
 	public CadastroMateriaPrimaEstoque() {
 		setBackground(new Color(234, 219, 247));
-		setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][][][][][][][][][grow]"));
-		
+		setLayout(new MigLayout("gapy 16, gapx 50", "[grow][][][grow]", "[grow][][][][][][][][][][grow]"));
+
 		JLabel lblNewLabel = new JLabel("");
 		add(lblNewLabel, "flowx,cell 0 0");
-		
-		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");
-		lbMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMateriaPrima, "cell 2 1");
-		
-		tfNomeMateriaPrima = new JTextField();
-		tfNomeMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfNomeMateriaPrima, "cell 2 2 3 1,growx");
-		tfNomeMateriaPrima.setColumns(10);
-		
-		JLabel lbValor = new JLabel("Valor");
-		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValor, "cell 2 3");
-		
-				tfValor = new JTextField();
-		tfValor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfValor, "cell 2 4 3 1,growx");
-		tfValor.setColumns(10);
-		
-		JLabel lbMarca = new JLabel("Marca");
-		lbMarca.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMarca, "cell 2 5");
-		
-		JLabel lbCor = new JLabel("Cor");
-		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCor, "cell 4 5");
-		
-		tfMarca = new JTextField();
-		tfMarca.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfMarca, "cell 2 6,growx");
-		tfMarca.setColumns(10);
-		
-		tfCor = new JTextField();
-		tfCor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfCor, "cell 4 6,growx");
-		tfCor.setColumns(10);
-		
-		JLabel lbUnidadeMed = new JLabel("Unidade de Medida");
-		lbUnidadeMed.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbUnidadeMed, "flowx,cell 2 7");		
-		
-		JLabel lbQtdUnidade = new JLabel("Quantidade Por Unidade");
-		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQtdUnidade, "cell 4 7");
-		
-		cbUnidadeMedida = new JComboBox<>(model.MateriaPrima.UnidadeMedida.values());		
-		cbUnidadeMedida.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(cbUnidadeMedida, "cell 2 8,growx");
-		
-		tfQtdUnidade = new JTextField();
-		tfQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfQtdUnidade, "cell 4 8,growx");
-		tfQtdUnidade.setColumns(10);
-		
-		JLabel lbQtdDisponivel = new JLabel("Quantidade Disponível");
-		lbQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQtdDisponivel, "flowx,cell 2 9");
-		
-		tfQtdDisponivel = new JTextField();
-		tfQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfQtdDisponivel, "cell 2 10,growx");
-		tfQtdDisponivel.setColumns(10);
-		
+
 		lbIconeVoltar = new JLabel("");
 		lbIconeVoltar.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Seta2.png")));
-		add(lbIconeVoltar, "cell 0 0");
-		
+		add(lbIconeVoltar, "pos 20 20");
+
+		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");
+		lbMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbMateriaPrima, "cell 1 1");
+
+		tfNomeMateriaPrima = new JTextField();
+		tfNomeMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfNomeMateriaPrima, "cell 1 2 2 1,growx");
+		tfNomeMateriaPrima.setColumns(10);
+
+		JLabel lbMarca = new JLabel("Marca");
+		lbMarca.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbMarca, "cell 1 3");
+
+		JLabel lbCor = new JLabel("Cor");
+		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbCor, "cell 2 3");
+
+		tfMarca = new JTextField();
+		tfMarca.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfMarca, "cell 1 4,growx");
+		tfMarca.setColumns(10);
+
+		tfCor = new JTextField();
+		tfCor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfCor, "cell 2 4,growx");
+		tfCor.setColumns(10);
+
+		JLabel lbUnidadeMed = new JLabel("Unidade de Medida");
+		lbUnidadeMed.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbUnidadeMed, "flowx,cell 1 5");
+
+		JLabel lbQtdUnidade = new JLabel("Quantidade Por Unidade");
+		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbQtdUnidade, "cell 2 5");
+
+		cbUnidadeMedida = new JComboBox<>(model.MateriaPrima.UnidadeMedida.values());
+		cbUnidadeMedida.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(cbUnidadeMedida, "cell 1 6,growx");
+
+		tfQtdUnidade = new JTextField();
+		tfQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfQtdUnidade, "cell 2 6,growx");
+		tfQtdUnidade.setColumns(10);
+
+		JLabel lbQtdDisponivel = new JLabel("Quantidade Disponível");
+		lbQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbQtdDisponivel, "flowx,cell 1 7");
+
+		JLabel lbValor = new JLabel("Valor");
+		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbValor, "cell 2 7");
+
+		tfQtdDisponivel = new JTextField();
+		tfQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfQtdDisponivel, "cell 1 8,growx");
+		tfQtdDisponivel.setColumns(10);
+
+		tfValor = new JTextField();
+		tfValor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(tfValor, "cell 2 8,growx");
+		tfValor.setColumns(10);
+
 		btConfirmar = new JButton("Confirmar");
-		add(btConfirmar, "cell 2 11 3 1,alignx center,aligny center");
+		add(btConfirmar, "cell 1 9 2 1,alignx center,aligny center");
 		btConfirmar.setBackground(new Color(193, 151, 232));
 		btConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		
+
 		btConfirmar.setBorderPainted(false);
-		
+
 		JLabel interrogacaoQntDisponivel = new JLabel("");
-		interrogacaoQntDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 5));	
-		add(interrogacaoQntDisponivel, "cell 2 9");
-		
+		interrogacaoQntDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 5));
+		add(interrogacaoQntDisponivel, "cell 1 7");
+
 		ImageIcon iconInterrogacao = new ImageIcon(
-		        CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")
-		);
+				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
-		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(
-		        18,
-		        18,
-		        Image.SCALE_SMOOTH
-		);
+		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoQntDisponivel.setIcon(new ImageIcon(imgInterrogacao));
-		
-		
-		JLabel interrogacaoQntUnidade = new JLabel("");
-		interrogacaoQntUnidade.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")));
-		add(interrogacaoQntUnidade, "flowy,cell 4 7");
-		
-		ImageIcon iconInterrogacao2 = new ImageIcon(
-		        CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")
-		);
 
-		Image imgInterrogacao2 = iconInterrogacao2.getImage().getScaledInstance(
-		        18,
-		        18,
-		        Image.SCALE_SMOOTH
-		);
+		JLabel interrogacaoQntUnidade = new JLabel("");
+		interrogacaoQntUnidade.setIcon(
+				new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")));
+		add(interrogacaoQntUnidade, "flowy,cell 2 5");
+
+		ImageIcon iconInterrogacao2 = new ImageIcon(
+				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
+
+		Image imgInterrogacao2 = iconInterrogacao2.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 
 		interrogacaoQntUnidade.setIcon(new ImageIcon(imgInterrogacao2));
-		
-		interrogacaoQntDisponivel.setToolTipText("<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã.</html> ");
-		
-		interrogacaoQntUnidade.setToolTipText("<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros.</html>" );
-	
+
+		interrogacaoQntDisponivel.setToolTipText(
+				"<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã.</html> ");
+
+		interrogacaoQntUnidade.setToolTipText(
+				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros.</html>");
+
 	}
-	
+
 	public void voltar(MouseListener mouseListener) {
 		this.lbIconeVoltar.addMouseListener(mouseListener);
 	}
-	
+
 	public void confirmar(ActionListener actionListener) {
 		this.btConfirmar.addActionListener(actionListener);
 	}
@@ -212,5 +204,5 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	public void setCbUnidadeMedida(JComboBox<model.MateriaPrima.UnidadeMedida> cbUnidadeMedida) {
 		this.cbUnidadeMedida = cbUnidadeMedida;
 	}
-	
+
 }
