@@ -128,21 +128,19 @@ public class BotoesAcoesController extends ComponentAdapter{
 	//MÉTODO PARA ATUALIZAR MATERIA PRIMA
 	public void atualizarMP() {
 		
-		MateriaPrima mpAtualizada = new MateriaPrima(null, null, null, 0, 0, 0, null);
+		MpEditada.setNome(cadMateriaPrima.getTfNomeMateriaPrima().getText());
+		MpEditada.setMarca(cadMateriaPrima.getTfMarca().getText());
+		MpEditada.setCor(cadMateriaPrima.getTfCor().getText());
+		MpEditada.setQuantidadeDisponivel(Integer.parseInt(cadMateriaPrima.getTfQtdDisponivel().getText()));
+		MpEditada.setQtdPorUnidade(Float.parseFloat(cadMateriaPrima.getTfQtdUnidade().getText()));
+		MpEditada.setUnidadeMedida((MateriaPrima.UnidadeMedida) cadMateriaPrima.getCbUnidadeMedida().getSelectedItem());
+		MpEditada.setValor(Float.parseFloat(cadMateriaPrima.getTfValor().getText()));
 		
-		mpAtualizada.setIdMateriaPrima(MpEditada.getIdMateriaPrima());
-		
-		mpAtualizada.setNome(cadMateriaPrima.getTfNomeMateriaPrima().getText());
-		mpAtualizada.setMarca(cadMateriaPrima.getTfMarca().getText());
-		mpAtualizada.setCor(cadMateriaPrima.getTfCor().getText());
-		mpAtualizada.setQuantidadeDisponivel(Integer.parseInt(cadMateriaPrima.getTfQtdDisponivel().getText()));
-		mpAtualizada.setQtdPorUnidade(Float.parseFloat(cadMateriaPrima.getTfQtdUnidade().getText()));
-		mpAtualizada.setUnidadeMedida((MateriaPrima.UnidadeMedida) cadMateriaPrima.getCbUnidadeMedida().getSelectedItem());
-		mpAtualizada.setValor(Float.parseFloat(cadMateriaPrima.getTfValor().getText()));
-		
-		materiaPrimaDAO.atualizarMateriasPrimas(mpAtualizada);
+		materiaPrimaDAO.atualizarMateriasPrimas(MpEditada);
 		
 		carregarTabela();
+		
+		MpEditada = null;
 		
 	}
 	

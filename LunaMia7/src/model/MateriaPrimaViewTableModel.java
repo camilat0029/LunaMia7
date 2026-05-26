@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class MateriaPrimaViewTableModel extends AbstractTableModel{
 	
-	private final javax.swing.ImageIcon ICONE_ACOES = new javax.swing.ImageIcon(getClass().getResource("/imagensIcones/7.png"));
+	private final javax.swing.ImageIcon ICONE_ACOES = new javax.swing.ImageIcon(getClass().getResource("/imagensIcones/Icone_3_Pontos.png"));
 	
 	private List<MateriaPrima> listaMateriasPrimas = new ArrayList<>();
 	
@@ -82,7 +82,8 @@ public class MateriaPrimaViewTableModel extends AbstractTableModel{
 	
 	//INSERE UMA LISTA
 	public void setLista(List<MateriaPrima> lista) {
-		this.listaMateriasPrimas = lista;
+		listaMateriasPrimas.clear();
+		listaMateriasPrimas.addAll(lista);
 		fireTableDataChanged();
 	}
 	

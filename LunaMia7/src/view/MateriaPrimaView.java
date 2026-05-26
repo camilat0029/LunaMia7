@@ -118,7 +118,7 @@ public class MateriaPrimaView extends JPanel {
 		JMenuItem btExcluir = new JMenuItem("Excluir");
 		
 		Font fonteMenu = new Font("Bodoni Bk BT", Font.BOLD, 16);
-	    Color corTexto = Color.GRAY; 
+	    Color corTexto = new Color(80,80,80); 
 
 	    JMenuItem[] itens = {btVisualizar, btAtualizar, btExcluir};
 	    for (JMenuItem item : itens) {

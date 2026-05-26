@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class OrcamentoTableModel extends AbstractTableModel{
 	
-	private final javax.swing.ImageIcon ICONE_ACOES = new javax.swing.ImageIcon(getClass().getResource("/imagensIcones/7.png"));
+	private final javax.swing.ImageIcon ICONE_ACOES = new javax.swing.ImageIcon(getClass().getResource("/imagensIcones/Icone_3_Pontos.png"));
 	
 	private List<Orcamento> listaOrcamentos = new ArrayList<>();
 	
