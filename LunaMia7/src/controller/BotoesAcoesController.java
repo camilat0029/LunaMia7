@@ -4,8 +4,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -13,8 +11,6 @@ import javax.swing.JOptionPane;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
-import view.BotoesMateriaPrima;
-import view.BotoesOrcamento;
 import view.CadastroMateriaPrimaEstoque;
 import view.MateriaPrimaView;
 import view.TelaPrincipal;
@@ -23,8 +19,6 @@ import view.VisualizarOrcamento;
 
 public class BotoesAcoesController extends ComponentAdapter{
 	
-	private BotoesMateriaPrima botoesMateriaPrima;
-	private BotoesOrcamento botoesOrcamento;
 	private NavegadorTelas navegadorTelas;
 	private TelaPrincipal tela;
 	private VisualizarOrcamento visualizarOrcamento;
@@ -36,13 +30,10 @@ public class BotoesAcoesController extends ComponentAdapter{
 	
 	private MateriaPrima MpEditada;
 	
-	public BotoesAcoesController(BotoesMateriaPrima botoesMateriaPrima, BotoesOrcamento botoesOrcamento,
-			NavegadorTelas navegadorTelas, TelaPrincipal tela, VisualizarOrcamento visualizarOrcamento,
+	public BotoesAcoesController(NavegadorTelas navegadorTelas, TelaPrincipal tela, VisualizarOrcamento visualizarOrcamento,
 			VisualizarMateriaPrima visualizarMateriaPrima, Menu menu, MateriaPrimaView materiaPrimaView,
 			CadastroMateriaPrimaEstoque cadMateriaPrima, MateriaPrimaDAO materiaPrimaDAO) {
 		super();
-		this.botoesMateriaPrima = botoesMateriaPrima;
-		this.botoesOrcamento = botoesOrcamento;
 		this.navegadorTelas = navegadorTelas;
 		this.tela = tela;
 		this.visualizarOrcamento = visualizarOrcamento;

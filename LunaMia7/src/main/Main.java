@@ -26,15 +26,11 @@ import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
-import view.BotoesMateriaPrima;
-import view.BotoesOrcamento;
 import view.CadastroMateriaPrimaEstoque;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
 import view.CriarOrcamento;
-import view.CriarOrcamentoAposCalcular;
-import view.CriarOrcamentoComFormaPagamento;
 import view.Inicio;
 import view.Login;
 import view.MenuContraido;
@@ -86,8 +82,6 @@ public class Main {
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
 		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
 		CriarOrcamento criarOrcamento = new CriarOrcamento();
-		CriarOrcamentoAposCalcular criarOrcamentoAposCalcular = new CriarOrcamentoAposCalcular();
-		CriarOrcamentoComFormaPagamento criarOrcamentoComFormaPagamento = new CriarOrcamentoComFormaPagamento();
 		Inicio inicio = new Inicio();
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
 		Relatorios relatorios = new Relatorios();
@@ -98,8 +92,6 @@ public class Main {
 		RelatorioHorasTrabalhadas relatorioHorasTrabalhadas = new RelatorioHorasTrabalhadas();
 		RelatorioGastos relatorioGastos = new RelatorioGastos();
 		Orcamentos orcamentos = new Orcamentos();
-		BotoesMateriaPrima botoesMateriaPrima = new BotoesMateriaPrima();
-		BotoesOrcamento botoesOrcamento = new BotoesOrcamento();
 		VisualizarMateriaPrima visualizarMateriaPrima = new VisualizarMateriaPrima();
 		VisualizarOrcamento visualizarOrcamento = new VisualizarOrcamento();
 		
@@ -118,8 +110,8 @@ public class Main {
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
 		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque,
 				materiaPrimaView);
-		BotoesAcoesController botoesLateralController = new BotoesAcoesController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal,
-				visualizarOrcamento, visualizarMateriaPrima, menu, materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO);
+		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, telaPrincipal, visualizarOrcamento, visualizarMateriaPrima, menu, 
+				materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -133,8 +125,6 @@ public class Main {
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
 		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", configurarPerfiAposCadastrar);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO", scrollPaneOrcamento );
-		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_APOS_CALCULAR", criarOrcamentoAposCalcular);
-		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO_COM_FORMA_PAGAMENTO", criarOrcamentoComFormaPagamento);
 		navegadorTelas.adicionarPainel("INICIO", inicio);
 		navegadorTelas.adicionarPainel("REDEFINIR_SENHA", redefinirSenha);
 		navegadorTelas.adicionarPainel("RELATORIOS", relatorios);

@@ -27,6 +27,7 @@ import javax.swing.table.JTableHeader;
 import model.MateriaPrimaTableModel;
 import model.Orcamento;
 import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
 
 public class VisualizarOrcamento extends JPanel {
 
@@ -37,24 +38,14 @@ public class VisualizarOrcamento extends JPanel {
 	private JTable tabMateriaisEstoque;
 	public MateriaPrimaTableModel tabModeloEstoque = new MateriaPrimaTableModel();
 	public MateriaPrimaTableModel tabModeloOrcam = new MateriaPrimaTableModel();
-	private JPanel panel_Titulo;
-	private JPanel panel_Cliente;
-	private JPanel panel_email;
-	private JPanel panel_Contato;
-	private JPanel panel_PrecoHora;
-	private JPanel panel_PercentualLucro;
-	private JPanel panel_HorasPrevistas;
-	private JPanel panel_QuantMaxDias;
-	private JPanel panel_CustoAdicional;
-	private JPanel panel_Status;
-	private JPanel panel_ValorSemLucro;
-	private JPanel panel_ValorLucro;
-	private JPanel panel_TotalGastos;
-	private JPanel panel_ValorVenda;
-	private JPanel panel_DataConfirmacao;
-	private JPanel panel_DataPrevistaEnt;
-	private JPanel panel_FormaPagamento;
-	private JPanel panel_ValorFinal;
+	private JPanel panel_Titulo, panel_Cliente, panel_email, panel_Contato, panel_PrecoHora, panel_PercentualLucro;
+	private JPanel panel_HorasPrevistas, panel_QuantMaxDias, panel_CustoAdicional, panel_Status, panel_ValorSemLucro;
+	private JPanel panel_ValorLucro, panel_TotalGastos, panel_ValorVenda, panel_DataConfirmacao, panel_DataPrevistaEnt;
+	private JPanel panel_FormaPagamento, panel_ValorFinal;
+	private JLabel lbTituloOrcamCad, lbNomeClienteCad, lbEmailClienteCad, lbContClienteCad, lbPrecoHoraCad;
+	private JLabel lbPercLucroCad, lbHorasPrevistasCad, lbQuantDiasMaxCad, lbCustoAdiCad, lbStatusCad;
+	private JLabel lbValorSemLucroCad, lbValorLucroCad, lbTotalGastosCad, lbValorVendaCad;
+	private JLabel lbDtConfirCad, lbDtEntregaCad, lbFormaPagCad, lbValorFinalCad;
 
 	/**
 	 * Create the panel.
@@ -180,58 +171,166 @@ public class VisualizarOrcamento extends JPanel {
 		//PANELS
 		
 		panel_Titulo = new JPanel();
-		add(panel_Titulo, "cell 1 2 2 1,width 71%,height 38!");
+		panel_Titulo.setBorder(new EmptyBorder(0, 0, 0, 0));
+		add(panel_Titulo, "cell 1 2 2 1,growx,width 71%,height 38!");
+		panel_Titulo.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbTituloOrcamCad = new JLabel("");
+		lbTituloOrcamCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_Titulo.add(lbTituloOrcamCad, "cell 0 0");
 
 		panel_Cliente = new JPanel();
-		add(panel_Cliente, "cell 1 4 2 1,width 71%,height 38!");
+		panel_Cliente.setBorder(new EmptyBorder(0, 0, 0, 0));
+		add(panel_Cliente, "cell 1 4 2 1,growx,width 71%,height 38!");
+		panel_Cliente.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbNomeClienteCad = new JLabel("");
+		lbNomeClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_Cliente.add(lbNomeClienteCad, "cell 0 0");
 
 		panel_email = new JPanel();
+		panel_email.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_email, "cell 1 6,width 71%,height 38!");
+		panel_email.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbEmailClienteCad = new JLabel("");
+		lbEmailClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_email.add(lbEmailClienteCad, "cell 0 0");
 
 		panel_Contato = new JPanel();
+		panel_Contato.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Contato, "cell 2 6, width 71%,height 38!");
+		panel_Contato.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbContClienteCad = new JLabel("");
+		lbContClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_Contato.add(lbContClienteCad, "cell 0 0");
 
 		panel_PrecoHora = new JPanel();
+		panel_PrecoHora.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_PrecoHora, "cell 1 8,width 71%,height 38!");
+		panel_PrecoHora.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbPrecoHoraCad = new JLabel("");
+		lbPrecoHoraCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_PrecoHora.add(lbPrecoHoraCad, "cell 0 0");
 
 		panel_PercentualLucro = new JPanel();
+		panel_PercentualLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_PercentualLucro, "cell 2 8,width 71%,height 38!");
+		panel_PercentualLucro.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbPercLucroCad = new JLabel("");
+		lbPercLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_PercentualLucro.add(lbPercLucroCad, "cell 0 0");
 
 		panel_HorasPrevistas = new JPanel();
+		panel_HorasPrevistas.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_HorasPrevistas, "cell 1 15,width 71%,height 38!");
+		panel_HorasPrevistas.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbHorasPrevistasCad = new JLabel("");
+		lbHorasPrevistasCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_HorasPrevistas.add(lbHorasPrevistasCad, "cell 0 0");
 
 		panel_QuantMaxDias = new JPanel();
+		panel_QuantMaxDias.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_QuantMaxDias, "cell 2 15,width 71%,height 38!");
+		panel_QuantMaxDias.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbQuantDiasMaxCad = new JLabel("");
+		lbQuantDiasMaxCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_QuantMaxDias.add(lbQuantDiasMaxCad, "cell 0 0");
 
 		panel_TotalGastos = new JPanel();
+		panel_TotalGastos.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_TotalGastos, "cell 1 21,width 71%,height 38!");
+		panel_TotalGastos.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbTotalGastosCad = new JLabel("");
+		lbTotalGastosCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_TotalGastos.add(lbTotalGastosCad, "cell 0 0");
 
 		panel_ValorVenda = new JPanel();
+		panel_ValorVenda.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorVenda, "cell 2 21,width 71%,height 38!");
+		panel_ValorVenda.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbValorVendaCad = new JLabel("");
+		lbValorVendaCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_ValorVenda.add(lbValorVendaCad, "cell 0 0");
 
 		panel_CustoAdicional = new JPanel();
+		panel_CustoAdicional.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_CustoAdicional, "cell 1 17,width 71%,height 38!");
+		panel_CustoAdicional.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbCustoAdiCad = new JLabel("");
+		lbCustoAdiCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_CustoAdicional.add(lbCustoAdiCad, "cell 0 0");
 
 		panel_Status = new JPanel();
+		panel_Status.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Status, "cell 2 17,width 71%,height 38");
+		panel_Status.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbStatusCad = new JLabel("");
+		lbStatusCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_Status.add(lbStatusCad, "cell 0 0");
 
 		panel_ValorSemLucro = new JPanel();
+		panel_ValorSemLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorSemLucro, "cell 1 19,width 71%,height 38!");
+		panel_ValorSemLucro.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbValorSemLucroCad = new JLabel("");
+		lbValorSemLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_ValorSemLucro.add(lbValorSemLucroCad, "cell 0 0");
 
 		panel_ValorLucro = new JPanel();
+		panel_ValorLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorLucro, "cell 2 19,width 71%,height 38!");
+		panel_ValorLucro.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbValorLucroCad = new JLabel("");
+		lbValorLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_ValorLucro.add(lbValorLucroCad, "cell 0 0");
 
 		panel_DataConfirmacao = new JPanel();
+		panel_DataConfirmacao.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_DataConfirmacao, "cell 1 23,width 71%,height 38!");
+		panel_DataConfirmacao.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbDtConfirCad = new JLabel("");
+		lbDtConfirCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_DataConfirmacao.add(lbDtConfirCad, "cell 0 0");
 
 		panel_DataPrevistaEnt = new JPanel();
+		panel_DataPrevistaEnt.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_DataPrevistaEnt, "cell 2 23,width 71%,height 38!");
+		panel_DataPrevistaEnt.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbDtEntregaCad = new JLabel("");
+		lbDtEntregaCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_DataPrevistaEnt.add(lbDtEntregaCad, "cell 0 0");
 
 		panel_FormaPagamento = new JPanel();
+		panel_FormaPagamento.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_FormaPagamento, "cell 1 25,width 71%,height 38!");
+		panel_FormaPagamento.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbFormaPagCad = new JLabel("");
+		lbFormaPagCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_FormaPagamento.add(lbFormaPagCad, "cell 0 0");
 
 		panel_ValorFinal = new JPanel();
+		panel_ValorFinal.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorFinal, "cell 2 25,width 71%,height 38!");
+		panel_ValorFinal.setLayout(new MigLayout("", "[]", "[]"));
+		
+		lbValorFinalCad = new JLabel("");
+		lbValorFinalCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		panel_ValorFinal.add(lbValorFinalCad, "cell 0 0");
 
 	}
 
@@ -239,84 +338,140 @@ public class VisualizarOrcamento extends JPanel {
 		this.lbVoltar.addMouseListener(mouseListener);
 	}
 
-	public JLabel getLbValorSemLucro() {
-		return lbValorSemLucro;
+	public JLabel getLbTituloOrcamCad() {
+		return lbTituloOrcamCad;
 	}
 
-	public void setLbValorSemLucro(JLabel lbValorSemLucro) {
-		this.lbValorSemLucro = lbValorSemLucro;
+	public void setLbTituloOrcamCad(JLabel lbTituloOrcamCad) {
+		this.lbTituloOrcamCad = lbTituloOrcamCad;
 	}
 
-	public JLabel getLbValorLucro() {
-		return lbValorLucro;
+	public JLabel getLbNomeClienteCad() {
+		return lbNomeClienteCad;
 	}
 
-	public void setLbValorLucro(JLabel lbValorLucro) {
-		this.lbValorLucro = lbValorLucro;
+	public void setLbNomeClienteCad(JLabel lbNomeClienteCad) {
+		this.lbNomeClienteCad = lbNomeClienteCad;
 	}
 
-	public JLabel getLbGastos() {
-		return lbGastos;
+	public JLabel getLbEmailClienteCad() {
+		return lbEmailClienteCad;
 	}
 
-	public void setLbGastos(JLabel lbGastos) {
-		this.lbGastos = lbGastos;
+	public void setLbEmailClienteCad(JLabel lbEmailClienteCad) {
+		this.lbEmailClienteCad = lbEmailClienteCad;
 	}
 
-	public JLabel getLbValorVenda() {
-		return lbValorVenda;
+	public JLabel getLbContClienteCad() {
+		return lbContClienteCad;
 	}
 
-	public void setLbValorVenda(JLabel lbValorVenda) {
-		this.lbValorVenda = lbValorVenda;
+	public void setLbContClienteCad(JLabel lbContClienteCad) {
+		this.lbContClienteCad = lbContClienteCad;
 	}
 
-	public JLabel getLbDtConfPedido() {
-		return lbDtConfPedido;
+	public JLabel getLbPrecoHoraCad() {
+		return lbPrecoHoraCad;
 	}
 
-	public void setLbDtConfPedido(JLabel lbDtConfPedido) {
-		this.lbDtConfPedido = lbDtConfPedido;
+	public void setLbPrecoHoraCad(JLabel lbPrecoHoraCad) {
+		this.lbPrecoHoraCad = lbPrecoHoraCad;
 	}
 
-	public JLabel getLbDtPrevEntrega() {
-		return lbDtPrevEntrega;
+	public JLabel getLbPercLucroCad() {
+		return lbPercLucroCad;
 	}
 
-	public void setLbDtPrevEntrega(JLabel lbDtPrevEntrega) {
-		this.lbDtPrevEntrega = lbDtPrevEntrega;
+	public void setLbPercLucroCad(JLabel lbPercLucroCad) {
+		this.lbPercLucroCad = lbPercLucroCad;
 	}
 
-	public JLabel getLbFormaPaga() {
-		return lbFormaPaga;
+	public JLabel getLbHorasPrevistasCad() {
+		return lbHorasPrevistasCad;
 	}
 
-	public void setLbFormaPaga(JLabel lbFormaPaga) {
-		this.lbFormaPaga = lbFormaPaga;
+	public void setLbHorasPrevistasCad(JLabel lbHorasPrevistasCad) {
+		this.lbHorasPrevistasCad = lbHorasPrevistasCad;
 	}
 
-	public JLabel getLbValorFinal() {
-		return lbValorFinal;
+	public JLabel getLbQuantDiasMaxCad() {
+		return lbQuantDiasMaxCad;
 	}
 
-	public void setLbValorFinal(JLabel lbValorFinal) {
-		this.lbValorFinal = lbValorFinal;
+	public void setLbQuantDiasMaxCad(JLabel lbQuantDiasMaxCad) {
+		this.lbQuantDiasMaxCad = lbQuantDiasMaxCad;
 	}
 
-	public JLabel getLbCustoAdicional() {
-		return lbCustoAdicional;
+	public JLabel getLbCustoAdiCad() {
+		return lbCustoAdiCad;
 	}
 
-	public void setLbCustoAdicional(JLabel lbCustoAdicional) {
-		this.lbCustoAdicional = lbCustoAdicional;
+	public void setLbCustoAdiCad(JLabel lbCustoAdiCad) {
+		this.lbCustoAdiCad = lbCustoAdiCad;
 	}
 
-	public JLabel getLbStatus() {
-		return lbStatus;
+	public JLabel getLbStatusCad() {
+		return lbStatusCad;
 	}
 
-	public void setLbStatus(JLabel lbStatus) {
-		this.lbStatus = lbStatus;
+	public void setLbStatusCad(JLabel lbStatusCad) {
+		this.lbStatusCad = lbStatusCad;
+	}
+
+	public JLabel getLbValorSemLucroCad() {
+		return lbValorSemLucroCad;
+	}
+
+	public void setLbValorSemLucroCad(JLabel lbValorSemLucroCad) {
+		this.lbValorSemLucroCad = lbValorSemLucroCad;
+	}
+
+	public JLabel getLbValorLucroCad() {
+		return lbValorLucroCad;
+	}
+
+	public void setLbValorLucroCad(JLabel lbValorLucroCad) {
+		this.lbValorLucroCad = lbValorLucroCad;
+	}
+
+	public JLabel getLbTotalGastosCad() {
+		return lbTotalGastosCad;
+	}
+
+	public void setLbTotalGastosCad(JLabel lbTotalGastosCad) {
+		this.lbTotalGastosCad = lbTotalGastosCad;
+	}
+
+	public JLabel getLbValorVendaCad() {
+		return lbValorVendaCad;
+	}
+
+	public void setLbValorVendaCad(JLabel lbValorVendaCad) {
+		this.lbValorVendaCad = lbValorVendaCad;
+	}
+
+	public JLabel getLbDtConfirCad() {
+		return lbDtConfirCad;
+	}
+
+	public void setLbDtConfirCad(JLabel lbDtConfirCad) {
+		this.lbDtConfirCad = lbDtConfirCad;
+	}
+
+	public JLabel getLbDtEntregaCad() {
+		return lbDtEntregaCad;
+	}
+
+	public void setLbDtEntregaCad(JLabel lbDtEntregaCad) {
+		this.lbDtEntregaCad = lbDtEntregaCad;
+	}
+
+	public JLabel getLbFormaPagCad() {
+		return lbFormaPagCad;
+	}
+
+	public void setLbFormaPagCad(JLabel lbFormaPagCad) {
+		this.lbFormaPagCad = lbFormaPagCad;
 	}
 
 	public JTable getTabMateriaisEstoque() {
