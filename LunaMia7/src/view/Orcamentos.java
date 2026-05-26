@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
@@ -13,25 +17,26 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import model.MateriaPrima;
 import model.MateriaPrimaTableModel;
+import model.Orcamento;
+import model.OrcamentoTableModel;
 
 public class Orcamentos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private static final int COLUNA_BOTOES = 3;
 	private JTable tabelaOrcamentos;
 	private JButton btCriar;
-	public DefaultTableModel tabelaModeloOrcamentos;
-	//public MateriaPrimaTableModel tabModeloOrcamentos = new MateriaPrimaTableModel();
+	public OrcamentoTableModel tabelaModeloOrcamento;
+	private JPopupMenu botoesAcoes;
+	private Orcamento orcamentoSelecionado;
+	
+	private ActionListener acaoVisualizar, acaoAtualizar, acaoExcluir, acaoCancelar;
 
-	/**
-	 * Create the panel.
-	 */
 	public Orcamentos() {
-		
-		//FAZER A TABELA EM STATIC PARA PODER EDITAR COM AS COISAS DO BANCO 
 		
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
@@ -51,11 +56,8 @@ public class Orcamentos extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
-		;
-		
-		String[] colunas = {"Orcamentos", "Status", "Cliente", ""};
-		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-		tabelaOrcamentos = new JTable(modelo);
+		tabelaModeloOrcamento = new OrcamentoTableModel();
+		tabelaOrcamentos = new JTable(tabelaModeloOrcamento);
 		
 		//Estilização do cabeçalho
 		
@@ -82,6 +84,8 @@ public class Orcamentos extends JPanel {
 
 		tabelaOrcamentos.getColumnModel().getColumn(1).setCellRenderer(center);
 		tabelaOrcamentos.getColumnModel().getColumn(2).setCellRenderer(center);
+		tabelaOrcamentos.getColumnModel().getColumn(3).setCellRenderer(tabelaOrcamentos.getDefaultRenderer(javax.swing.Icon.class));
+		((DefaultTableCellRenderer)tabelaOrcamentos.getColumnModel().getColumn(3).getCellRenderer()).setHorizontalAlignment(JLabel.CENTER);
 		
 		tabelaOrcamentos.getColumnModel().getColumn(0).setPreferredWidth(200); // Orçamentos
 		tabelaOrcamentos.getColumnModel().getColumn(1).setPreferredWidth(200); // Status
@@ -90,8 +94,87 @@ public class Orcamentos extends JPanel {
 		//tabelaOrcamentos.getColumnModel().getColumn(4).setPreferredWidth(50);  // Botão / mais
 				
 		scrollPane.setViewportView(tabelaOrcamentos);
+		
+		popupBotoes();
+		eventoTabela();
 				
 		
+	}
+	
+	private void popupBotoes() {
+		
+		botoesAcoes = new JPopupMenu();
+		
+		JMenuItem btVisualizar = new JMenuItem("Visualizar");
+		JMenuItem btAtualizar = new JMenuItem("Atualizar");
+		JMenuItem btExcluir = new JMenuItem("Excluir");
+		JMenuItem btCancelar = new JMenuItem("Cancelar");
+		
+		btVisualizar.addActionListener(e -> {
+			if(acaoVisualizar != null) {
+				acaoVisualizar.actionPerformed(e);
+			}
+		});
+		
+		btAtualizar.addActionListener(e -> {
+			if(acaoAtualizar != null) {
+				acaoAtualizar.actionPerformed(e);
+			}
+		});
+		
+		btExcluir.addActionListener(e -> {
+			if(acaoExcluir != null) {
+				acaoExcluir.actionPerformed(e);
+			}
+		});
+		
+		btCancelar.addActionListener(e -> {
+			if(acaoCancelar != null) {
+				acaoCancelar.actionPerformed(e);
+			}
+		});
+		
+		botoesAcoes.add(btVisualizar);
+		botoesAcoes.add(btAtualizar);
+		botoesAcoes.add(btExcluir);
+		botoesAcoes.add(btCancelar);
+		
+	}
+	
+	private void eventoTabela() {
+		
+		tabelaOrcamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				
+				int linha = tabelaOrcamentos.rowAtPoint(e.getPoint());
+				int coluna = tabelaOrcamentos.columnAtPoint(e.getPoint());
+				
+				if (linha != -1 && coluna == COLUNA_BOTOES){
+					
+					orcamentoSelecionado = tabelaModeloOrcamento.getOrcamento(linha);
+					botoesAcoes.show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+		});
+		
+	}
+	
+	public void visualizar(java.util.function.Consumer<Orcamento> actionListener) {
+		this.acaoVisualizar = e -> actionListener.accept(orcamentoSelecionado);
+	}
+	
+	public void atualizar(java.util.function.Consumer<Orcamento> actionListener) {
+		this.acaoAtualizar = e -> actionListener.accept(orcamentoSelecionado);
+	}
+	
+	public void excluir(java.util.function.Consumer<Orcamento> actionListener) {
+		this.acaoExcluir = e -> actionListener.accept(orcamentoSelecionado);
+	}
+	
+	public void cancelar(java.util.function.Consumer<Orcamento> actionListener) {
+		this.acaoCancelar = e -> actionListener.accept(orcamentoSelecionado);
 	}
 	
 	public void criar(ActionListener actionListener) {
@@ -105,7 +188,4 @@ public class Orcamentos extends JPanel {
 	public void setTabelaOrcamentos(JTable tabelaOrcamentos) {
 		this.tabelaOrcamentos = tabelaOrcamentos;
 	}
-	
-	
-
 }

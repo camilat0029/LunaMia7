@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
-import controller.BotoesLateralController;
+import controller.BotoesAcoesController;
 import controller.CadastroUsuarioController;
 import controller.InicioController;
 import controller.LoginController;
@@ -109,13 +109,17 @@ public class Main {
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
-		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento,  clienteDAO, materiaPrimaDAO, confirOrcamDAO);
+		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento,  
+				clienteDAO, materiaPrimaDAO, confirOrcamDAO);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento, materiaPrimaDAO);
 		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrimaView, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
-		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, relatorioHorasTrabalhadas, relatorioGastos);
+		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, 
+				relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
-		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque, materiaPrimaView);
-		BotoesLateralController botoesLateralController = new BotoesLateralController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal, visualizarOrcamento, visualizarMateriaPrima, menu);
+		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque,
+				materiaPrimaView);
+		BotoesAcoesController botoesLateralController = new BotoesAcoesController(botoesMateriaPrima, botoesOrcamento, navegadorTelas, telaPrincipal,
+				visualizarOrcamento, visualizarMateriaPrima, menu, materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

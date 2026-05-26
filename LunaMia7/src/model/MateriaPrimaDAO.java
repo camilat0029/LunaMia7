@@ -1,4 +1,3 @@
-
 package model;
 
 import java.sql.Connection;
@@ -134,19 +133,26 @@ public class MateriaPrimaDAO {
     }
     
     public void excluirMateriasPrimas(MateriaPrima materiasPrimas) {
-        String sql = "DELETE FROM MateriaPrima WHERE nome = ?";
+        String sql = "DELETE FROM MateriaPrima WHERE id_estoque = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
-            pstm.setString(1, materiasPrimas.getNome());
+            pstm = conexao.prepareStatement(sql);
+            
+            pstm.setInt(1, materiasPrimas.getIdMateriaPrima());
 
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	BancoDeDados.desconectar(conexao);
+        	try { 
+        		if (pstm != null) pstm.close(); 
+        	} catch (SQLException e) {
+        		
+        	}
+            BancoDeDados.desconectar(conexao);
         }
     }
 	

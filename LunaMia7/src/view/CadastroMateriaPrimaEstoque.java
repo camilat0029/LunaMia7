@@ -205,4 +205,14 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		this.cbUnidadeMedida = cbUnidadeMedida;
 	}
 
+	public JButton getBtConfirmar() {
+		return btConfirmar;
+	}
+
+	public void setBtConfirmar(JButton btConfirmar) {
+		this.btConfirmar = btConfirmar;
+	}
+	
+	
+
 }

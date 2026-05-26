@@ -5,13 +5,13 @@ CREATE DATABASE `LunaMia`;
 CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
   `id_estoque` INT AUTO_INCREMENT NOT NULL,
   `unidadeMedida` ENUM('metro', 'centimetro', 'litro', 'milimetro', 'unidade') NOT NULL,
-  `valor` DECIMAL NOT NULL,
+  `valor` DECIMAL(10,2) NOT NULL,
   `marca` VARCHAR(45) NULL,
   `cor` VARCHAR(45) NULL,
   `qntDisponivel` INT NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
    `usuario_email` VARCHAR(255),
-  `qntPorUnidade` DECIMAL NOT NULL,
+  `qntPorUnidade` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id_estoque`));
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
@@ -23,23 +23,23 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
   `email` VARCHAR(64) NOT NULL,
-  `fotoPerfil` varchar(300) NULL,
+  `fotoPerfil` VARCHAR(300) NULL,
   `senha` VARCHAR(12) NOT NULL,
   `nrTelefone` VARCHAR(15) NOT NULL,
   `nomeUsuario` VARCHAR(50) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
-  `precoHora` DECIMAL NOT NULL,
+  `precoHora` DECIMAL(10,2) NOT NULL,
   `cidade` VARCHAR(100) NOT NULL,
   `estado` VARCHAR(50) NOT NULL,
-  `percentualLucro` DECIMAL NOT NULL,
+  `percentualLucro` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`email`, `nomeUsuario`));
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `id_orcamento` INT AUTO_INCREMENT NOT NULL,
   `tituloPedido` VARCHAR(45) NOT NULL,
   `statusPedido` ENUM('concluido', 'andamento', 'pendente') NOT NULL,
-  `precoHora` DECIMAL NOT NULL,
-  `quantHrs` DECIMAL NOT NULL,
+  `precoHora` DECIMAL(10,2) NOT NULL,
+  `quantHrs` DECIMAL(10,2) NOT NULL,
   `quantDiasPedido` INT NOT NULL,
   `Perfil_Usuario_email` VARCHAR(64) NOT NULL,
   `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Confirmacao_de_orcamento` (
   `dataPrevisaoEnt` DATE NULL,
   `dataConfirmacao` DATE NULL,
   `id_orcamento` INT NOT NULL,
-  `valorVenda` DECIMAL not null,
-  `lucroTotalObtido` DECIMAL not null,
+  `valorVenda` DECIMAL(10,2) not null,
+  `lucroTotalObtido` DECIMAL(10,2) not null,
    
   PRIMARY KEY (`id_orcamento`),
   CONSTRAINT `fk_Confirmação_de_orcaçamento_Orcamento`
@@ -102,13 +102,13 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     ('lara.cs@aluno.ifsc.edu.br', null, '16022008', '(47) 99987-6543', 'lara.cs', 'Lara', 25, 'Gaspar', 'SC',  3);
    
     insert into MateriaPrima
-    values(null, 'metro', 10, 'Circulo', 'azul', 5, 'Linha', 100),
-    (null, 'metro', 15, 'Circulo2', 'azul2', 10, 'Linha2', 200),
-    (null, 'centimetro', 20, 'Circulo3', 'azul3', 15, 'Linha3', 300),
-    (null, 'milimetro', 25, 'Circulo4', 'azul4', 20, 'Linha4', 400),
-    (null, 'metro', 30, 'Circulo5', 'azul5', 25, 'Linha5', 500),
-    (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 600),
-    (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 700);
+    values(null, 'metro', 10, 'Circulo', 'azul', 5, 'Linha', 'camila.t29@aluno.ifsc.edu.br', 100),
+    (null, 'metro', 15, 'Circulo2', 'azul2', 10, 'Linha2', 'camila.t29@aluno.ifsc.edu.br', 200),
+    (null, 'centimetro', 20, 'Circulo3', 'azul3', 15, 'Linha3', 'camila.t29@aluno.ifsc.edu.br',300),
+    (null, 'milimetro', 25, 'Circulo4', 'azul4', 20, 'Linha4', 'camila.t29@aluno.ifsc.edu.br', 400),
+    (null, 'metro', 30, 'Circulo5', 'azul5', 25, 'Linha5', 'camila.t29@aluno.ifsc.edu.br', 500),
+    (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 'camila.t29@aluno.ifsc.edu.br', 600),
+    (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 'camila.t29@aluno.ifsc.edu.br', 700);
    
     select * from MateriaPrima;
     

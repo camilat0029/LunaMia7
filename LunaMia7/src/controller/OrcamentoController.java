@@ -55,7 +55,7 @@ public class OrcamentoController {
 		
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
-		//orcamentos.getta
+		orcamentos.getTabelaOrcamentos().setModel(orcamentos.tabelaModeloOrcamento);
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -392,16 +392,14 @@ public class OrcamentoController {
 	
 	public void carregarTabelaOrcamentos() {
 		
+		//TALVEZ IRA PRECISAR SE MODIFICAR O MÉTODO NA CLASSE DAO
+		//UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		
 		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos();
 		
-		orcamentos.tabelaModeloOrcamentos = (DefaultTableModel) orcamentos.getTabelaOrcamentos().getModel();
+		orcamentos.tabelaModeloOrcamento.limpar();
+		orcamentos.tabelaModeloOrcamento.setLista(orcamentosCad);
 		
-		orcamentos.tabelaModeloOrcamentos.setRowCount(0);
-
-		for(Orcamento orcam : orcamentosCad) {
-			Object[] informacoes = {orcam.getTituloPedido(), orcam.getStatus(), orcam.getCliente().getNome()};
-			orcamentos.tabelaModeloOrcamentos.addRow(informacoes);
-		}
 	}
 	
 }

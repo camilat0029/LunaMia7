@@ -38,7 +38,10 @@ public class MateriaPrimaController extends ComponentAdapter {
 
 		this.cadastroMateriaPrima.confirmar(e -> {
 
-			cadastrarMateriaPrima();
+			if(cadastroMateriaPrima.getBtConfirmar().getText().equals("Confirmar")) {
+				cadastrarMateriaPrima();
+			}
+			
 
 		});
 

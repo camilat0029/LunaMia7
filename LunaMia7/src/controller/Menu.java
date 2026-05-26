@@ -48,12 +48,14 @@ public class Menu {
 			removerMenu();
 		});
 		this.mnExp.estoque(e -> {
+			mostrarPanelCont();
 			navegadorTelas.navegarTela("MATERIA_PRIMA");
 		});
 		this.mnExp.inicio(e -> {
 			navegadorTelas.navegarTela("INICIO");
 		});
 		this.mnExp.orcamentos(e ->{
+			mostrarPanelCont();
 			navegadorTelas.navegarTela("ORCAMENTOS");
 		});
 		this.mnExp.relatorios(e ->{

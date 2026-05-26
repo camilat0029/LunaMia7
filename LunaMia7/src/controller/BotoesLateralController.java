@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import model.MateriaPrima;
 import view.BotoesMateriaPrima;
 import view.BotoesOrcamento;
 import view.TelaPrincipal;
@@ -19,7 +20,7 @@ public class BotoesLateralController {
 	private VisualizarOrcamento visualizarOrcamento;
 	private VisualizarMateriaPrima visualizarMateriaPrima;
 	private Menu menu;
-
+	
 	public BotoesLateralController(BotoesMateriaPrima botoesMateriaPrima, BotoesOrcamento botoesOrcamento,
 			NavegadorTelas navegadorTelas, TelaPrincipal tela,
 			VisualizarOrcamento visualizarOrcamento, VisualizarMateriaPrima visualizarMateriaPrima,

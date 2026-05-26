@@ -7,9 +7,11 @@ import javax.swing.table.AbstractTableModel;
 
 public class MateriaPrimaViewTableModel extends AbstractTableModel{
 	
+	private final javax.swing.ImageIcon ICONE_ACOES = new javax.swing.ImageIcon(getClass().getResource("/imagensIcones/7.png"));
+	
 	private List<MateriaPrima> listaMateriasPrimas = new ArrayList<>();
 	
-	private String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", "..."};
+	private String[] colunas = {"Matérias Primas", "Quantidade", "Unidade de Medida", "Ações"};
 
 	@Override
 	public int getRowCount() {
@@ -42,9 +44,20 @@ public class MateriaPrimaViewTableModel extends AbstractTableModel{
 		case 2:
 			return materiaPrima.getUnidadeMedida();
 			
+		case 3:
+			return ICONE_ACOES;
+			
 		default:
 			return null;
 		}
+	}
+	
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+	    if (columnIndex == 3) {
+	        return javax.swing.Icon.class;
+	    }
+	    return super.getColumnClass(columnIndex);
 	}
 	
 	// ADICIONA UM ITEM NA LISTA
