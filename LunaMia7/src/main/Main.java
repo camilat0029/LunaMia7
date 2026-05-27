@@ -101,7 +101,7 @@ public class Main {
 		
 		//CONTROLLER
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
-		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
+		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas, login);
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
 				menu, configurarPerfilAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);

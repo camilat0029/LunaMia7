@@ -64,6 +64,7 @@ public class LoginController {
 					
 					 usuarioLogado = usuarioPerfil;
 					 usuarioEncontrado = true;
+					
 					 
 					 break;
 				}

@@ -424,9 +424,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 					} else {
 
-						usuarioAtualizado.setFotoPerfil(
-							    LoginController.usuarioLogado.getFotoPerfil()
-							);
+						usuarioAtualizado.setFotoPerfil(LoginController.usuarioLogado.getFotoPerfil());
 
 					}
 					usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
@@ -476,18 +474,18 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 	// ACIONA EVENTO AO APARECER UM JPANEL PARA CADASTRAR INFOS NA TELA JÁ
 	// CADASTRADAS
-	
+
 	@Override
 	public void componentShown(ComponentEvent e) {
 
-	    Object componente = e.getComponent();
+		Object componente = e.getComponent();
 
-	    if (componente instanceof JScrollPane scroll) {
+		if (componente instanceof JScrollPane scroll) {
 
-	        JPanel painel = (JPanel) scroll.getViewport().getView();
+			JPanel painel = (JPanel) scroll.getViewport().getView();
 
-	        informacoesJaCadastradas(painel);
-	    }
+			informacoesJaCadastradas(painel);
+		}
 	}
 
 	// INFORMAÇÕES JÁ CADASTRADAS QUE IRÃO SER MOSTRADAS NAS TELAS DE CONFIGURAÇÃO
@@ -520,29 +518,27 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 			confPerfil.getCbEstado().setSelectedItem(usuario.getEstado());
 			confPerfil.getCbCidade().setSelectedItem(usuario.getCidade());
-			
+
 			String caminhoFoto = usuario.getFotoPerfil();
 
 			if (caminhoFoto != null && !caminhoFoto.isEmpty()) {
 
-			    File arquivo = new File(caminhoFoto);
+				File arquivo = new File(caminhoFoto);
 
-			    if (arquivo.exists()) {
+				if (arquivo.exists()) {
 
-			        try {
+					try {
 
-			            BufferedImage imagem = ImageIO.read(arquivo);
+						BufferedImage imagem = ImageIO.read(arquivo);
 
-			            confPerfil.getLbFoto().setIcon(
-			                new ImageIcon(recortarCircular(imagem, 150))
-			            );
+						confPerfil.getLbFoto().setIcon(new ImageIcon(recortarCircular(imagem, 150)));
 
-			        } catch (Exception ex) {
+					} catch (Exception ex) {
 
-			            ex.printStackTrace();
+						ex.printStackTrace();
 
-			        }
-			    }
+					}
+				}
 			}
 
 		}
@@ -557,9 +553,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 	}
 
-	private BufferedImage recortarCircular(
-
-			BufferedImage imagem, int tamanho) {
+	private BufferedImage recortarCircular(BufferedImage imagem, int tamanho) {
 
 		BufferedImage saida = new BufferedImage(tamanho, tamanho, BufferedImage.TYPE_INT_ARGB);
 
