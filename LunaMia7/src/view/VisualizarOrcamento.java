@@ -482,4 +482,14 @@ public class VisualizarOrcamento extends JPanel {
 		this.tabMateriaisEstoque = tabMateriaisEstoque;
 	}
 
+	public JLabel getLbValorFinalCad() {
+		return lbValorFinalCad;
+	}
+
+	public void setLbValorFinalCad(JLabel lbValorFinalCad) {
+		this.lbValorFinalCad = lbValorFinalCad;
+	}
+	
+	
+
 }

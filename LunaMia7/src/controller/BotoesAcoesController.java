@@ -8,11 +8,15 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import model.ConfirOrcam;
+import model.ConfirOrcamDAO;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
+import model.Orcamento;
 import model.UsuarioPerfil;
 import view.CadastroMateriaPrimaEstoque;
 import view.MateriaPrimaView;
+import view.Orcamentos;
 import view.TelaPrincipal;
 import view.VisualizarMateriaPrima;
 import view.VisualizarOrcamento;
@@ -25,14 +29,17 @@ public class BotoesAcoesController extends ComponentAdapter{
 	private VisualizarMateriaPrima visualizarMateriaPrima;
 	private Menu menu;
 	private MateriaPrimaView materiaPrimaView;
+	private Orcamentos orcamentos;
 	private CadastroMateriaPrimaEstoque cadMateriaPrima;
 	private MateriaPrimaDAO materiaPrimaDAO;
+	private ConfirOrcamDAO confirOrcamDAO;
 	
 	private MateriaPrima MpEditada;
 	
 	public BotoesAcoesController(NavegadorTelas navegadorTelas, TelaPrincipal tela, VisualizarOrcamento visualizarOrcamento,
 			VisualizarMateriaPrima visualizarMateriaPrima, Menu menu, MateriaPrimaView materiaPrimaView,
-			CadastroMateriaPrimaEstoque cadMateriaPrima, MateriaPrimaDAO materiaPrimaDAO) {
+			CadastroMateriaPrimaEstoque cadMateriaPrima, MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO,
+			Orcamentos orcamentos) {
 		super();
 		this.navegadorTelas = navegadorTelas;
 		this.tela = tela;
@@ -42,6 +49,10 @@ public class BotoesAcoesController extends ComponentAdapter{
 		this.materiaPrimaView = materiaPrimaView;
 		this.cadMateriaPrima = cadMateriaPrima;
 		this.materiaPrimaDAO = materiaPrimaDAO;
+		this.confirOrcamDAO = confirOrcamDAO;
+		this.orcamentos = orcamentos;
+		
+		visualizarOrcamento.getTabMateriaisEstoque().setModel(visualizarOrcamento.tabModeloEstoque);
 		
 		//AÇÃO VOLTAR DA TELA DE VISUALIZAÇÃO DA MATERIA PRIMA
 		this.visualizarMateriaPrima.voltar(new MouseAdapter() {
@@ -77,6 +88,11 @@ public class BotoesAcoesController extends ComponentAdapter{
 		this.materiaPrimaView.excluir(materiaPrima -> {
 			excluirMP(materiaPrima);
 		});
+		
+		this.orcamentos.visualizar(orcamento -> {
+			visualizarOrcam(orcamento);
+		});
+		
 		
 	}
 	
@@ -146,7 +162,7 @@ public class BotoesAcoesController extends ComponentAdapter{
 		JOptionPane.showMessageDialog(null, "Materia Prima Excluída com Sucesso", "Informação", 1);
 	}
 	
-	//RECARREGANDO TABELA
+	//RECARREGANDO TABELA MATERIA PRIMA
 	public void carregarTabela() {
 
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
@@ -157,9 +173,47 @@ public class BotoesAcoesController extends ComponentAdapter{
 
 	}
 	
+	//MÉTODO PARA VISUALIZAR ORCAMENTO
+	public void visualizarOrcam(Orcamento orcam) {
+		
+		visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido());
+		visualizarOrcamento.getLbNomeClienteCad().setText(orcam.getCliente().getNome());
+		visualizarOrcamento.getLbContClienteCad().setText(orcam.getCliente().getTelefone());
+		visualizarOrcamento.getLbEmailClienteCad().setText(orcam.getCliente().getEmail());
+		visualizarOrcamento.getLbPrecoHoraCad().setText(String.valueOf(orcam.getPrecoHora()));
+		visualizarOrcamento.getLbPercLucroCad().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro()));
+		visualizarOrcamento.getLbHorasPrevistasCad().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
+		visualizarOrcamento.getLbQuantDiasMaxCad().setText(String.valueOf(orcam.getMaxDias()));
+		//visualizarOrcamento.getLbCustoAdiCad().setText(orcam.get);
+		visualizarOrcamento.getLbStatusCad().setText(String.valueOf(orcam.getStatus()));
+		
+		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
+		
+		if(confirOrcam != null) {
+			visualizarOrcamento.getLbFormaPagCad().setText(confirOrcam.getFormPagamento());
+			visualizarOrcamento.getLbDtConfirCad().setText(String.valueOf(confirOrcam.getDataConfirmacao()));
+			visualizarOrcamento.getLbDtEntregaCad().setText(String.valueOf(confirOrcam.getDataPrevistaEntrega()));
+			visualizarOrcamento.getLbValorVendaCad().setText(String.valueOf(confirOrcam.getValorVenda()));
+			visualizarOrcamento.getLbValorLucroCad().setText(String.valueOf(confirOrcam.getLucro()));
+		}
+		
+		visualizarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
+		
+		//visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido()); // valor gastos
+		//visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido()); // valor sem lucro
+		
+		List<MateriaPrima> MPs = materiaPrimaDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
+		visualizarOrcamento.tabModeloEstoque.setLista(MPs);
+		
+		navegadorTelas.navegarTela("VISUALIZAR_ORCAMENTO");
+		
+	}
+	
 	public void componentShown(ComponentEvent e) {
 		this.carregarTabela();
 	}
+	
+	
 	
 	
 	
