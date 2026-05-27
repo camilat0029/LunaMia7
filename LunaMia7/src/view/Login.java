@@ -30,7 +30,6 @@ public class Login extends JPanel {
 		setMinimumSize(new Dimension(1020, 640));
 		setLayout(new MigLayout("", "[grow][center][][center][267.00,center][grow]", "[grow][][][][][][][][][][][grow]"));
 		
-		
 		JLabel lblNewLabel = new JLabel("");
 		add(lblNewLabel, "cell 0 0");
 		

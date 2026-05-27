@@ -37,6 +37,7 @@ import view.MenuContraido;
 import view.MenuExpandido;
 import view.Orcamentos;
 import view.MateriaPrimaView;
+import view.Mensagem;
 import view.RedefinirSenha;
 import view.RelatorioGastos;
 import view.RelatorioHorasTrabalhadas;
@@ -94,6 +95,9 @@ public class Main {
 		Orcamentos orcamentos = new Orcamentos();
 		VisualizarMateriaPrima visualizarMateriaPrima = new VisualizarMateriaPrima();
 		VisualizarOrcamento visualizarOrcamento = new VisualizarOrcamento();
+		
+		//AQUII
+		Mensagem mensagem = new Mensagem(telaPrincipal, null);
 		
 		//CONTROLLER
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);

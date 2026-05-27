@@ -1,11 +1,19 @@
 package controller;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -14,6 +22,7 @@ import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
+import view.Mensagem;
 import view.RedefinirSenha;
 
 public class CadastroUsuarioController extends ComponentAdapter{
@@ -26,6 +35,7 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	private ConfigurarPerfil confPerfil;
 	private RedefinirSenha redefinirSenha;
 	private UsuarioPerfil usuarioCadastrado;
+	private File arquivoSelecionado;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
 
@@ -83,8 +93,6 @@ public class CadastroUsuarioController extends ComponentAdapter{
 			menu.mostrarPanelCont();
 		});
 		
-		//MUDANÇASSSSS
-		
 		adicionarEstado();
 		
 		this.confPerfil.getCbEstado().addActionListener(e -> {
@@ -109,6 +117,53 @@ public class CadastroUsuarioController extends ComponentAdapter{
 	        pesquisarCidades(primeiroEstado);
 	        
 	    }
+	    
+	    this.confPerfil.escolherFoto(e -> {
+
+	        JFileChooser chooser = new JFileChooser();
+
+	        chooser.setAcceptAllFileFilterUsed(false);
+
+	        chooser.setFileFilter(
+	            new javax.swing.filechooser.FileNameExtensionFilter(
+	                "Imagens (.png, .jpg, .jpeg)",
+	                "png",
+	                "jpg",
+	                "jpeg"
+	            )
+	        );
+
+	        int resultado = chooser.showOpenDialog(null);
+
+	        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+	            try {
+
+	            	arquivoSelecionado = chooser.getSelectedFile();
+
+	            	BufferedImage imagem = ImageIO.read(
+	            	    arquivoSelecionado
+	            	
+	                );
+
+	                confPerfil.getLbFoto().setIcon(
+	                    new ImageIcon(
+	                        recortarCircular(imagem, 150)
+	                    )
+	                );
+
+	            } catch (Exception ex) {
+
+	                Mensagem.mostrar(
+	                    null,
+	                    "Erro",
+	                    "Erro ao carregar imagem"
+	                );
+	            }
+	        }
+	    });
+	   
+
 	    
 	}
 	
@@ -438,6 +493,46 @@ public class CadastroUsuarioController extends ComponentAdapter{
 		redefinirSenha.getLbSenha().setText(usuario.getSenha());
 		navegadorTelas2.navegarTela("REDEFINIR_SENHA");
 		
+	}
+	
+	private BufferedImage recortarCircular(
+	        BufferedImage imagem,
+	        int tamanho) {
+
+	    BufferedImage saida = new BufferedImage(
+	        tamanho,
+	        tamanho,
+	        BufferedImage.TYPE_INT_ARGB
+	    );
+
+	    Graphics2D g2 = saida.createGraphics();
+
+	    g2.setRenderingHint(
+	        RenderingHints.KEY_ANTIALIASING,
+	        RenderingHints.VALUE_ANTIALIAS_ON
+	    );
+
+	    g2.setClip(
+	        new Ellipse2D.Float(
+	            0,
+	            0,
+	            tamanho,
+	            tamanho
+	        )
+	    );
+
+	    g2.drawImage(
+	        imagem,
+	        0,
+	        0,
+	        tamanho,
+	        tamanho,
+	        null
+	    );
+
+	    g2.dispose();
+
+	    return saida;
 	}
 	
 	

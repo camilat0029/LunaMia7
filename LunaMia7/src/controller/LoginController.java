@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.Login;
+import view.Mensagem;
 
 public class LoginController {
 	
@@ -44,7 +45,13 @@ public class LoginController {
 		
 		if(login.getTfUsuarioLogin().getText().isEmpty() || login.getPfSenhaLogin().getText().isEmpty()) {
 			
-			JOptionPane.showMessageDialog(null, "Opa, algum campo está vazio");
+			//AQUI 
+			Mensagem.mostrar(
+				    null,
+				    "Informação",
+				    "Opa, algum campo está vazio!"
+				);
+			// JOptionPane.showMessageDialog(null, "Opa, algum campo está vazio");
 			
 		}
 		else{
