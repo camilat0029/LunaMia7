@@ -165,5 +165,49 @@ public class ConfirOrcamDAO {
 	        	BancoDeDados.desconectar(conexao);
 	        }
 	    }
+	    
+	    public ConfirOrcam buscarPeloOrcamento(int idOrcamento) {
+	    	String sql = "SELECT * FROM Confirmacao_de_orcamento WHERE id_orcamento = ?";
+	    	
+	    	Connection conexao = null;
+	        PreparedStatement pstm = null;
+	        ResultSet rs = null;
+	        
+	        try {
+	        	conexao = BancoDeDados.conectar();
+	        	pstm = conexao.prepareStatement(sql);
+	        	pstm.setInt(1, idOrcamento);
+	        	
+	        	rs = pstm.executeQuery();
+	        	
+	        	if (rs.next()) {
+	        		
+	        		ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
+	        		
+	        		confirOrcam.setFormPagamento(rs.getString("formaPagam"));
+	        		Date dataEntrega = rs.getDate("dataPrevisaoEnt");
+	        		if(dataEntrega != null) {
+	        			confirOrcam.setDataPrevistaEntrega(dataEntrega.toLocalDate());
+	        		}
+	        		
+	        		Date dataConfir = rs.getDate("dataConfirmacao");
+	        		if(dataConfir != null) {
+	        			confirOrcam.setDataConfirmacao(dataConfir.toLocalDate());
+	        		}
+	        		
+	        		confirOrcam.setValorVenda(rs.getFloat("valorVenda"));
+	        		confirOrcam.setLucro(rs.getFloat("lucroTotalObtido"));
+	        		
+	        		return confirOrcam;
+	        	}
+	        }
+	        catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            BancoDeDados.desconectar(conexao);
+	        }
+
+	        return null;
+	    }
 
 }

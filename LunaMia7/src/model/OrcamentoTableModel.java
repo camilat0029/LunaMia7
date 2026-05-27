@@ -36,13 +36,13 @@ public class OrcamentoTableModel extends AbstractTableModel{
 		switch(columnIndex) {
 		
 		case 0:
-			orcamento.getTituloPedido();
+			return orcamento.getTituloPedido();
 			
 		case 1:
-			orcamento.getStatus();
+			return orcamento.getStatus();
 			
 		case 2:
-			orcamento.getCliente().getNome();
+			return orcamento.getCliente().getNome();
 			
 		case 3:
 			return ICONE_ACOES;

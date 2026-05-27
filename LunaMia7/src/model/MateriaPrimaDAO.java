@@ -155,5 +155,38 @@ public class MateriaPrimaDAO {
             BancoDeDados.desconectar(conexao);
         }
     }
+    
+    
+    public List<MateriaPrima> buscarPeloIdOrcamento(int idOrcamento){
+    	 String sql = "SELECT mp.*, op.quantidade FROM MateriaPrima mp INNER JOIN OrcamentoProduto op "
+    	 		+ "ON mp.id_estoque = op.id_estoque WHERE op.id_orcamento = ?";
+    	 
+    	 List<MateriaPrima> listaMP = new ArrayList<>();
+    	 
+    	 try (Connection c = BancoDeDados.conectar(); PreparedStatement p = c.prepareStatement(sql)) {
+
+    	        p.setInt(1, idOrcamento);
+    	        ResultSet rs = p.executeQuery();
+    	        
+    	        while (rs.next()) {
+    	        	
+    	        	MateriaPrima MP = new MateriaPrima(null, null, null, 0, 0, 0, null);
+    	        	
+    	        	MP.setIdMateriaPrima(rs.getInt("id_estoque"));
+    	        	MP.setNome(rs.getString("nome"));
+    	        	MP.setValor(rs.getFloat("valor"));
+    	        	MP.setQuantidadeDisponivel(rs.getInt("qntDisponivel"));
+    	    
+
+    	        	listaMP.add(MP);
+    	        }
+    	 } catch (Exception e) {
+    	        e.printStackTrace();
+    	    }
+
+    	    return listaMP;
+    	 
+
+    }
 	
 }

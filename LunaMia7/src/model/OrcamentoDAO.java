@@ -61,9 +61,14 @@ public class OrcamentoDAO {
 		}
 	}
 
-	public List<Orcamento> listarOrcamentos() {
+	public List<Orcamento> listarOrcamentos(String emailUsuario) {
 
-	    String sql = "SELECT o.*, c.* FROM Orcamento o INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente";
+	    String sql = "SELECT o.*, c.*, u.* " +
+	             "FROM Orcamento o " +
+	             "INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
+	             "INNER JOIN Perfil_Usuario u ON o.Perfil_Usuario_email = u.email " +
+	             "WHERE o.Perfil_Usuario_email = ? " +
+	             "AND o.Perfil_Usuario_nomeUsuario = u.nomeUsuario";
 
 	    List<Orcamento> orcamentos = new ArrayList<>();
 
@@ -76,8 +81,9 @@ public class OrcamentoDAO {
 	        conexao = BancoDeDados.conectar();
 
 	        pstm = conexao.prepareStatement(sql);
-
+	        pstm.setString(1, emailUsuario);
 	        rset = pstm.executeQuery();
+	        
 
 	        while (rset.next()) {
 
@@ -90,9 +96,21 @@ public class OrcamentoDAO {
 	            orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
 	            orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
 	            
+	            UsuarioPerfil usuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+
+	            usuario.setEmail(rset.getString("email"));
+	            usuario.setNomeUsuario(rset.getString("nomeUsuario"));
+	            usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
+	            //usuario.setPrecoHora(rset.getFloat("precoHora"));
+
+	            orcamento.setUsuarioPerfil(usuario);
+	            
 	            Cliente cliente =new Cliente(null, null, null);
 	            
+	            cliente.setIdCliente(rset.getInt("id_cliente"));
 	            cliente.setNome(rset.getString("nomeCliente"));
+	            cliente.setTelefone(rset.getString("telefone"));
+	            cliente.setEmail(rset.getString("email"));
 	            orcamento.setCliente(cliente);
 	            
 	            orcamentos.add(orcamento);
@@ -151,5 +169,5 @@ public class OrcamentoDAO {
 	        	BancoDeDados.desconectar(conexao);
 	        }
 	    }
-	
+	    
 }

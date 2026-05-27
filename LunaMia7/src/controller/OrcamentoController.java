@@ -19,6 +19,8 @@ import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.Orcamento;
 import model.OrcamentoDAO;
+import model.OrcamentoProduto;
+import model.OrcamentoProdutoDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
 import view.Orcamentos;
@@ -64,6 +66,7 @@ public class OrcamentoController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegadorTelas.navegarTela("ORCAMENTOS");
+				menu.mostrarPanelCont();
 			}
 		});
 		
@@ -175,7 +178,6 @@ public class OrcamentoController {
 				matPrimaNova.setNome(matPrima.getNome());
 				matPrimaNova.setValor(matPrima.getValor());
 				matPrimaNova.setQuantidadeDisponivel(1);
-				
 				criarOrcamento.tabModeloOrcam.adicionarMatPrima(matPrimaNova);
 			}
 			
@@ -310,6 +312,22 @@ public class OrcamentoController {
 		confirOrcamDAO.adicionarDados(confirOrcam);
 		this.confirOrcamAtual = confirOrcam;
 		
+		//O ORCAMENTO PRODUTO
+		
+		List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
+		
+		for (MateriaPrima materiaPrima : listaMP) {
+			
+			OrcamentoProduto OP = new OrcamentoProduto();
+			
+			OP.setOrcamento(novoOrcamento);
+			OP.setMateriaPrima(materiaPrima);
+			OP.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+			
+			new OrcamentoProdutoDAO().adicionarDados(OP);
+			
+		}
+		
 		atualizarQuantMP();
 		
 	}
@@ -325,6 +343,7 @@ public class OrcamentoController {
 		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
 		
 		JOptionPane.showMessageDialog(null, "Orçamento Confirmado com Sucesso", "informação", 1);
+		menu.mostrarPanelCont();
 		navegadorTelas.navegarTela("ORCAMENTOS");
 		
 		carregarTabelaOrcamentos();
@@ -392,9 +411,9 @@ public class OrcamentoController {
 	public void carregarTabelaOrcamentos() {
 		
 		//TALVEZ IRA PRECISAR SE MODIFICAR O MÉTODO NA CLASSE DAO
-		//UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 		
-		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos();
+		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
 		
 		orcamentos.tabelaModeloOrcamento.limpar();
 		orcamentos.tabelaModeloOrcamento.setLista(orcamentosCad);

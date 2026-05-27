@@ -20,6 +20,7 @@ import controller.OrcamentoController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import model.OrcamentoDAO;
+import model.OrcamentoProdutoDAO;
 import model.ClienteDAO;
 import model.ConfirOrcamDAO;
 import model.MateriaPrima;
@@ -75,6 +76,7 @@ public class Main {
 		MateriaPrima materiaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
 		ClienteDAO clienteDAO = new ClienteDAO();
 		ConfirOrcamDAO confirOrcamDAO= new ConfirOrcamDAO();
+		OrcamentoProdutoDAO orcamProdDAO = new OrcamentoProdutoDAO();
 		
 		//VIEW
 		Login login = new Login();
@@ -115,7 +117,7 @@ public class Main {
 		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque,
 				materiaPrimaView);
 		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, telaPrincipal, visualizarOrcamento, visualizarMateriaPrima, menu, 
-				materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO);
+				materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO, confirOrcamDAO, orcamentos, orcamProdDAO, criarOrcamento, clienteDAO, orcamentoDAO);
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
