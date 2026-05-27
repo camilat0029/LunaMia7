@@ -65,6 +65,15 @@ public class BotoesAcoesController extends ComponentAdapter{
 			}
 		});
 		
+		this.visualizarOrcamento.voltar(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menu.mostrarPanelCont();
+				navegadorTelas.navegarTela("ORCAMENTOS");
+			}
+		});
+		
 		//VISUALIZANDO AS INFORMAÇÕES DA MATERIA PRIMA
 		this.materiaPrimaView.visualizar(materiaPrima -> {
 			visualizarMP(materiaPrima);
@@ -205,6 +214,7 @@ public class BotoesAcoesController extends ComponentAdapter{
 		List<MateriaPrima> MPs = materiaPrimaDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
 		visualizarOrcamento.tabModeloEstoque.setLista(MPs);
 		
+		menu.removerMenu();
 		navegadorTelas.navegarTela("VISUALIZAR_ORCAMENTO");
 		
 	}

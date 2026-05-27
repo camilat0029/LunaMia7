@@ -19,6 +19,8 @@ import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.Orcamento;
 import model.OrcamentoDAO;
+import model.OrcamentoProduto;
+import model.OrcamentoProdutoDAO;
 import model.UsuarioPerfil;
 import view.CriarOrcamento;
 import view.Orcamentos;
@@ -174,7 +176,7 @@ public class OrcamentoController {
 				matPrimaNova.setIdMateriaPrima(matPrima.getIdMateriaPrima());
 				matPrimaNova.setNome(matPrima.getNome());
 				matPrimaNova.setValor(matPrima.getValor());
-				matPrimaNova.setQuantidadeDisponivel(1);
+				//matPrimaNova.setQuan tidadeDisponivel(1);
 				
 				criarOrcamento.tabModeloOrcam.adicionarMatPrima(matPrimaNova);
 			}
@@ -309,6 +311,22 @@ public class OrcamentoController {
 		confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
 		confirOrcamDAO.adicionarDados(confirOrcam);
 		this.confirOrcamAtual = confirOrcam;
+		
+		//O ORCAMENTO PRODUTO
+		
+		List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
+		
+		for (MateriaPrima materiaPrima : listaMP) {
+			
+			OrcamentoProduto OP = new OrcamentoProduto();
+			
+			OP.setOrcamento(novoOrcamento);
+			OP.setMateriaPrima(materiaPrima);
+			OP.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+			
+			new OrcamentoProdutoDAO().adicionarDados(OP);
+			
+		}
 		
 		atualizarQuantMP();
 		

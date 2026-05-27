@@ -130,5 +130,54 @@ public class OrcamentoProdutoDAO {
 	        	BancoDeDados.desconectar(conexao);
 	        }
 	    }
+	    
+	    public List<MateriaPrima> buscarPeloIdOrcamento(int idOrcamento){
+	    	 String sql = "SELECT mp.id_estoque, mp.nome, mp.valor, op.quantidade FROM OrcamentoProduto op INNER JOIN "
+	    	 		+ "MateriaPrima mp ON mp.id_estoque = op.id_estoque WHERE op.id_orcamento = ?";
+	    	 
+	    	 List<MateriaPrima> listaMP = new ArrayList<>(); 
+	    	 
+	    	 Connection conexao = null;
+	    	 PreparedStatement pstm = null;
+	    	 ResultSet rset = null;
+	    	 
+	    	 try {
+	    	        conexao = BancoDeDados.conectar();
+	    	        pstm = conexao.prepareStatement(sql);
+	    	        pstm.setInt(1, idOrcamento);
 
-}
+	    	        rset = pstm.executeQuery();
+	    	        
+	    	        while(rset.next()) {
+	    	        	
+	    	        	MateriaPrima materiaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
+	    	        	
+	    	        	materiaPrima.setIdMateriaPrima(rset.getInt("id_estoque"));
+	    	        	materiaPrima.setNome(rset.getString("nome"));
+	    	        	materiaPrima.setValor(rset.getFloat("valor"));
+	    	        	materiaPrima.setQuantidadeDisponivel(rset.getInt("quantidade"));
+	    	        	
+	    	        	listaMP.add(materiaPrima);
+	    	        }
+	    	 } catch(SQLException e){
+	    		 e.printStackTrace();
+	    	 }finally {
+
+	    	        try {
+
+	    	            if(rset != null)
+	    	                rset.close();
+
+	    	            if(pstm != null)
+	    	                pstm.close();
+
+	    	        } catch(SQLException e) {
+	    	            e.printStackTrace();
+	    	        }
+
+	    	        BancoDeDados.desconectar(conexao);
+	    	 }
+
+	    	 return listaMP;
+	    }
+} 

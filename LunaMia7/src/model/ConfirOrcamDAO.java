@@ -187,7 +187,7 @@ public class ConfirOrcamDAO {
 	        		confirOrcam.setFormPagamento(rs.getString("formaPagam"));
 	        		Date dataEntrega = rs.getDate("dataPrevisaoEnt");
 	        		if(dataEntrega != null) {
-	        			confirOrcam.setDataConfirmacao(dataEntrega.toLocalDate());
+	        			confirOrcam.setDataPrevistaEntrega(dataEntrega.toLocalDate());
 	        		}
 	        		
 	        		Date dataConfir = rs.getDate("dataConfirmacao");

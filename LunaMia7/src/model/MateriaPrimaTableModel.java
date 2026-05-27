@@ -96,6 +96,10 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 		return listaMateriasPrimas.get(linha);
 	}
 	
+	public List<MateriaPrima> getListaMP(){
+		return listaMateriasPrimas;
+	}
+	
 	//INSERE UMA LISTA
 	public void setLista(List<MateriaPrima> lista) {
 		this.listaMateriasPrimas = lista;
