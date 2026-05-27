@@ -177,7 +177,6 @@ public class OrcamentoController {
 				matPrimaNova.setNome(matPrima.getNome());
 				matPrimaNova.setValor(matPrima.getValor());
 				//matPrimaNova.setQuan tidadeDisponivel(1);
-				
 				criarOrcamento.tabModeloOrcam.adicionarMatPrima(matPrimaNova);
 			}
 			
