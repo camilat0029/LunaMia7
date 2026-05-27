@@ -103,7 +103,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					confPerfilAposCad.getLbFoto().setIcon(new ImageIcon(recortarCircular(imagem, 150)));
 
 				} catch (Exception ex) {
-
 					Mensagem.mostrar(null, "Erro", "Erro ao carregar imagem");
 				}
 			}
@@ -171,7 +170,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					confPerfil.getLbFoto().setIcon(new ImageIcon(recortarCircular(imagem, 150)));
 
 				} catch (Exception ex) {
-
 					Mensagem.mostrar(null, "Erro", "Erro ao carregar imagem");
 				}
 			}
@@ -230,7 +228,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				|| cadastroUsuario.getTfTelefone().getText().isEmpty()
 				|| cadastroUsuario.getPfSenha().getText().isEmpty()) {
 
-			JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Informação", 1);
+			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 
 		} else {
 
@@ -239,7 +237,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 			if (!emailPermitido(cadastroUsuario.getTfEmail().getText())
 					|| !nomePermitido(cadastroUsuario.getTfNomeComp().getText())) {
-				JOptionPane.showMessageDialog(null, "Email ou Nome Inválido!", "Informação", 1);
+				Mensagem.mostrar(null, "Inválido", "Email ou Nome inválido!");
+
 			} else {
 				verificarEmail();
 				verificarUsuarioPerfil();
@@ -263,18 +262,17 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					usuarioDAO.adicionarDados(novoUsuario);
 					this.usuarioCadastrado = novoUsuario;
 
-					JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "Informação", 1);
+					Mensagem.mostrar(null, "Sucesso", "Cadastro realizado com Sucesso!");
 
 					navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
 					limparCamposTelaCadastro();
 
 				} else if (EmailRepetido == true && UsuarioRepetido == true) {
-					JOptionPane.showMessageDialog(null, "Este Email e Usuário já Existem!! Informe outros.",
-							"Informação", 1);
+					Mensagem.mostrar(null, "Inválido", "Este email e Usuário já estão em uso. \nInforme outros.");
 				} else if (EmailRepetido == true && UsuarioRepetido == false) {
-					JOptionPane.showMessageDialog(null, "Este Email já Existe!! Informe outro.", "Informação", 1);
+					Mensagem.mostrar(null, "Inválido", "Este email já está em uso. \nEscolha outro.");
 				} else if (EmailRepetido == false && UsuarioRepetido == true) {
-					JOptionPane.showMessageDialog(null, "Este Usuário já Existe!! Informe outro.", "Informação", 1);
+					Mensagem.mostrar(null, "Inválido", "Este usuário já está em uso. \nEscolha outro.");
 				}
 			}
 		}
@@ -339,14 +337,15 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				|| confPerfilAposCad.getPfSenhaCP().getText().isEmpty() || cidade == null || cidade.isEmpty()
 				|| estado == null || estado.isEmpty()) {
 
-			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
-
+			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 		} else {
 
 			nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText());
 
 			if (!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
-				JOptionPane.showMessageDialog(null, "Nome Inválido! \n(A-Z, a-z, .)", "Informação", 1);
+
+				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \n(A-Z, a-z, .)");
+
 			} else {
 				String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText().replace(",", ".");
 				String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText().replace(",", ".");
@@ -375,12 +374,14 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 					usuarioDAO.atualizarUsuario(usuarioAtualizado);
 
-					JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação",
-							1);
+					Mensagem.mostrar(null, "Sucesso", "Configuração de perfil realizado com sucesso!");
+
 					navegadorTelas2.navegarTela("LOGIN");
+					
 				} else {
-					JOptionPane.showInternalMessageDialog(null,
-							"Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+
+					Mensagem.mostrar(null, "Informação", "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
+
 				}
 			}
 		}
@@ -397,7 +398,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				|| confPerfil.getPfSenhaCP().getText().isEmpty() || cidade == null || cidade.isEmpty() || estado == null
 				|| estado.isEmpty()) {
 
-			JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Informação", 1);
+			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 
 		} else {
 
@@ -405,7 +406,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 			if (!nomePermitido(confPerfil.getTfNomeCompCP().getText())) {
 
-				JOptionPane.showMessageDialog(null, "Nome Inválido! \n(A-Z, a-z, .)", "Informação", 1);
+				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \n(A-Z, a-z, .)");
 
 			} else {
 
@@ -416,8 +417,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				percentualLucroPermitido(percentualLucroValido);
 
 				if (precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
-					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0,
-							null);
+					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 					if (arquivoSelecionado != null) {
 
 						usuarioAtualizado.setFotoPerfil(arquivoSelecionado.getAbsolutePath());
@@ -440,11 +440,10 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 					usuarioDAO.atualizarUsuario(usuarioAtualizado);
 
-					JOptionPane.showMessageDialog(null, "Configuração de Perfil realizado com Sucesso", "Informação",
-							1);
+					Mensagem.mostrar(null, "Sucesso", "Configuração de perfil realizado com sucesso!");
+
 				} else {
-					JOptionPane.showInternalMessageDialog(null,
-							"Digite apenas números para o Preço da Hora \ne para Percentual de Lucro", "Informação", 1);
+					Mensagem.mostrar(null, "Informação", "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
 				}
 			}
 		}

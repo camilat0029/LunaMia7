@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
+import view.Mensagem;
 import view.RedefinirSenha;
 
 public class RedefinirSenhaController{
@@ -43,7 +44,8 @@ public class RedefinirSenhaController{
 		
 		if(redefinirSenha.getPfNovaSenhaRS().getText().isEmpty() || redefinirSenha.getPfConfirmarNovaSenhaRS().getText().isEmpty()) {
 			
-			JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Informação", 1);
+			Mensagem.mostrar(null, "Informação",  "Preencha todos os campos!");
+
 		} else {
 			
 			if(redefinirSenha.getPfNovaSenhaRS().getText().equals(redefinirSenha.getPfConfirmarNovaSenhaRS().getText())) {
@@ -54,11 +56,14 @@ public class RedefinirSenhaController{
 				
 				usuarioDAO.atualizarSenha(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail(), novaSenha);
 				
-				JOptionPane.showMessageDialog(null, "Senha Atualizada com Sucesso", "Informação", 1);
+				Mensagem.mostrar(null, "Sucesso",  "Senha atualizada com sucesso!");
+
 				navegadorTelas.navegarTela("CONFIGURAR_PERFIL");
 				
 			} else {
-				JOptionPane.showMessageDialog(null, "O Campo de Nova Senha e Confirmar \nSenha estão Diferentes!", "Informação", 1);
+				
+				Mensagem.mostrar(null, "Sucesso",  "O Campo de Nova Senha e Confirmar \nSenha estão Diferentes!");
+
 			}
 			
 		}

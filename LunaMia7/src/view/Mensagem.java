@@ -2,11 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class Mensagem extends JDialog {
-	
+
 	private final JPanel contentPanel = new JPanel();
 
 	private JButton btOk;
@@ -27,8 +27,6 @@ public class Mensagem extends JDialog {
 		super(parent, true);
 
 		setTitle("Informação");
-		setSize(330, 180);
-		setLocationRelativeTo(parent);
 		setResizable(false);
 
 		getContentPane().setLayout(new BorderLayout());
@@ -38,9 +36,20 @@ public class Mensagem extends JDialog {
 		contentPanel.setLayout(new BorderLayout());
 
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
-		lbMensagem = new JLabel(mensagem, SwingConstants.CENTER);
+
+		lbMensagem = new JLabel(formatarMensagem(mensagem));
+
+		lbMensagem.setHorizontalAlignment(SwingConstants.CENTER);
+
 		lbMensagem.setFont(new Font("Times New Roman", Font.BOLD, 16));
+
+		contentPanel.add(lbMensagem, BorderLayout.CENTER);
+		
+		pack();
+
+		setMinimumSize(new Dimension(330, 150));
+		setLocationRelativeTo(parent);
+
 		contentPanel.add(lbMensagem, BorderLayout.CENTER);
 
 		JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -49,11 +58,11 @@ public class Mensagem extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		btOk = new JButton("OK");
 
-		btOk.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		btOk.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btOk.setBackground(new Color(193, 151, 232));
 		btOk.setBorderPainted(false);
-		
-		//ISSO AQUI NÃO DEIXA COM AQUELE RISCO AZUL AO REDOR
+
+		// ISSO AQUI NÃO DEIXA COM AQUELE RISCO AZUL AO REDOR
 		btOk.setFocusPainted(false);
 
 		btOk.addActionListener(e -> dispose());
@@ -61,19 +70,27 @@ public class Mensagem extends JDialog {
 
 		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
 		setIconImage(icone.getImage());
-		
-		
+
 	}
 
-	public static void mostrar(Frame parent, String titulo, String mensagem) {
+	private String formatarMensagem(String mensagem) {
 
-	    Mensagem dialogo = new Mensagem(parent, mensagem);
+		mensagem = mensagem == null ? "" : mensagem;
 
-	    dialogo.setTitulo(titulo);
-
-	    dialogo.setVisible(true);
+		return "<html><div style='text-align: center;'>"
+				+ mensagem.replace("\n", "<br>")
+				+ "</div></html>";
 	}
 	
+	public static void mostrar(Frame parent, String titulo, String mensagem) {
+
+		Mensagem dialogo = new Mensagem(parent, mensagem);
+
+		dialogo.setTitulo(titulo);
+
+		dialogo.setVisible(true);
+	}
+
 	public void setMensagem(String mensagem) {
 		lbMensagem.setText(mensagem);
 	}
@@ -81,9 +98,9 @@ public class Mensagem extends JDialog {
 	public void setTitulo(String titulo) {
 		setTitle(titulo);
 	}
-	
+
 	public void ok(ActionListener actionListener) {
 		btOk.addActionListener(actionListener);
 	}
-	
+
 }

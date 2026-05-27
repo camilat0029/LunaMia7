@@ -13,6 +13,7 @@ import model.MateriaPrimaDAO;
 import model.UsuarioPerfil;
 import view.CadastroMateriaPrimaEstoque;
 import view.MateriaPrimaView;
+import view.Mensagem;
 import model.MateriaPrima;
 
 public class MateriaPrimaController extends ComponentAdapter {
@@ -73,16 +74,13 @@ public class MateriaPrimaController extends ComponentAdapter {
 
 		if (nome.isEmpty() || qtdDisponivelStr.isEmpty() || qtdUnidadeStr.isEmpty() || valorStr.isEmpty()) {
 
-			JOptionPane.showMessageDialog(null, "Você precisa preencher os campos obrigatórios!", "Informação",
-					JOptionPane.INFORMATION_MESSAGE);
-			return;
+			Mensagem.mostrar(null, "Informação", "Você precisa preencher os campos obrigatórios!");
 		}
 
 		if (!qtdDisponivelPermitida(qtdDisponivelStr) || !qtdUnidadePermitida(qtdUnidadeStr)
 				|| !valorPermitido(valorStr)) {
 
-			JOptionPane.showMessageDialog(null, "Valores numéricos inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-			return;
+			Mensagem.mostrar(null, "Inválido", "Valores numéricos inválidos!");
 		}
 
 		try {
@@ -109,10 +107,13 @@ public class MateriaPrimaController extends ComponentAdapter {
 			limparCamposMP();
 			carregarTabela();
 
-			JOptionPane.showMessageDialog(null, "Matéria Prima cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			Mensagem.mostrar(null, "Sucesso", "Matéria Prima cadastrada com sucesso!");
+
+			
 
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+			Mensagem.mostrar(null, "Erro", "Erro ao cadastrar: " + ex.getMessage());
+
 		}
 	}
 
