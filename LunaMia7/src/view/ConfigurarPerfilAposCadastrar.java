@@ -7,6 +7,7 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -22,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class ConfigurarPerfilAposCadastrar extends JPanel {
 
@@ -32,11 +34,10 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
-	private JLabel lbEmailCad;
+	private JLabel lbEmailCad, lbFoto;
 	private JComboBox cbCidade;
 	private JComboBox cbEstado;
-	private JButton btSalvar;
-	private JButton btIgnorar;
+	private JButton btIgnorar, btEscolherFoto, btSalvar;
 
 	/**
 	 * Create the panel.
@@ -44,8 +45,8 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	public ConfigurarPerfilAposCadastrar() {
 		
 		setBackground(new Color(234, 219, 247));
-		setPreferredSize(new Dimension(1020,640));
-		setMinimumSize(new Dimension(1020, 640));
+		setPreferredSize(new Dimension(1020, 700));
+		setMinimumSize(new Dimension(1020, 700));
 		setLayout(new MigLayout("gap 16", "[grow][][][][][][grow]", "[grow][][][][][][][][][][][][][][grow]"));
 		
 		JLabel lbNomeCompCP = new JLabel("Nome Completo");
@@ -144,12 +145,28 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		add(tfPercLucroCP, "cell 4 8 2 1,growx,height 38px");
 		tfPercLucroCP.setColumns(10);
 		
-		JPanel panel_foto = new JPanel();
-		add(panel_foto, "cell 2 9 1 3,width 21.5%,growy");
-		
 		JLabel lbFotoPerfilCP = new JLabel("Foto de Perfil");
 		lbFotoPerfilCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbFotoPerfilCP, "cell 1 10");
+		
+		lbFoto = new JLabel();
+		
+		lbFoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lbFoto.setVerticalAlignment(SwingConstants.CENTER);
+		
+		lbFoto.setIcon(new ImageIcon(ConfigurarPerfil.class.getResource("/imagensIcones/fotoPerfilPadrao.png")));
+		ImageIcon imagemPadrao = new ImageIcon(getClass().getResource("/imagensIcones/fotoPerfilPadrao.png"));
+		lbFoto.setIcon(new ImageIcon(imagemPadrao.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+
+		lbFoto.setPreferredSize(new Dimension(150, 150));
+		
+		add(lbFoto, "cell 2 10");
+		
+		btEscolherFoto = new JButton("Escolher foto");
+		btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		btEscolherFoto.setBackground(new Color(193, 151, 232));
+		btEscolherFoto.setBorderPainted(false);
+		add(btEscolherFoto, "cell 3 10");
 		
 		JPanel panel_btSalvar = new JPanel();
 		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -202,6 +219,18 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		
 
+	}
+	
+	public JLabel getLbFoto() {
+		return lbFoto;
+	}
+
+	public void setLbFoto(JLabel lbFoto) {
+		this.lbFoto = lbFoto;
+	}
+	
+	public void escolherFoto(ActionListener actionListener) {
+		this.btEscolherFoto.addActionListener(actionListener);
 	}
 	
 	public void salvarCadCompleto(ActionListener actionListener) {

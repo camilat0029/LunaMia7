@@ -81,7 +81,7 @@ public class Main {
 		CadastroUsuario cadastro = new CadastroUsuario();
 		CadastroMateriaPrimaEstoque cadastroMateriaPrimaEstoque = new CadastroMateriaPrimaEstoque();
 		ConfigurarPerfil configurarPerfil = new ConfigurarPerfil();
-		ConfigurarPerfilAposCadastrar configurarPerfiAposCadastrar = new ConfigurarPerfilAposCadastrar();
+		ConfigurarPerfilAposCadastrar configurarPerfilAposCadastrar = new ConfigurarPerfilAposCadastrar();
 		CriarOrcamento criarOrcamento = new CriarOrcamento();
 		Inicio inicio = new Inicio();
 		RedefinirSenha redefinirSenha = new RedefinirSenha();
@@ -103,7 +103,7 @@ public class Main {
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
 		Menu menu = new Menu(telaPrincipal, menuExp, menuCont, navegadorTelas);
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastro, usuarioPerfilDAO, navegadorTelas, 
-				menu, configurarPerfiAposCadastrar, configurarPerfil, redefinirSenha);
+				menu, configurarPerfilAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento,  
 				clienteDAO, materiaPrimaDAO, confirOrcamDAO);
@@ -119,15 +119,19 @@ public class Main {
 		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneConfigurarPerfil = new JScrollPane(configurarPerfil, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneConfigPerfilAposCad = new JScrollPane(configurarPerfilAposCadastrar, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		configurarPerfiAposCadastrar.adicionarOuvinte(cadastroUsuarioController);
-		configurarPerfil.adicionarOuvinte(cadastroUsuarioController);
+
+		scrollPaneConfigurarPerfil.addComponentListener(cadastroUsuarioController);
+		scrollPaneConfigPerfilAposCad.addComponentListener(cadastroUsuarioController);
+		
 		materiaPrimaView.adicionarOuvinte(materiaPrimaController);
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);
 		navegadorTelas.adicionarPainel("CADASTRO_MATERIA_PRIMA", cadastroMateriaPrimaEstoque);
-		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", configurarPerfil);
-		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", configurarPerfiAposCadastrar);
+		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL", scrollPaneConfigurarPerfil);
+		navegadorTelas.adicionarPainel("CONFIGURAR_PERFIL_APOS_CADASTRAR", scrollPaneConfigPerfilAposCad);
 		navegadorTelas.adicionarPainel("CRIAR_ORCAMENTO", scrollPaneOrcamento );
 		navegadorTelas.adicionarPainel("INICIO", inicio);
 		navegadorTelas.adicionarPainel("REDEFINIR_SENHA", redefinirSenha);

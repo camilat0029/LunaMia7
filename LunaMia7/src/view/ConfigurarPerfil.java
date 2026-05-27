@@ -47,8 +47,8 @@ public class ConfigurarPerfil extends JPanel {
 	public ConfigurarPerfil() {
 
 		setBackground(new Color(234, 219, 247));
-		setPreferredSize(new Dimension(1020, 640));
-		setMinimumSize(new Dimension(1020, 640));
+		setPreferredSize(new Dimension(1020, 700));
+		setMinimumSize(new Dimension(1020, 700));
 		setLayout(new MigLayout("gap 16", "[grow][][][191.00][][175.00][grow]",
 				"[grow][][][][][grow][][][][][][][][][grow]"));
 	
