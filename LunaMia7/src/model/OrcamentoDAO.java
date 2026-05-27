@@ -61,14 +61,14 @@ public class OrcamentoDAO {
 		}
 	}
 
-	public List<Orcamento> listarOrcamentos() {
+	public List<Orcamento> listarOrcamentos(String emailUsuario) {
 
 	    String sql = "SELECT o.*, c.*, u.* " +
-	    				"FROM Orcamento o " +
-	    				"INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
-	    				"INNER JOIN Perfil_Usuario u " +
-	    				"ON o.Perfil_Usuario_email = u.email " +
-	    				"AND o.Perfil_Usuario_nomeUsuario = u.nomeUsuario";
+	             "FROM Orcamento o " +
+	             "INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
+	             "INNER JOIN Perfil_Usuario u ON o.Perfil_Usuario_email = u.email " +
+	             "WHERE o.Perfil_Usuario_email = ? " +
+	             "AND o.Perfil_Usuario_nomeUsuario = u.nomeUsuario";
 
 	    List<Orcamento> orcamentos = new ArrayList<>();
 
@@ -81,8 +81,9 @@ public class OrcamentoDAO {
 	        conexao = BancoDeDados.conectar();
 
 	        pstm = conexao.prepareStatement(sql);
-
+	        pstm.setString(1, emailUsuario);
 	        rset = pstm.executeQuery();
+	        
 
 	        while (rset.next()) {
 

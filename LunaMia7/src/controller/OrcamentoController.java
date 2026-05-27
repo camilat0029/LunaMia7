@@ -66,6 +66,7 @@ public class OrcamentoController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegadorTelas.navegarTela("ORCAMENTOS");
+				menu.mostrarPanelCont();
 			}
 		});
 		
@@ -176,7 +177,7 @@ public class OrcamentoController {
 				matPrimaNova.setIdMateriaPrima(matPrima.getIdMateriaPrima());
 				matPrimaNova.setNome(matPrima.getNome());
 				matPrimaNova.setValor(matPrima.getValor());
-				//matPrimaNova.setQuan tidadeDisponivel(1);
+				matPrimaNova.setQuantidadeDisponivel(1);
 				criarOrcamento.tabModeloOrcam.adicionarMatPrima(matPrimaNova);
 			}
 			
@@ -342,6 +343,7 @@ public class OrcamentoController {
 		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
 		
 		JOptionPane.showMessageDialog(null, "Orçamento Confirmado com Sucesso", "informação", 1);
+		menu.mostrarPanelCont();
 		navegadorTelas.navegarTela("ORCAMENTOS");
 		
 		carregarTabelaOrcamentos();
@@ -409,9 +411,9 @@ public class OrcamentoController {
 	public void carregarTabelaOrcamentos() {
 		
 		//TALVEZ IRA PRECISAR SE MODIFICAR O MÉTODO NA CLASSE DAO
-		//UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 		
-		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos();
+		List<Orcamento> orcamentosCad = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
 		
 		orcamentos.tabelaModeloOrcamento.limpar();
 		orcamentos.tabelaModeloOrcamento.setLista(orcamentosCad);
