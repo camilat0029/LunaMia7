@@ -56,7 +56,7 @@ public class CriarOrcamento extends JPanel {
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020, 1464));
 
-		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
 		lbVoltar = new JLabel("");
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
@@ -78,49 +78,49 @@ public class CriarOrcamento extends JPanel {
 		tfNomeCliente = new JTextField();
 		tfNomeCliente.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfNomeCliente.setColumns(10);
-		add(tfNomeCliente, "cell 1 5 3 1,growx");
+		add(tfNomeCliente, "cell 1 4 3 1,growx");
 
 		JLabel lbEmail = new JLabel("Email");
 		lbEmail.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbEmail, "cell 1 6");
+		add(lbEmail, "cell 1 5");
 
 		JLabel lbContato = new JLabel("Contato");
 		lbContato.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbContato, "cell 3 6");
+		add(lbContato, "cell 3 5");
 
 		tfEmail = new JTextField();
 		tfEmail.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfEmail.setColumns(10);
-		add(tfEmail, "cell 1 7,growx");
+		add(tfEmail, "cell 1 6,growx");
 
 		tfContato = new JTextField();
 		tfContato.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfContato.setColumns(10);
-		add(tfContato, "cell 3 7,growx");
+		add(tfContato, "cell 3 6,growx");
 
 		JLabel lbPrecoHora = new JLabel("Preço da hora (R$)");
 		lbPrecoHora.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPrecoHora, "cell 1 8");
+		add(lbPrecoHora, "cell 1 7");
 
 		JLabel lbPercentualLucro = new JLabel("Percentual de lucro (%)");
 		lbPercentualLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPercentualLucro, "cell 3 8");
+		add(lbPercentualLucro, "cell 3 7");
 
 		lbPrecoHoraUsuario = new JLabel("R$");
 		lbPrecoHoraUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPrecoHoraUsuario, "cell 1 9");
+		add(lbPrecoHoraUsuario, "cell 1 8");
 
 		lbPercLucroUsuario = new JLabel("%");
 		lbPercLucroUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPercLucroUsuario, "cell 3 9");
+		add(lbPercLucroUsuario, "cell 3 8");
 
 		JLabel lblMateriais = new JLabel("Materiais do Estoque");
 		lblMateriais.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lblMateriais, "cell 1 10");
+		add(lblMateriais, "cell 1 9");
 
 		lbMateriasOrcam = new JLabel("Materiais para Orçamento");
 		lbMateriasOrcam.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMateriasOrcam, "cell 3 10");
+		add(lbMateriasOrcam, "cell 3 9");
 
 		Dimension tamanhoFixo = new Dimension(300, 180);
 
@@ -128,7 +128,7 @@ public class CriarOrcamento extends JPanel {
 		scrollPane.setPreferredSize(tamanhoFixo);
 		scrollPane.setMinimumSize(tamanhoFixo);
 		scrollPane.setMaximumSize(tamanhoFixo);
-		add(scrollPane, "cell 1 11 1 4");
+		add(scrollPane, "cell 1 10 1 4");
 
 		tabMateriaisEstoque = new JTable(tabModeloEstoque);
 
@@ -139,7 +139,7 @@ public class CriarOrcamento extends JPanel {
 		scrollPane_1.setMinimumSize(tamanhoFixo);
 		scrollPane_1.setMaximumSize(tamanhoFixo);
 
-		add(scrollPane_1, "cell 3 11 1 4");
+		add(scrollPane_1, "cell 3 10 1 4");
 
 		tabMateriaisOrcam = new JTable(tabModeloOrcam);
 		scrollPane_1.setViewportView(tabMateriaisOrcam);
@@ -187,7 +187,7 @@ public class CriarOrcamento extends JPanel {
 		btAdicionar.setHorizontalTextPosition(SwingConstants.LEFT);
 		btAdicionar.setBackground(new Color(208, 176, 238));
 		btAdicionar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(btAdicionar, "cell 2 13,alignx center");
+		add(btAdicionar, "cell 2 12,alignx center");
 
 		btAdicionar.setBorderPainted(false);
 
@@ -197,140 +197,140 @@ public class CriarOrcamento extends JPanel {
 		btRemover.setIcon(new ImageIcon(imgRem));
 		btRemover.setBackground(new Color(208, 176, 238));
 		btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(btRemover, "cell 2 14,alignx center");
+		add(btRemover, "cell 2 13,alignx center");
 		btRemover.setBorderPainted(false);
 
 		JLabel lbHorasPrevistas = new JLabel("Horas previstas");
 		lbHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbHorasPrevistas, "flowx,cell 1 15");
+		add(lbHorasPrevistas, "flowx,cell 1 14");
 
 		JLabel lbQuantMaxDias = new JLabel("Quantidade máxima de dias");
 		lbQuantMaxDias.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQuantMaxDias, "flowx,cell 3 15");
+		add(lbQuantMaxDias, "flowx,cell 3 14");
 
 		tfHorasPrevistas = new JTextField();
 		tfHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfHorasPrevistas.setColumns(10);
-		add(tfHorasPrevistas, "cell 1 16,growx");
+		add(tfHorasPrevistas, "cell 1 15,growx");
 
 		tfQuantMaxDias = new JTextField();
 		tfQuantMaxDias.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfQuantMaxDias.setColumns(10);
-		add(tfQuantMaxDias, "cell 3 16,growx");
+		add(tfQuantMaxDias, "cell 3 15,growx");
 
 		lbCustoAdicional = new JLabel("Custo Adicional");
 		lbCustoAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCustoAdicional, "flowx,cell 1 17");
+		add(lbCustoAdicional, "flowx,cell 1 16");
 
 		lbStatus = new JLabel("Status do Pedido");
 		lbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbStatus, "cell 3 17");
+		add(lbStatus, "cell 3 16");
 
 		tfCustoAdicional = new JTextField();
 		tfCustoAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfCustoAdicional, "cell 1 18,growx");
+		add(tfCustoAdicional, "cell 1 17,growx");
 		tfCustoAdicional.setColumns(10);
 
 		cbStatus = new JComboBox<>(model.Orcamento.Status.values());
 		cbStatus.setSelectedItem(Orcamento.Status.PENDENTE);
 		cbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(cbStatus, "cell 3 18,growx");
+		add(cbStatus, "cell 3 17,growx");
 
 		btCalcEdi = new JButton("Calcular");
 		btCalcEdi.setBackground(new Color(193, 151, 232));
 		btCalcEdi.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btCalcEdi, "cell 2 19,growx,aligny center");
+		add(btCalcEdi, "cell 2 18,growx,aligny center");
 
 		lbValorSemLucro = new JLabel("Valor sem lucro");
 		lbValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorSemLucro, "cell 1 20");
+		add(lbValorSemLucro, "cell 1 19");
 
 		lbValorLucro = new JLabel("Valor do lucro");
 		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorLucro, "cell 3 20");
+		add(lbValorLucro, "cell 3 19");
 
 		lbValorCalcSemLucro = new JLabel("R$");
 		lbValorCalcSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbValorCalcSemLucro, "cell 1 21");
+		add(lbValorCalcSemLucro, "cell 1 20");
 
 		lbCalcLucro = new JLabel("R$");
 		lbCalcLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbCalcLucro, "cell 3 21");
+		add(lbCalcLucro, "cell 3 20");
 
 		lbGastos = new JLabel("Total de Gastos");
 		lbGastos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbGastos, "cell 1 22");
+		add(lbGastos, "cell 1 21");
 
 		lbValorVenda = new JLabel("Valor de venda");
 		lbValorVenda.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorVenda, "cell 3 22");
+		add(lbValorVenda, "cell 3 21");
 
 		lbCalcGastos = new JLabel("R$");
 		lbCalcGastos.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbCalcGastos, "cell 1 23");
+		add(lbCalcGastos, "cell 1 22");
 
 		lbValorCalVenda = new JLabel("R$");
 		lbValorCalVenda.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbValorCalVenda, "cell 3 23");
+		add(lbValorCalVenda, "cell 3 22");
 
 		btSalvar = new JButton("Salvar");
 		btSalvar.setBackground(new Color(193, 151, 232));
 		btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btSalvar, "cell 2 24,growx");
+		add(btSalvar, "cell 2 23,growx");
 
 		lbDtConfPedido = new JLabel("Data de confirmação do pedido");
 		lbDtConfPedido.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbDtConfPedido, "cell 1 25");
+		add(lbDtConfPedido, "cell 1 24");
 
 		lbDtPrevEntrega = new JLabel("Data prevista de entrega");
 		lbDtPrevEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbDtPrevEntrega, "cell 3 25");
+		add(lbDtPrevEntrega, "cell 3 24");
 
 		tfDataConfPedido = new JTextField();
 		tfDataConfPedido.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfDataConfPedido, "cell 1 26,growx");
+		add(tfDataConfPedido, "cell 1 25,growx");
 		tfDataConfPedido.setColumns(10);
 
 		tfDtPrevEntrega = new JTextField();
 		tfDtPrevEntrega.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfDtPrevEntrega, "cell 3 26,growx");
+		add(tfDtPrevEntrega, "cell 3 25,growx");
 		tfDtPrevEntrega.setColumns(10);
 
 		lbFormaPaga = new JLabel("Forma de pagamento");
 		lbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbFormaPaga, "cell 1 27");
+		add(lbFormaPaga, "cell 1 26");
 
 		lbValorFinal = new JLabel("Valor final");
 		lbValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorFinal, "cell 3 27");
+		add(lbValorFinal, "cell 3 26");
 
 		cbFormaPaga = new JComboBox();
 		cbFormaPaga.setModel(new DefaultComboBoxModel(
 				new String[] { "", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro" }));
 		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(cbFormaPaga, "cell 1 28,growx");
+		add(cbFormaPaga, "cell 1 27,growx");
 
 		lbValorFinalCad = new JLabel("R$");
 		lbValorFinalCad.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbValorFinalCad, "cell 3 28");
+		add(lbValorFinalCad, "cell 3 27");
 
 		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setBackground(new Color(193, 151, 232));
 		btConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btConfirmar, "cell 2 29,growx");
+		add(btConfirmar, "cell 2 28,growx");
 
 		btCalcEdi.setBorderPainted(false);
 		btSalvar.setBorderPainted(false);
 		btConfirmar.setBorderPainted(false);
 
 		interrogacaoHrsPrev = new JLabel("");
-		add(interrogacaoHrsPrev, "cell 1 15");
+		add(interrogacaoHrsPrev, "cell 1 14");
 
 		interrogacaoQuantMaxDias = new JLabel("");
-		add(interrogacaoQuantMaxDias, "cell 3 15");
+		add(interrogacaoQuantMaxDias, "cell 3 14");
 
 		interrogacaoCustoAdic = new JLabel("");
-		add(interrogacaoCustoAdic, "cell 1 17");
+		add(interrogacaoCustoAdic, "cell 1 16");
 
 		ImageIcon iconInterrogacao = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));

@@ -303,10 +303,8 @@ public class BotoesAcoesController extends ComponentAdapter {
 		List<MateriaPrima> MPs = orcamProdDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
 		criarOrcamento.tabModeloOrcam.setLista(MPs);
 
-		criarOrcamento.getBtAdicionar().setVisible(true);
-		criarOrcamento.getBtRemover().setVisible(true);
-		criarOrcamento.getBtCalcEdi().setVisible(true);
-		criarOrcamento.getBtSalvar().setVisible(false);
+		ativDesaCompParaIrAtualizar();
+		criarOrcamento.getBtCalcEdi().setText("Calcular");
 		criarOrcamento.getBtConfirmar().setText("Atualizar");
 
 		criarOrcamento.getTfNomeCliente().setEditable(false);
@@ -439,6 +437,38 @@ public class BotoesAcoesController extends ComponentAdapter {
 			MateriaPrima materiaPrima = criarOrcamento.tabModeloEstoque.getMatPrima(i);
 			materiaPrimaDAO.atualizarQuantMP(materiaPrima.getIdMateriaPrima(), materiaPrima.getQuantidadeDisponivel());
 		}
+	}
+	
+	public void ativDesaCompParaIrAtualizar() {
+		criarOrcamento.getTituloOrcamento().setEditable(true);
+		criarOrcamento.getTfContato().setEditable(true);
+		criarOrcamento.getTfEmail().setEditable(true);
+		criarOrcamento.getTfCustoAdicional().setEditable(true);
+		criarOrcamento.getTfHorasPrevistas().setEditable(true);
+		criarOrcamento.getTfQuantMaxDias().setEditable(true);
+		criarOrcamento.getBtAdicionar().setVisible(true);
+		criarOrcamento.getBtRemover().setVisible(true);
+		criarOrcamento.getBtCalcEdi().setVisible(true);
+		criarOrcamento.getBtSalvar().setVisible(false);
+		criarOrcamento.getLbCalcGastos().setVisible(true);
+		criarOrcamento.getLbCalcLucro().setVisible(true);
+		criarOrcamento.getLbValorCalcSemLucro().setVisible(true);
+		criarOrcamento.getTfDataConfPedido().setVisible(true);
+		criarOrcamento.getTfDtPrevEntrega().setVisible(true);
+		criarOrcamento.getLbGastos().setVisible(true);
+		criarOrcamento.getLbValorLucro().setVisible(true);
+		criarOrcamento.getLbStatus().setVisible(true);
+		criarOrcamento.getCbStatus().setVisible(true);
+		criarOrcamento.getLbValorSemLucro().setVisible(true);
+		criarOrcamento.getLbValorVenda().setVisible(true);
+		criarOrcamento.getLbValorCalVenda().setVisible(true);
+		criarOrcamento.getLbFormaPaga().setVisible(true);
+		criarOrcamento.getLbDtConfPedido().setVisible(true);
+		criarOrcamento.getLbDtPrevEntrega().setVisible(true);
+		criarOrcamento.getCbFormaPaga().setVisible(true);
+		criarOrcamento.getLbValorFinal().setVisible(true);
+		criarOrcamento.getLbValorFinalCad().setVisible(true);
+		criarOrcamento.getBtConfirmar().setVisible(true);
 	}
 	
 	public void limparCamposMP() {

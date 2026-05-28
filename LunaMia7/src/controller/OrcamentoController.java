@@ -109,7 +109,6 @@ public class OrcamentoController {
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
 
-		//Terminar de deixar oque pode editar true
 		criarOrcamento.getTituloOrcamento().setEditable(true);
 		criarOrcamento.getTfNomeCliente().setEditable(true);
 		criarOrcamento.getTfContato().setEditable(true);

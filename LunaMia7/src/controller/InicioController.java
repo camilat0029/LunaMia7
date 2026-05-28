@@ -63,6 +63,11 @@ public class InicioController {
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
 		
+		criarOrcamento.getTituloOrcamento().setEditable(true);
+		criarOrcamento.getTfNomeCliente().setEditable(true);
+		criarOrcamento.getTfContato().setEditable(true);
+		criarOrcamento.getTfEmail().setEditable(true);
+		
 		criarOrcamento.getLbValorCalcSemLucro().setVisible(false);
 		criarOrcamento.getLbValorCalVenda().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(false);

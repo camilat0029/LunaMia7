@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.Login;
+import view.MensagemSimNao;
 import view.MenuContraido;
 import view.MenuExpandido;
 import view.TelaPrincipal;
@@ -67,11 +68,15 @@ public class Menu {
 		});
 
 		this.mnExp.sair(e -> {
-			int confirm = JOptionPane.showConfirmDialog(tela, "Deseja sair da conta?", "Sair",
-					JOptionPane.YES_NO_OPTION);
+
+			int confirm = MensagemSimNao.mostrar(tela, "Sair da Conta", "Deseja sair da conta?");
+
 			if (confirm == JOptionPane.YES_OPTION) {
+
 				LoginController.usuarioLogado = null;
+
 				removerMenu();
+
 				navegadorTelas.navegarTela("LOGIN");
 			}
 		});
@@ -82,15 +87,13 @@ public class Menu {
 
 		if (LoginController.usuarioLogado != null) {
 
-		    mnExp.setNomeUsuario(LoginController.usuarioLogado.getNomeUsuario());
+			mnExp.setNomeUsuario(LoginController.usuarioLogado.getNomeUsuario());
 
-		    String foto = LoginController.usuarioLogado.getFotoPerfil();
-		    if (foto != null && !foto.isEmpty()) {
-		        mnExp.setImagemPerfil(foto);
-		        
-		        
-		        
-		    }
+			String foto = LoginController.usuarioLogado.getFotoPerfil();
+			if (foto != null && !foto.isEmpty()) {
+				mnExp.setImagemPerfil(foto);
+
+			}
 		}
 
 	}
@@ -108,8 +111,9 @@ public class Menu {
 			mnExp.setNomeUsuario(LoginController.usuarioLogado.getNomeUsuario());
 		}
 		String foto = LoginController.usuarioLogado.getFotoPerfil();
-        if (foto != null && !foto.isEmpty()) {
-            mnExp.setImagemPerfil(foto);}
+		if (foto != null && !foto.isEmpty()) {
+			mnExp.setImagemPerfil(foto);
+		}
 	}
 
 	public void removerMenu() {
