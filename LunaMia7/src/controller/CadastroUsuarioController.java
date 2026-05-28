@@ -18,12 +18,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import model.ConfirOrcam;
+import model.ConfirOrcamDAO;
+import model.MateriaPrima;
+import model.MateriaPrimaDAO;
+import model.Orcamento;
+import model.OrcamentoDAO;
+import model.OrcamentoProduto;
+import model.OrcamentoProdutoDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastroUsuario;
 import view.ConfigurarPerfil;
 import view.ConfigurarPerfilAposCadastrar;
 import view.Mensagem;
+import view.MensagemSimNao;
 import view.RedefinirSenha;
 
 public class CadastroUsuarioController extends ComponentAdapter {
@@ -177,6 +186,52 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 		confPerfil.addComponentListener(this);
 		confPerfilAposCad.addComponentListener(this);
+
+		this.confPerfil.excluir(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int confirm = MensagemSimNao.mostrar(null, "Excluir", "Tem certeza que deseja excluir a conta? \nEla não poderá ser recuperada.");
+
+				if (confirm == JOptionPane.YES_OPTION) {
+
+					UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+					
+					MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
+					List<MateriaPrima> listaMateriaPrima = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
+					for (MateriaPrima materiaPrima : listaMateriaPrima) {
+						materiaPrimaDAO.excluirMateriasPrimas(materiaPrima);
+					}
+					
+					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();					
+					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());					
+					for (Orcamento orcamento : listaOrcamento) {
+						orcamentoDAO.excluirOrcamento(orcamento);
+					}
+					
+					ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
+					List<ConfirOrcam> listaConfirOrcam = confirOrcamDAO.listarConfirOrcam();
+					for (ConfirOrcam confirOrcam : listaConfirOrcam) {
+						confirOrcamDAO.excluirConfirOrcam(confirOrcam);
+					}
+					
+					OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
+					
+					List<OrcamentoProduto> listaOrcamentoProduto = orcamentoProdutoDAO.listarOrcamProd();
+					for (OrcamentoProduto orcamentoProduto : listaOrcamentoProduto) {
+						orcamentoProdutoDAO.excluirOrcamentoProduto(orcamentoProduto);
+					}
+					
+					//MateriaPrima, cliente, confirmacaoPedido
+					//MateriaPrima, orcamento, confirmacaoOrcamento, orcamentoProduto 
+					
+					usuarioDAO.excluirUsuario(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail());
+					navegadorTelas.navegarTela("LOGIN");
+
+				}
+			}
+		});
 
 	}
 
@@ -377,10 +432,11 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					Mensagem.mostrar(null, "Sucesso", "Configuração de perfil realizado com sucesso!");
 
 					navegadorTelas2.navegarTela("LOGIN");
-					
+
 				} else {
 
-					Mensagem.mostrar(null, "Informação", "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
+					Mensagem.mostrar(null, "Informação",
+							"Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
 
 				}
 			}
@@ -417,7 +473,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				percentualLucroPermitido(percentualLucroValido);
 
 				if (precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
-					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0,
+							null);
 					if (arquivoSelecionado != null) {
 
 						usuarioAtualizado.setFotoPerfil(arquivoSelecionado.getAbsolutePath());
@@ -443,7 +500,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					Mensagem.mostrar(null, "Sucesso", "Configuração de perfil realizado com sucesso!");
 
 				} else {
-					Mensagem.mostrar(null, "Informação", "Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
+					Mensagem.mostrar(null, "Informação",
+							"Digite apenas números para o Preço da Hora \ne para Percentual de Lucro");
 				}
 			}
 		}
