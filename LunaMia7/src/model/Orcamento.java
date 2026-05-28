@@ -5,7 +5,8 @@ import java.time.LocalDate;
 public class Orcamento {
 	
 	private String tituloPedido;
-	private float quantHorasPrevistas, precoHora;
+	private float quantHorasPrevistas, precoHora, percentualLucro;
+	private float valorAdicional, valorGastos, valorSemLucro;
 	private int maxDias, idOrcamento;
 	private Cliente cliente;
 	private UsuarioPerfil usuarioPerfil;
@@ -29,13 +30,18 @@ public class Orcamento {
 	}
 	
 	public Orcamento(String tituloPedido, float quantHorasPrevistas, float precoHora,
-			int maxDias, Status status) {
+			int maxDias, Status status, float percentualLucro, float valorAdicional,
+			float valorGastos, float valorSemLucro) {
 		super();
 		this.tituloPedido = tituloPedido;
 		this.quantHorasPrevistas = quantHorasPrevistas;
 		this.precoHora = precoHora;
 		this.maxDias = maxDias;
 		this.status = status;
+		this.percentualLucro = percentualLucro;
+		this.valorAdicional = valorAdicional;
+		this.valorGastos = valorGastos;
+		this.valorSemLucro = valorSemLucro;
 	}
 	
 	public Status getStatus() {
@@ -131,14 +137,36 @@ public class Orcamento {
 	public void setUsuarioPerfil(UsuarioPerfil usuarioPerfil) {
 		this.usuarioPerfil = usuarioPerfil;
 	}
-	
-	
-	
-	
-	
 
+	public float getPercentualLucro() {
+		return percentualLucro;
+	}
 
-	
-	
+	public void setPercentualLucro(float percentualLucro) {
+		this.percentualLucro = percentualLucro;
+	}
 
+	public float getValorAdicional() {
+		return valorAdicional;
+	}
+
+	public void setValorAdicional(float valorAdicional) {
+		this.valorAdicional = valorAdicional;
+	}
+
+	public float getValorGastos() {
+		return valorGastos;
+	}
+
+	public void setValorGastos(float valorGastos) {
+		this.valorGastos = valorGastos;
+	}
+
+	public float getValorSemLucro() {
+		return valorSemLucro;
+	}
+
+	public void setValorSemLucro(float valorSemLucro) {
+		this.valorSemLucro = valorSemLucro;
+	}
 }

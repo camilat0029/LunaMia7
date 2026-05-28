@@ -15,9 +15,9 @@ public class OrcamentoDAO {
 
 	public void adicionarDados(Orcamento orcamento) {
 
-		String sql = "INSERT INTO Orcamento (tituloPedido, statusPedido, precoHora, "
+		String sql = "INSERT INTO Orcamento (tituloPedido, statusPedido, precoHora, percentualLucro, "
 				+ " quantHrs, quantDiasPedido, Perfil_Usuario_email, Perfil_Usuario_nomeUsuario,"
-				+ "Cliente_id_cliente) VALUES (?,?,?,?,?,?,?,?)";
+				+ "Cliente_id_cliente, valorAdicional, valorGastos, valorSemLucro) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection conexao = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -28,11 +28,15 @@ public class OrcamentoDAO {
 			pstm.setString(1, orcamento.getTituloPedido());
 			pstm.setString(2, orcamento.getStatus().name().toLowerCase());
 			pstm.setFloat(3, orcamento.getPrecoHora());
-			pstm.setFloat(4, orcamento.getQuantHorasPrevistas());
-			pstm.setInt(5, orcamento.getMaxDias());
-			pstm.setString(6, orcamento.getUsuarioPerfil().getEmail());
-			pstm.setString(7, orcamento.getUsuarioPerfil().getNomeUsuario());
-			pstm.setInt(8, orcamento.getCliente().getIdCliente());
+			pstm.setFloat(4, orcamento.getPercentualLucro());
+			pstm.setFloat(5, orcamento.getQuantHorasPrevistas());
+			pstm.setInt(6, orcamento.getMaxDias());
+			pstm.setString(7, orcamento.getUsuarioPerfil().getEmail());
+			pstm.setString(8, orcamento.getUsuarioPerfil().getNomeUsuario());
+			pstm.setInt(9, orcamento.getCliente().getIdCliente());
+			pstm.setFloat(10, orcamento.getValorAdicional());
+			pstm.setFloat(11, orcamento.getValorGastos());
+			pstm.setFloat(12, orcamento.getValorSemLucro());
 			
 			pstm.executeUpdate();
 			
@@ -63,7 +67,7 @@ public class OrcamentoDAO {
 
 	public List<Orcamento> listarOrcamentos(String emailUsuario) {
 
-	    String sql = "SELECT o.*, c.*, u.* " +
+	    String sql = "SELECT o.*, c.*, u.percentualLucro AS percLucroUsuario, u.precoHora AS precoHoraUsuario " +
 	             "FROM Orcamento o " +
 	             "INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
 	             "INNER JOIN Perfil_Usuario u ON o.Perfil_Usuario_email = u.email " +
@@ -87,21 +91,25 @@ public class OrcamentoDAO {
 
 	        while (rset.next()) {
 
-	            Orcamento orcamento = new Orcamento(null, 0, 0, 0, null);
+	            Orcamento orcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
 
 	            orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
 	            orcamento.setTituloPedido(rset.getString("tituloPedido"));
 	            orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido").toUpperCase()));
 	            orcamento.setPrecoHora(rset.getFloat("precoHora"));
+	            orcamento.setPercentualLucro(rset.getFloat("percentualLucro"));
 	            orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
 	            orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
+	            orcamento.setValorAdicional(rset.getFloat("valorAdicional"));
+	            orcamento.setValorGastos(rset.getFloat("valorGastos"));
+	            orcamento.setValorSemLucro(rset.getFloat("valorSemLucro"));
 	            
 	            UsuarioPerfil usuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 
 	            usuario.setEmail(rset.getString("email"));
 	            usuario.setNomeUsuario(rset.getString("nomeUsuario"));
-	            usuario.setPercentualLucro(rset.getFloat("percentualLucro"));
-	            //usuario.setPrecoHora(rset.getFloat("precoHora"));
+	            usuario.setPercentualLucro(rset.getFloat("percLucroUsuario"));
+	            usuario.setPrecoHora(rset.getFloat("precoHoraUsuario"));
 
 	            orcamento.setUsuarioPerfil(usuario);
 	            
@@ -129,8 +137,8 @@ public class OrcamentoDAO {
 	}
 	
 	 public void atualizarOrcamento(Orcamento orcamento) {
-	        String sql = "UPDATE Orcamento SET tituloPedido = ?, statusPedido = ?, precoHora = ?, quantHrs = ?,"
-	        		+ " quantDiasPedido = ? WHERE id_orcamento = ?";
+	        String sql = "UPDATE Orcamento SET tituloPedido = ?, statusPedido = ?, precoHora = ?, percentualLucro = ? , quantHrs = ?,"
+	        		+ " quantDiasPedido = ?, valorAdicional = ?, valorGastos = ?, valorSemLucro = ? WHERE id_orcamento = ?";
 	        Connection conexao = null;
 	        PreparedStatement pstm = null;
 
@@ -140,9 +148,13 @@ public class OrcamentoDAO {
 				pstm.setString(1, orcamento.getTituloPedido());
 				pstm.setString(2, orcamento.getStatus().name().toLowerCase());
 				pstm.setFloat(3, orcamento.getPrecoHora());
-				pstm.setFloat(4, orcamento.getQuantHorasPrevistas());
-				pstm.setInt(5, orcamento.getMaxDias());
-				pstm.setInt(6, orcamento.getIdOrcamento());
+				pstm.setFloat(4, orcamento.getPercentualLucro());
+				pstm.setFloat(5, orcamento.getQuantHorasPrevistas());
+				pstm.setInt(6, orcamento.getMaxDias());
+				pstm.setFloat(7, orcamento.getValorAdicional());
+				pstm.setFloat(8, orcamento.getValorGastos());
+				pstm.setFloat(9, orcamento.getValorSemLucro());
+				pstm.setInt(10, orcamento.getIdOrcamento());
 	            
 	            
 	            pstm.executeUpdate();

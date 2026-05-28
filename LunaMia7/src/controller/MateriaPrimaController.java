@@ -58,6 +58,7 @@ public class MateriaPrimaController extends ComponentAdapter {
 
 		this.materiaPrimaView.adicionar(e -> {
 			navegador.navegarTela("CADASTRO_MATERIA_PRIMA");
+			cadastroMateriaPrima.getBtConfirmar().setText("Confirmar");
 			menu.removerMenu();
 		});
 
@@ -69,8 +70,8 @@ public class MateriaPrimaController extends ComponentAdapter {
 		String cor = cadastroMateriaPrima.getTfCor().getText();
 		String marca = cadastroMateriaPrima.getTfMarca().getText();
 		String qtdDisponivelStr = cadastroMateriaPrima.getTfQtdDisponivel().getText();
-		String qtdUnidadeStr = cadastroMateriaPrima.getTfQtdUnidade().getText();
-		String valorStr = cadastroMateriaPrima.getTfValor().getText();
+		String qtdUnidadeStr = cadastroMateriaPrima.getTfQtdUnidade().getText().replace(",", ".");
+		String valorStr = cadastroMateriaPrima.getTfValor().getText().replace(",", ".");
 
 		if (nome.isEmpty() || qtdDisponivelStr.isEmpty() || qtdUnidadeStr.isEmpty() || valorStr.isEmpty()) {
 
@@ -81,6 +82,7 @@ public class MateriaPrimaController extends ComponentAdapter {
 				|| !valorPermitido(valorStr)) {
 
 			Mensagem.mostrar(null, "Inválido", "Valores numéricos inválidos!");
+			return;
 		}
 
 		try {
@@ -151,7 +153,7 @@ public class MateriaPrimaController extends ComponentAdapter {
 	public boolean qtdUnidadePermitida(String qtdUnidadeValida) {
 
 		boolean valido;
-		if (!qtdUnidadeValida.matches("\\d+")) {
+		if (!qtdUnidadeValida.matches("\\d+(\\.\\d{1,2})?")) {
 			valido = false;
 		} else {
 			valido = true;

@@ -38,6 +38,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JComboBox cbCidade;
 	private JComboBox cbEstado;
 	private JButton btIgnorar, btEscolherFoto, btSalvar;
+	private JLabel interrogacaoPrecoHora, interrogacaoPercentLucro;
 
 	/**
 	 * Create the panel.
@@ -128,7 +129,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPrecoHoraCP, "cell 1 8");
+		add(lbPrecoHoraCP, "flowx,cell 1 8");
 		
 		tfPrecoHoraCP = new JTextField();
 		tfPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -138,7 +139,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		JLabel lbPercLucroCP = new JLabel("Percentual de Lucro");
 		lbPercLucroCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbPercLucroCP, "cell 3 8");
+		add(lbPercLucroCP, "flowx,cell 3 8");
 		
 		tfPercLucroCP = new JTextField();
 		tfPercLucroCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -189,6 +190,27 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		btSalvar.setBorderPainted(false);
 		btIgnorar.setBorderPainted(false);
+		
+		interrogacaoPrecoHora = new JLabel("");
+		add(interrogacaoPrecoHora, "cell 1 8");
+		
+		interrogacaoPercentLucro = new JLabel("");
+		add(interrogacaoPercentLucro, "cell 3 8");
+		
+		ImageIcon iconInterrogacao = new ImageIcon(
+				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
+
+		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
+		interrogacaoPercentLucro.setIcon(new ImageIcon(imgInterrogacao));
+		interrogacaoPrecoHora.setIcon(new ImageIcon(imgInterrogacao));
+		
+		interrogacaoPrecoHora.setToolTipText("<html> O valor que será cobrado por cada hora do seu trabalho.<br>"
+				+ "Você pode fazer :<br>"
+				+ "(Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </html>");
+		interrogacaoPercentLucro.setToolTipText("<html> É a porcentagem que irá sobrar após pagar as <br> despesas do trabalho."
+				+ "Você pode fazer: <br>"
+				+ "(Lucro da empresa / Faturamento) * 100 </html>");
+		
 		
 		addComponentListener(new ComponentAdapter() {
             @Override

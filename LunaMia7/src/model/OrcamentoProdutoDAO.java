@@ -53,7 +53,7 @@ public class OrcamentoProdutoDAO {
 			while (rset.next()) {
 
 				OrcamentoProduto orcamProd = new OrcamentoProduto();
-				Orcamento orcamento = new Orcamento(null, 0, 0, 0, null);
+				Orcamento orcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
 				orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
 				MateriaPrima materiaPrima = new MateriaPrima(null, null, null, 0, 0, 0, null);
 				materiaPrima.setIdMateriaPrima((rset.getInt("id_estoque")));
@@ -159,25 +159,46 @@ public class OrcamentoProdutoDAO {
 	    	        	
 	    	        	listaMP.add(materiaPrima);
 	    	        }
+	    	        
 	    	 } catch(SQLException e){
 	    		 e.printStackTrace();
 	    	 }finally {
-
 	    	        try {
-
 	    	            if(rset != null)
 	    	                rset.close();
-
 	    	            if(pstm != null)
 	    	                pstm.close();
-
 	    	        } catch(SQLException e) {
 	    	            e.printStackTrace();
 	    	        }
-
 	    	        BancoDeDados.desconectar(conexao);
 	    	 }
-
 	    	 return listaMP;
+	    }
+	    
+	    public void excluirPorIdOrcamento(int idOrcamento) {
+	    	String sql = "DELETE FROM OrcamentoProduto WHERE id_orcamento = ?";
+	    	Connection conexao = null;
+	    	PreparedStatement pstm = null;
+	    	
+	    	try {
+	    		conexao = BancoDeDados.conectar();
+	    		pstm = conexao.prepareStatement(sql);
+	    		
+	    		pstm.setInt(1, idOrcamento);
+	    		
+	    		pstm.executeUpdate();
+	    	} catch(SQLException e) {
+	    		e.printStackTrace();
+	    	} finally {
+	    		try {
+	    			if (pstm != null) {
+	    				pstm.close();
+	    			}
+	    		} catch(SQLException e) {
+	    			e.printStackTrace();
+	    		}
+	    		BancoDeDados.desconectar(conexao);
+	    	}
 	    }
 } 

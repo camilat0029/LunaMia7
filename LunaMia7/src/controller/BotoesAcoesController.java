@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -18,6 +19,7 @@ import model.MateriaPrima;
 import model.MateriaPrimaDAO;
 import model.Orcamento;
 import model.OrcamentoDAO;
+import model.OrcamentoProduto;
 import model.OrcamentoProdutoDAO;
 import model.UsuarioPerfil;
 import view.CadastroMateriaPrimaEstoque;
@@ -108,6 +110,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 				atualizarMP();
 
 				Mensagem.mostrar(null, "Informação", "Materia Prima Atualizada com Sucesso!");
+				limparCamposMP();
 				navegadorTelas.navegarTela("MATERIA_PRIMA");
 			}
 		});
@@ -125,6 +128,12 @@ public class BotoesAcoesController extends ComponentAdapter {
 		// ATUALIZANDO INFORMAÇÕES DO ORCAMENTO
 		this.orcamentos.atualizar(orcamento -> {
 			irParaAtualizarORC(orcamento);
+		});
+		
+		this.criarOrcamento.confirmar(e -> {
+			if(criarOrcamento.getBtConfirmar().getText().equals("Atualizar")) {
+				atualizarORC();
+			}
 		});
 
 	}
@@ -217,7 +226,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 		visualizarOrcamento.getLbPercLucroCad().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro()));
 		visualizarOrcamento.getLbHorasPrevistasCad().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
 		visualizarOrcamento.getLbQuantDiasMaxCad().setText(String.valueOf(orcam.getMaxDias()));
-		// visualizarOrcamento.getLbCustoAdiCad().setText(orcam.get); // calor adcional
+		visualizarOrcamento.getLbCustoAdiCad().setText(String.valueOf(orcam.getValorAdicional()));
 		visualizarOrcamento.getLbStatusCad().setText(String.valueOf(orcam.getStatus()));
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
@@ -231,10 +240,8 @@ public class BotoesAcoesController extends ComponentAdapter {
 			visualizarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
 		}
 
-		// visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido());
-		// // valor gastos
-		// visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido());
-		// // valor sem lucro
+		visualizarOrcamento.getLbTotalGastosCad().setText(String.valueOf(orcam.getValorGastos()));
+		visualizarOrcamento.getLbValorSemLucroCad().setText(String.valueOf(orcam.getValorSemLucro()));
 
 		List<MateriaPrima> MPs = orcamProdDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
 		visualizarOrcamento.tabModeloEstoque.setLista(MPs);
@@ -246,29 +253,25 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 	// MÉTODO PARA IR PARA A TELA DE ATUALIZAR ORCAMENTO
 	public void irParaAtualizarORC(Orcamento orcam) {
+		
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		List<MateriaPrima> estoque = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
+		criarOrcamento.tabModeloEstoque.limpar();
+		criarOrcamento.tabModeloEstoque.setLista(estoque);
 
 		OrcEditada = orcam;
 
 		criarOrcamento.getTituloOrcamento().setText(orcam.getTituloPedido());
-		criarOrcamento.getTfNomeCliente().setText(orcam.getTituloPedido());
+		criarOrcamento.getTfNomeCliente().setText(orcam.getCliente().getNome());
 		criarOrcamento.getTfContato().setText(orcam.getCliente().getTelefone());
 		criarOrcamento.getTfEmail().setText(orcam.getCliente().getEmail());
-		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(orcam.getUsuarioPerfil().getPrecoHora())); // Vefificar
-																													// se
-																													// dará
-																													// certo
-																													// caso
-																													// a
-																													// pessoa
-																													// queira
-																													// mudar
-																													// esse
-																													// valor
-		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro())); // verificar
-																														// também
+		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(orcam.getPrecoHora())); // Vefificar se dará certo caso a																									     // pessoa queira mudar esse valor
+		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(orcam.getPercentualLucro())); // verificar também
 		criarOrcamento.getTfHorasPrevistas().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
 		criarOrcamento.getTfQuantMaxDias().setText(String.valueOf(orcam.getMaxDias()));
-		// custo adicional
+		criarOrcamento.getTfCustoAdicional().setText(String.valueOf(orcam.getValorAdicional()));
+		criarOrcamento.getLbCalcGastos().setText(String.valueOf(orcam.getValorGastos()));
+		criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(orcam.getValorSemLucro()));
 		criarOrcamento.getCbStatus().setSelectedItem(orcam.getStatus());
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
@@ -276,22 +279,30 @@ public class BotoesAcoesController extends ComponentAdapter {
 		if (confirOrcam != null) {
 
 			criarOrcamento.getCbFormaPaga().setSelectedItem(confirOrcam.getFormPagamento());
-			criarOrcamento.getTfDataConfPedido().setText(String.valueOf(confirOrcam.getDataConfirmacao()));
-			criarOrcamento.getTfDtPrevEntrega().setText(String.valueOf(confirOrcam.getDataPrevistaEntrega()));
+			
+			DateTimeFormatter formatacao = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			criarOrcamento.getTfDataConfPedido().setText(confirOrcam.getDataConfirmacao().format(formatacao));
+			criarOrcamento.getTfDtPrevEntrega().setText(confirOrcam.getDataPrevistaEntrega().format(formatacao));
+			
 			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(confirOrcam.getValorVenda()));
-			criarOrcamento.getLbValorLucro().setText(String.valueOf(confirOrcam.getLucro()));
+			criarOrcamento.getLbCalcLucro().setText(String.valueOf(confirOrcam.getLucro()));
 			criarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
 		}
 
 		List<MateriaPrima> MPs = orcamProdDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
 		criarOrcamento.tabModeloOrcam.setLista(MPs);
 
+		criarOrcamento.getBtAdicionar().setVisible(true);
+		criarOrcamento.getBtRemover().setVisible(true);
+		criarOrcamento.getBtCalcEdi().setVisible(true);
 		criarOrcamento.getBtSalvar().setVisible(false);
 		criarOrcamento.getBtConfirmar().setText("Atualizar");
 
 		criarOrcamento.getTfNomeCliente().setEditable(false);
 
 		menu.removerMenu();
+		
+		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 
 	}
@@ -307,8 +318,13 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		OrcEditada.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
 		OrcEditada.setQuantHorasPrevistas(Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText()));
+		OrcEditada.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
+		OrcEditada.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
 		OrcEditada.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
 		OrcEditada.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
+		OrcEditada.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText()));
+		OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
+		OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
 		orcamentoDAO.atualizarOrcamento(OrcEditada);
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(OrcEditada.getIdOrcamento());
@@ -322,9 +338,27 @@ public class BotoesAcoesController extends ComponentAdapter {
 					DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 			confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
 			confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+			
+			confirOrcamDAO.atualizarConfirOrcam(confirOrcam);
 		}
 
 		// TERMINAR ATUALIZAR COM AS MATERIAS PRIMAS UTILIZADAS NO ORÇAMENTO
+		
+		orcamProdDAO.excluirPorIdOrcamento(OrcEditada.getIdOrcamento());
+		
+		List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
+		
+		for (MateriaPrima materiaPrima : listaMP) {
+			OrcamentoProduto orcamProd = new OrcamentoProduto();
+			
+			orcamProd.setOrcamento(OrcEditada);
+			orcamProd.setMateriaPrima(materiaPrima);
+			orcamProd.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+			orcamProdDAO.adicionarDados(orcamProd);
+			
+		}
+		
+		atualizarQuantMP();
 
 		Mensagem.mostrar(null, "Informação", "Orçamento atualizado com sucesso!");
 		navegadorTelas.navegarTela("ORCAMENTOS");
@@ -336,6 +370,28 @@ public class BotoesAcoesController extends ComponentAdapter {
 	// MÉTODO DE EXCLUIR ORÇAMENTO
 	// MÉTODO DE CANCELAR ORÇAMENTO
 
+	
+	public void atualizarQuantMP() {
+
+		int totalLinhas = criarOrcamento.tabModeloEstoque.getRowCount();
+
+		for (int i = 0; i < totalLinhas; i++) {
+			MateriaPrima materiaPrima = criarOrcamento.tabModeloEstoque.getMatPrima(i);
+			materiaPrimaDAO.atualizarQuantMP(materiaPrima.getIdMateriaPrima(), materiaPrima.getQuantidadeDisponivel());
+		}
+	}
+	
+	public void limparCamposMP() {
+		cadMateriaPrima.getTfNomeMateriaPrima().setText("");
+		cadMateriaPrima.getTfCor().setText("");
+		cadMateriaPrima.getTfMarca().setText("");
+		cadMateriaPrima.getTfQtdDisponivel().setText("");
+		cadMateriaPrima.getTfQtdUnidade().setText("");
+		cadMateriaPrima.getTfValor().setText("");
+		cadMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
+
+	}
+	
 	public void componentShown(ComponentEvent e) {
 		this.carregarTabela();
 	}

@@ -94,7 +94,9 @@ public class OrcamentoController {
 		});
 
 		this.criarOrcamento.confirmar(e -> {
-			confirmar();
+			if(criarOrcamento.getBtConfirmar().getText().equals("Confirmar")) {
+				confirmar();
+			}
 		});
 
 	}
@@ -131,7 +133,7 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 
 		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020, 920));
+		criarOrcamento.setPreferredSize(new Dimension(1020, 970));
 
 		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		criarOrcamento.tabModeloEstoque.limpar();
@@ -265,6 +267,7 @@ public class OrcamentoController {
 	public void editarValores() {
 
 		criarOrcamento.getBtCalcEdi().setText("Calcular");
+		criarOrcamento.getBtSalvar().setVisible(false);
 
 		criarOrcamento.getTfQuantMaxDias().setEditable(true);
 		criarOrcamento.getTfHorasPrevistas().setEditable(true);
@@ -289,17 +292,22 @@ public class OrcamentoController {
 
 		// DO ORÇAMENTO
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-		Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null);
+		Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
 
 		novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
 		novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
 		novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
+		novoOrcamento.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
 		novoOrcamento.setQuantHorasPrevistas(Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText()));
 		novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
 		novoOrcamento.setUsuarioPerfil(usuarioLogado);
-		;
+		
 		novoOrcamento.setCliente(cliente);
-		;
+		
+		novoOrcamento.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText()));
+		novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
+		novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+		
 		orcamentoDAO.adicionarDados(novoOrcamento);
 		this.orcamentoAtual = novoOrcamento;
 
@@ -359,8 +367,14 @@ public class OrcamentoController {
 	}
 
 	public void ativandoDevativandoComp() {
-
-		criarOrcamento.setPreferredSize(new Dimension(1020, 1150));
+		
+		if(criarOrcamento.getBtConfirmar().getText().equals("Confirmar")) {
+			criarOrcamento.setPreferredSize(new Dimension(1020, 1200));
+			criarOrcamento.getBtSalvar().setVisible(true);
+		} else {
+			criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
+			criarOrcamento.getBtSalvar().setVisible(false);
+		}
 
 		criarOrcamento.getTfQuantMaxDias().setEditable(false);
 		criarOrcamento.getTfHorasPrevistas().setEditable(false);
@@ -377,8 +391,6 @@ public class OrcamentoController {
 		criarOrcamento.getLbValorVenda().setVisible(true);
 		criarOrcamento.getLbGastos().setVisible(true);
 		criarOrcamento.getLbValorLucro().setVisible(true);
-
-		criarOrcamento.getBtSalvar().setVisible(true);
 
 		criarOrcamento.getBtCalcEdi().setText("Editar");
 	}
@@ -397,6 +409,10 @@ public class OrcamentoController {
 	public void ativDesativCompAoSalvar() {
 		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
 
+		criarOrcamento.getTituloOrcamento().setEditable(false);
+		criarOrcamento.getTfNomeCliente().setEditable(false);
+		criarOrcamento.getTfContato().setEditable(false);
+		criarOrcamento.getTfEmail().setEditable(false);
 		criarOrcamento.getLbDtConfPedido().setVisible(true);
 		criarOrcamento.getTfDataConfPedido().setVisible(true);
 		criarOrcamento.getLbDtPrevEntrega().setVisible(true);

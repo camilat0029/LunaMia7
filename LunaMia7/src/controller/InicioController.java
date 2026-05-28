@@ -45,7 +45,7 @@ public class InicioController {
 		ativandoDesativandoComp();
 		
 		menu.removerMenu();
-		criarOrcamento.setPreferredSize(new Dimension(1020,920));
+		criarOrcamento.setPreferredSize(new Dimension(1020,970));
 		
 		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 		criarOrcamento.tabModeloEstoque.limpar();

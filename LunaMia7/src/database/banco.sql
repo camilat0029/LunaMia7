@@ -39,11 +39,15 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `tituloPedido` VARCHAR(45) NOT NULL,
   `statusPedido` ENUM('concluido', 'andamento', 'pendente') NOT NULL,
   `precoHora` DECIMAL(10,2) NOT NULL,
+  `percentualLucro` DECIMAL(10,2) NOT NULL,
   `quantHrs` DECIMAL(10,2) NOT NULL,
   `quantDiasPedido` INT NOT NULL,
   `Perfil_Usuario_email` VARCHAR(64) NOT NULL,
   `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,
   `Cliente_id_cliente` INT NOT NULL,
+  `valorAdicional` DECIMAL(10,2) NULL,
+  `valorGastos` DECIMAL(10,2) NOT NULL,
+  `valorSemLucro` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id_orcamento`),
  
   INDEX `fk_Orcamento_Perfil_Usuario1_idx` (`Perfil_Usuario_email` ASC) ,
@@ -110,6 +114,6 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 'camila.t29@aluno.ifsc.edu.br', 600),
     (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 'camila.t29@aluno.ifsc.edu.br', 700);
    
-    select * from MateriaPrima;
+    select * from Orcamento;
     
     
