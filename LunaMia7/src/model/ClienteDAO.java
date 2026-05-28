@@ -106,7 +106,7 @@ public class ClienteDAO {
         }
     }
     
-    public void excluirCliente(Cliente cliente) {
+    public void excluirCliente(int idCliente) {
         String sql = "DELETE FROM Cliente WHERE id_cliente = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
@@ -114,7 +114,7 @@ public class ClienteDAO {
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setInt(1, cliente.getIdCliente());
+            pstm.setInt(1, idCliente);
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

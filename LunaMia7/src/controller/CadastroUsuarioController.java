@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import model.Cliente;
+import model.ClienteDAO;
 import model.ConfirOrcam;
 import model.ConfirOrcamDAO;
 import model.MateriaPrima;
@@ -213,9 +215,12 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					}
 
 					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+					ClienteDAO clienteDAO = new ClienteDAO();
 					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
 					for (Orcamento orcamento : listaOrcamento) {
+						Cliente cliente = orcamento.getCliente();                        
 						orcamentoDAO.excluirOrcamento(orcamento);
+						clienteDAO.excluirCliente(cliente.getIdCliente());
 					}
 
 					MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
