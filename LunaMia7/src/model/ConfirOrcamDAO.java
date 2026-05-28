@@ -83,6 +83,10 @@ public class ConfirOrcamDAO {
 				confirOrcam.setValorVenda(rset.getFloat("valorVenda"));
 				confirOrcam.setLucro(rset.getFloat("lucroTotalObtido"));
 				
+			    Orcamento orcamento = new Orcamento(sql, 0, 0, 0, null, 0, 0, 0, 0);
+			    orcamento.setIdOrcamento(rset.getInt("id_orcamento"));
+			    confirOrcam.setOrcamento(orcamento);
+				
 				confirOrcams.add(confirOrcam);
 			}
 		} catch (SQLException e) {
@@ -143,7 +147,7 @@ public class ConfirOrcamDAO {
 	        }
 	    }
 	    
-	    public void excluirConfirOrcam(ConfirOrcam confirOrcam) {
+	    public void excluirConfirOrcam(int idOrcamento) {
 	        String sql = "DELETE FROM Confirmacao_de_orcamento WHERE id_orcamento = ?";
 	        Connection conexao = null;
 	        PreparedStatement pstm = null;
@@ -151,7 +155,7 @@ public class ConfirOrcamDAO {
 	        try {
 	            conexao = BancoDeDados.conectar();
 	            pstm = conexao.prepareStatement(sql);
-	            pstm.setInt(1, confirOrcam.getOrcamento().getIdOrcamento());
+	            pstm.setInt(1, idOrcamento);
 	            pstm.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -197,6 +201,10 @@ public class ConfirOrcamDAO {
 	        		
 	        		confirOrcam.setValorVenda(rs.getFloat("valorVenda"));
 	        		confirOrcam.setLucro(rs.getFloat("lucroTotalObtido"));
+	        		
+	        	    Orcamento orcamento = new Orcamento(sql, idOrcamento, idOrcamento, idOrcamento, null, idOrcamento, idOrcamento, idOrcamento, idOrcamento);
+	        	    orcamento.setIdOrcamento(rs.getInt("id_orcamento"));
+	        	    confirOrcam.setOrcamento(orcamento);
 	        		
 	        		return confirOrcam;
 	        	}

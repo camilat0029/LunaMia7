@@ -192,40 +192,41 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				int confirm = MensagemSimNao.mostrar(null, "Excluir", "Tem certeza que deseja excluir a conta? \nEla não poderá ser recuperada.");
+				int confirm = MensagemSimNao.mostrar(null, "Excluir",
+						"Tem certeza que deseja excluir a conta? \nEla não poderá ser recuperada.");
 
 				if (confirm == JOptionPane.YES_OPTION) {
 
 					UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-					
+
+					OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
+
+					List<OrcamentoProduto> listaOrcamentoProduto = orcamentoProdutoDAO.listarOrcamProd();
+					for (OrcamentoProduto orcamentoProduto : listaOrcamentoProduto) {
+						orcamentoProdutoDAO.excluirOrcamentoProduto(orcamentoProduto);
+					}
+
+					ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
+					List<ConfirOrcam> listaConfirOrcam = confirOrcamDAO.listarConfirOrcam();
+					for (ConfirOrcam confirOrcam : listaConfirOrcam) {
+					    confirOrcamDAO.excluirConfirOrcam(confirOrcam.getOrcamento().getIdOrcamento());
+					}
+
+					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
+					for (Orcamento orcamento : listaOrcamento) {
+						orcamentoDAO.excluirOrcamento(orcamento);
+					}
+
 					MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
 					List<MateriaPrima> listaMateriaPrima = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
 					for (MateriaPrima materiaPrima : listaMateriaPrima) {
 						materiaPrimaDAO.excluirMateriasPrimas(materiaPrima);
 					}
-					
-					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();					
-					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());					
-					for (Orcamento orcamento : listaOrcamento) {
-						orcamentoDAO.excluirOrcamento(orcamento);
-					}
-					
-					ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
-					List<ConfirOrcam> listaConfirOrcam = confirOrcamDAO.listarConfirOrcam();
-					for (ConfirOrcam confirOrcam : listaConfirOrcam) {
-						confirOrcamDAO.excluirConfirOrcam(confirOrcam);
-					}
-					
-					OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
-					
-					List<OrcamentoProduto> listaOrcamentoProduto = orcamentoProdutoDAO.listarOrcamProd();
-					for (OrcamentoProduto orcamentoProduto : listaOrcamentoProduto) {
-						orcamentoProdutoDAO.excluirOrcamentoProduto(orcamentoProduto);
-					}
-					
-					//MateriaPrima, cliente, confirmacaoPedido
-					//MateriaPrima, orcamento, confirmacaoOrcamento, orcamentoProduto 
-					
+
+					// MateriaPrima, cliente, confirmacaoPedido
+					// MateriaPrima, orcamento, confirmacaoOrcamento, orcamentoProduto
+
 					usuarioDAO.excluirUsuario(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail());
 					navegadorTelas.navegarTela("LOGIN");
 
