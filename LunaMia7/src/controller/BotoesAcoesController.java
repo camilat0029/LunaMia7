@@ -107,11 +107,12 @@ public class BotoesAcoesController extends ComponentAdapter {
 		this.cadMateriaPrima.confirmar(e -> {
 
 			if (cadMateriaPrima.getBtConfirmar().getText().equals("Atualizar")) {
+				
 				atualizarMP();
-
 				Mensagem.mostrar(null, "Informação", "Materia Prima Atualizada com Sucesso!");
 				limparCamposMP();
 				navegadorTelas.navegarTela("MATERIA_PRIMA");
+				menu.mostrarPanelCont();
 			}
 		});
 
@@ -134,6 +135,16 @@ public class BotoesAcoesController extends ComponentAdapter {
 			if(criarOrcamento.getBtConfirmar().getText().equals("Atualizar")) {
 				atualizarORC();
 			}
+		});
+		
+		//EXCLUINDO INFORMAÇÕES DO ORCAMENTO
+		this.orcamentos.excluir(orcamento -> {
+			excluirORC(orcamento);
+		});
+		
+		//CANCELANDO INFORMAÇÕES DO ORÇAMENTO
+		this.orcamentos.cancelar(orcamento -> {
+			cancelarORC(orcamento);
 		});
 
 	}
@@ -341,8 +352,6 @@ public class BotoesAcoesController extends ComponentAdapter {
 			
 			confirOrcamDAO.atualizarConfirOrcam(confirOrcam);
 		}
-
-		// TERMINAR ATUALIZAR COM AS MATERIAS PRIMAS UTILIZADAS NO ORÇAMENTO
 		
 		orcamProdDAO.excluirPorIdOrcamento(OrcEditada.getIdOrcamento());
 		
@@ -362,14 +371,65 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		Mensagem.mostrar(null, "Informação", "Orçamento atualizado com sucesso!");
 		navegadorTelas.navegarTela("ORCAMENTOS");
-
+		menu.mostrarPanelCont();
+		
 		OrcEditada = null;
 
 	}
 
 	// MÉTODO DE EXCLUIR ORÇAMENTO
+	public void excluirORC(Orcamento orcamento) {
+		
+		int linhaSelecionada = orcamentos.getTabelaOrcamentos().getSelectedRow();
+		
+		orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
+		orcamentoDAO.excluirOrcamento(orcamento);
+		
+		Mensagem.mostrar(null, "Informação", "Orçamento exluído com sucesso!");
+		
+	}
+	
+	
 	// MÉTODO DE CANCELAR ORÇAMENTO
-
+	public void cancelarORC(Orcamento orcamento) {
+		
+		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+		int linhaSelecionada = orcamentos.getTabelaOrcamentos().getSelectedRow();
+		
+		//orcamentos.tabelaModeloOrcamento.getOrcamento(linhaSelecionada);
+		
+		List<OrcamentoProduto> listaProdUtiORC = orcamProdDAO.listarOrcamProd();
+		List<MateriaPrima> listaMP = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
+		
+		for (OrcamentoProduto orcamentoProduto : listaProdUtiORC) {
+			
+			if(orcamentoProduto.getOrcamento().getIdOrcamento() == orcamento.getIdOrcamento()) {
+				
+				int idMP = orcamentoProduto.getMateriaPrima().getIdMateriaPrima();
+				int quantORC = orcamentoProduto.getQuantidade();
+				int quantMP = 0;
+				
+				for (MateriaPrima materiaPrima : listaMP) {
+					if(materiaPrima.getIdMateriaPrima() == idMP) {
+						quantMP = materiaPrima.getQuantidadeDisponivel();
+						break;
+					}
+				}
+				
+				int quantAtualizMP = quantMP + quantORC;
+				
+				materiaPrimaDAO.atualizarQuantMP(idMP,quantAtualizMP);
+				
+			}
+		}
+		
+		
+		orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
+		orcamentoDAO.excluirOrcamento(orcamento);
+		
+		Mensagem.mostrar(null, "Informação", "Orçamento cancelado com sucesso! \nQuantidade das materias primas \nutilizadas no seu orçamento \natualizadas com sucesso! ");
+		
+	}
 	
 	public void atualizarQuantMP() {
 

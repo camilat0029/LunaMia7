@@ -67,12 +67,17 @@ public class OrcamentoDAO {
 
 	public List<Orcamento> listarOrcamentos(String emailUsuario) {
 
-	    String sql = "SELECT o.*, c.*, u.percentualLucro AS percLucroUsuario, u.precoHora AS precoHoraUsuario " +
-	             "FROM Orcamento o " +
-	             "INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
-	             "INNER JOIN Perfil_Usuario u ON o.Perfil_Usuario_email = u.email " +
-	             "WHERE o.Perfil_Usuario_email = ? " +
-	             "AND o.Perfil_Usuario_nomeUsuario = u.nomeUsuario";
+		String sql =
+			    "SELECT o.*, c.*, " +
+			    "u.email AS emailUsuario, " +
+			    "u.nomeUsuario AS nomeUsuario, " +
+			    "u.percentualLucro AS percLucroUsuario, " +
+			    "u.precoHora AS precoHoraUsuario " +
+			    "FROM Orcamento o " +
+			    "INNER JOIN Cliente c ON o.Cliente_id_cliente = c.id_cliente " +
+			    "INNER JOIN Perfil_Usuario u ON o.Perfil_Usuario_email = u.email " +
+			    "AND o.Perfil_Usuario_nomeUsuario = u.nomeUsuario " +
+			    "WHERE o.Perfil_Usuario_email = ?";
 
 	    List<Orcamento> orcamentos = new ArrayList<>();
 
@@ -113,7 +118,7 @@ public class OrcamentoDAO {
 
 	            orcamento.setUsuarioPerfil(usuario);
 	            
-	            Cliente cliente =new Cliente(null, null, null);
+	            Cliente cliente = new Cliente(null, null, null);
 	            
 	            cliente.setIdCliente(rset.getInt("id_cliente"));
 	            cliente.setNome(rset.getString("nomeCliente"));

@@ -109,6 +109,12 @@ public class OrcamentoController {
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
 
+		//Terminar de deixar oque pode editar true
+		criarOrcamento.getTituloOrcamento().setEditable(true);
+		criarOrcamento.getTfNomeCliente().setEditable(true);
+		criarOrcamento.getTfContato().setEditable(true);
+		criarOrcamento.getTfEmail().setEditable(true);
+		
 		criarOrcamento.getLbValorCalcSemLucro().setVisible(false);
 		criarOrcamento.getLbValorCalVenda().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(false);
@@ -133,6 +139,7 @@ public class OrcamentoController {
 		criarOrcamento.getBtSalvar().setVisible(false);
 
 		menu.removerMenu();
+		criarOrcamento.getBtConfirmar().setText("Confirmar");
 		criarOrcamento.setPreferredSize(new Dimension(1020, 970));
 
 		List<MateriaPrima> listaMateriasPrimas = this.materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
