@@ -25,12 +25,7 @@ public class MenuExpandido extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lbMostrarMenuCont;
-	private JButton btInicio;
-	private JButton btPerfil;
-	private JButton btEstoque;
-	private JButton btRelatorios;
-	private JButton btOrcamentos;
-	private JButton btSair;
+	private JButton btInicio, btPerfil, btEstoque, btRelatorios, btOrcamentos, btSair;
 	private JLabel lbNomeUsuario;
 	private JLabel lbFoto;
 	
@@ -97,11 +92,20 @@ public class MenuExpandido extends JPanel {
 		btEstoque.setBorderPainted(false);
 		btRelatorios.setBorderPainted(false);
 		
+		btInicio.setFocusPainted(false);
+		btPerfil.setFocusPainted(false);
+		btOrcamentos.setFocusPainted(false);
+		btEstoque.setFocusPainted(false);
+		btRelatorios.setFocusPainted(false);
+		
 		btSair = new JButton("Sair");
 		btSair.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btSair.setBorderPainted(false);
+		btSair.setFocusPainted(false);
 		btSair.setBackground(new Color(193, 151, 232));
 		add(btSair, "cell 1 10,growx,aligny center");
+		
+		
 
 	}
 	

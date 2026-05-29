@@ -21,8 +21,7 @@ public class RedefinirSenha extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPasswordField pfNovaSenhaRS;
 	private JPasswordField pfConfirmarNovaSenhaRS;
-	private JButton btConfirmarRS;
-	private JButton btCancelarRS;
+	private JButton btConfirmarRS, btCancelarRS;
 	private JLabel lbSenha;
 
 	/**
@@ -73,6 +72,7 @@ public class RedefinirSenha extends JPanel {
 		btCancelarRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panelCancelarRS.add(btCancelarRS);
 		btCancelarRS.setBorderPainted(false);
+		btCancelarRS.setFocusPainted(false);
 		
 		JPanel panelConfirmarRS = new JPanel();
 		panelConfirmarRS.setBackground(new Color(234, 219, 247));
@@ -83,7 +83,8 @@ public class RedefinirSenha extends JPanel {
 		btConfirmarRS.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panelConfirmarRS.add(btConfirmarRS);
 		btConfirmarRS.setBorderPainted(false);
-		
+		btConfirmarRS.setFocusPainted(false);
+
 		addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {

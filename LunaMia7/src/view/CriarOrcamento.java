@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -56,7 +57,8 @@ public class CriarOrcamento extends JPanel {
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020, 1464));
 
-		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]",
+				"[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
 		lbVoltar = new JLabel("");
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
@@ -190,6 +192,7 @@ public class CriarOrcamento extends JPanel {
 		add(btAdicionar, "cell 2 12,alignx center");
 
 		btAdicionar.setBorderPainted(false);
+		btAdicionar.setFocusPainted(false);
 
 		btRemover = new JButton("Remover");
 		ImageIcon iconRem = new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/7.png"));
@@ -198,7 +201,9 @@ public class CriarOrcamento extends JPanel {
 		btRemover.setBackground(new Color(208, 176, 238));
 		btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(btRemover, "cell 2 13,alignx center");
+
 		btRemover.setBorderPainted(false);
+		btRemover.setFocusPainted(false);
 
 		JLabel lbHorasPrevistas = new JLabel("Horas previstas");
 		lbHorasPrevistas.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -323,13 +328,56 @@ public class CriarOrcamento extends JPanel {
 		btSalvar.setBorderPainted(false);
 		btConfirmar.setBorderPainted(false);
 
-		interrogacaoHrsPrev = new JLabel("");
+		btCalcEdi.setFocusPainted(false);
+		btSalvar.setFocusPainted(false);
+		btConfirmar.setFocusPainted(false);
+
+		interrogacaoHrsPrev = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoHrsPrev, "cell 1 14");
 
-		interrogacaoQuantMaxDias = new JLabel("");
+		interrogacaoQuantMaxDias = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoQuantMaxDias, "cell 3 14");
 
-		interrogacaoCustoAdic = new JLabel("");
+		interrogacaoCustoAdic = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoCustoAdic, "cell 1 16");
 
 		ImageIcon iconInterrogacao = new ImageIcon(
@@ -340,12 +388,17 @@ public class CriarOrcamento extends JPanel {
 		interrogacaoQuantMaxDias.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoCustoAdic.setIcon(new ImageIcon(imgInterrogacao));
 
+		interrogacaoQuantMaxDias.setOpaque(false);
+		interrogacaoHrsPrev.setOpaque(false);
+		interrogacaoCustoAdic.setOpaque(false);
+
 		interrogacaoHrsPrev.setToolTipText(
-				"<html>A quantidade de horas <br> que você acha que levará <br> para finalizar o trabalho.</html>");
+				"<html><div style = 'width:100px;' > A quantidade de horas que você acha que levará para finalizar o trabalho. </div></html>");
 		interrogacaoQuantMaxDias.setToolTipText(
-				"<html>A quantidade máxima<br>de dias que você tem <br>para finalizar o pedido.<br>Você pode indicar em <br>números inteiros, <br>como 1,2,3...");
-		interrogacaoCustoAdic.setToolTipText(
-				"<html> Custos adicionais podem <br> incluir frete, reelaboração do pedido, <br> entre outros... </html>");
+				"<html><div style='width:80px;'>" + "A quantidade máxima de dias que você tem para finalizar o pedido. "
+						+ "Você pode indicar em números inteiros, como 1, 2, 3..." + "</div></html>");
+		interrogacaoCustoAdic.setToolTipText("<html> <div style='width:100px;'>"
+				+ "Custos adicionais podem incluir frete, reelaboração do pedido,  entre outros... </div></html>");
 
 	}
 

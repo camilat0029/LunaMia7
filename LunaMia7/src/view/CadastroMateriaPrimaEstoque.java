@@ -110,6 +110,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		btConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 
 		btConfirmar.setBorderPainted(false);
+		btConfirmar.setFocusPainted(false);
 
 		JLabel interrogacaoQntDisponivel = new JLabel("");
 		interrogacaoQntDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 5));

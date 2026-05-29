@@ -15,6 +15,7 @@ import java.awt.event.ComponentListener;
 import java.text.ParseException;
 
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -166,7 +167,6 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		btEscolherFoto = new JButton("Escolher foto");
 		btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btEscolherFoto.setBackground(new Color(193, 151, 232));
-		btEscolherFoto.setBorderPainted(false);
 		add(btEscolherFoto, "cell 3 10");
 		
 		JPanel panel_btSalvar = new JPanel();
@@ -190,26 +190,56 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		btSalvar.setBorderPainted(false);
 		btIgnorar.setBorderPainted(false);
+		btEscolherFoto.setBorderPainted(false);
 		
-		interrogacaoPrecoHora = new JLabel("");
+		btSalvar.setFocusPainted(false);
+		btIgnorar.setFocusPainted(false);
+		btEscolherFoto.setFocusPainted(false);		
+		
+		interrogacaoPrecoHora = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoPrecoHora, "cell 1 8");
-		
-		interrogacaoPercentLucro = new JLabel("");
+
+		interrogacaoPercentLucro = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoPercentLucro, "cell 3 8");
-		
+
 		ImageIcon iconInterrogacao = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
 		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoPercentLucro.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoPrecoHora.setIcon(new ImageIcon(imgInterrogacao));
-		
-		interrogacaoPrecoHora.setToolTipText("<html> O valor que será cobrado por cada hora do seu trabalho.<br>"
-				+ "Você pode fazer :<br>"
-				+ "(Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </html>");
-		interrogacaoPercentLucro.setToolTipText("<html> É a porcentagem que irá sobrar após pagar as <br> despesas do trabalho."
-				+ "Você pode fazer: <br>"
-				+ "(Lucro da empresa / Faturamento) * 100 </html>");
+
+		interrogacaoPrecoHora.setToolTipText("<html><div style='width: 150px;'> O valor que será cobrado por cada hora do seu trabalho."
+				+ "Você pode fazer : (Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </div></html>");
+		interrogacaoPercentLucro
+				.setToolTipText("<html><div style='width:150px;'> É a porcentagem que irá sobrar após pagar as despesas do trabalho."
+						+ "Você pode fazer: (Lucro da empresa / Faturamento) * 100 </div></html>");
 		
 		
 		addComponentListener(new ComponentAdapter() {

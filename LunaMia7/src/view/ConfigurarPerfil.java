@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.text.ParseException;
 
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -52,8 +53,7 @@ public class ConfigurarPerfil extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020, 850));
 		setMinimumSize(new Dimension(1020, 700));
-		setLayout(new MigLayout("gap 16", "[grow][][][191.00][][175.00][grow]", "[grow][][][][][][][][][][][][grow]"));
-	
+		setLayout(new MigLayout("gap 16", "[grow][][][][][grow]", "[grow][][][][][][][][][][][][grow]"));
 
 		JLabel lbNomeCompCP = new JLabel("Nome Completo");
 		lbNomeCompCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -61,7 +61,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		tfNomeCompCP = new JTextField();
 		tfNomeCompCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfNomeCompCP, "cell 2 2 4 1,width 71%,height 38px");
+		add(tfNomeCompCP, "cell 2 2 3 1,width 71%,height 38px");
 		tfNomeCompCP.setColumns(10);
 
 		JLabel lbNomeUsuaCP = new JLabel("Nome de Usuário");
@@ -71,7 +71,7 @@ public class ConfigurarPerfil extends JPanel {
 		JPanel panel_NomeUsuario = new JPanel();
 		panel_NomeUsuario.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_NomeUsuario.setBackground(new Color(255, 255, 255));
-		add(panel_NomeUsuario, "cell 2 3 4 1,width 71%,height 38!");
+		add(panel_NomeUsuario, "cell 2 3 3 1,width 71%,height 38!");
 		panel_NomeUsuario.setLayout(new MigLayout("", "[]", "[]"));
 
 		lbNomeUsuarioCad = new JLabel("");
@@ -85,7 +85,7 @@ public class ConfigurarPerfil extends JPanel {
 		JPanel panel_EmailCad = new JPanel();
 		panel_EmailCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_EmailCad.setBackground(new Color(255, 255, 255));
-		add(panel_EmailCad, "cell 2 4 4 1,width 71%,height 38!");
+		add(panel_EmailCad, "cell 2 4 3 1,width 71%,height 38!");
 		panel_EmailCad.setLayout(new MigLayout("", "[grow]", "[grow]"));
 
 		lbEmailCad = new JLabel("");
@@ -103,7 +103,7 @@ public class ConfigurarPerfil extends JPanel {
 		JPanel panel_btRedefinirSenha = new JPanel();
 		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
 		panel_btRedefinirSenha.setBackground(new Color(234, 219, 247));
-		add(panel_btRedefinirSenha, "cell 3 5 3 2,alignx center,aligny center");
+		add(panel_btRedefinirSenha, "cell 3 5 2 2,alignx center,aligny center");
 
 		btRedefinirSenha = new JButton("Redefinir Senha");
 		btRedefinirSenha.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -132,7 +132,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		cbEstado = new JComboBox();
 		cbEstado.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbEstado, "cell 2 7,width 18%,height 38px");
+		add(cbEstado, "cell 2 7,growx,width 18%,height 38px");
 
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -140,7 +140,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		cbCidade = new JComboBox();
 		cbCidade.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbCidade, "cell 4 7 2 1, width 18%,height 38px");
+		add(cbCidade, "cell 4 7,growx,width 18%,height 38px");
 
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -158,38 +158,15 @@ public class ConfigurarPerfil extends JPanel {
 
 		tfPercLucroCP = new JTextField();
 		tfPercLucroCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfPercLucroCP, "cell 4 8 2 1,width 18%,height 38px");
+		add(tfPercLucroCP, "cell 4 8,growx,width 18%,height 38px");
 		tfPercLucroCP.setColumns(10);
-
-		JPanel panel_btSalvar = new JPanel();
-		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
-		panel_btSalvar.setBackground(new Color(234, 219, 247));
-		add(panel_btSalvar, "cell 1 10 2 1,alignx center,gapy 15");
-		
-				btVoltar = new JButton("Voltar");
-				panel_btSalvar.add(btVoltar, "cell 0 0,growx");
-				btVoltar.setBackground(new Color(193, 151, 232));
-				btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				btVoltar.setBorderPainted(false);
-
-		JPanel panel_btEditar = new JPanel();
-		panel_btEditar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
-		panel_btEditar.setBackground(new Color(234, 219, 247));
-		add(panel_btEditar, "cell 3 10 3 1,alignx center,gapy 15");
-		
-				btSalvar = new JButton("Salvar");
-				panel_btEditar.add(btSalvar, "cell 0 0,grow");
-				btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				btSalvar.setBackground(new Color(193, 151, 232));
-				
-						btSalvar.setBorderPainted(false);
 
 		btEscolherFoto = new JButton("Escolher Foto");
 		btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btEscolherFoto.setBackground(new Color(193, 151, 232));
-		add(btEscolherFoto, "cell 3 9");
-		btRedefinirSenha.setBorderPainted(false);
+		add(btEscolherFoto, "cell 3 9,alignx center");
 		btEscolherFoto.setBorderPainted(false);
+		btEscolherFoto.setFocusPainted(false);
 
 		JLabel lbFotoPerfilCP = new JLabel("Foto de Perfil");
 		lbFotoPerfilCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -199,39 +176,91 @@ public class ConfigurarPerfil extends JPanel {
 
 		lbFoto.setHorizontalAlignment(SwingConstants.CENTER);
 		lbFoto.setVerticalAlignment(SwingConstants.CENTER);
-		
+
 		lbFoto.setIcon(new ImageIcon(ConfigurarPerfil.class.getResource("/imagensIcones/fotoPerfilPadrao.png")));
 		ImageIcon imagemPadrao = new ImageIcon(getClass().getResource("/imagensIcones/fotoPerfilPadrao.png"));
 		lbFoto.setIcon(new ImageIcon(imagemPadrao.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
 
 		lbFoto.setPreferredSize(new Dimension(150, 150));
 		add(lbFoto, "cell 2 9,alignx center");
+
+		JPanel panel_btSalvar = new JPanel();
+		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
+		panel_btSalvar.setBackground(new Color(234, 219, 247));
+		add(panel_btSalvar, "cell 1 10 2 1,alignx center,gapy 15");
+
+		btVoltar = new JButton("Voltar");
+		panel_btSalvar.add(btVoltar, "cell 0 0,growx");
+		btVoltar.setBackground(new Color(193, 151, 232));
+		btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btVoltar.setBorderPainted(false);
+
+		JPanel panel_btEditar = new JPanel();
+		panel_btEditar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
+		panel_btEditar.setBackground(new Color(234, 219, 247));
+		add(panel_btEditar, "cell 3 10 2 1,alignx center,gapy 15");
+
+		btSalvar = new JButton("Salvar");
+		panel_btEditar.add(btSalvar, "cell 0 0,grow");
+		btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btSalvar.setBackground(new Color(193, 151, 232));
+
+		btRedefinirSenha.setBorderPainted(false);
+		btSalvar.setBorderPainted(false);
+
+		btRedefinirSenha.setFocusPainted(false);
+		btSalvar.setFocusPainted(false);
 		
-		interrogacaoPrecoHora = new JLabel("");
+		interrogacaoPrecoHora = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoPrecoHora, "cell 1 8");
 
-		interrogacaoPercentLucro = new JLabel("");
+		interrogacaoPercentLucro = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		add(interrogacaoPercentLucro, "cell 3 8");
-		
+
 		ImageIcon iconInterrogacao = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
 		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoPercentLucro.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoPrecoHora.setIcon(new ImageIcon(imgInterrogacao));
-		
-		interrogacaoPrecoHora.setToolTipText("<html> O valor que será cobrado por cada hora do seu trabalho.<br>"
-				+ "Você pode fazer :<br>"
-				+ "(Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </html>");
-		interrogacaoPercentLucro.setToolTipText("<html> É a porcentagem que irá sobrar após pagar as <br> despesas do trabalho."
-				+ "Você pode fazer: <br>"
-				+ "(Lucro da empresa / Faturamento) * 100 </html>");
-		
+
+		interrogacaoPrecoHora.setToolTipText(
+				"<html><div style='width: 150px;'> O valor que será cobrado por cada hora do seu trabalho."
+						+ "Você pode fazer : (Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </div></html>");
+		interrogacaoPercentLucro.setToolTipText(
+				"<html><div style='width:150px;'> É a porcentagem que irá sobrar após pagar as despesas do trabalho."
+						+ "Você pode fazer: (Lucro da empresa / Faturamento) * 100 </div></html>");
+
 		lbExcluir = new JLabel("Excluir conta");
 		lbExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lbExcluir.setForeground(new Color(143, 97, 201));
-		add(lbExcluir, "cell 1 11 5 1,alignx center");
-		
+		add(lbExcluir, "cell 3 11 2 1,alignx center");
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -360,7 +389,7 @@ public class ConfigurarPerfil extends JPanel {
 	public void adicionarOuvinte(ComponentListener listener) {
 		this.addComponentListener(listener);
 	}
-	
+
 	public void excluir(MouseListener mouseListener) {
 		this.lbExcluir.addMouseListener(mouseListener);
 	}

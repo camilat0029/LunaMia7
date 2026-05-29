@@ -20,8 +20,7 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfUsuarioLogin;
 	private JPasswordField pfSenhaLogin;
-	private JButton btEntrarLogin;
-	private JButton btCadastreseLogin;
+	private JButton btEntrarLogin, btCadastreseLogin;
 
 	public Login() {
 		
@@ -64,6 +63,7 @@ public class Login extends JPanel {
 		btEntrarLogin.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		panel.add(btEntrarLogin);
 		btEntrarLogin.setBorderPainted(false);
+		btEntrarLogin.setFocusPainted(false);
 		
 		JLabel lbNaoTemContaLogin = new JLabel("Não tem conta?");
 		lbNaoTemContaLogin.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -78,7 +78,8 @@ public class Login extends JPanel {
 		btCadastreseLogin.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		panel_2.add(btCadastreseLogin);
 		btCadastreseLogin.setBorderPainted(false);
-		
+		btCadastreseLogin.setFocusPainted(false);
+
 		addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {

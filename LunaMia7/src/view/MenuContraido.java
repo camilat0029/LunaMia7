@@ -31,6 +31,7 @@ public class MenuContraido extends JPanel {
 		    }
 		};
 		
+		
 		lbMostrarMenuExp.setIcon(new ImageIcon(MenuContraido.class.getResource("/imagensIcones/Icone_Abrir.png")));
 		
 		add(lbMostrarMenuExp, "cell 0 0");

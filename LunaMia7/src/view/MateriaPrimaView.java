@@ -54,6 +54,7 @@ public class MateriaPrimaView extends JPanel {
 		btAdicionar = new JButton("Adicionar");
 		btAdicionar.setBackground(new Color(193, 151, 232));
 		btAdicionar.setBorderPainted(false);
+		btAdicionar.setFocusPainted(false);
 		btAdicionar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btAdicionar, "cell 3 1,alignx right");
 		
@@ -71,8 +72,6 @@ public class MateriaPrimaView extends JPanel {
 		header.setForeground(new Color(103, 80, 125));
 		header.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		header.setReorderingAllowed(false); // impede arrastar colunas
-		
-		
 		
 		//Estilização das linhas e colunas
 		

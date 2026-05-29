@@ -50,6 +50,10 @@ public class Inicio extends JPanel {
 		btCriarEstoque.setBorderPainted(false);
 		btConfigurarPerfil.setBorderPainted(false);
 		
+		btCriarOrcamento.setFocusPainted(false);
+		btCriarEstoque.setFocusPainted(false);
+		btConfigurarPerfil.setFocusPainted(false);
+		
 		
 		addComponentListener(new ComponentAdapter() {
             @Override

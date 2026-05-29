@@ -121,6 +121,7 @@ public class CadastroUsuario extends JPanel {
 		panel.add(btCadastrar);
 		
 		btCadastrar.setBorderPainted(false);
+		btCadastrar.setFocusPainted(false);
 		
 		addComponentListener(new ComponentAdapter() {
             @Override

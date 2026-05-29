@@ -51,6 +51,7 @@ public class Orcamentos extends JPanel {
 		btCriar = new JButton("Criar");
 		btCriar.setBackground(new Color(193, 151, 232));
 		btCriar.setBorderPainted(false);
+		btCriar.setFocusPainted(false);
 		btCriar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btCriar, "cell 3 1,alignx right");
 		
