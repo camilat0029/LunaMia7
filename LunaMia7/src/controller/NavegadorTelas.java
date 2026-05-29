@@ -28,7 +28,7 @@ public class NavegadorTelas {
 			return "Login";
 
 		case "CADASTRO_MATERIA_PRIMA":
-			return "Cadastro de matéria prima";
+			return "Matéria prima";
 
 		case "CONFIGURAR_PERFIL":
 			return "Configuração de perfil";
@@ -37,13 +37,7 @@ public class NavegadorTelas {
 			return "Configuração de perfil";
 
 		case "CRIAR_ORCAMENTO":
-			return "Criação de orçamento";
-
-		case "CRIAR_ORCAMENTO_APOS_CALCULAR":
-			return "Criação de orçamento";
-
-		case "CRIAR_ORCAMENTO_COM_FORMA_PAGAMENTO":
-			return "Criação de orcamento";
+			return "Orçamento";
 
 		case "INICIO":
 			return "Início";

@@ -163,6 +163,7 @@ public class CriarOrcamento extends JPanel {
 
 		scrollPane.setBorder(null);
 		tabMateriaisEstoque.setBorder(null);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
 		// Estilização do cabeçalho
 		JTableHeader header2 = tabMateriaisOrcam.getTableHeader();
@@ -181,6 +182,7 @@ public class CriarOrcamento extends JPanel {
 
 		scrollPane_1.setBorder(null);
 		tabMateriaisOrcam.setBorder(null);
+		scrollPane_1.getVerticalScrollBar().setUnitIncrement(20);
 
 		btAdicionar = new JButton("Adicionar");
 		ImageIcon iconAdd = new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/8.png"));

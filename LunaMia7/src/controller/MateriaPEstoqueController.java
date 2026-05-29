@@ -21,12 +21,12 @@ public class MateriaPEstoqueController {
 		this.telaPrincipal = telaPrincipal;
 		this.materiaPrimaDAO = materiaPrimaDAO;
 		
-		this.materiaPrimaView.adicionar(e -> {
-			System.out.println("CLIQUE");
-			navegadorTelas.navegarTela("CADASTRO_PRODUTO");
-			menu.removerMenu();
-			
-		});
+//		this.materiaPrimaView.adicionar(e -> {
+//			System.out.println("CLIQUE");
+//			navegadorTelas.navegarTela("CADASTRO_PRODUTO");
+//			menu.removerMenu();
+//			
+//		});
 		
 		
 	}

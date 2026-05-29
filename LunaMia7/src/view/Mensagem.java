@@ -92,7 +92,7 @@ public class Mensagem extends JDialog {
 	}
 
 	public void setMensagem(String mensagem) {
-		lbMensagem.setText(mensagem);
+	    lbMensagem.setText(formatarMensagem(mensagem));
 	}
 
 	public void setTitulo(String titulo) {

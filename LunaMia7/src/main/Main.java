@@ -102,11 +102,15 @@ public class Main {
 		Mensagem mensagem = new Mensagem(telaPrincipal, null);
 		
 		//JSCROLLPANE
+		
 		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneConfigurarPerfil = new JScrollPane(configurarPerfil, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JScrollPane scrollPaneConfigPerfilAposCad = new JScrollPane(configurarPerfilAposCadastrar, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		scrollPaneOrcamento.getVerticalScrollBar().setUnitIncrement(20);
+		scrollPaneConfigurarPerfil.getVerticalScrollBar().setUnitIncrement(20);
+		scrollPaneVisualizarOrcamento.getVerticalScrollBar().setUnitIncrement(20);
+		scrollPaneConfigPerfilAposCad.getVerticalScrollBar().setUnitIncrement(20);
 		
 		//CONTROLLER
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);

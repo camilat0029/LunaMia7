@@ -58,6 +58,8 @@ public class Orcamentos extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+		
 		tabelaModeloOrcamento = new OrcamentoTableModel();
 		tabelaOrcamentos = new JTable(tabelaModeloOrcamento);
 		

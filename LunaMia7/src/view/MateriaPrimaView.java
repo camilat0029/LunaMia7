@@ -61,6 +61,8 @@ public class MateriaPrimaView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 2 2 2 1,grow");
 		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+		
 		tabelaModeloMateriaPrima = new MateriaPrimaViewTableModel();
 		tabelaMateriaPrima = new JTable(tabelaModeloMateriaPrima);
 		scrollPane.setViewportView(tabelaMateriaPrima);

@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+import javax.swing.JToolTip;
 
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
@@ -42,6 +43,19 @@ public class MenuExpandido extends JPanel {
 		    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent event) {
 		        return new java.awt.Point(getWidth(), 10);
 		    }
+		    
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
+				return tooltip;
+			}
 		};
 		
 		lbMostrarMenuCont.setIcon(new ImageIcon(MenuExpandido.class.getResource("/imagensIcones/Icone_Fechar.png")));
