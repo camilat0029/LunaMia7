@@ -200,25 +200,17 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				if (confirm == JOptionPane.YES_OPTION) {
 
 					UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-
 					OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
-
-					List<OrcamentoProduto> listaOrcamentoProduto = orcamentoProdutoDAO.listarOrcamProd();
-					for (OrcamentoProduto orcamentoProduto : listaOrcamentoProduto) {
-						orcamentoProdutoDAO.excluirOrcamentoProduto(orcamentoProduto);
-					}
-
 					ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
-					List<ConfirOrcam> listaConfirOrcam = confirOrcamDAO.listarConfirOrcam();
-					for (ConfirOrcam confirOrcam : listaConfirOrcam) {
-					    confirOrcamDAO.excluirConfirOrcam(confirOrcam.getOrcamento().getIdOrcamento());
-					}
 
 					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 					ClienteDAO clienteDAO = new ClienteDAO();
 					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
 					for (Orcamento orcamento : listaOrcamento) {
-						Cliente cliente = orcamento.getCliente();                        
+						Cliente cliente = orcamento.getCliente();
+							
+						orcamentoProdutoDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
+						confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
 						orcamentoDAO.excluirOrcamento(orcamento);
 						clienteDAO.excluirCliente(cliente.getIdCliente());
 					}
@@ -228,9 +220,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					for (MateriaPrima materiaPrima : listaMateriaPrima) {
 						materiaPrimaDAO.excluirMateriasPrimas(materiaPrima);
 					}
-
-					// MateriaPrima, cliente, confirmacaoPedido
-					// MateriaPrima, orcamento, confirmacaoOrcamento, orcamentoProduto
 
 					usuarioDAO.excluirUsuario(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail());
 					navegadorTelas.navegarTela("LOGIN");

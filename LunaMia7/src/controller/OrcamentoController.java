@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
@@ -27,7 +31,7 @@ import view.Mensagem;
 import view.Orcamentos;
 import view.TelaPrincipal;
 
-public class OrcamentoController {
+public class OrcamentoController extends ComponentAdapter{
 
 	private Menu menu;
 	private TelaPrincipal telaPrincipal;
@@ -41,10 +45,11 @@ public class OrcamentoController {
 
 	private ConfirOrcam confirOrcamAtual;
 	private Orcamento orcamentoAtual;
+	private JScrollPane scrollPaneOrcamento;
 
 	public OrcamentoController(OrcamentoDAO orcamentoDAO, TelaPrincipal telaPrincipal, Menu menu,
 			NavegadorTelas navegadorTelas, Orcamentos orcamentos, CriarOrcamento criarOrcamento, ClienteDAO clienteDAO,
-			MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO) {
+			MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO, JScrollPane scrollPaneOrcamento) {
 		this.orcamentoDAO = orcamentoDAO;
 		this.telaPrincipal = telaPrincipal;
 		this.menu = menu;
@@ -54,6 +59,7 @@ public class OrcamentoController {
 		this.clienteDAO = clienteDAO;
 		this.materiaPrimaDAO = materiaPrimaDAO;
 		this.confirOrcamDAO = confirOrcamDAO;
+		this.scrollPaneOrcamento = scrollPaneOrcamento;
 
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
@@ -114,6 +120,10 @@ public class OrcamentoController {
 		criarOrcamento.getTfContato().setEditable(true);
 		criarOrcamento.getTfEmail().setEditable(true);
 		
+		criarOrcamento.getTfCustoAdicional().setEditable(true);
+		criarOrcamento.getTfHorasPrevistas().setEditable(true);
+		criarOrcamento.getTfQuantMaxDias().setEditable(true);
+		
 		criarOrcamento.getLbValorCalcSemLucro().setVisible(false);
 		criarOrcamento.getLbValorCalVenda().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(false);
@@ -134,10 +144,15 @@ public class OrcamentoController {
 		criarOrcamento.getLbValorFinal().setVisible(false);
 		criarOrcamento.getLbValorFinalCad().setVisible(false);
 
+		criarOrcamento.getBtAdicionar().setVisible(true);
+		criarOrcamento.getBtRemover().setVisible(true);
 		criarOrcamento.getBtConfirmar().setVisible(false);
-		criarOrcamento.getBtSalvar().setVisible(false);
+		criarOrcamento.getBtSalvar().setVisible(true);
+		criarOrcamento.getBtCalcEdi().setVisible(true);
 
 		menu.removerMenu();
+		
+		criarOrcamento.getBtCalcEdi().setText("Calcular");
 		criarOrcamento.getBtConfirmar().setText("Confirmar");
 		criarOrcamento.setPreferredSize(new Dimension(1020, 970));
 
@@ -147,6 +162,10 @@ public class OrcamentoController {
 		criarOrcamento.tabModeloEstoque.setLista(listaMateriasPrimas);
 
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
+		
+		SwingUtilities.invokeLater(() -> {
+			scrollPaneOrcamento.getVerticalScrollBar().setValue(0);
+		});
 
 	}
 
@@ -364,8 +383,10 @@ public class OrcamentoController {
 		Mensagem.mostrar(null, "Sucesso",  "Orçamento Confirmado com Sucesso");
 		menu.mostrarPanelCont();
 		navegadorTelas.navegarTela("ORCAMENTOS");
-
-		carregarTabelaOrcamentos();
+		
+		limparCamposCriarORC();
+		//carregarTabelaOrcamentos();
+		
 
 		// CRIAR E COLOCAR METODO DE LIMPAR A TELA
 		// FAZER VALIDAÇÕES
@@ -444,6 +465,27 @@ public class OrcamentoController {
 		orcamentos.tabelaModeloOrcamento.limpar();
 		orcamentos.tabelaModeloOrcamento.setLista(orcamentosCad);
 
+	}
+	
+	
+	public void limparCamposCriarORC() {
+		
+		criarOrcamento.getTituloOrcamento().setText("");
+		criarOrcamento.getTfNomeCliente().setText("");
+		criarOrcamento.getTfContato().setText("");
+		criarOrcamento.getTfEmail().setText("");
+		criarOrcamento.getTfHorasPrevistas().setText("");
+		criarOrcamento.getTfQuantMaxDias().setText("");
+		criarOrcamento.getTfCustoAdicional().setText("");
+		criarOrcamento.getTfDataConfPedido().setText("");
+		criarOrcamento.getTfDtPrevEntrega().setText("");
+		criarOrcamento.getCbStatus().setSelectedIndex(2);
+		criarOrcamento.getCbFormaPaga().setSelectedIndex(0);
+		
+	}
+	
+	public void componentShown(ComponentEvent e) {
+		this.carregarTabelaOrcamentos();
 	}
 
 }

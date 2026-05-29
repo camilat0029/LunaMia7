@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -187,5 +188,9 @@ public class Orcamentos extends JPanel {
 
 	public void setTabelaOrcamentos(JTable tabelaOrcamentos) {
 		this.tabelaOrcamentos = tabelaOrcamentos;
+	}
+	
+	public void adicionarOuvinte(ComponentListener listener) {
+		this.addComponentListener(listener);
 	}
 }

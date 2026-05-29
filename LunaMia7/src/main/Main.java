@@ -98,8 +98,15 @@ public class Main {
 		VisualizarMateriaPrima visualizarMateriaPrima = new VisualizarMateriaPrima();
 		VisualizarOrcamento visualizarOrcamento = new VisualizarOrcamento();
 		
-		//AQUII
+		//JFRAME DE MENSAGEM PERSONALIZADO
 		Mensagem mensagem = new Mensagem(telaPrincipal, null);
+		
+		//JSCROLLPANE
+		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneConfigurarPerfil = new JScrollPane(configurarPerfil, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPaneConfigPerfilAposCad = new JScrollPane(configurarPerfilAposCadastrar, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		
 		//CONTROLLER
 		NavegadorTelas navegadorTelas = new NavegadorTelas(telaPrincipal);
@@ -108,26 +115,23 @@ public class Main {
 				menu, configurarPerfilAposCadastrar, configurarPerfil, redefinirSenha);
 		LoginController loginController = new LoginController(login, usuarioPerfilDAO, navegadorTelas, menu);
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento,  
-				clienteDAO, materiaPrimaDAO, confirOrcamDAO);
-		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento, materiaPrimaDAO);
-		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrimaView, navegadorTelas, menu, telaPrincipal, materiaPrimaDAO);
+				clienteDAO, materiaPrimaDAO, confirOrcamDAO, scrollPaneOrcamento);
+		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento, materiaPrimaDAO, scrollPaneConfigPerfilAposCad);
+		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrimaView, navegadorTelas, menu, 
+				telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, 
 				relatorioHorasTrabalhadas, relatorioGastos);
 		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
-		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, cadastroMateriaPrimaEstoque,
-				materiaPrimaView);
-		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, telaPrincipal, visualizarOrcamento, visualizarMateriaPrima, menu, 
-				materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO, confirOrcamDAO, orcamentos, orcamProdDAO, criarOrcamento, clienteDAO, orcamentoDAO);
-		
-		JScrollPane scrollPaneOrcamento = new JScrollPane(criarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JScrollPane scrollPaneVisualizarOrcamento = new JScrollPane(visualizarOrcamento, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JScrollPane scrollPaneConfigurarPerfil = new JScrollPane(configurarPerfil, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JScrollPane scrollPaneConfigPerfilAposCad = new JScrollPane(configurarPerfilAposCadastrar, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, 
+				cadastroMateriaPrimaEstoque,materiaPrimaView);
+		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, telaPrincipal, visualizarOrcamento,
+				visualizarMateriaPrima, menu, materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO, confirOrcamDAO, orcamentos, 
+				orcamProdDAO, criarOrcamento, clienteDAO, orcamentoDAO, scrollPaneConfigPerfilAposCad);
 
 		scrollPaneConfigurarPerfil.addComponentListener(cadastroUsuarioController);
 		scrollPaneConfigPerfilAposCad.addComponentListener(cadastroUsuarioController);
 		
+		orcamentos.adicionarOuvinte(orcamentoController);
 		materiaPrimaView.adicionarOuvinte(materiaPrimaController);
 		
 		navegadorTelas.adicionarPainel("LOGIN", login);

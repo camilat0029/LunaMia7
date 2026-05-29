@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 import model.Cliente;
 import model.ClienteDAO;
@@ -49,13 +51,14 @@ public class BotoesAcoesController extends ComponentAdapter {
 	private OrcamentoDAO orcamentoDAO;
 	private MateriaPrima MpEditada;
 	private Orcamento OrcEditada;
+	private JScrollPane scrollPaneOrcamento;
 
 	public BotoesAcoesController(NavegadorTelas navegadorTelas, TelaPrincipal tela,
 			VisualizarOrcamento visualizarOrcamento, VisualizarMateriaPrima visualizarMateriaPrima, Menu menu,
 			MateriaPrimaView materiaPrimaView, CadastroMateriaPrimaEstoque cadMateriaPrima,
 			MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO, Orcamentos orcamentos,
 			OrcamentoProdutoDAO orcamProdDAO, CriarOrcamento criarOrcamento, ClienteDAO clienteDAO,
-			OrcamentoDAO orcamentoDAO) {
+			OrcamentoDAO orcamentoDAO, JScrollPane scrollPaneOrcamento) {
 		super();
 		this.navegadorTelas = navegadorTelas;
 		this.tela = tela;
@@ -71,6 +74,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 		this.criarOrcamento = criarOrcamento;
 		this.clienteDAO = clienteDAO;
 		this.orcamentoDAO = orcamentoDAO;
+		this.scrollPaneOrcamento = scrollPaneOrcamento;
 
 		visualizarOrcamento.getTabMateriaisEstoque().setModel(visualizarOrcamento.tabModeloEstoque);
 
@@ -112,6 +116,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Informação", "Materia Prima Atualizada com Sucesso!");
 				limparCamposMP();
 				navegadorTelas.navegarTela("MATERIA_PRIMA");
+				SwingUtilities.invokeLater(() -> {
+					scrollPaneOrcamento.getVerticalScrollBar().setValue(0);
+				});
 				menu.mostrarPanelCont();
 			}
 		});
@@ -374,14 +381,18 @@ public class BotoesAcoesController extends ComponentAdapter {
 		OrcEditada = null;
 
 	}
-
+	
 	// MÉTODO DE EXCLUIR ORÇAMENTO
 	public void excluirORC(Orcamento orcamento) {
 		
 		int linhaSelecionada = orcamentos.getTabelaOrcamentos().getSelectedRow();
 		
+		orcamProdDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
+		confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
+		
 		orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
 		orcamentoDAO.excluirOrcamento(orcamento);
+		clienteDAO.excluirCliente(orcamento.getCliente().getIdCliente());
 		
 		Mensagem.mostrar(null, "Informação", "Orçamento exluído com sucesso!");
 		
@@ -395,6 +406,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 		int linhaSelecionada = orcamentos.getTabelaOrcamentos().getSelectedRow();
 		
 		//orcamentos.tabelaModeloOrcamento.getOrcamento(linhaSelecionada);
+		
+		ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
+		Cliente cliente = orcamento.getCliente();
 		
 		List<OrcamentoProduto> listaProdUtiORC = orcamProdDAO.listarOrcamProd();
 		List<MateriaPrima> listaMP = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
@@ -415,15 +429,17 @@ public class BotoesAcoesController extends ComponentAdapter {
 				}
 				
 				int quantAtualizMP = quantMP + quantORC;
-				
 				materiaPrimaDAO.atualizarQuantMP(idMP,quantAtualizMP);
 				
 			}
 		}
 		
+		orcamProdDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
+		confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
 		
 		orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
 		orcamentoDAO.excluirOrcamento(orcamento);
+		clienteDAO.excluirCliente(orcamento.getCliente().getIdCliente());
 		
 		Mensagem.mostrar(null, "Informação", "Orçamento cancelado com sucesso! \nQuantidade das materias primas \nutilizadas no seu orçamento \natualizadas com sucesso! ");
 		
