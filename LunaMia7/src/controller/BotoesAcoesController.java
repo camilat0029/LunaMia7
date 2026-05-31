@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -29,14 +28,12 @@ import view.CriarOrcamento;
 import view.MateriaPrimaView;
 import view.Mensagem;
 import view.Orcamentos;
-import view.TelaPrincipal;
 import view.VisualizarMateriaPrima;
 import view.VisualizarOrcamento;
 
 public class BotoesAcoesController extends ComponentAdapter {
 
 	private NavegadorTelas navegadorTelas;
-	private TelaPrincipal tela;
 	private VisualizarOrcamento visualizarOrcamento;
 	private VisualizarMateriaPrima visualizarMateriaPrima;
 	private Menu menu;
@@ -53,15 +50,14 @@ public class BotoesAcoesController extends ComponentAdapter {
 	private Orcamento OrcEditada;
 	private JScrollPane scrollPaneOrcamento;
 
-	public BotoesAcoesController(NavegadorTelas navegadorTelas, TelaPrincipal tela,
-			VisualizarOrcamento visualizarOrcamento, VisualizarMateriaPrima visualizarMateriaPrima, Menu menu,
+	public BotoesAcoesController(NavegadorTelas navegadorTelas, VisualizarOrcamento visualizarOrcamento, 
+			VisualizarMateriaPrima visualizarMateriaPrima, Menu menu,
 			MateriaPrimaView materiaPrimaView, CadastroMateriaPrimaEstoque cadMateriaPrima,
 			MateriaPrimaDAO materiaPrimaDAO, ConfirOrcamDAO confirOrcamDAO, Orcamentos orcamentos,
 			OrcamentoProdutoDAO orcamProdDAO, CriarOrcamento criarOrcamento, ClienteDAO clienteDAO,
 			OrcamentoDAO orcamentoDAO, JScrollPane scrollPaneOrcamento) {
 		super();
 		this.navegadorTelas = navegadorTelas;
-		this.tela = tela;
 		this.visualizarOrcamento = visualizarOrcamento;
 		this.visualizarMateriaPrima = visualizarMateriaPrima;
 		this.menu = menu;
@@ -251,8 +247,18 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		if (confirOrcam != null) {
 			visualizarOrcamento.getLbFormaPagCad().setText(confirOrcam.getFormPagamento());
-			visualizarOrcamento.getLbDtConfirCad().setText(String.valueOf(confirOrcam.getDataConfirmacao()));
-			visualizarOrcamento.getLbDtEntregaCad().setText(String.valueOf(confirOrcam.getDataPrevistaEntrega()));
+			if(confirOrcam.getDataConfirmacao()==null) {
+				visualizarOrcamento.getLbDtConfirCad().setText("");
+			} else {
+				visualizarOrcamento.getLbDtConfirCad().setText(String.valueOf(confirOrcam.getDataConfirmacao()));
+			}
+			
+			if(confirOrcam.getDataPrevistaEntrega()==null) {
+				visualizarOrcamento.getLbDtEntregaCad().setText("");
+			} else {
+				visualizarOrcamento.getLbDtEntregaCad().setText(String.valueOf(confirOrcam.getDataPrevistaEntrega()));
+			}
+			
 			visualizarOrcamento.getLbValorVendaCad().setText(String.valueOf(confirOrcam.getValorVenda()));
 			visualizarOrcamento.getLbValorLucroCad().setText(String.valueOf(confirOrcam.getLucro()));
 			visualizarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
@@ -299,8 +305,18 @@ public class BotoesAcoesController extends ComponentAdapter {
 			criarOrcamento.getCbFormaPaga().setSelectedItem(confirOrcam.getFormPagamento());
 			
 			DateTimeFormatter formatacao = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			criarOrcamento.getTfDataConfPedido().setText(confirOrcam.getDataConfirmacao().format(formatacao));
-			criarOrcamento.getTfDtPrevEntrega().setText(confirOrcam.getDataPrevistaEntrega().format(formatacao));
+			
+			if(confirOrcam.getDataConfirmacao()==null) {
+				criarOrcamento.getTfDataConfPedido().setText("");
+			} else {
+				criarOrcamento.getTfDataConfPedido().setText(confirOrcam.getDataConfirmacao().format(formatacao));
+			}
+			
+			if(confirOrcam.getDataPrevistaEntrega()==null) {
+				criarOrcamento.getTfDtPrevEntrega().setText("");
+			} else {
+				criarOrcamento.getTfDtPrevEntrega().setText(confirOrcam.getDataPrevistaEntrega().format(formatacao));
+			}
 			
 			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(confirOrcam.getValorVenda()));
 			criarOrcamento.getLbCalcLucro().setText(String.valueOf(confirOrcam.getLucro()));
@@ -325,61 +341,126 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 	// MÉTODO PARA ATUALIZAR ORCAMENTO
 	public void atualizarORC() {
-
-		Cliente clienteEdtidado = OrcEditada.getCliente();
-
-		clienteEdtidado.setTelefone(criarOrcamento.getTfContato().getText());
-		clienteEdtidado.setEmail(criarOrcamento.getTfEmail().getText());
-		clienteDAO.atualizarCliente(clienteEdtidado);
-
-		OrcEditada.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
-		OrcEditada.setQuantHorasPrevistas(Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText()));
-		OrcEditada.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
-		OrcEditada.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
-		OrcEditada.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
-		OrcEditada.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
-		OrcEditada.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText()));
-		OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
-		OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
-		orcamentoDAO.atualizarOrcamento(OrcEditada);
-
-		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(OrcEditada.getIdOrcamento());
-
-		if (confirOrcam != null) {
-			confirOrcam.setOrcamento(OrcEditada);
-			confirOrcam.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
-			confirOrcam.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(),
-					DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			confirOrcam.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(),
-					DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-			confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+		
+		//COLOCAR VALIDAÇÕES DO ORÇAMENTO AQUI
+		//PERMITIR A ATUALIZAÇÃO DO NOME DO CLIENTE
+		//FORMATAR OS VALORES DE CÁLCULOS QUE APAREM NOS LABELS PARA SÓ TEREM 2 CASAS DECIMAIS.
+		
+		String tituloOrcamStr = criarOrcamento.getTituloOrcamento().getText();
+		String nomeClienteStr = criarOrcamento.getTfNomeCliente().getText();
+		String telefoneClienteStr = criarOrcamento.getTfContato().getText();
+		String emailClienteStr = criarOrcamento.getTfEmail().getText();
+		String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+		String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
+		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
+		String dataConfirStr = criarOrcamento.getTfDataConfPedido().getText();
+		String dataEntregaStr = criarOrcamento.getTfDtPrevEntrega().getText();
+		
+		if (tituloPermit(tituloOrcamStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Título do orcamento inválido! \nExexmplo: Título orçamento-01");
+			return;
 			
-			confirOrcamDAO.atualizarConfirOrcam(confirOrcam);
+		}else if(nomePermit(nomeClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExexmplo: Júlia, Dr. Lara...");
+			return;
+			
+		}else if(emailClientePermit(emailClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Email inválido! \nExexmplo: aaA@bbbb.cc");
+			return;
+			
+		}else if(telefonePermit(telefoneClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExexmplo: (11) 22222-3333");
+			return;
+			
+		}else if (diasMaxQuantHrsPermit(horasPrevStr)==false) {
+		
+			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExexmplo: 2, 5, 8...");
+			return;
+			
+		}  else if(diasMaxQuantHrsPermit(quantDiasStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
+			return;
+			
+		} else if(custoAdicPermit(custoAdicStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
+			return;
+			
+		} else if(!dataPermit(dataConfirStr)) {
+			Mensagem.mostrar(null, "Informação", "Data de confitmação inválida! \nExemplo: 01/02/2026");
+			return;
+			
+		} else if(!dataPermit(dataEntregaStr)) {
+			Mensagem.mostrar(null, "Informação", "Data de entrega inválida! \nExemplo: 01/02/2026");
+			return;
+			
+		} else {
+			
+			Cliente clienteEdtidado = OrcEditada.getCliente();
+
+			clienteEdtidado.setTelefone(criarOrcamento.getTfContato().getText());
+			clienteEdtidado.setEmail(criarOrcamento.getTfEmail().getText());
+			clienteDAO.atualizarCliente(clienteEdtidado);
+
+			OrcEditada.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
+			OrcEditada.setQuantHorasPrevistas(Integer.parseInt(criarOrcamento.getTfHorasPrevistas().getText()));
+			OrcEditada.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
+			OrcEditada.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
+			OrcEditada.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
+			OrcEditada.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
+			OrcEditada.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText().replace(",", ".")));
+			OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
+			OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+			orcamentoDAO.atualizarOrcamento(OrcEditada);
+
+			ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(OrcEditada.getIdOrcamento());
+
+			if (confirOrcam != null) {
+				confirOrcam.setOrcamento(OrcEditada);
+				confirOrcam.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
+				
+				if(!dataConfirStr.trim().isEmpty()) {
+					confirOrcam.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(),
+							DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+				} else {
+					confirOrcam.setDataConfirmacao(null);
+				}
+				
+				if(!dataEntregaStr.trim().isEmpty()) {
+					confirOrcam.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(),
+							DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+				} else {
+					confirOrcam.setDataPrevistaEntrega(null);
+				}
+				
+				confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
+				confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+				
+				confirOrcamDAO.atualizarConfirOrcam(confirOrcam);
+			}
+			
+			orcamProdDAO.excluirPorIdOrcamento(OrcEditada.getIdOrcamento());
+			
+			List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
+			
+			for (MateriaPrima materiaPrima : listaMP) {
+				OrcamentoProduto orcamProd = new OrcamentoProduto();
+				
+				orcamProd.setOrcamento(OrcEditada);
+				orcamProd.setMateriaPrima(materiaPrima);
+				orcamProd.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+				orcamProdDAO.adicionarDados(orcamProd);
+				
+			}
+			
+			atualizarQuantMP();
+
+			Mensagem.mostrar(null, "Informação", "Orçamento atualizado com sucesso!");
+			navegadorTelas.navegarTela("ORCAMENTOS");
+			menu.mostrarPanelCont();
+			
+			OrcEditada = null;
+			
 		}
-		
-		orcamProdDAO.excluirPorIdOrcamento(OrcEditada.getIdOrcamento());
-		
-		List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
-		
-		for (MateriaPrima materiaPrima : listaMP) {
-			OrcamentoProduto orcamProd = new OrcamentoProduto();
-			
-			orcamProd.setOrcamento(OrcEditada);
-			orcamProd.setMateriaPrima(materiaPrima);
-			orcamProd.setQuantidade(materiaPrima.getQuantidadeDisponivel());
-			orcamProdDAO.adicionarDados(orcamProd);
-			
-		}
-		
-		atualizarQuantMP();
-
-		Mensagem.mostrar(null, "Informação", "Orçamento atualizado com sucesso!");
-		navegadorTelas.navegarTela("ORCAMENTOS");
-		menu.mostrarPanelCont();
-		
-		OrcEditada = null;
-
 	}
 	
 	// MÉTODO DE EXCLUIR ORÇAMENTO
@@ -452,6 +533,96 @@ public class BotoesAcoesController extends ComponentAdapter {
 		for (int i = 0; i < totalLinhas; i++) {
 			MateriaPrima materiaPrima = criarOrcamento.tabModeloEstoque.getMatPrima(i);
 			materiaPrimaDAO.atualizarQuantMP(materiaPrima.getIdMateriaPrima(), materiaPrima.getQuantidadeDisponivel());
+		}
+	}
+	
+	//VALIDAÇÃO DE NOME DO CLIENTE
+		public boolean nomePermit(String nome) {
+			String nomeValido = "[A-Za-zÀ-úçÇ. ]+";
+			
+			if(nome==null) {
+				return false;
+			}
+			
+			return nome.matches(nomeValido);
+		}
+	
+	//VALIDAÇÃO DE TITULO DO ORÇAMENTO
+	public boolean tituloPermit(String titulo) {
+		String tituloValido = "[A-Za-zÀ-ú0-9çÇ. -]+";
+			
+		if(titulo==null) {
+			return false;
+		}
+			
+		return titulo.matches(tituloValido);
+	}
+		
+	//VALIDAÇÃO DO EMAIL DO CLIENTE
+	public boolean emailClientePermit(String email) {
+		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+		if(email==null) {
+			return false;
+		}
+		return email.matches(emailValido);
+	}
+		
+	//VALIDAÇÃO DO TELEFONE DO CLIENTE
+	public boolean telefonePermit(String telefone) {
+		String telefoneValido = "[0-9\\-() ]{8,15}";
+		if(telefone==null) {
+			return false;
+		}
+		//boolean telefoneValido = telefone.matches("[0-9\\-() ]{8,15}");
+		//boolean temDigitos = telefone.matches(".*[0-9].*");
+		//return telefoneValido && temDigitos;
+		return telefone.matches(telefoneValido);
+	}
+		
+	//VALIDAÇÃO QUANTIDADE DE DIAS MÁXIMO E QUANTIDADE DE HORAS
+	public boolean diasMaxQuantHrsPermit(String diasHoras) {
+		String diasHorasValido = "[0-9]+$";
+		if(diasHoras==null) {
+			return false;
+		}
+		return diasHoras.matches(diasHorasValido);
+	}
+	//VALIDAÇÃO DE CUSTO ADICIONAL
+	public boolean custoAdicPermit(String custoAdic) {
+		String custoAdicValido = "[0-9]+([.,][0-9]+)?";
+		if(custoAdic==null) {
+			return false;
+		}
+		return custoAdic.matches(custoAdicValido);
+	}
+		
+	//VALIDAÇÃO PARA CUSTO DE 2 CASAS DECIMAIS
+	public String formatarCustoAdic(String custoAdic) {
+		if (custoAdic == null) {
+			return "0.00";
+		}
+		String custoAdicFormat = custoAdic.replace(",", ".");
+		float custoAdicF = Float.parseFloat(custoAdicFormat);
+		    
+		custoAdicF = (float)(Math.floor(custoAdicF * 100) / 100);
+		return String.valueOf(custoAdicF);
+	}
+		
+	//VALIDAÇÃO DE DATAS
+	public boolean dataPermit(String data) {
+		if(data==null || data.trim().isEmpty()) {
+			return true;
+		}
+			
+		if(!data.matches("\\d{2}/\\d{2}/\\d{4}")){
+			return false;
+		};
+			
+		try {
+			LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		    return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 	

@@ -119,17 +119,6 @@ public class MateriaPrimaController extends ComponentAdapter {
 		}
 	}
 
-	public void limparCamposMP() {
-		cadastroMateriaPrima.getTfNomeMateriaPrima().setText("");
-		cadastroMateriaPrima.getTfCor().setText("");
-		cadastroMateriaPrima.getTfMarca().setText("");
-		cadastroMateriaPrima.getTfQtdDisponivel().setText("");
-		cadastroMateriaPrima.getTfQtdUnidade().setText("");
-		cadastroMateriaPrima.getTfValor().setText("");
-		cadastroMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
-
-	}
-
 	public void carregarTabela() {
 
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
@@ -169,6 +158,17 @@ public class MateriaPrimaController extends ComponentAdapter {
 			valido = true;
 		}
 		return valido;
+	}
+	
+	public void limparCamposMP() {
+		cadastroMateriaPrima.getTfNomeMateriaPrima().setText("");
+		cadastroMateriaPrima.getTfCor().setText("");
+		cadastroMateriaPrima.getTfMarca().setText("");
+		cadastroMateriaPrima.getTfQtdDisponivel().setText("");
+		cadastroMateriaPrima.getTfQtdUnidade().setText("");
+		cadastroMateriaPrima.getTfValor().setText("");
+		cadastroMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
+
 	}
 
 	public void componentShown(ComponentEvent e) {

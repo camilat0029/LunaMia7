@@ -29,7 +29,7 @@ public class OrcamentoDAO {
 			pstm.setString(2, orcamento.getStatus().name().toLowerCase());
 			pstm.setFloat(3, orcamento.getPrecoHora());
 			pstm.setFloat(4, orcamento.getPercentualLucro());
-			pstm.setFloat(5, orcamento.getQuantHorasPrevistas());
+			pstm.setInt(5, orcamento.getQuantHorasPrevistas());
 			pstm.setInt(6, orcamento.getMaxDias());
 			pstm.setString(7, orcamento.getUsuarioPerfil().getEmail());
 			pstm.setString(8, orcamento.getUsuarioPerfil().getNomeUsuario());
@@ -103,7 +103,7 @@ public class OrcamentoDAO {
 	            orcamento.setStatus(Orcamento.Status.valueOf(rset.getString("statusPedido").toUpperCase()));
 	            orcamento.setPrecoHora(rset.getFloat("precoHora"));
 	            orcamento.setPercentualLucro(rset.getFloat("percentualLucro"));
-	            orcamento.setQuantHorasPrevistas(rset.getFloat("quantHrs"));
+	            orcamento.setQuantHorasPrevistas(rset.getInt("quantHrs"));
 	            orcamento.setMaxDias(rset.getInt("quantDiasPedido"));
 	            orcamento.setValorAdicional(rset.getFloat("valorAdicional"));
 	            orcamento.setValorGastos(rset.getFloat("valorGastos"));
@@ -154,7 +154,7 @@ public class OrcamentoDAO {
 				pstm.setString(2, orcamento.getStatus().name().toLowerCase());
 				pstm.setFloat(3, orcamento.getPrecoHora());
 				pstm.setFloat(4, orcamento.getPercentualLucro());
-				pstm.setFloat(5, orcamento.getQuantHorasPrevistas());
+				pstm.setInt(5, orcamento.getQuantHorasPrevistas());
 				pstm.setInt(6, orcamento.getMaxDias());
 				pstm.setFloat(7, orcamento.getValorAdicional());
 				pstm.setFloat(8, orcamento.getValorGastos());

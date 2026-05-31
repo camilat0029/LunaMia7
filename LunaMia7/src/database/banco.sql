@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Orcamento` (
   `statusPedido` ENUM('concluido', 'andamento', 'pendente') NOT NULL,
   `precoHora` DECIMAL(10,2) NOT NULL,
   `percentualLucro` DECIMAL(10,2) NOT NULL,
-  `quantHrs` DECIMAL(10,2) NOT NULL,
+  `quantHrs` INT NOT NULL,
   `quantDiasPedido` INT NOT NULL,
   `Perfil_Usuario_email` VARCHAR(64) NOT NULL,
   `Perfil_Usuario_nomeUsuario` VARCHAR(50) NOT NULL,

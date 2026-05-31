@@ -31,7 +31,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNomeCompCP;
 	private JPasswordField pfSenhaCP;
-	private JFormattedTextField tfTelefoneCP;
+	private JTextField tfTelefoneCP;
 	private JTextField tfPrecoHoraCP;
 	private JTextField tfPercLucroCP;
 	private JLabel lbNomeUsuarioCad;
@@ -100,16 +100,9 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		lbTelefoneCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbTelefoneCP, "cell 1 6");
 		
-		try {
-			MaskFormatter  mascaraTelefone = new MaskFormatter("## ##### ####");
-			mascaraTelefone.setPlaceholder(" ");
-			
-			tfTelefoneCP = new JFormattedTextField(mascaraTelefone);
-			tfTelefoneCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-			add(tfTelefoneCP, "cell 2 6,width 21.5%,height 38px");
-		} catch(ParseException e) {
-			e.printStackTrace();
-		}
+		tfTelefoneCP = new JTextField();
+		tfTelefoneCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		add(tfTelefoneCP, "cell 2 6,width 21.5%,height 38px");
 		tfTelefoneCP.setColumns(10);
 		
 		JLabel lbEstadoCP = new JLabel("Estado");
@@ -323,7 +316,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	}
 
 	public void setTfTelefoneCP(JTextField tfTelefoneCP) {
-		this.tfTelefoneCP = (JFormattedTextField) tfTelefoneCP;
+		this.tfTelefoneCP = tfTelefoneCP;
 	}
 
 	public JTextField getTfPrecoHoraCP() {

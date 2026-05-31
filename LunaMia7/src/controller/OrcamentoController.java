@@ -249,43 +249,64 @@ public class OrcamentoController extends ComponentAdapter{
 
 	// CALCULANDO VALORES
 	public void calcular() {
+		
+		String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+		String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
+		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
+		
+		if (diasMaxQuantHrsPermit(horasPrevStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExexmplo: 2, 5, 8...");
+			return;
+		}  else if(diasMaxQuantHrsPermit(quantDiasStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
+			return;
+		} else if(custoAdicPermit(custoAdicStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
+			return;
+		} else {
+			
+			ativandoDevativandoComp();
+			
+			float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText());
+			float custoAdicional = Float.parseFloat(custoAdicStr);
+			float horasPrevistas = Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText());
+			float precoHora = Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText());
 
-		ativandoDevativandoComp();
+			float valorTrabalho = horasPrevistas * precoHora;
 
-		float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText());
-		float custoAdicional = Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText());
-		float horasPrevistas = Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText());
-		float precoHora = Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText());
+			int totalLinhas = criarOrcamento.tabModeloOrcam.getRowCount();
 
-		float valorTrabalho = horasPrevistas * precoHora;
+			float somaProdutos = 0;
 
-		int totalLinhas = criarOrcamento.tabModeloOrcam.getRowCount();
+			for (int i = 0; i < totalLinhas; i++) {
 
-		float somaProdutos = 0;
+				float valorProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 1).toString());
+				float quantProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 2).toString());
 
-		for (int i = 0; i < totalLinhas; i++) {
+				float valorPorProduto = valorProduto * quantProduto;
 
-			float valorProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 1).toString());
-			float quantProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 2).toString());
+				somaProdutos += valorPorProduto;
 
-			float valorPorProduto = valorProduto * quantProduto;
+			}
 
-			somaProdutos += valorPorProduto;
+			// VALORES QUE VÃO PARA OS LABELS
+			float totalGastos = custoAdicional + somaProdutos;
+			float valorSemLucro = custoAdicional + somaProdutos + valorTrabalho;
+			float valorVenda = valorSemLucro + (valorSemLucro * (percLucro / 100));
+			float lucroAdicional = valorVenda - valorSemLucro;
+			float lucro = lucroAdicional + valorTrabalho;
 
+			// LABELS RECEBENDO OS VALORES
+			criarOrcamento.getLbCalcGastos().setText(String.valueOf(totalGastos));
+			criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(valorSemLucro));
+			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(valorVenda));
+			criarOrcamento.getLbCalcLucro().setText(String.valueOf(lucro));
+			
 		}
 
-		// VALORES QUE VÃO PARA OS LABELS
-		float totalGastos = custoAdicional + somaProdutos;
-		float valorSemLucro = custoAdicional + somaProdutos + valorTrabalho;
-		float valorVenda = valorSemLucro + (valorSemLucro * (percLucro / 100));
-		float lucroAdicional = valorVenda - valorSemLucro;
-		float lucro = lucroAdicional + valorTrabalho;
+		
 
-		// LABELS RECEBENDO OS VALORES
-		criarOrcamento.getLbCalcGastos().setText(String.valueOf(totalGastos));
-		criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(valorSemLucro));
-		criarOrcamento.getLbValorCalVenda().setText(String.valueOf(valorVenda));
-		criarOrcamento.getLbCalcLucro().setText(String.valueOf(lucro));
+		
 	}
 
 	// EDITANDO VALORES
@@ -302,94 +323,151 @@ public class OrcamentoController extends ComponentAdapter{
 	}
 
 	public void salvarInformacoes() {
-
-		ativDesativCompAoSalvar();
-
-		criarOrcamento.getLbValorFinalCad().setText(criarOrcamento.getLbValorCalVenda().getText());
-
-		// DO CLIENTE
-		Cliente cliente = new Cliente(null, null, null);
-
-		cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
-		cliente.setEmail(criarOrcamento.getTfEmail().getText());
-		cliente.setTelefone(criarOrcamento.getTfContato().getText());
-		clienteDAO.adicionarDados(cliente);
-
-		// DO ORÇAMENTO
-		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-		Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
-
-		novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
-		novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
-		novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
-		novoOrcamento.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
-		novoOrcamento.setQuantHorasPrevistas(Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText()));
-		novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
-		novoOrcamento.setUsuarioPerfil(usuarioLogado);
 		
-		novoOrcamento.setCliente(cliente);
+		String tituloOrcamStr = criarOrcamento.getTituloOrcamento().getText();
+		String nomeClienteStr = criarOrcamento.getTfNomeCliente().getText();
+		String telefoneClienteStr = criarOrcamento.getTfContato().getText();
+		String emailClienteStr = criarOrcamento.getTfEmail().getText();
+		String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+		String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
+		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 		
-		novoOrcamento.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText()));
-		novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
-		novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+		if (tituloPermit(tituloOrcamStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Título do orcamento inválido! \nExexmplo: Título orçamento-01");
+			return;
+			
+		}else if(nomePermit(nomeClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExexmplo: Júlia, Dr. Lara...");
+			return;
+			
+		}else if(emailClientePermit(emailClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Email inválido! \nExexmplo: aaA@bbbb.cc");
+			return;
+			
+		}else if(telefonePermit(telefoneClienteStr)==false){
+			Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExexmplo: (11) 22222-3333");
+			return;
+			
+		}else if (diasMaxQuantHrsPermit(horasPrevStr)==false) {
 		
-		orcamentoDAO.adicionarDados(novoOrcamento);
-		this.orcamentoAtual = novoOrcamento;
+			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExexmplo: 2, 5, 8...");
+			return;
+			
+		}  else if(diasMaxQuantHrsPermit(quantDiasStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
+			return;
+			
+		} else if(custoAdicPermit(custoAdicStr)==false) {
+			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
+			return;
+			
+		} else {
+			
+			ativDesativCompAoSalvar();
 
-		// DE CONFIRMAÇÃO DO ORCAMENTO
-		ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
+			criarOrcamento.getLbValorFinalCad().setText(criarOrcamento.getLbValorCalVenda().getText());
+			
+			// DO CLIENTE
+			Cliente cliente = new Cliente(null, null, null);
 
-		confirOrcam.setFormPagamento(null);
-		confirOrcam.setDataPrevistaEntrega(null);
-		confirOrcam.setDataConfirmacao(null);
-		confirOrcam.setOrcamento(novoOrcamento);
-		confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-		confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
-		confirOrcamDAO.adicionarDados(confirOrcam);
-		this.confirOrcamAtual = confirOrcam;
+			cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
+			cliente.setEmail(criarOrcamento.getTfEmail().getText());
+			cliente.setTelefone(criarOrcamento.getTfContato().getText());
+			clienteDAO.adicionarDados(cliente);
 
-		// O ORCAMENTO PRODUTO
+			// DO ORÇAMENTO
+			UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+			Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
 
-		List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
+			novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
+			novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
+			novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
+			novoOrcamento.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
+			novoOrcamento.setQuantHorasPrevistas(Integer.parseInt(criarOrcamento.getTfHorasPrevistas().getText()));
+			novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
+			novoOrcamento.setUsuarioPerfil(usuarioLogado);
+			
+			novoOrcamento.setCliente(cliente);
+			
+			novoOrcamento.setValorAdicional(Float.parseFloat(custoAdicStr));
+			novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
+			novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+			
+			orcamentoDAO.adicionarDados(novoOrcamento);
+			this.orcamentoAtual = novoOrcamento;
 
-		for (MateriaPrima materiaPrima : listaMP) {
+			// DE CONFIRMAÇÃO DO ORCAMENTO
+			ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
 
-			OrcamentoProduto OP = new OrcamentoProduto();
+			confirOrcam.setFormPagamento(null);
+			confirOrcam.setDataPrevistaEntrega(null);
+			confirOrcam.setDataConfirmacao(null);
+			confirOrcam.setOrcamento(novoOrcamento);
+			confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
+			confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+			confirOrcamDAO.adicionarDados(confirOrcam);
+			this.confirOrcamAtual = confirOrcam;
 
-			OP.setOrcamento(novoOrcamento);
-			OP.setMateriaPrima(materiaPrima);
-			OP.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+			// O ORCAMENTO PRODUTO
 
-			new OrcamentoProdutoDAO().adicionarDados(OP);
+			List<MateriaPrima> listaMP = criarOrcamento.tabModeloOrcam.getListaMP();
 
+			for (MateriaPrima materiaPrima : listaMP) {
+
+				OrcamentoProduto OP = new OrcamentoProduto();
+
+				OP.setOrcamento(novoOrcamento);
+				OP.setMateriaPrima(materiaPrima);
+				OP.setQuantidade(materiaPrima.getQuantidadeDisponivel());
+
+				new OrcamentoProdutoDAO().adicionarDados(OP);
+
+			}
+			atualizarQuantMP();
 		}
-
-		atualizarQuantMP();
-
 	}
 
 	public void confirmar() {
-
-		confirOrcamAtual.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
-		confirOrcamAtual.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(),
-				DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		confirOrcamAtual.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(),
-				DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-		confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
-		confirOrcamAtual.setOrcamento(orcamentoAtual);
-		confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
-
-		Mensagem.mostrar(null, "Sucesso",  "Orçamento Confirmado com Sucesso");
-		menu.mostrarPanelCont();
-		navegadorTelas.navegarTela("ORCAMENTOS");
 		
-		limparCamposCriarORC();
-		//carregarTabelaOrcamentos();
+		String dataConfirStr = criarOrcamento.getTfDataConfPedido().getText();
+		String dataEntregaStr = criarOrcamento.getTfDtPrevEntrega().getText();
 		
+		if(!dataPermit(dataConfirStr)) {
+			Mensagem.mostrar(null, "Informação", "Data de confitmação inválida! \nExemplo: 01/02/2026");
+			return;
+		} else if(!dataPermit(dataEntregaStr)) {
+			Mensagem.mostrar(null, "Informação", "Data de entrega inválida! \nExemplo: 01/02/2026");
+			return;
+		} else {
+			
+			confirOrcamAtual.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());
+			
+			if(!dataEntregaStr.trim().isEmpty()) {
+				confirOrcamAtual.setDataPrevistaEntrega(LocalDate.parse(criarOrcamento.getTfDtPrevEntrega().getText(),
+						DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			} else {
+				confirOrcamAtual.setDataPrevistaEntrega(null);
+			}
+			
+			if(!dataConfirStr.trim().isEmpty()) {
+				confirOrcamAtual.setDataConfirmacao(LocalDate.parse(criarOrcamento.getTfDataConfPedido().getText(),
+						DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			} else {
+				confirOrcamAtual.setDataConfirmacao(null);
+			}
+			
+			
+			confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
+			confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+			confirOrcamAtual.setOrcamento(orcamentoAtual);
+			confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
 
-		// CRIAR E COLOCAR METODO DE LIMPAR A TELA
-		// FAZER VALIDAÇÕES
+			Mensagem.mostrar(null, "Sucesso",  "Orçamento Confirmado com Sucesso");
+			menu.mostrarPanelCont();
+			navegadorTelas.navegarTela("ORCAMENTOS");
+			
+			limparCamposCriarORC();
+		}
 
 	}
 
@@ -451,10 +529,102 @@ public class OrcamentoController extends ComponentAdapter{
 		criarOrcamento.getLbValorFinalCad().setVisible(true);
 
 		criarOrcamento.getBtConfirmar().setVisible(true);
+		criarOrcamento.getBtAdicionar().setVisible(false);
+		criarOrcamento.getBtRemover().setVisible(false);
 		criarOrcamento.getBtCalcEdi().setVisible(false);
 		criarOrcamento.getBtSalvar().setVisible(false);
 	}
-
+	
+	//VALIDAÇÃO DE NOME DO CLIENTE
+	public boolean nomePermit(String nome) {
+		String nomeValido = "[A-Za-zÀ-úçÇ. ]+";
+		
+		if(nome==null) {
+			return false;
+		}
+		
+		return nome.matches(nomeValido);
+	}
+	
+	//VALIDAÇÃO DE TITULO DO ORÇAMENTO
+	public boolean tituloPermit(String titulo) {
+		String tituloValido = "[A-Za-zÀ-ú0-9çÇ. -]+";
+		
+		if(titulo==null) {
+			return false;
+		}
+		
+		return titulo.matches(tituloValido);
+	}
+	
+	//VALIDAÇÃO DO EMAIL DO CLIENTE
+	public boolean emailClientePermit(String email) {
+		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+		if(email==null) {
+			return false;
+		}
+		return email.matches(emailValido);
+	}
+	
+	//VALIDAÇÃO DO TELEFONE DO CLIENTE
+	public boolean telefonePermit(String telefone) {
+		String telefoneValido = "[0-9\\-() ]{8,15}";
+		if(telefone==null) {
+			return false;
+		}
+		//boolean telefoneValido = telefone.matches("[0-9\\-() ]{8,15}");
+		//boolean temDigitos = telefone.matches(".*[0-9].*");
+		//return telefoneValido && temDigitos;
+		return telefone.matches(telefoneValido);
+	}
+	
+	//VALIDAÇÃO QUANTIDADE DE DIAS MÁXIMO E QUANTIDADE DE HORAS
+	public boolean diasMaxQuantHrsPermit(String diasHoras) {
+		String diasHorasValido = "[0-9]+$";
+		if(diasHoras==null) {
+			return false;
+		}
+		return diasHoras.matches(diasHorasValido);
+	}
+	//VALIDAÇÃO DE CUSTO ADICIONAL
+	public boolean custoAdicPermit(String custoAdic) {
+		String custoAdicValido = "[0-9]+([.,][0-9]+)?";
+		if(custoAdic==null) {
+			return false;
+		}
+		return custoAdic.matches(custoAdicValido);
+	}
+	
+	//VALIDAÇÃO PARA CUSTO DE 2 CASAS DECIMAIS
+	public String formatarCustoAdic(String custoAdic) {
+	    if (custoAdic == null) {
+	    	return "0.00";
+	    }
+	    String custoAdicFormat = custoAdic.replace(",", ".");
+	    float custoAdicF = Float.parseFloat(custoAdicFormat);
+	    
+	    custoAdicF = (float)(Math.floor(custoAdicF * 100) / 100);
+	    return String.valueOf(custoAdicF);
+	}
+	
+	//VALIDAÇÃO DE DATAS
+	public boolean dataPermit(String data) {
+		if(data==null || data.trim().isEmpty()) {
+			return true;
+		}
+		
+		if(!data.matches("\\d{2}/\\d{2}/\\d{4}")){
+			return false;
+		};
+		
+		try {
+			LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	        return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	public void carregarTabelaOrcamentos() {
 
 		// TALVEZ IRA PRECISAR SE MODIFICAR O MÉTODO NA CLASSE DAO

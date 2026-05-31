@@ -1,11 +1,5 @@
 package controller;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.Mensagem;
@@ -16,14 +10,12 @@ public class RedefinirSenhaController{
 	private RedefinirSenha redefinirSenha;
 	private NavegadorTelas navegadorTelas;
 	private UsuarioPerfilDAO usuarioDAO;
-	private UsuarioPerfil usuarioCadastrado;
 	
 	public RedefinirSenhaController(RedefinirSenha redefinirSenha, NavegadorTelas navegadorTelas, 
-			UsuarioPerfil usuarioCadastrado, UsuarioPerfilDAO usuarioDAO) {
+			UsuarioPerfilDAO usuarioDAO) {
 		super();
 		this.redefinirSenha = redefinirSenha;
 		this.navegadorTelas = navegadorTelas;
-		this.usuarioCadastrado = usuarioCadastrado;
 		this.usuarioDAO = usuarioDAO;
 		
 		
@@ -46,6 +38,10 @@ public class RedefinirSenhaController{
 			
 			Mensagem.mostrar(null, "Informação",  "Preencha todos os campos!");
 
+		} else if(!senhaPermitida(new String(redefinirSenha.getPfNovaSenhaRS().getPassword()))){
+			Mensagem.mostrar(null, "Inválido", "Senha inválida! \nMínimo 8 caracteres");
+			return;
+			
 		} else {
 			
 			if(redefinirSenha.getPfNovaSenhaRS().getText().equals(redefinirSenha.getPfConfirmarNovaSenhaRS().getText())) {
@@ -65,8 +61,13 @@ public class RedefinirSenhaController{
 				Mensagem.mostrar(null, "Sucesso",  "O Campo de Nova Senha e Confirmar \nSenha estão Diferentes!");
 
 			}
-			
 		}
+	}
+	
+	//VALIDAÇÃO DE SENHA
+	public boolean senhaPermitida(String senha) {
+		String senhaValida = ".{8,}";
+		return senha.matches(senhaValida);
 	}
 	
 	public void limparCamposTelaRedSenha() {

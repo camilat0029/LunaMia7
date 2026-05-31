@@ -82,11 +82,11 @@ public class CriarOrcamento extends JPanel {
 		tfNomeCliente.setColumns(10);
 		add(tfNomeCliente, "cell 1 4 3 1,growx");
 
-		JLabel lbEmail = new JLabel("Email");
+		JLabel lbEmail = new JLabel("Email do cliente");
 		lbEmail.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbEmail, "cell 1 5");
 
-		JLabel lbContato = new JLabel("Contato");
+		JLabel lbContato = new JLabel("Telefone do Cliente");
 		lbContato.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbContato, "cell 3 5");
 

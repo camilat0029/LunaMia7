@@ -11,14 +11,12 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.text.ParseException;
 
 public class CadastroUsuario extends JPanel {
 
@@ -26,7 +24,7 @@ public class CadastroUsuario extends JPanel {
 	private JTextField tfNomeComp;
 	private JTextField tfNomeUsuario;
 	private JTextField tfEmail;
-	private JFormattedTextField tfTelefone;
+	private JTextField tfTelefone;
 	private JPasswordField pfSenha;
 	private JLabel lbIconeVoltar;
 	private JButton btCadastrar;
@@ -85,20 +83,10 @@ public class CadastroUsuario extends JPanel {
 		JLabel lbTelefone = new JLabel("Telefone");
 		lbTelefone.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbTelefone, "cell 3 7");
-		
-
-		try {
-			MaskFormatter  mascaraTelefone = new MaskFormatter("## ##### ####");
-			mascaraTelefone.setPlaceholder(" ");
 			
-			tfTelefone = new JFormattedTextField(mascaraTelefone);
-			tfTelefone.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-			add(tfTelefone, "cell 5 7 2 1,width 27%,height 38px");
-		} catch(ParseException e) {
-			e.printStackTrace();
-		}
-		
-		
+		tfTelefone = new JTextField();
+		tfTelefone.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		add(tfTelefone, "cell 5 7 2 1,width 27%,height 38px");
 		tfTelefone.setColumns(10);
 		
 		JLabel lbSenha = new JLabel("Senha");
@@ -177,7 +165,7 @@ public class CadastroUsuario extends JPanel {
 	}
 
 	public void setTfTelefone(JTextField tfTelefone) {
-		this.tfTelefone = (JFormattedTextField) tfTelefone;
+		this.tfTelefone = tfTelefone;
 	}
 
 	public JPasswordField getPfSenha() {

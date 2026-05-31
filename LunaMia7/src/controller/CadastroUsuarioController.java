@@ -259,16 +259,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		}
 	}
 
-	// LIMPAR CAMPOS TELA DE CADASTRO
-	public void limparCamposTelaCadastro() {
-		cadastroUsuario.getTfNomeComp().setText("");
-		cadastroUsuario.getTfNomeUsuario().setText("");
-		cadastroUsuario.getTfEmail().setText("");
-		cadastroUsuario.getTfTelefone().setText("");
-		cadastroUsuario.getPfSenha().setText("");
-
-	}
-
 	// CADASTRO DE USUARIO - TELA CADASTRO
 	public void cadastrarUsuario() {
 
@@ -282,14 +272,24 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 		} else {
 
-			emailPermitido(cadastroUsuario.getTfEmail().getText());
-			nomePermitido(cadastroUsuario.getTfNomeComp().getText());
-
-			if (!emailPermitido(cadastroUsuario.getTfEmail().getText())
-					|| !nomePermitido(cadastroUsuario.getTfNomeComp().getText())) {
-				Mensagem.mostrar(null, "Inválido", "Email ou Nome inválido!");
-
+			if (!nomePermitido(cadastroUsuario.getTfNomeComp().getText())){
+				Mensagem.mostrar(null, "Inválido", "Nome inválido! \nExemplo: Ana Júlia");
+				return;
+				
+			} else if(!emailPermitido(cadastroUsuario.getTfEmail().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Email inválido! \nExemplo: aaa@bbb.ccc");
+				return;
+				
+			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
+				return;
+				
+			} else if(!senhaPermitida(new String(cadastroUsuario.getPfSenha().getPassword()))){
+				Mensagem.mostrar(null, "Inválido", "Senha inválida! \nMínimo 8 caracteres");
+				return;
+				
 			} else {
+				
 				verificarEmail();
 				verificarUsuarioPerfil();
 
@@ -323,51 +323,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 					Mensagem.mostrar(null, "Inválido", "Este email já está em uso. \nEscolha outro.");
 				} else if (EmailRepetido == false && UsuarioRepetido == true) {
 					Mensagem.mostrar(null, "Inválido", "Este usuário já está em uso. \nEscolha outro.");
-				}
-			}
-		}
-	}
-
-	// VERIFICAÇÃO EMAIL REPETIDO
-	public void verificarEmail() {
-
-		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
-
-		EmailRepetido = false;
-
-		for (UsuarioPerfil usuarioPerfil : usuarios) {
-
-			if (usuarioPerfil.getEmail().equals(cadastroUsuario.getTfEmail().getText())) {
-				EmailRepetido = true;
-				break;
-			}
-		}
-	}
-
-	// VALIDAÇÃO DE EMAIL COM @ APARECENDO, ENTRE OUTROS
-	public boolean emailPermitido(String email) {
-		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-		return email.matches(emailValido);
-	}
-
-	// VALIDAÇÃO DE NOME
-	public boolean nomePermitido(String nome) {
-		String nomeValido = "^[A-Za-z. ]+$";
-		return nome.matches(nomeValido);
-	}
-
-	// VERIFICAÇÃO USUARIO REPETIDO
-	public void verificarUsuarioPerfil() {
-
-		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
-
-		UsuarioRepetido = false;
-
-		for (UsuarioPerfil usuarioPerfil : usuarios) {
-
-			if (usuarioPerfil.getNomeUsuario().equals(cadastroUsuario.getTfNomeUsuario().getText())) {
-				UsuarioRepetido = true;
-				break;
+				}	
 			}
 		}
 	}
@@ -390,18 +346,18 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 		} else {
 
-			nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText());
-
 			if (!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
+				return;
 
-				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \n(A-Z, a-z, .)");
-
+			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
+				return;
+				
 			} else {
+
 				String precoHoraValido = confPerfilAposCad.getTfPrecoHoraCP().getText().replace(",", ".");
 				String percentualLucroValido = confPerfilAposCad.getTfPercLucroCP().getText().replace(",", ".");
-
-				precoHoraPermitido(precoHoraValido);
-				percentualLucroPermitido(percentualLucroValido);
 
 				if (precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
 
@@ -453,19 +409,18 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 		} else {
 
-			nomePermitido(confPerfil.getTfNomeCompCP().getText());
+			if (!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
+				return;
 
-			if (!nomePermitido(confPerfil.getTfNomeCompCP().getText())) {
-
-				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \n(A-Z, a-z, .)");
-
+			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
+				return;
+				
 			} else {
 
 				String precoHoraValido = confPerfil.getTfPrecoHoraCP().getText().replace(",", ".");
 				String percentualLucroValido = confPerfil.getTfPercLucroCP().getText().replace(",", ".");
-
-				precoHoraPermitido(precoHoraValido);
-				percentualLucroPermitido(percentualLucroValido);
 
 				if (precoHoraPermitido(precoHoraValido) && percentualLucroPermitido(percentualLucroValido)) {
 					UsuarioPerfil usuarioAtualizado = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0,
@@ -501,6 +456,54 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			}
 		}
 	}
+	
+	// VERIFICAÇÃO EMAIL REPETIDO
+	public void verificarEmail() {
+
+		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+		EmailRepetido = false;
+
+		for (UsuarioPerfil usuarioPerfil : usuarios) {
+
+			if (usuarioPerfil.getEmail().equals(cadastroUsuario.getTfEmail().getText())) {
+				EmailRepetido = true;
+				break;
+			}
+		}
+	}
+
+	// VALIDAÇÃO DE EMAIL COM @ APARECENDO, ENTRE OUTROS
+	public boolean emailPermitido(String email) {
+		String emailValido = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+		return email.matches(emailValido);
+	}
+
+	// VALIDAÇÃO DE NOME
+	public boolean nomePermitido(String nome) {
+		String nomeValido = "[A-Za-zÀ-úçÇ. ]+";
+		return nome.matches(nomeValido);
+	}
+		
+	//VALIDAÇÃO DE SENHA
+	public boolean senhaPermitida(String senha) {
+		String senhaValida = ".{8,}";
+		return senha.matches(senhaValida);
+	}
+
+	// VERIFICAÇÃO USUARIO REPETIDO
+	public void verificarUsuarioPerfil() {
+
+		List<UsuarioPerfil> usuarios = usuarioDAO.listarUsuarios();
+		UsuarioRepetido = false;
+
+		for (UsuarioPerfil usuarioPerfil : usuarios) {
+
+			if (usuarioPerfil.getNomeUsuario().equals(cadastroUsuario.getTfNomeUsuario().getText())) {
+				UsuarioRepetido = true;
+				break;
+			}
+		}
+	}
 
 	// VALIDAÇÃO PRECO HORA PARA NUMEROS
 	public boolean precoHoraPermitido(String precoHoraValido) {
@@ -523,10 +526,31 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		}
 		return valido;
 	}
+	
+	//VALIDAÇÃO DO TELEFONE
+	public boolean telefonePermit(String telefone) {
+		String telefoneValido = "[0-9\\-() ]{8,15}";
+		if(telefone==null) {
+			return false;
+		}
+		//boolean telefoneValido = telefone.matches("[0-9\\-() ]{8,15}");
+		//boolean temDigitos = telefone.matches(".*[0-9].*");
+		//return telefoneValido && temDigitos;
+		return telefone.matches(telefoneValido);
+	}
+
+	// LIMPAR CAMPOS TELA DE CADASTRO
+	public void limparCamposTelaCadastro() {
+		cadastroUsuario.getTfNomeComp().setText("");
+		cadastroUsuario.getTfNomeUsuario().setText("");
+		cadastroUsuario.getTfEmail().setText("");
+		cadastroUsuario.getTfTelefone().setText("");
+		cadastroUsuario.getPfSenha().setText("");
+
+	}
 
 	// ACIONA EVENTO AO APARECER UM JPANEL PARA CADASTRAR INFOS NA TELA JÁ
 	// CADASTRADAS
-
 	@Override
 	public void componentShown(ComponentEvent e) {
 

@@ -12,7 +12,6 @@ import controller.BotoesAcoesController;
 import controller.CadastroUsuarioController;
 import controller.InicioController;
 import controller.LoginController;
-import controller.MateriaPEstoqueController;
 import controller.MateriaPrimaController;
 import controller.Menu;
 import controller.NavegadorTelas;
@@ -121,14 +120,12 @@ public class Main {
 		OrcamentoController orcamentoController = new OrcamentoController(orcamentoDAO, telaPrincipal, menu, navegadorTelas, orcamentos, criarOrcamento,  
 				clienteDAO, materiaPrimaDAO, confirOrcamDAO, scrollPaneOrcamento);
 		InicioController inicioController = new InicioController(inicio, navegadorTelas, menu, criarOrcamento, materiaPrimaDAO, scrollPaneConfigPerfilAposCad);
-		MateriaPEstoqueController materiaPEstoqueController = new MateriaPEstoqueController(materiaPrimaView, navegadorTelas, menu, 
-				telaPrincipal, materiaPrimaDAO);
 		RelatoriosController relatoriosController = new RelatoriosController(menu, navegadorTelas, relatorios, telaPrincipal, relatorioLucros, orcamentoDAO, 
 				relatorioHorasTrabalhadas, relatorioGastos);
-		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfil, usuarioPerfilDAO);
+		RedefinirSenhaController redefSenhaController = new RedefinirSenhaController(redefinirSenha, navegadorTelas, usuarioPerfilDAO);
 		MateriaPrimaController materiaPrimaController = new MateriaPrimaController(materiaPrima, materiaPrimaDAO, navegadorTelas, menu, 
 				cadastroMateriaPrimaEstoque,materiaPrimaView);
-		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, telaPrincipal, visualizarOrcamento,
+		BotoesAcoesController botoesLateralController = new BotoesAcoesController( navegadorTelas, visualizarOrcamento,
 				visualizarMateriaPrima, menu, materiaPrimaView, cadastroMateriaPrimaEstoque, materiaPrimaDAO, confirOrcamDAO, orcamentos, 
 				orcamProdDAO, criarOrcamento, clienteDAO, orcamentoDAO, scrollPaneConfigPerfilAposCad);
 

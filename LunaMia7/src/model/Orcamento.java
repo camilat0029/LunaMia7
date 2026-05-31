@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class Orcamento {
 	
 	private String tituloPedido;
-	private float quantHorasPrevistas, precoHora, percentualLucro;
+	private float precoHora, percentualLucro;
 	private float valorAdicional, valorGastos, valorSemLucro;
-	private int maxDias, idOrcamento;
+	private int maxDias, idOrcamento, quantHorasPrevistas;
 	private Cliente cliente;
 	private UsuarioPerfil usuarioPerfil;
 	public Status status;
@@ -29,7 +29,7 @@ public class Orcamento {
 		}
 	}
 	
-	public Orcamento(String tituloPedido, float quantHorasPrevistas, float precoHora,
+	public Orcamento(String tituloPedido, int quantHorasPrevistas, float precoHora,
 			int maxDias, Status status, float percentualLucro, float valorAdicional,
 			float valorGastos, float valorSemLucro) {
 		super();
@@ -89,11 +89,11 @@ public class Orcamento {
 		this.tituloPedido = tituloPedido;
 	}
 	
-	public float getQuantHorasPrevistas() {
+	public int getQuantHorasPrevistas() {
 		return quantHorasPrevistas;
 	}
 	
-	public void setQuantHorasPrevistas(float quantHorasPrevistas) {
+	public void setQuantHorasPrevistas(int quantHorasPrevistas) {
 		this.quantHorasPrevistas = quantHorasPrevistas;
 	}
 	

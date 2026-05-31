@@ -109,10 +109,27 @@ public class Orcamentos extends JPanel {
 		
 		botoesAcoes = new JPopupMenu();
 		
+		botoesAcoes.setBackground(new Color(234, 219, 247));
+	    botoesAcoes.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(234, 219, 247)));
+		
 		JMenuItem btVisualizar = new JMenuItem("Visualizar");
 		JMenuItem btAtualizar = new JMenuItem("Atualizar");
 		JMenuItem btExcluir = new JMenuItem("Excluir");
 		JMenuItem btCancelar = new JMenuItem("Cancelar");
+		
+		Font fonteMenu = new Font("Bodoni Bk BT", Font.BOLD, 16);
+	    Color corTexto = new Color(80,80,80); 
+
+	    JMenuItem[] itens = {btVisualizar, btAtualizar, btExcluir, btCancelar};
+	    for (JMenuItem item : itens) {
+	        item.setFont(fonteMenu);
+	        item.setForeground(corTexto);
+	        item.setOpaque(false); 
+	        item.setContentAreaFilled(false); 
+	        item.setBackground(new Color(0, 0, 0, 0)); 
+	        
+	        item.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 15));
+	    }
 		
 		btVisualizar.addActionListener(e -> {
 			if(acaoVisualizar != null) {
