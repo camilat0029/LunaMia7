@@ -62,6 +62,14 @@ public class MenuExpandido extends JPanel {
 		add(lbMostrarMenuCont, "cell 1 0,alignx right");
 		
 		lbMostrarMenuCont.setToolTipText("Fechar Menu");
+
+		lbMostrarMenuCont.addMouseListener(new java.awt.event.MouseAdapter() {
+		    @Override
+		    public void mouseExited(java.awt.event.MouseEvent e) {
+		        javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
+		        javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
+		    }
+		});
 		
 		lbFoto = new JLabel("");
 		lbFoto.setFont(new Font("Times New Roman", Font.PLAIN, 18));

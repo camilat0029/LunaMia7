@@ -127,11 +127,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			informacoesSenhaParaTelaRedefinir();
 		});
 
-		this.confPerfil.voltar(e -> {
-			navegadorTelas2.navegarTela("INICIO");
-			menu.mostrarPanelCont();
-		});
-
 		adicionarEstado();
 
 		this.confPerfil.getCbEstado().addActionListener(e -> {
@@ -188,46 +183,50 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 		confPerfil.addComponentListener(this);
 		confPerfilAposCad.addComponentListener(this);
+		
+		this.confPerfil.excluir(e ->{
+			
+			int confirm = MensagemSimNao.mostrar(null, "Excluir",
+					"Tem certeza que deseja excluir a conta? \nEla não poderá ser recuperada.");
 
-		this.confPerfil.excluir(new MouseAdapter() {
+			if (confirm == JOptionPane.YES_OPTION) {
+
+				UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
+				OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
+				ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
+
+				OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+				ClienteDAO clienteDAO = new ClienteDAO();
+				List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
+				for (Orcamento orcamento : listaOrcamento) {
+					Cliente cliente = orcamento.getCliente();
+						
+					orcamentoProdutoDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
+					confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
+					orcamentoDAO.excluirOrcamento(orcamento);
+					clienteDAO.excluirCliente(cliente.getIdCliente());
+				}
+
+				MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
+				List<MateriaPrima> listaMateriaPrima = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
+				for (MateriaPrima materiaPrima : listaMateriaPrima) {
+					materiaPrimaDAO.excluirMateriasPrimas(materiaPrima);
+				}
+
+				usuarioDAO.excluirUsuario(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail());
+				navegadorTelas.navegarTela("LOGIN");
+			}
+			
+		});
+		
+		this.confPerfil.voltar(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				int confirm = MensagemSimNao.mostrar(null, "Excluir",
-						"Tem certeza que deseja excluir a conta? \nEla não poderá ser recuperada.");
-
-				if (confirm == JOptionPane.YES_OPTION) {
-
-					UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
-					OrcamentoProdutoDAO orcamentoProdutoDAO = new OrcamentoProdutoDAO();
-					ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
-
-					OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-					ClienteDAO clienteDAO = new ClienteDAO();
-					List<Orcamento> listaOrcamento = orcamentoDAO.listarOrcamentos(usuarioLogado.getEmail());
-					for (Orcamento orcamento : listaOrcamento) {
-						Cliente cliente = orcamento.getCliente();
-							
-						orcamentoProdutoDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
-						confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
-						orcamentoDAO.excluirOrcamento(orcamento);
-						clienteDAO.excluirCliente(cliente.getIdCliente());
-					}
-
-					MateriaPrimaDAO materiaPrimaDAO = new MateriaPrimaDAO();
-					List<MateriaPrima> listaMateriaPrima = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
-					for (MateriaPrima materiaPrima : listaMateriaPrima) {
-						materiaPrimaDAO.excluirMateriasPrimas(materiaPrima);
-					}
-
-					usuarioDAO.excluirUsuario(usuarioLogado.getNomeUsuario(), usuarioLogado.getEmail());
-					navegadorTelas.navegarTela("LOGIN");
-
-				}
+				navegadorTelas.navegarTela("INICIO");
+				menu.mostrarPanelCont();
 			}
 		});
-
 	}
 
 	// PREENCHE O COMBOBOX DOS ESTADOS

@@ -111,7 +111,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		cbEstado = new JComboBox();
 		cbEstado.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbEstado, "cell 2 7,width 18%,height 38px");
+		add(cbEstado, "cell 2 7,growx,width 18%,height 38px");
 		
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
