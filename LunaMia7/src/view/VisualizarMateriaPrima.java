@@ -37,47 +37,47 @@ public class VisualizarMateriaPrima extends JPanel {
 	 */
 	public VisualizarMateriaPrima() {
 		setBackground(new Color(234, 219, 247));
-		setPreferredSize(new Dimension(925, 700));
-		setLayout(new MigLayout("gap 16", "[][grow][][][grow]", "[][grow][][][][][][][][][grow]"));
+		setPreferredSize(new Dimension(1232, 700));
+		setLayout(new MigLayout("gap 16", "[grow][][][][grow]", "[grow][][][][][][][][][grow]"));
 
 		lbIconeVoltar = new JLabel("");
 		lbIconeVoltar
 				.setIcon(new ImageIcon(VisualizarMateriaPrima.class.getResource("/imagensIcones/Icone_Seta2.png")));
-		add(lbIconeVoltar, "cell 0 0");
+		add(lbIconeVoltar, "pos 20 20,cell 0 0");
 
 		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");
 		lbMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMateriaPrima, "cell 2 2");
+		add(lbMateriaPrima, "cell 2 1");
 
 		JLabel lbMarca = new JLabel("Marca");
 		lbMarca.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMarca, "cell 2 4");
+		add(lbMarca, "cell 2 3");
 
 		JLabel lbCor = new JLabel("Cor");
 		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCor, "cell 3 4");
+		add(lbCor, "cell 3 3");
 
 		JLabel lbUnidadeMed = new JLabel("Unidade de Medida");
 		lbUnidadeMed.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbUnidadeMed, "flowx,cell 2 6");
+		add(lbUnidadeMed, "flowx,cell 2 5");
 
 		JLabel lbQtdUnidade = new JLabel("Quantidade Por Unidade");
 		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQtdUnidade, "cell 3 6");
+		add(lbQtdUnidade, "cell 3 5");
 
 		JLabel lbQtdDisponivel = new JLabel("Quantidade Disponível");
 		lbQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQtdDisponivel, "flowx,cell 2 8");
+		add(lbQtdDisponivel, "flowx,cell 2 7");
 
 		JLabel lbValor = new JLabel("Valor");
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValor, "cell 3 8");
+		add(lbValor, "cell 3 7");
 
 		//PANELS
 		
 		panel_materiaPrima = new JPanel();
 		panel_materiaPrima.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_materiaPrima, "cell 2 3 2 1,growx,width 67%,height 38!");
+		add(panel_materiaPrima, "cell 2 2,growx,width 35%,height 38!");
 		panel_materiaPrima.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbNomeMpCad = new JLabel("");
@@ -86,7 +86,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_marca = new JPanel();
 		panel_marca.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_marca, "cell 2 5,width 67%,height 38!");
+		add(panel_marca, "cell 2 4,width 35%,height 38!");
 		panel_marca.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbMarcaCad = new JLabel("");
@@ -95,7 +95,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_cor = new JPanel();
 		panel_cor.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_cor, "cell 3 5,width 67%,height 38!");
+		add(panel_cor, "cell 3 4,width 35%,height 38!");
 		panel_cor.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbCorCad = new JLabel("");
@@ -104,7 +104,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_UnidadeMedida = new JPanel();
 		panel_UnidadeMedida.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_UnidadeMedida, "cell 2 7,width 67%,height 38!");
+		add(panel_UnidadeMedida, "cell 2 6,width 35%,height 38!");
 		panel_UnidadeMedida.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbUnMedCad = new JLabel("");
@@ -113,7 +113,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_QuantPorUnidade = new JPanel();
 		panel_QuantPorUnidade.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_QuantPorUnidade, "cell 3 7,width 67%,height 38!");
+		add(panel_QuantPorUnidade, "cell 3 6,width 35%,height 38!");
 		panel_QuantPorUnidade.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbQuantUniCad = new JLabel("");
@@ -122,7 +122,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_QuantDispo = new JPanel();
 		panel_QuantDispo.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_QuantDispo, "cell 2 9,width 67%,height 38!");
+		add(panel_QuantDispo, "cell 2 8,width 35%,height 38!");
 		panel_QuantDispo.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbQuantCad = new JLabel("");
@@ -131,7 +131,7 @@ public class VisualizarMateriaPrima extends JPanel {
 
 		panel_valor = new JPanel();
 		panel_valor.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(panel_valor, "cell 3 9,growx,width 67%,height 38!");
+		add(panel_valor, "cell 3 8,growx,width 35%,height 38!");
 		panel_valor.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbValorCad = new JLabel("");

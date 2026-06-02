@@ -132,6 +132,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 		// ATUALIZANDO INFORMAÇÕES DO ORCAMENTO
 		this.orcamentos.atualizar(orcamento -> {
 			irParaAtualizarORC(orcamento);
+			
 		});
 		
 		this.criarOrcamento.confirmar(e -> {
@@ -336,6 +337,11 @@ public class BotoesAcoesController extends ComponentAdapter {
 		
 		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
+		
+		SwingUtilities.invokeLater(() -> {
+			scrollPaneOrcamento.getVerticalScrollBar().setValue(0);
+		});
+
 
 	}
 

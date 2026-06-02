@@ -44,8 +44,6 @@ public class Mensagem extends JDialog {
 		lbMensagem.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
 		contentPanel.add(lbMensagem, BorderLayout.CENTER);
-		
-		pack();
 
 		setMinimumSize(new Dimension(330, 150));
 		setLocationRelativeTo(parent);
@@ -62,7 +60,6 @@ public class Mensagem extends JDialog {
 		btOk.setBackground(new Color(193, 151, 232));
 		btOk.setBorderPainted(false);
 
-		// ISSO AQUI NÃO DEIXA COM AQUELE RISCO AZUL AO REDOR
 		btOk.setFocusPainted(false);
 
 		btOk.addActionListener(e -> dispose());
@@ -70,6 +67,8 @@ public class Mensagem extends JDialog {
 
 		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
 		setIconImage(icone.getImage());
+		
+		pack();
 
 	}
 

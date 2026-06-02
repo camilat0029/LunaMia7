@@ -349,7 +349,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
 				return;
 
-			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+			} else if(!telefonePermit(confPerfilAposCad.getTfTelefoneCP().getText())) {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				
@@ -408,11 +408,11 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 		} else {
 
-			if (!nomePermitido(confPerfilAposCad.getTfNomeCompCP().getText())) {
+			if (!nomePermitido(confPerfil.getTfNomeCompCP().getText())) {
 				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
 				return;
 
-			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+			} else if(!telefonePermit(confPerfil.getTfTelefoneCP().getText())) {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				

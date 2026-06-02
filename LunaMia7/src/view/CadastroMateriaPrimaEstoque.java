@@ -5,6 +5,8 @@ import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -112,7 +114,20 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		btConfirmar.setBorderPainted(false);
 		btConfirmar.setFocusPainted(false);
 
-		JLabel interrogacaoQntDisponivel = new JLabel("");
+		JLabel interrogacaoQntDisponivel = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		interrogacaoQntDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 5));
 		add(interrogacaoQntDisponivel, "cell 1 7");
 
@@ -122,7 +137,20 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoQntDisponivel.setIcon(new ImageIcon(imgInterrogacao));
 
-		JLabel interrogacaoQntUnidade = new JLabel("");
+		JLabel interrogacaoQntUnidade = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		interrogacaoQntUnidade.setIcon(
 				new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")));
 		add(interrogacaoQntUnidade, "flowy,cell 2 5");

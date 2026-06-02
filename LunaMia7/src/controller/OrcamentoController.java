@@ -255,13 +255,13 @@ public class OrcamentoController extends ComponentAdapter{
 		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 		
 		if (diasMaxQuantHrsPermit(horasPrevStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExexmplo: 2, 5, 8...");
+			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExemplo: 2, 5, 8...");
 			return;
 		}  else if(diasMaxQuantHrsPermit(quantDiasStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
+			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExemplo: 2, 5, 8...");
 			return;
 		} else if(custoAdicPermit(custoAdicStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
+			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExemplo: (2.5); (5,8); (8)...");
 			return;
 		} else {
 			
@@ -297,10 +297,10 @@ public class OrcamentoController extends ComponentAdapter{
 			float lucro = lucroAdicional + valorTrabalho;
 
 			// LABELS RECEBENDO OS VALORES
-			criarOrcamento.getLbCalcGastos().setText(String.valueOf(totalGastos));
-			criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(valorSemLucro));
-			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(valorVenda));
-			criarOrcamento.getLbCalcLucro().setText(String.valueOf(lucro));
+			criarOrcamento.getLbCalcGastos().setText(String.format("%.2f", totalGastos));
+			criarOrcamento.getLbValorCalcSemLucro().setText(String.format("%.2f", valorSemLucro));
+			criarOrcamento.getLbValorCalVenda().setText(String.format("%.2f", valorVenda));
+			criarOrcamento.getLbCalcLucro().setText(String.format("%.2f", lucro));
 			
 		}
 
@@ -333,32 +333,32 @@ public class OrcamentoController extends ComponentAdapter{
 		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 		
 		if (tituloPermit(tituloOrcamStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Título do orcamento inválido! \nExexmplo: Título orçamento-01");
+			Mensagem.mostrar(null, "Informação", "Título do orcamento inválido! \nExemplo: Título orçamento-01");
 			return;
 			
 		}else if(nomePermit(nomeClienteStr)==false){
-			Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExexmplo: Júlia, Dr. Lara...");
+			Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExemplo: Júlia, Dr. Lara...");
 			return;
 			
 		}else if(emailClientePermit(emailClienteStr)==false){
-			Mensagem.mostrar(null, "Informação", "Email inválido! \nExexmplo: aaA@bbbb.cc");
+			Mensagem.mostrar(null, "Informação", "Email inválido! \nExemplo: aaA@bbbb.cc");
 			return;
 			
 		}else if(telefonePermit(telefoneClienteStr)==false){
-			Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExexmplo: (11) 22222-3333");
+			Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExemplo: (11) 22222-3333");
 			return;
 			
 		}else if (diasMaxQuantHrsPermit(horasPrevStr)==false) {
 		
-			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExexmplo: 2, 5, 8...");
+			Mensagem.mostrar(null, "Informação", "Horas previstas inválido! \nExemplo: 2, 5, 8...");
 			return;
 			
 		}  else if(diasMaxQuantHrsPermit(quantDiasStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
+			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExemplo: 2, 5, 8...");
 			return;
 			
 		} else if(custoAdicPermit(custoAdicStr)==false) {
-			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
+			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExemplo: (2.5); (5,8); (8)...");
 			return;
 			
 		} else {
@@ -390,8 +390,8 @@ public class OrcamentoController extends ComponentAdapter{
 			novoOrcamento.setCliente(cliente);
 			
 			novoOrcamento.setValorAdicional(Float.parseFloat(custoAdicStr));
-			novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
-			novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+			novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText().replace(",", ".")));
+			novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText().replace(",", ".")));
 			
 			orcamentoDAO.adicionarDados(novoOrcamento);
 			this.orcamentoAtual = novoOrcamento;
@@ -403,8 +403,8 @@ public class OrcamentoController extends ComponentAdapter{
 			confirOrcam.setDataPrevistaEntrega(null);
 			confirOrcam.setDataConfirmacao(null);
 			confirOrcam.setOrcamento(novoOrcamento);
-			confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-			confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+			confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText().replace(",", ".")));
+			confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText().replace(",", ".")));
 			confirOrcamDAO.adicionarDados(confirOrcam);
 			this.confirOrcamAtual = confirOrcam;
 
@@ -457,8 +457,8 @@ public class OrcamentoController extends ComponentAdapter{
 			}
 			
 			
-			confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-			confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+			confirOrcamAtual.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText().replace(",", ".")));
+			confirOrcamAtual.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText().replace(",", ".")));
 			confirOrcamAtual.setOrcamento(orcamentoAtual);
 			confirOrcamDAO.atualizarConfirOrcam(confirOrcamAtual);
 
