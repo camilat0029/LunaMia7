@@ -313,7 +313,7 @@ public class CriarOrcamento extends JPanel {
 
 		cbFormaPaga = new JComboBox();
 		cbFormaPaga.setModel(new DefaultComboBoxModel(
-				new String[] { "", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro" }));
+				new String[] { "Outro", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro"}));
 		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbFormaPaga, "cell 1 27,growx");
 

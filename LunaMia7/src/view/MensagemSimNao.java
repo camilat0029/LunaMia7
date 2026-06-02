@@ -48,8 +48,6 @@ public class MensagemSimNao extends JDialog {
 
 		contentPanel.add(lbMensagem, BorderLayout.CENTER);
 
-		pack();
-
 		setMinimumSize(new Dimension(330, 150));
 		setLocationRelativeTo(parent);
 
@@ -94,6 +92,8 @@ public class MensagemSimNao extends JDialog {
 
 		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
 		setIconImage(icone.getImage());
+		
+		pack();
 
 	}
 
