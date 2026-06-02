@@ -49,6 +49,7 @@ public class CriarOrcamento extends JPanel {
 	private JLabel interrogacaoHrsPrev;
 	private JLabel interrogacaoQuantMaxDias;
 	private JLabel interrogacaoCustoAdic;
+	private JLabel interrogacaoStatus;
 
 	/**
 	 * Create the panel.
@@ -246,7 +247,7 @@ public class CriarOrcamento extends JPanel {
 
 		lbStatus = new JLabel("Status do Pedido");
 		lbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbStatus, "cell 3 16");
+		add(lbStatus, "flowx,cell 3 16");
 
 		tfCustoAdicional = new JTextField();
 		tfCustoAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -396,6 +397,23 @@ public class CriarOrcamento extends JPanel {
 			}
 		};
 		add(interrogacaoCustoAdic, "cell 1 16");
+		
+		interrogacaoStatus = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		interrogacaoStatus.setOpaque(false);
+		add(interrogacaoStatus, "cell 3 16");
 
 		ImageIcon iconInterrogacao = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
@@ -404,18 +422,21 @@ public class CriarOrcamento extends JPanel {
 		interrogacaoHrsPrev.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoQuantMaxDias.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoCustoAdic.setIcon(new ImageIcon(imgInterrogacao));
+		interrogacaoStatus.setIcon(new ImageIcon(imgInterrogacao));
 
 		interrogacaoQuantMaxDias.setOpaque(false);
 		interrogacaoHrsPrev.setOpaque(false);
 		interrogacaoCustoAdic.setOpaque(false);
 
 		interrogacaoHrsPrev.setToolTipText(
-				"<html><div style = 'width:100px;' > A quantidade de horas que você acha que levará para finalizar o trabalho. </div></html>");
+				"<html><div style = 'width:100px;' > A <b>quantidade de horas</b> que você acha que levará para <b>finalizar</b> o trabalho. </div></html>");
 		interrogacaoQuantMaxDias.setToolTipText(
-				"<html><div style='width:80px;'>" + "A quantidade máxima de dias que você tem para finalizar o pedido. "
-						+ "Você pode indicar em números inteiros, como 1, 2, 3..." + "</div></html>");
+				"<html><div style='width:80px;'>" + "A <b>quantidade máxima de dias<b/> que você tem para finalizar o pedido. "
+						+ "Você pode indicar em números <b>inteiros<b/>, como 1, 2, 3..." + "</div></html>");
 		interrogacaoCustoAdic.setToolTipText("<html> <div style='width:100px;'>"
-				+ "Custos adicionais podem incluir frete, reelaboração do pedido,  entre outros... </div></html>");
+				+ "<b>Custos adicionais</b> podem incluir frete, reelaboração do pedido,  entre outros... </div></html>");
+		interrogacaoStatus.setToolTipText("<html><div style='width:100px;'>Esta parte depende do cliente. <br><b>Pendente:</b> ainda não foi enviado ao cliente;"
+				+ "<br><b>Em andamento:</b> cliente aprovou; <br><b>Concluido: </b>terminou o projeto.</div></html>");
 
 	}
 
