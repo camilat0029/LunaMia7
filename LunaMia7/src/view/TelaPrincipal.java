@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.ScrollPaneEstilizacao;
+
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.BorderLayout;
@@ -52,6 +55,8 @@ public class TelaPrincipal extends JFrame {
 		setPreferredSize(new Dimension(1020, 640)); // Tamanho de padrão
 		setMinimumSize(new Dimension(1020, 640)); // Tamanho minimo
 		setLocationRelativeTo(null); // Tela Centralizada
+		
+		
 
 	}
 

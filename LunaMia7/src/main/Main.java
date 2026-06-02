@@ -18,6 +18,7 @@ import controller.NavegadorTelas;
 import controller.OrcamentoController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
+import controller.ScrollPaneEstilizacao;
 import model.OrcamentoDAO;
 import model.OrcamentoProdutoDAO;
 import model.ClienteDAO;
@@ -151,6 +152,8 @@ public class Main {
 		navegadorTelas.adicionarPainel("CADASTRO", cadastro);
 		navegadorTelas.adicionarPainel("VISUALIZAR_MATERIA_PRIMA", visualizarMateriaPrima);
 		navegadorTelas.adicionarPainel("VISUALIZAR_ORCAMENTO", scrollPaneVisualizarOrcamento);
+		
+		ScrollPaneEstilizacao.estilizarTodos(telaPrincipal.getContentPane());
 		
 		navegadorTelas.navegarTela("LOGIN");
 
