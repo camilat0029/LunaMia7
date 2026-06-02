@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -40,9 +42,22 @@ public class VisualizarMateriaPrima extends JPanel {
 		setPreferredSize(new Dimension(1232, 700));
 		setLayout(new MigLayout("gap 16", "[grow][][][][grow]", "[grow][][][][][][][][][grow]"));
 
-		lbIconeVoltar = new JLabel("");
-		lbIconeVoltar
-				.setIcon(new ImageIcon(VisualizarMateriaPrima.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		lbIconeVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
+				return tooltip;
+			}
+		};
+		lbIconeVoltar.setIcon(new ImageIcon(VisualizarMateriaPrima.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		lbIconeVoltar.setToolTipText("Voltar");
 		add(lbIconeVoltar, "pos 20 20,cell 0 0");
 
 		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");

@@ -40,8 +40,22 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		JLabel lblNewLabel = new JLabel("");
 		add(lblNewLabel, "flowx,cell 0 0");
 
-		lbIconeVoltar = new JLabel("");
+		lbIconeVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman",  Font.BOLD, 15));
+
+				return tooltip;
+			}
+		};
 		lbIconeVoltar.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		lbIconeVoltar.setToolTipText("Voltar");
 		add(lbIconeVoltar, "pos 20 20");
 
 		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");

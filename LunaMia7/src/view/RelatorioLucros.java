@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTable;
+import javax.swing.JToolTip;
 import javax.swing.JLabel;
 
 import java.awt.Color;
@@ -29,7 +30,20 @@ public class RelatorioLucros extends JPanel {
 	public RelatorioLucros() {
 		setLayout(new MigLayout("", "[grow][][][][grow]", "[grow][][][][][][][][grow]"));
 		
-		lbVoltar = new JLabel("");
+		lbVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		lbVoltar.setIcon(new ImageIcon(RelatorioLucros.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
 		add(lbVoltar, "cell 1 1");
 		lbVoltar.setPreferredSize(new java.awt.Dimension(40, 40));

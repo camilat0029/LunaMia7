@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
@@ -37,14 +38,22 @@ public class CadastroUsuario extends JPanel {
 		setLayout(new MigLayout("", "[][30.00][grow][][][][][45.00][grow]", "[][grow][][][][][][][][71.00][][][grow]"));
 		
 		lbIconeVoltar = new JLabel(""){
-		    @Override
-		    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent event) {
-		        return new java.awt.Point(getWidth(), 15);
-		    }
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
+				return tooltip;
+			}
 		};
 		
 		lbIconeVoltar.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
-		lbIconeVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 27));
+		lbIconeVoltar.setToolTipText("Voltar");
 		add(lbIconeVoltar, "cell 0 0 2 1");
 		
 		lbIconeVoltar.setToolTipText("Voltar");

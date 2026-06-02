@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -57,9 +58,22 @@ public class VisualizarOrcamento extends JPanel {
 		setLayout(new MigLayout("gap 15", "[grow][207.00,grow][207.00,grow][grow]",
 				"[grow][][grow][][grow][][grow][][grow][][][][75px:n][75px:n][][grow][][grow][][grow][][grow][][grow][][grow][grow]"));
 
-		lbVoltar = new JLabel("");
-		lbVoltar.setIcon(
-				new ImageIcon(VisualizarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
+		lbVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		lbVoltar.setIcon(new ImageIcon(VisualizarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
+		lbVoltar.setToolTipText("Voltar");
 		add(lbVoltar, "pos 20 20");
 
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");

@@ -60,8 +60,23 @@ public class CriarOrcamento extends JPanel {
 		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]",
 				"[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
-		lbVoltar = new JLabel("");
+		lbVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
+				return tooltip;
+			}
+		};
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
+		lbVoltar.setToolTipText("Voltar");
+
 		add(lbVoltar, "pos 20 20");
 
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");
