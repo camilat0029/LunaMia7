@@ -57,7 +57,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		tfNomeCompCP = new JTextField();
 		tfNomeCompCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfNomeCompCP, "cell 2 2 4 1,width 60%,height 38px");
+		add(tfNomeCompCP, "cell 2 2 4 1,width 62%,height 38px");
 		tfNomeCompCP.setColumns(10);
 		
 		JLabel lbNomeUsuaCP = new JLabel("Nome de Usuário");
@@ -67,7 +67,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		JPanel panel_NomeUsuario = new JPanel();
 		panel_NomeUsuario.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_NomeUsuario.setBackground(new Color(255, 255, 255));
-		add(panel_NomeUsuario, "cell 2 3 4 1,width 60%,height 38!");
+		add(panel_NomeUsuario, "cell 2 3 4 1,width 62%,height 38!");
 		panel_NomeUsuario.setLayout(new MigLayout("", "[]", "[]"));
 		
 		lbNomeUsuarioCad = new JLabel("");
@@ -81,7 +81,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		JPanel panel_EmailCad = new JPanel();
 		panel_EmailCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_EmailCad.setBackground(new Color(255, 255, 255));
-		add(panel_EmailCad, "cell 2 4 4 1,width 60%,height 38!");
+		add(panel_EmailCad, "cell 2 4 4 1,width 62%,height 38!");
 		panel_EmailCad.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		
 		lbEmailCad = new JLabel("");
@@ -121,10 +121,10 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 		
 		cbCidade = new JComboBox();
 		cbCidade.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbCidade, "cell 4 7 2 1,growx,height 38px");
-		cbCidade.setPreferredSize(new Dimension(95,38));
+		add(cbCidade, "cell 4 7 2 1, growx, width 12%,height 38px");
+		cbCidade.setPreferredSize(new Dimension(80,38));
 		cbCidade.setMaximumSize(new Dimension(550,38));
-		cbCidade.setMinimumSize(new Dimension(95,38));
+		cbCidade.setMinimumSize(new Dimension(80,38));
 		
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
