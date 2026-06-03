@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
+import javax.swing.JToolTip;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -57,9 +58,23 @@ public class VisualizarOrcamento extends JPanel {
 		setLayout(new MigLayout("gap 15", "[grow][207.00,grow][207.00,grow][grow]",
 				"[grow][][grow][][grow][][grow][][grow][][][][75px:n][75px:n][][grow][][grow][][grow][][grow][][grow][][grow][grow]"));
 
-		lbVoltar = new JLabel("");
+		lbVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
 		lbVoltar.setIcon(
 				new ImageIcon(VisualizarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
+		lbVoltar.setToolTipText("Voltar");
 		add(lbVoltar, "pos 20 20");
 
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");
@@ -168,13 +183,13 @@ public class VisualizarOrcamento extends JPanel {
 		lbValorFinal.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValorFinal, "cell 2 24");
 
-		//PANELS
-		
+		// PANELS
+
 		panel_Titulo = new JPanel();
 		panel_Titulo.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Titulo, "cell 1 2 2 1,growx,width 71%,height 38!");
 		panel_Titulo.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbTituloOrcamCad = new JLabel("");
 		lbTituloOrcamCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_Titulo.add(lbTituloOrcamCad, "cell 0 0");
@@ -183,7 +198,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_Cliente.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Cliente, "cell 1 4 2 1,growx,width 71%,height 38!");
 		panel_Cliente.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbNomeClienteCad = new JLabel("");
 		lbNomeClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_Cliente.add(lbNomeClienteCad, "cell 0 0");
@@ -192,7 +207,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_email.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_email, "cell 1 6,width 71%,height 38!");
 		panel_email.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbEmailClienteCad = new JLabel("");
 		lbEmailClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_email.add(lbEmailClienteCad, "cell 0 0");
@@ -201,7 +216,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_Contato.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Contato, "cell 2 6, width 71%,height 38!");
 		panel_Contato.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbContClienteCad = new JLabel("");
 		lbContClienteCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_Contato.add(lbContClienteCad, "cell 0 0");
@@ -210,7 +225,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_PrecoHora.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_PrecoHora, "cell 1 8,width 71%,height 38!");
 		panel_PrecoHora.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbPrecoHoraCad = new JLabel("");
 		lbPrecoHoraCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_PrecoHora.add(lbPrecoHoraCad, "cell 0 0");
@@ -219,7 +234,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_PercentualLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_PercentualLucro, "cell 2 8,width 71%,height 38!");
 		panel_PercentualLucro.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbPercLucroCad = new JLabel("");
 		lbPercLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_PercentualLucro.add(lbPercLucroCad, "cell 0 0");
@@ -228,7 +243,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_HorasPrevistas.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_HorasPrevistas, "cell 1 15,width 71%,height 38!");
 		panel_HorasPrevistas.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbHorasPrevistasCad = new JLabel("");
 		lbHorasPrevistasCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_HorasPrevistas.add(lbHorasPrevistasCad, "cell 0 0");
@@ -237,7 +252,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_QuantMaxDias.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_QuantMaxDias, "cell 2 15,width 71%,height 38!");
 		panel_QuantMaxDias.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbQuantDiasMaxCad = new JLabel("");
 		lbQuantDiasMaxCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_QuantMaxDias.add(lbQuantDiasMaxCad, "cell 0 0");
@@ -246,7 +261,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_TotalGastos.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_TotalGastos, "cell 1 21,width 71%,height 38!");
 		panel_TotalGastos.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbTotalGastosCad = new JLabel("");
 		lbTotalGastosCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_TotalGastos.add(lbTotalGastosCad, "cell 0 0");
@@ -255,7 +270,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_ValorVenda.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorVenda, "cell 2 21,width 71%,height 38!");
 		panel_ValorVenda.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbValorVendaCad = new JLabel("");
 		lbValorVendaCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_ValorVenda.add(lbValorVendaCad, "cell 0 0");
@@ -264,7 +279,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_CustoAdicional.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_CustoAdicional, "cell 1 17,width 71%,height 38!");
 		panel_CustoAdicional.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbCustoAdiCad = new JLabel("");
 		lbCustoAdiCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_CustoAdicional.add(lbCustoAdiCad, "cell 0 0");
@@ -273,7 +288,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_Status.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_Status, "cell 2 17,width 71%,height 38");
 		panel_Status.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbStatusCad = new JLabel("");
 		lbStatusCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_Status.add(lbStatusCad, "cell 0 0");
@@ -282,7 +297,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_ValorSemLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorSemLucro, "cell 1 19,width 71%,height 38!");
 		panel_ValorSemLucro.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbValorSemLucroCad = new JLabel("");
 		lbValorSemLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_ValorSemLucro.add(lbValorSemLucroCad, "cell 0 0");
@@ -291,7 +306,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_ValorLucro.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorLucro, "cell 2 19,width 71%,height 38!");
 		panel_ValorLucro.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbValorLucroCad = new JLabel("");
 		lbValorLucroCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_ValorLucro.add(lbValorLucroCad, "cell 0 0");
@@ -300,7 +315,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_DataConfirmacao.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_DataConfirmacao, "cell 1 23,width 71%,height 38!");
 		panel_DataConfirmacao.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbDtConfirCad = new JLabel("");
 		lbDtConfirCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_DataConfirmacao.add(lbDtConfirCad, "cell 0 0");
@@ -309,7 +324,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_DataPrevistaEnt.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_DataPrevistaEnt, "cell 2 23,width 71%,height 38!");
 		panel_DataPrevistaEnt.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbDtEntregaCad = new JLabel("");
 		lbDtEntregaCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_DataPrevistaEnt.add(lbDtEntregaCad, "cell 0 0");
@@ -318,7 +333,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_FormaPagamento.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_FormaPagamento, "cell 1 25,width 71%,height 38!");
 		panel_FormaPagamento.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbFormaPagCad = new JLabel("");
 		lbFormaPagCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_FormaPagamento.add(lbFormaPagCad, "cell 0 0");
@@ -327,7 +342,7 @@ public class VisualizarOrcamento extends JPanel {
 		panel_ValorFinal.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(panel_ValorFinal, "cell 2 25,width 71%,height 38!");
 		panel_ValorFinal.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		lbValorFinalCad = new JLabel("");
 		lbValorFinalCad.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		panel_ValorFinal.add(lbValorFinalCad, "cell 0 0");
@@ -489,7 +504,5 @@ public class VisualizarOrcamento extends JPanel {
 	public void setLbValorFinalCad(JLabel lbValorFinalCad) {
 		this.lbValorFinalCad = lbValorFinalCad;
 	}
-	
-	
 
 }

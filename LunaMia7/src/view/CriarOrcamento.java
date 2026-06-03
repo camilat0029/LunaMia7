@@ -49,6 +49,11 @@ public class CriarOrcamento extends JPanel {
 	private JLabel interrogacaoHrsPrev;
 	private JLabel interrogacaoQuantMaxDias;
 	private JLabel interrogacaoCustoAdic;
+	private JLabel interrogacaoLucroAdicional;
+	private JLabel interLT;
+	private JLabel interTG;
+	private JLabel interTotal;
+	private JLabel interrogacaoStatus;
 
 	/**
 	 * Create the panel.
@@ -250,11 +255,11 @@ public class CriarOrcamento extends JPanel {
 
 		lbLucroAdicional = new JLabel("Valor do lucro adicional");
 		lbLucroAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbLucroAdicional, "cell 1 19");
+		add(lbLucroAdicional, "flowx,cell 1 19");
 
 		lbValorLucro = new JLabel("Valor do lucro total");
 		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorLucro, "cell 3 19");
+		add(lbValorLucro, "flowx,cell 3 19");
 
 		lbLucroAdicionalCad = new JLabel("R$");
 		lbLucroAdicionalCad.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -266,11 +271,11 @@ public class CriarOrcamento extends JPanel {
 
 		lbGastos = new JLabel("Total de Gastos");
 		lbGastos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbGastos, "cell 1 21");
+		add(lbGastos, "flowx,cell 1 21");
 
 		lbValorVenda = new JLabel("Valor de venda");
 		lbValorVenda.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorVenda, "cell 3 21");
+		add(lbValorVenda, "flowx,cell 3 21");
 
 		lbCalcGastos = new JLabel("R$");
 		lbCalcGastos.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -313,7 +318,7 @@ public class CriarOrcamento extends JPanel {
 
 		cbFormaPaga = new JComboBox();
 		cbFormaPaga.setModel(new DefaultComboBoxModel(
-				new String[] { "", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro", "Outro" }));
+				new String[] { "Outro", "Cartão Crédito", "Cartão Débito", "Pix", "Dinheiro" }));
 		cbFormaPaga.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(cbFormaPaga, "cell 1 27,growx");
 
@@ -382,6 +387,94 @@ public class CriarOrcamento extends JPanel {
 		};
 		add(interrogacaoCustoAdic, "cell 1 16");
 
+		interrogacaoLucroAdicional = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+
+		};
+
+		add(interrogacaoLucroAdicional, "cell 1 19");
+
+		interLT = new JLabel("") {
+
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+
+		};
+		add(interLT, "cell 3 19");
+
+		interTG = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+
+		};
+		add(interTG, "cell 1 21");
+		
+		interTotal = new JLabel("") {
+			
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+
+		};
+		add(interTotal, "cell 3 21");
+		
+		interrogacaoStatus = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		interrogacaoStatus.setOpaque(false);
+		add(interrogacaoStatus, "cell 3 16");
+
 		ImageIcon iconInterrogacao = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
@@ -389,18 +482,43 @@ public class CriarOrcamento extends JPanel {
 		interrogacaoHrsPrev.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoQuantMaxDias.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoCustoAdic.setIcon(new ImageIcon(imgInterrogacao));
+		interrogacaoLucroAdicional.setIcon(new ImageIcon(imgInterrogacao));
+		interrogacaoStatus.setIcon(new ImageIcon(imgInterrogacao));
+		interLT.setIcon(new ImageIcon(imgInterrogacao));
+		interTG.setIcon(new ImageIcon(imgInterrogacao));
+		interTotal.setIcon(new ImageIcon(imgInterrogacao));
 
 		interrogacaoQuantMaxDias.setOpaque(false);
 		interrogacaoHrsPrev.setOpaque(false);
 		interrogacaoCustoAdic.setOpaque(false);
+		interrogacaoLucroAdicional.setOpaque(false);
+		interLT.setOpaque(false);
+		interTG.setOpaque(false);
+		interTotal.setOpaque(false);
 
 		interrogacaoHrsPrev.setToolTipText(
-				"<html><div style = 'width:100px;' > A quantidade de horas que você acha que levará para finalizar o trabalho. </div></html>");
+				"<html><div style = 'width:100px;' > A <b>quantidade de horas</b> que você acha que levará para <b>finalizar</b> o trabalho. </div></html>");
 		interrogacaoQuantMaxDias.setToolTipText(
-				"<html><div style='width:80px;'>" + "A quantidade máxima de dias que você tem para finalizar o pedido. "
-						+ "Você pode indicar em números inteiros, como 1, 2, 3..." + "</div></html>");
+				"<html><div style='width:80px;'>" + "A <b>quantidade máxima de dias<b/> que você tem para finalizar o pedido. "
+						+ "Você pode indicar em números <b>inteiros<b/>, como 1, 2, 3..." + "</div></html>");
 		interrogacaoCustoAdic.setToolTipText("<html> <div style='width:100px;'>"
-				+ "Custos adicionais podem incluir frete, reelaboração do pedido,  entre outros... </div></html>");
+				+ "<b>Custos adicionais</b> podem incluir frete, reelaboração do pedido,  entre outros... </div></html>");
+		interrogacaoStatus.setToolTipText("<html><div style='width:100px;'>Esta parte depende do cliente. <br><b>Pendente:</b> ainda não foi enviado ao cliente;"
+				+ "<br><b>Em andamento:</b> cliente aprovou; <br><b>Concluido: </b>terminou o projeto.</div></html>");
+
+		interrogacaoLucroAdicional.setToolTipText(
+				"<html> <div style='width:100px;'>Valor de venda <b>-</b> valor sem lucro</div></html>");
+		interLT.setToolTipText(
+				"<html> <div style='width:100px;'>Lucro adicional <b>+</b>(valor hora <b>*</b> horas previstas)</div></html>");
+		interTG.setToolTipText(
+				"<html> <div style='width:100px;'>Custo adicional <b>+</b> (valor da materia prima <b>*</b> quantidade) <b>+</b> (valor da materia prima <b>*</b> quantidade)... </div></html>");
+
+		interTotal.setToolTipText("<html> <div style='width:100px;'> (Custo adicional <b>+</b> "
+				+ "(valor da materia prima <b>*</b> quantidade) "
+				+ "<b>+</b> (valor da materia prima "
+				+ "<b>*</b> quantidade)... <b>+</b> "
+				+ "(valor hora <b>*</b> horas previstas)) <b>+</b> "
+				+ "percentual de lucro * (cálculo anterior)</div></html>");
 
 	}
 
