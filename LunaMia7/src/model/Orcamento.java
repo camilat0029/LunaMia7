@@ -52,35 +52,6 @@ public class Orcamento {
 		this.status = status;
 	}
 	
-	public void adicionarDados() {
-		
-	}
-	public void atualizarDados() {
-		
-	}
-	public void excluirDados() {
-		
-	}
-	public void calcularLucro() {
-		
-	}
-	public void calcularGastoTotal(){
-		
-	}
-	public void calcularValorDeVenda() {
-		
-	}
-	public void duplicarOrcamento() {
-		
-	}
-	public void guardarOrcamento() {
-		
-	}
-	public void consultarHistOrcam() {
-		
-	}
-	
-	
 	public String getTituloPedido() {
 		return tituloPedido;
 	}

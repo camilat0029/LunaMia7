@@ -62,8 +62,7 @@ public class CriarOrcamento extends JPanel {
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020, 1464));
 
-		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]",
-				"[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
 		lbVoltar = new JLabel("");
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
@@ -71,7 +70,7 @@ public class CriarOrcamento extends JPanel {
 
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");
 		lbTituloOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbTituloOrcamento, "cell 1 1 3 1");
+		add(lbTituloOrcamento, "cell 1 1 3 1, gapy 60");
 
 		tituloOrcamento = new JTextField();
 		tituloOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -251,7 +250,7 @@ public class CriarOrcamento extends JPanel {
 		btCalcEdi = new JButton("Calcular");
 		btCalcEdi.setBackground(new Color(193, 151, 232));
 		btCalcEdi.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(btCalcEdi, "cell 2 18,growx,aligny center");
+		add(btCalcEdi, "cell 2 18,growx,aligny center, gapy 30");
 
 		lbLucroAdicional = new JLabel("Valor do lucro adicional");
 		lbLucroAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 25));

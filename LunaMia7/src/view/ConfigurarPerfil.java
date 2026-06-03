@@ -54,7 +54,7 @@ public class ConfigurarPerfil extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020, 850));
 		setMinimumSize(new Dimension(1020, 700));
-		setLayout(new MigLayout("gap 16", "[grow][][][][][grow]", "[grow][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout(" gap 16", "[grow][][][][167.00][grow]", "[grow][][][][][][][][][][][grow]"));
 		
 		lbVoltar = new JLabel("") {
 			@Override
@@ -80,7 +80,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		tfNomeCompCP = new JTextField();
 		tfNomeCompCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfNomeCompCP, "cell 2 1 3 1,width 71%,height 38px");
+		add(tfNomeCompCP, "cell 2 1 3 1,width 60%,height 38px");
 		tfNomeCompCP.setColumns(10);
 
 		JLabel lbNomeUsuaCP = new JLabel("Nome de Usuário");
@@ -90,7 +90,7 @@ public class ConfigurarPerfil extends JPanel {
 		JPanel panel_NomeUsuario = new JPanel();
 		panel_NomeUsuario.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_NomeUsuario.setBackground(new Color(255, 255, 255));
-		add(panel_NomeUsuario, "cell 2 2 3 1,width 71%,height 38!");
+		add(panel_NomeUsuario, "cell 2 2 3 1,width 60%,height 38!");
 		panel_NomeUsuario.setLayout(new MigLayout("", "[]", "[]"));
 
 		lbNomeUsuarioCad = new JLabel("");
@@ -104,7 +104,7 @@ public class ConfigurarPerfil extends JPanel {
 		JPanel panel_EmailCad = new JPanel();
 		panel_EmailCad.setBorder(BorderFactory.createEmptyBorder(0, 5, 4, 0));
 		panel_EmailCad.setBackground(new Color(255, 255, 255));
-		add(panel_EmailCad, "cell 2 3 3 1,width 71%,height 38!");
+		add(panel_EmailCad, "cell 2 3 3 1,width 60%,height 38!");
 		panel_EmailCad.setLayout(new MigLayout("", "[grow]", "[grow]"));
 
 		lbEmailCad = new JLabel("");
@@ -117,7 +117,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		pfSenhaCP = new JPasswordField();
 		pfSenhaCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(pfSenhaCP, "cell 2 4,width 21.5%,height 38px");
+		add(pfSenhaCP, "cell 2 4, growx,width 18%,height 38px");
 
 		JPanel panel_btRedefinirSenha = new JPanel();
 		panel_btRedefinirSenha.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -125,7 +125,7 @@ public class ConfigurarPerfil extends JPanel {
 		add(panel_btRedefinirSenha, "cell 3 4 2 2,alignx center,aligny center");
 
 		btRedefinirSenha = new JButton("Redefinir Senha");
-		btRedefinirSenha.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btRedefinirSenha.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		btRedefinirSenha.setBackground(new Color(193, 151, 232));
 		panel_btRedefinirSenha.add(btRedefinirSenha, "growx");
 
@@ -135,7 +135,7 @@ public class ConfigurarPerfil extends JPanel {
 
 		tfTelefoneCP = new JTextField();
 		tfTelefoneCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfTelefoneCP, "cell 2 5,width 21.5%,height 38px");
+		add(tfTelefoneCP, "cell 2 5, growx, width 18%,height 38px");
 		tfTelefoneCP.setColumns(10);
 
 		JLabel lbEstadoCP = new JLabel("Estado");
@@ -144,7 +144,9 @@ public class ConfigurarPerfil extends JPanel {
 
 		cbEstado = new JComboBox();
 		cbEstado.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbEstado, "cell 2 6,growx,width 18%,height 38px");
+		add(cbEstado, "cell 2 6,growx, width 12%,height 38px");
+		cbEstado.setPreferredSize(new Dimension(175,38));
+		cbEstado.setMaximumSize(new Dimension(350,38));
 
 		JLabel lbCidadeCP = new JLabel("Cidade");
 		lbCidadeCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -152,7 +154,10 @@ public class ConfigurarPerfil extends JPanel {
 
 		cbCidade = new JComboBox();
 		cbCidade.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(cbCidade, "cell 4 6,growx,width 18%,height 38px");
+		add(cbCidade, "cell 4 6, growx, width 12%,height 38px");
+		cbCidade.setPreferredSize(new Dimension(100,38));
+		cbCidade.setMaximumSize(new Dimension(600,38));
+		cbCidade.setMinimumSize(new Dimension(100,38));
 
 		JLabel lbPrecoHoraCP = new JLabel("Preço da Hora");
 		lbPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -161,7 +166,7 @@ public class ConfigurarPerfil extends JPanel {
 		tfPrecoHoraCP = new JTextField();
 		tfPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		tfPrecoHoraCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfPrecoHoraCP, "cell 2 7,growx,height 38px");
+		add(tfPrecoHoraCP, "cell 2 7, growx,width 18%,height 38px");
 		tfPrecoHoraCP.setColumns(10);
 
 		JLabel lbPercLucroCP = new JLabel("Percentual de Lucro");
@@ -170,19 +175,19 @@ public class ConfigurarPerfil extends JPanel {
 
 		tfPercLucroCP = new JTextField();
 		tfPercLucroCP.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		add(tfPercLucroCP, "cell 4 7,growx,width 18%,height 38px");
+		add(tfPercLucroCP, "cell 4 7, growx, width 18%,height 38px");
 		tfPercLucroCP.setColumns(10);
 
 		btEscolherFoto = new JButton("Escolher Foto");
 		btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btEscolherFoto.setBackground(new Color(193, 151, 232));
-		add(btEscolherFoto, "cell 3 8,alignx center");
+		add(btEscolherFoto, "cell 3 8,alignx center, gapy 40");
 		btEscolherFoto.setBorderPainted(false);
 		btEscolherFoto.setFocusPainted(false);
 
 		JLabel lbFotoPerfilCP = new JLabel("Foto de Perfil");
 		lbFotoPerfilCP.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbFotoPerfilCP, "cell 1 8");
+		add(lbFotoPerfilCP, "cell 1 8, gapy 40");
 
 		lbFoto = new JLabel();
 
@@ -194,27 +199,27 @@ public class ConfigurarPerfil extends JPanel {
 		lbFoto.setIcon(new ImageIcon(imagemPadrao.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
 
 		lbFoto.setPreferredSize(new Dimension(150, 150));
-		add(lbFoto, "cell 2 8,alignx center");
+		add(lbFoto, "cell 2 8,alignx center, gapy 40");
 
 		JPanel panel_btSalvar = new JPanel();
 		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
 		panel_btSalvar.setBackground(new Color(234, 219, 247));
-		add(panel_btSalvar, "cell 1 9 2 1,alignx center,gapy 15");
+		add(panel_btSalvar, "cell 1 9 2 1,alignx center,gapy 40");
 
 		btExcluirConta = new JButton("Excluir conta");
 		panel_btSalvar.add(btExcluirConta, "cell 0 0,growx");
 		btExcluirConta.setBackground(new Color(193, 151, 232));
-		btExcluirConta.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btExcluirConta.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		btExcluirConta.setBorderPainted(false);
 
 		JPanel panel_btEditar = new JPanel();
 		panel_btEditar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
 		panel_btEditar.setBackground(new Color(234, 219, 247));
-		add(panel_btEditar, "cell 3 9 2 1,alignx center,gapy 15");
+		add(panel_btEditar, "cell 3 9 2 1,alignx center,gapy 40");
 
 		btSalvar = new JButton("Salvar");
 		panel_btEditar.add(btSalvar, "cell 0 0,grow");
-		btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		btSalvar.setBackground(new Color(193, 151, 232));
 
 		btRedefinirSenha.setBorderPainted(false);
@@ -286,8 +291,8 @@ public class ConfigurarPerfil extends JPanel {
 				btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
 				btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
 
-				lbNomeUsuarioCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
-				lbEmailCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+				//lbNomeUsuarioCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+				//lbEmailCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
 
 			}
 		});

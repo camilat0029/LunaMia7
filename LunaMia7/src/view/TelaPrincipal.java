@@ -49,7 +49,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(panelBotoesOrcamento, BorderLayout.EAST);
 
 
-		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo4.png"));
+		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo8.png"));
 		
 		setIconImage(icon.getImage()); //muda a logo para a de gatinho
 
@@ -66,9 +66,13 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	public void mostrarTela(String nome) {
+		int estado = this.getExtendedState();
 		this.cardLayout.show(this.panelTelas, nome);
 		this.panelAtual = nome;
-		this.pack();
+		this.revalidate();
+		this.repaint();
+		this.setExtendedState(estado);
+		
 	}
 
 	public String getPanelAtual() {

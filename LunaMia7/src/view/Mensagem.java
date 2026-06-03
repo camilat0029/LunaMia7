@@ -65,7 +65,7 @@ public class Mensagem extends JDialog {
 		btOk.addActionListener(e -> dispose());
 		buttonPane.add(btOk);
 
-		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
+		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo8.png"));
 		setIconImage(icone.getImage());
 		
 		pack();

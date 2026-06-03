@@ -92,7 +92,7 @@ public class MensagemSimNao extends JDialog {
 
 		buttonPane.add(btNao);
 
-		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
+		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo8.png"));
 		setIconImage(icone.getImage());
 
 	}

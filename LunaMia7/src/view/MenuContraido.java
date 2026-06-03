@@ -58,8 +58,8 @@ public class MenuContraido extends JPanel {
 		lbMostrarMenuExp.setToolTipText("Menu");
 		
 		JLabel lbLogo = new JLabel("");
-		lbLogo.setIcon(new ImageIcon(MenuContraido.class.getResource("/imagensIcones/Logo.png")));
-		add(lbLogo, "cell 0 2,alignx left");
+		lbLogo.setIcon(new ImageIcon(MenuContraido.class.getResource("/imagensIcones/Logo12.png")));
+		add(lbLogo, "cell 0 2,alignx center");
 		
 		  addAncestorListener(new AncestorListener() {
 		        @Override

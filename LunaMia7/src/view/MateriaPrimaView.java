@@ -12,6 +12,8 @@ import javax.swing.JMenuItem;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.JButton;
@@ -45,7 +47,7 @@ public class MateriaPrimaView extends JPanel {
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
-		setLayout(new MigLayout("", "[grow][-60.00][][389.00][grow]", "[][][grow][]"));
+		setLayout(new MigLayout("", "[grow][-60.00][][389.00][grow]", "[grow][][][grow]"));
 		
 		JLabel lbCrieNovoOrcamento = new JLabel("Adicione uma nova matéria prima");
 		lbCrieNovoOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -101,6 +103,38 @@ public class MateriaPrimaView extends JPanel {
 		tabelaMateriaPrima.getColumnModel().getColumn(3).setPreferredWidth(50);  // Botão / mais
 				
 		scrollPane.setViewportView(tabelaMateriaPrima);
+		
+		addComponentListener(new ComponentAdapter() {
+			
+		        @Override
+		        public void componentResized(ComponentEvent e) {
+
+		            int largura = getWidth();
+
+		            // Fonte dos labels e botão (igual ao Login e CadastroUsuario)
+		            int fonteLabel = Math.max(18, Math.min(30, largura / 40));
+		            lbCrieNovoOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, fonteLabel));
+		            btAdicionar.setFont(new Font("Times New Roman", Font.PLAIN, fonteLabel));
+
+		            // Fonte e altura da tabela crescem a partir de 1280px
+		            if (largura >= 1280) {
+		            	
+		                int fonteTabela = Math.max(16, Math.min(20, largura / 55));
+		                int alturaLinha = Math.max(30, largura / 35);
+
+		                tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, fonteTabela));
+		                tabelaMateriaPrima.setRowHeight(alturaLinha);
+		                header.setFont(new Font("Times New Roman", Font.BOLD, fonteTabela + 2));
+
+		            } else {
+		                tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		                tabelaMateriaPrima.setRowHeight(35);
+		                header.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+		            }
+		        }
+
+		});
 		
 		popupBotoes();
 		eventoTabela();

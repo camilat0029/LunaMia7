@@ -12,16 +12,7 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 	
-	public void adicionarDados() {
-		
-	}
-	public void atualizarDados() {
-		
-	}
-	public void excluirDados() {
-		
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
