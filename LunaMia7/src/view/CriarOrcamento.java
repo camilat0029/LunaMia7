@@ -64,7 +64,21 @@ public class CriarOrcamento extends JPanel {
 
 		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
-		lbVoltar = new JLabel("");
+		lbVoltar = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
+				return tooltip;
+			}
+		};
+		lbVoltar.setToolTipText("Voltar");
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
 		add(lbVoltar, "pos 20 20");
 
@@ -823,6 +837,70 @@ public class CriarOrcamento extends JPanel {
 
 	public void setTituloOrcamento(JTextField tituloOrcamento) {
 		this.tituloOrcamento = tituloOrcamento;
+	}
+
+	public JLabel getInterrogacaoHrsPrev() {
+		return interrogacaoHrsPrev;
+	}
+
+	public void setInterrogacaoHrsPrev(JLabel interrogacaoHrsPrev) {
+		this.interrogacaoHrsPrev = interrogacaoHrsPrev;
+	}
+
+	public JLabel getInterrogacaoQuantMaxDias() {
+		return interrogacaoQuantMaxDias;
+	}
+
+	public void setInterrogacaoQuantMaxDias(JLabel interrogacaoQuantMaxDias) {
+		this.interrogacaoQuantMaxDias = interrogacaoQuantMaxDias;
+	}
+
+	public JLabel getInterrogacaoCustoAdic() {
+		return interrogacaoCustoAdic;
+	}
+
+	public void setInterrogacaoCustoAdic(JLabel interrogacaoCustoAdic) {
+		this.interrogacaoCustoAdic = interrogacaoCustoAdic;
+	}
+
+	public JLabel getInterrogacaoLucroAdicional() {
+		return interrogacaoLucroAdicional;
+	}
+
+	public void setInterrogacaoLucroAdicional(JLabel interrogacaoLucroAdicional) {
+		this.interrogacaoLucroAdicional = interrogacaoLucroAdicional;
+	}
+
+	public JLabel getInterTG() {
+		return interTG;
+	}
+
+	public void setInterTG(JLabel interTG) {
+		this.interTG = interTG;
+	}
+
+	public JLabel getInterTotal() {
+		return interTotal;
+	}
+
+	public void setInterTotal(JLabel interTotal) {
+		this.interTotal = interTotal;
+	}
+
+	public JLabel getInterrogacaoStatus() {
+		return interrogacaoStatus;
+	}
+
+	public void setInterrogacaoStatus(JLabel interrogacaoStatus) {
+		this.interrogacaoStatus = interrogacaoStatus;
+	}
+	
+	public JLabel getInterLT() {
+		return interLT;
+	}
+
+	public void setInterLT(JLabel interLT) {
+		this.interLT = interLT;
 	}
 
 }

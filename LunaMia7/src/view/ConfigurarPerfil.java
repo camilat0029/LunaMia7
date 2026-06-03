@@ -65,7 +65,7 @@ public class ConfigurarPerfil extends JPanel {
 				tooltip.setOpaque(true);
 				tooltip.setBackground(new Color(239, 239, 239));
 				tooltip.setForeground(new Color(143, 97, 201));
-				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 
 				return tooltip;
 			}

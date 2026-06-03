@@ -55,8 +55,7 @@ public class VisualizarMateriaPrima extends JPanel {
 				return tooltip;
 			}
 		};
-		lbIconeVoltar
-				.setIcon(new ImageIcon(VisualizarMateriaPrima.class.getResource("/imagensIcones/Icone_Seta2.png")));
+		lbIconeVoltar.setIcon(new ImageIcon(VisualizarMateriaPrima.class.getResource("/imagensIcones/Icone_Seta2.png")));
 		lbIconeVoltar.setToolTipText("Voltar");
 		add(lbIconeVoltar, "pos 20 20,cell 0 0");
 

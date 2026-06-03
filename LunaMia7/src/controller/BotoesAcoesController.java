@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -27,6 +28,7 @@ import view.CadastroMateriaPrimaEstoque;
 import view.CriarOrcamento;
 import view.MateriaPrimaView;
 import view.Mensagem;
+import view.MensagemSimNao;
 import view.Orcamentos;
 import view.VisualizarMateriaPrima;
 import view.VisualizarOrcamento;
@@ -210,13 +212,26 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 	// MÉTODO EXCLUIR MATERIA PRIMA
 	public void excluirMP(MateriaPrima MP) {
+	    boolean emUso = orcamProdDAO.existePorIdMateriaPrima(MP.getIdMateriaPrima());
 
-		int linhaSelecionada = materiaPrimaView.getTabelaMateriaPrima().getSelectedRow();
+	    if (emUso) {
+	        Mensagem.mostrar(null, "Atenção", "Essa matéria prima está \nvinculada a um ou mais orçamentos \ne não pode ser excluída!");
+	        return;
+	    }
 
-		materiaPrimaView.tabelaModeloMateriaPrima.removerMatPrima(linhaSelecionada);
-		materiaPrimaDAO.excluirMateriasPrimas(MP);
+	    int linhaSelecionada = materiaPrimaView.getTabelaMateriaPrima().getSelectedRow();
+	   
+		int confirm = MensagemSimNao.mostrar(null, "Excluir", "Deseja excluir a matéria prima? \nEsta ação não poderá ser desfeita.");
 
-		Mensagem.mostrar(null, "Informação", "Materia prima exluída com sucesso!");
+		if (confirm == JOptionPane.YES_OPTION) {
+			
+		    materiaPrimaView.tabelaModeloMateriaPrima.removerMatPrima(linhaSelecionada);
+		    materiaPrimaDAO.excluirMateriasPrimas(MP);
+
+		    Mensagem.mostrar(null, "Informação", "Materia prima excluída com sucesso!");
+
+		}
+
 	}
 
 	// RECARREGANDO TABELA MATERIA PRIMA
@@ -478,18 +493,25 @@ public class BotoesAcoesController extends ComponentAdapter {
 	}
 	
 	// MÉTODO DE EXCLUIR ORÇAMENTO
+	// MÉTODO DE EXCLUIR ORÇAMENTO
 	public void excluirORC(Orcamento orcamento) {
 		
 		int linhaSelecionada = orcamentos.getTabelaOrcamentos().getSelectedRow();
 		
-		orcamProdDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
-		confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
 		
-		orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
-		orcamentoDAO.excluirOrcamento(orcamento);
-		clienteDAO.excluirCliente(orcamento.getCliente().getIdCliente());
-		
-		Mensagem.mostrar(null, "Informação", "Orçamento exluído com sucesso!");
+		int confirm = MensagemSimNao.mostrar(null, "Excluir", "Deseja excluir o orçamento? \nEsta ação não poderá desfeita.");
+
+		if (confirm == JOptionPane.YES_OPTION) {
+			
+			orcamProdDAO.excluirPorIdOrcamento(orcamento.getIdOrcamento());
+			confirOrcamDAO.excluirConfirOrcam(orcamento.getIdOrcamento());
+			
+			orcamentos.tabelaModeloOrcamento.removerOrcamento(linhaSelecionada);
+			orcamentoDAO.excluirOrcamento(orcamento);
+			clienteDAO.excluirCliente(orcamento.getCliente().getIdCliente());
+			
+			Mensagem.mostrar(null, "Informação", "Orçamento exluído com sucesso!");
+		}
 		
 	}
 	
@@ -504,6 +526,10 @@ public class BotoesAcoesController extends ComponentAdapter {
 		
 		ConfirOrcamDAO confirOrcamDAO = new ConfirOrcamDAO();
 		Cliente cliente = orcamento.getCliente();
+		
+		int confirm = MensagemSimNao.mostrar(null, "Cancelar", "Deseja cancelar o orçamento? \nEsta ação não poderá desfeita, \ne a matéria prima voltará para o estoque.");
+
+		if (confirm == JOptionPane.YES_OPTION) {
 		
 		List<OrcamentoProduto> listaProdUtiORC = orcamProdDAO.listarOrcamProd();
 		List<MateriaPrima> listaMP = materiaPrimaDAO.listarMateriaPrima(usuarioLogado.getEmail());
@@ -537,8 +563,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 		clienteDAO.excluirCliente(orcamento.getCliente().getIdCliente());
 		
 		Mensagem.mostrar(null, "Informação", "Orçamento cancelado com sucesso! \nQuantidade das materias primas \nutilizadas no seu orçamento \natualizadas com sucesso! ");
-		
+		}
 	}
+	
 	
 	public void atualizarQuantMP() {
 
@@ -658,6 +685,10 @@ public class BotoesAcoesController extends ComponentAdapter {
 		criarOrcamento.getTfDtPrevEntrega().setVisible(true);
 		criarOrcamento.getLbGastos().setVisible(true);
 		criarOrcamento.getLbValorLucro().setVisible(true);
+		criarOrcamento.getInterrogacaoLucroAdicional().setVisible(true);
+		criarOrcamento.getInterTotal().setVisible(true);
+		criarOrcamento.getInterLT().setVisible(true);
+		criarOrcamento.getInterTotal().setVisible(true);
 		criarOrcamento.getLbStatus().setVisible(true);
 		criarOrcamento.getCbStatus().setVisible(true);
 		criarOrcamento.getLbValorLucroAdicional().setVisible(true);

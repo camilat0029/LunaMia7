@@ -201,4 +201,32 @@ public class OrcamentoProdutoDAO {
 	    		BancoDeDados.desconectar(conexao);
 	    	}
 	    }
+	    
+	    public boolean existePorIdMateriaPrima(int idMateriaPrima) {
+	        String sql = "SELECT COUNT(*) FROM OrcamentoProduto WHERE id_estoque = ?";
+	        Connection conexao = null;
+	        PreparedStatement pstm = null;
+	        ResultSet rset = null;
+
+	        try {
+	            conexao = BancoDeDados.conectar();
+	            pstm = conexao.prepareStatement(sql);
+	            pstm.setInt(1, idMateriaPrima);
+	            rset = pstm.executeQuery();
+	            if (rset.next()) {
+	                return rset.getInt(1) > 0;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (rset != null) rset.close();
+	                if (pstm != null) pstm.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	            BancoDeDados.desconectar(conexao);
+	        }
+	        return false;
+	    }
 } 

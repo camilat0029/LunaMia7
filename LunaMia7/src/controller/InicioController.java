@@ -104,6 +104,11 @@ public class InicioController {
 		criarOrcamento.getCbFormaPaga().setVisible(false);
 		criarOrcamento.getLbValorFinal().setVisible(false);
 		criarOrcamento.getLbValorFinalCad().setVisible(false);
+		
+		criarOrcamento.getInterrogacaoLucroAdicional().setVisible(false);
+		criarOrcamento.getInterTotal().setVisible(false);
+		criarOrcamento.getInterLT().setVisible(false);
+		criarOrcamento.getInterTotal().setVisible(false);
 
 		criarOrcamento.getBtAdicionar().setVisible(true);
 		criarOrcamento.getBtRemover().setVisible(true);
