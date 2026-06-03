@@ -68,7 +68,6 @@ public class Orcamento {
 		this.quantHorasPrevistas = quantHorasPrevistas;
 	}
 	
-	
 	public float getPrecoHora() {
 		return precoHora;
 	}

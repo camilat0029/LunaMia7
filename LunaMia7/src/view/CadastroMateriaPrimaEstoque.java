@@ -68,7 +68,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 
 		JLabel lbMarca = new JLabel("Marca");
 		lbMarca.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMarca, "cell 1 3");
+		add(lbMarca, "flowx,cell 1 3");
 
 		JLabel lbCor = new JLabel("Cor");
 		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -180,6 +180,10 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 
 		interrogacaoQntUnidade.setToolTipText(
 				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros.</html>");
+		
+		JLabel asteriscoMarca = new JLabel("");
+		asteriscoMarca.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png")));
+		add(asteriscoMarca, "cell 1 3");
 
 	}
 
@@ -254,7 +258,5 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	public void setBtConfirmar(JButton btConfirmar) {
 		this.btConfirmar = btConfirmar;
 	}
-	
-	
 
 }

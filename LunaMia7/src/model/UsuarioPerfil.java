@@ -22,22 +22,7 @@ public class UsuarioPerfil {
 		this.precoHora = precoHora;
 		this.percentualLucro = percentualLucro;
 		this.fotoPerfil = fotoPerfil;
-	}
-	
-	//métodos 
-	
-	public void adicionarDados() {
-		
-	}
-	
-	public void atualizarDados() {
-		
-	}
-	
-	public void excluirDados(){
-		
-	}
-	
+	}	
 	//getters and setters 
 
 	public String getNome() {
@@ -87,8 +72,6 @@ public class UsuarioPerfil {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
 
 	public String getCidade() {
 		return cidade;
