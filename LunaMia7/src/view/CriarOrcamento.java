@@ -32,9 +32,9 @@ public class CriarOrcamento extends JPanel {
 	private JTextField tituloOrcamento, tfNomeCliente, tfEmail, tfContato, tfHorasPrevistas, tfQuantMaxDias;
 	private JTextField tfDataConfPedido, tfDtPrevEntrega, tfCustoAdicional;
 
-	private JLabel lbPrecoHoraUsuario, lbPercLucroUsuario, lbValorCalcSemLucro, lbCalcLucro, lbCalcGastos,
+	private JLabel lbPrecoHoraUsuario, lbPercLucroUsuario, lbLucroAdicionalCad, lbCalcLucro, lbCalcGastos,
 			lbValorCalVenda;
-	private JLabel lbValorSemLucro, lbValorLucro, lbGastos, lbValorVenda, lbDtConfPedido, lbDtPrevEntrega;
+	private JLabel lbLucroAdicional, lbValorLucro, lbGastos, lbValorVenda, lbDtConfPedido, lbDtPrevEntrega;
 	private JLabel lbFormaPaga, lbValorFinal, lbCustoAdicional, lbStatus, lbMateriasOrcam, lbValorFinalCad, lbVoltar;
 
 	private JButton btCalcEdi, btSalvar, btConfirmar, btAdicionar, btRemover;
@@ -248,17 +248,17 @@ public class CriarOrcamento extends JPanel {
 		btCalcEdi.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(btCalcEdi, "cell 2 18,growx,aligny center");
 
-		lbValorSemLucro = new JLabel("Valor sem lucro");
-		lbValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorSemLucro, "cell 1 19");
+		lbLucroAdicional = new JLabel("Valor do lucro adicional");
+		lbLucroAdicional.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbLucroAdicional, "cell 1 19");
 
-		lbValorLucro = new JLabel("Valor do lucro");
+		lbValorLucro = new JLabel("Valor do lucro total");
 		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValorLucro, "cell 3 19");
 
-		lbValorCalcSemLucro = new JLabel("R$");
-		lbValorCalcSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(lbValorCalcSemLucro, "cell 1 20");
+		lbLucroAdicionalCad = new JLabel("R$");
+		lbLucroAdicionalCad.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		add(lbLucroAdicionalCad, "cell 1 20");
 
 		lbCalcLucro = new JLabel("R$");
 		lbCalcLucro.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -484,12 +484,12 @@ public class CriarOrcamento extends JPanel {
 		this.lbPercLucroUsuario = lbPercLucroUsuario;
 	}
 
-	public JLabel getLbValorCalcSemLucro() {
-		return lbValorCalcSemLucro;
+	public JLabel getLbValorCalLucroAdici() {
+		return lbLucroAdicionalCad;
 	}
 
-	public void setLbValorCalcSemLucro(JLabel lbValorCalcSemLucro) {
-		this.lbValorCalcSemLucro = lbValorCalcSemLucro;
+	public void setLbValorCalLucroAdici(JLabel lbValorCalLucroAdici) {
+		this.lbLucroAdicionalCad = lbValorCalLucroAdici;
 	}
 
 	public JLabel getLbCalcLucro() {
@@ -532,12 +532,12 @@ public class CriarOrcamento extends JPanel {
 		this.btConfirmar = btConfirmar;
 	}
 
-	public JLabel getLbValorSemLucro() {
-		return lbValorSemLucro;
+	public JLabel getLbValorLucroAdicional() {
+		return lbLucroAdicional;
 	}
 
-	public void setLbValorSemLucro(JLabel lbValorSemLucro) {
-		this.lbValorSemLucro = lbValorSemLucro;
+	public void setLbValorLucroAdicional(JLabel lbValorLucroAdicional) {
+		this.lbLucroAdicional = lbValorLucroAdicional;
 	}
 
 	public JLabel getLbValorLucro() {

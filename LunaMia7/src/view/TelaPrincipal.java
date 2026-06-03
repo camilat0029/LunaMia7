@@ -49,7 +49,8 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(panelBotoesOrcamento, BorderLayout.EAST);
 
 
-		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo.png"));
+		ImageIcon icon = new ImageIcon(getClass().getResource("/imagensIcones/Logo4.png"));
+		
 		setIconImage(icon.getImage()); //muda a logo para a de gatinho
 
 		setPreferredSize(new Dimension(1020, 640)); // Tamanho de padrão

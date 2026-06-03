@@ -296,7 +296,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 		criarOrcamento.getTfQuantMaxDias().setText(String.valueOf(orcam.getMaxDias()));
 		criarOrcamento.getTfCustoAdicional().setText(String.valueOf(orcam.getValorAdicional()));
 		criarOrcamento.getLbCalcGastos().setText(String.valueOf(orcam.getValorGastos()));
-		criarOrcamento.getLbValorCalcSemLucro().setText(String.valueOf(orcam.getValorSemLucro()));
+		criarOrcamento.getLbValorCalLucroAdici().setText(String.valueOf(orcam.getValorSemLucro()));
 		criarOrcamento.getCbStatus().setSelectedItem(orcam.getStatus());
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
@@ -339,9 +339,16 @@ public class BotoesAcoesController extends ComponentAdapter {
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 		SwingUtilities.invokeLater(() -> {
-			scrollPaneOrcamento.getVerticalScrollBar().setValue(0);
-		});
 
+		    JScrollPane scrollReal = (JScrollPane)
+		            SwingUtilities.getAncestorOfClass(
+		                    JScrollPane.class,
+		                    criarOrcamento);
+
+		    if (scrollReal != null) {
+		        scrollReal.getVerticalScrollBar().setValue(0);
+		    }
+		});
 
 	}
 
@@ -415,7 +422,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 			OrcEditada.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
 			OrcEditada.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText().replace(",", ".")));
 			OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
-			OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText()));
+			OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalLucroAdici().getText()));
 			orcamentoDAO.atualizarOrcamento(OrcEditada);
 
 			ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(OrcEditada.getIdOrcamento());
@@ -462,6 +469,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 			Mensagem.mostrar(null, "Informação", "Orçamento atualizado com sucesso!");
 			navegadorTelas.navegarTela("ORCAMENTOS");
+			limparCamposCriarORC();
 			menu.mostrarPanelCont();
 			
 			OrcEditada = null;
@@ -645,14 +653,14 @@ public class BotoesAcoesController extends ComponentAdapter {
 		criarOrcamento.getBtSalvar().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(true);
 		criarOrcamento.getLbCalcLucro().setVisible(true);
-		criarOrcamento.getLbValorCalcSemLucro().setVisible(true);
+		criarOrcamento.getLbValorCalLucroAdici().setVisible(true);
 		criarOrcamento.getTfDataConfPedido().setVisible(true);
 		criarOrcamento.getTfDtPrevEntrega().setVisible(true);
 		criarOrcamento.getLbGastos().setVisible(true);
 		criarOrcamento.getLbValorLucro().setVisible(true);
 		criarOrcamento.getLbStatus().setVisible(true);
 		criarOrcamento.getCbStatus().setVisible(true);
-		criarOrcamento.getLbValorSemLucro().setVisible(true);
+		criarOrcamento.getLbValorLucroAdicional().setVisible(true);
 		criarOrcamento.getLbValorVenda().setVisible(true);
 		criarOrcamento.getLbValorCalVenda().setVisible(true);
 		criarOrcamento.getLbFormaPaga().setVisible(true);
@@ -673,6 +681,22 @@ public class BotoesAcoesController extends ComponentAdapter {
 		cadMateriaPrima.getTfValor().setText("");
 		cadMateriaPrima.getCbUnidadeMedida().setSelectedIndex(0);
 
+	}
+	
+	public void limparCamposCriarORC() {
+		
+		criarOrcamento.getTituloOrcamento().setText("");
+		criarOrcamento.getTfNomeCliente().setText("");
+		criarOrcamento.getTfContato().setText("");
+		criarOrcamento.getTfEmail().setText("");
+		criarOrcamento.getTfHorasPrevistas().setText("");
+		criarOrcamento.getTfQuantMaxDias().setText("");
+		criarOrcamento.getTfCustoAdicional().setText("");
+		criarOrcamento.getTfDataConfPedido().setText("");
+		criarOrcamento.getTfDtPrevEntrega().setText("");
+		criarOrcamento.getCbStatus().setSelectedIndex(2);
+		criarOrcamento.getCbFormaPaga().setSelectedIndex(0);
+		
 	}
 	
 	public void componentShown(ComponentEvent e) {

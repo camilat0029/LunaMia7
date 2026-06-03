@@ -27,7 +27,7 @@ public class MenuContraido extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		
 		setPreferredSize(new Dimension(50,640));
-		setLayout(new MigLayout("", "[]", "[]"));
+		setLayout(new MigLayout("", "[]", "[][grow][]"));
 		
 		lbMostrarMenuExp = new JLabel(""){
 		    @Override
@@ -56,6 +56,10 @@ public class MenuContraido extends JPanel {
 		add(lbMostrarMenuExp, "cell 0 0");
 		
 		lbMostrarMenuExp.setToolTipText("Menu");
+		
+		JLabel lbLogo = new JLabel("");
+		lbLogo.setIcon(new ImageIcon(MenuContraido.class.getResource("/imagensIcones/Logo.png")));
+		add(lbLogo, "cell 0 2,alignx left");
 		
 		  addAncestorListener(new AncestorListener() {
 		        @Override

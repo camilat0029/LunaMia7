@@ -124,12 +124,12 @@ public class OrcamentoController extends ComponentAdapter{
 		criarOrcamento.getTfHorasPrevistas().setEditable(true);
 		criarOrcamento.getTfQuantMaxDias().setEditable(true);
 		
-		criarOrcamento.getLbValorCalcSemLucro().setVisible(false);
+		criarOrcamento.getLbValorCalLucroAdici().setVisible(false);
 		criarOrcamento.getLbValorCalVenda().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(false);
 		criarOrcamento.getLbCalcLucro().setVisible(false);
 
-		criarOrcamento.getLbValorSemLucro().setVisible(false);
+		criarOrcamento.getLbValorLucroAdicional().setVisible(false);
 		criarOrcamento.getLbValorVenda().setVisible(false);
 		criarOrcamento.getLbGastos().setVisible(false);
 		criarOrcamento.getLbValorLucro().setVisible(false);
@@ -291,14 +291,14 @@ public class OrcamentoController extends ComponentAdapter{
 
 			// VALORES QUE VÃO PARA OS LABELS
 			float totalGastos = custoAdicional + somaProdutos;
-			float valorSemLucro = custoAdicional + somaProdutos + valorTrabalho;
-			float valorVenda = valorSemLucro + (valorSemLucro * (percLucro / 100));
-			float lucroAdicional = valorVenda - valorSemLucro;
+			float valorSemLucroAdic = custoAdicional + somaProdutos + valorTrabalho;
+			float valorVenda = valorSemLucroAdic + (valorSemLucroAdic * (percLucro / 100));
+			float lucroAdicional = valorVenda - valorSemLucroAdic;
 			float lucro = lucroAdicional + valorTrabalho;
 
 			// LABELS RECEBENDO OS VALORES
 			criarOrcamento.getLbCalcGastos().setText(String.format("%.2f", totalGastos));
-			criarOrcamento.getLbValorCalcSemLucro().setText(String.format("%.2f", valorSemLucro));
+			criarOrcamento.getLbValorCalLucroAdici().setText(String.format("%.2f", lucroAdicional));
 			criarOrcamento.getLbValorCalVenda().setText(String.format("%.2f", valorVenda));
 			criarOrcamento.getLbCalcLucro().setText(String.format("%.2f", lucro));
 			
@@ -391,7 +391,7 @@ public class OrcamentoController extends ComponentAdapter{
 			
 			novoOrcamento.setValorAdicional(Float.parseFloat(custoAdicStr));
 			novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText().replace(",", ".")));
-			novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalcSemLucro().getText().replace(",", ".")));
+			novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalLucroAdici().getText().replace(",", ".")));
 			
 			orcamentoDAO.adicionarDados(novoOrcamento);
 			this.orcamentoAtual = novoOrcamento;
@@ -487,12 +487,12 @@ public class OrcamentoController extends ComponentAdapter{
 		criarOrcamento.getBtAdicionar().setVisible(false);
 		criarOrcamento.getBtRemover().setVisible(false);
 
-		criarOrcamento.getLbValorCalcSemLucro().setVisible(true);
+		criarOrcamento.getLbValorCalLucroAdici().setVisible(true);
 		criarOrcamento.getLbValorCalVenda().setVisible(true);
 		criarOrcamento.getLbCalcGastos().setVisible(true);
 		criarOrcamento.getLbCalcLucro().setVisible(true);
 
-		criarOrcamento.getLbValorSemLucro().setVisible(true);
+		criarOrcamento.getLbValorLucroAdicional().setVisible(true);
 		criarOrcamento.getLbValorVenda().setVisible(true);
 		criarOrcamento.getLbGastos().setVisible(true);
 		criarOrcamento.getLbValorLucro().setVisible(true);

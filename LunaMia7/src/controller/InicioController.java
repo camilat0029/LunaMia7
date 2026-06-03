@@ -85,12 +85,12 @@ public class InicioController {
 		criarOrcamento.getTfHorasPrevistas().setEditable(true);
 		criarOrcamento.getTfQuantMaxDias().setEditable(true);
 		
-		criarOrcamento.getLbValorCalcSemLucro().setVisible(false);
+		criarOrcamento.getLbValorCalLucroAdici().setVisible(false);
 		criarOrcamento.getLbValorCalVenda().setVisible(false);
 		criarOrcamento.getLbCalcGastos().setVisible(false);
 		criarOrcamento.getLbCalcLucro().setVisible(false);
 
-		criarOrcamento.getLbValorSemLucro().setVisible(false);
+		criarOrcamento.getLbValorLucroAdicional().setVisible(false);
 		criarOrcamento.getLbValorVenda().setVisible(false);
 		criarOrcamento.getLbGastos().setVisible(false);
 		criarOrcamento.getLbValorLucro().setVisible(false);
