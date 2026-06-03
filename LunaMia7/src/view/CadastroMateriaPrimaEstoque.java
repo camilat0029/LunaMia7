@@ -27,8 +27,11 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 	private JTextField tfQtdUnidade;
 	private JLabel lbIconeVoltar;
 	JButton btConfirmar;
+	JLabel asteriscoValor;
 
 	private JComboBox<model.MateriaPrima.UnidadeMedida> cbUnidadeMedida;
+	private JLabel asteriscoNome;
+	private JLabel asteriscoUM;
 
 	/**
 	 * Create the panel.
@@ -59,7 +62,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 
 		JLabel lbMateriaPrima = new JLabel("Nome da Matéria Prima");
 		lbMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbMateriaPrima, "cell 1 1");
+		add(lbMateriaPrima, "flowx,cell 1 1");
 
 		tfNomeMateriaPrima = new JTextField();
 		tfNomeMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -72,7 +75,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 
 		JLabel lbCor = new JLabel("Cor");
 		lbCor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCor, "cell 2 3");
+		add(lbCor, "flowx,cell 2 3");
 
 		tfMarca = new JTextField();
 		tfMarca.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -90,7 +93,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 
 		JLabel lbQtdUnidade = new JLabel("Quantidade Por Unidade");
 		lbQtdUnidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQtdUnidade, "cell 2 5");
+		add(lbQtdUnidade, "flowx,cell 2 5");
 
 		cbUnidadeMedida = new JComboBox<>(model.MateriaPrima.UnidadeMedida.values());
 		cbUnidadeMedida.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -105,9 +108,9 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		lbQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQtdDisponivel, "flowx,cell 1 7");
 
-		JLabel lbValor = new JLabel("Valor");
+		JLabel lbValor = new JLabel("Valor unitário");
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValor, "cell 2 7");
+		add(lbValor, "flowx,cell 2 7");
 
 		tfQtdDisponivel = new JTextField();
 		tfQtdDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -164,9 +167,8 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 				return tooltip;
 			}
 		};
-		interrogacaoQntUnidade.setIcon(
-				new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")));
-		add(interrogacaoQntUnidade, "flowy,cell 2 5");
+		interrogacaoQntUnidade.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png")));
+		add(interrogacaoQntUnidade, "cell 2 5");
 
 		ImageIcon iconInterrogacao2 = new ImageIcon(
 				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
@@ -176,14 +178,71 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		interrogacaoQntUnidade.setIcon(new ImageIcon(imgInterrogacao2));
 
 		interrogacaoQntDisponivel.setToolTipText(
-				"<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã.</html> ");
+				"<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã. <br><b>* É obrigatório<b/></html> ");
 
 		interrogacaoQntUnidade.setToolTipText(
-				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros.</html>");
+				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros. <br> <b>* É obrigatório<b/></html>");
 		
-		JLabel asteriscoMarca = new JLabel("");
-		asteriscoMarca.setIcon(new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png")));
-		add(asteriscoMarca, "cell 1 3");
+		ImageIcon iconAsterisco = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png"));
+		Image imgAsterisco = iconAsterisco.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		
+		asteriscoNome = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoNome.setIcon(new ImageIcon(imgAsterisco));
+		
+		add(asteriscoNome, "cell 1 1");
+		
+		asteriscoValor = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoValor.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoValor, "cell 2 7,alignx left");
+		
+		asteriscoUM = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+
+				return tooltip;
+			}
+		};
+		asteriscoUM.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoUM, "cell 1 5");
+		
+		asteriscoNome.setToolTipText("<html><b>É obrigatório<b/></html>");
+		asteriscoUM.setToolTipText("<html><b>É obrigatório<b/></html>");
+		asteriscoValor.setToolTipText("<html><b>É obrigatório<b/></html>");
+		
+		
 
 	}
 
