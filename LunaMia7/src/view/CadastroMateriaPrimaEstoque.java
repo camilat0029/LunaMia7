@@ -147,8 +147,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		interrogacaoQntDisponivel.setFont(new Font("Times New Roman", Font.PLAIN, 5));
 		add(interrogacaoQntDisponivel, "cell 1 7");
 
-		ImageIcon iconInterrogacao = new ImageIcon(
-				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
+		ImageIcon iconInterrogacao = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
 		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoQntDisponivel.setIcon(new ImageIcon(imgInterrogacao));
@@ -201,7 +200,6 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 			}
 		};
 		asteriscoNome.setIcon(new ImageIcon(imgAsterisco));
-		
 		add(asteriscoNome, "cell 1 1");
 		
 		asteriscoValor = new JLabel("") {

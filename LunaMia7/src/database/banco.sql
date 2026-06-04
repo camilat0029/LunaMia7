@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
   `email` VARCHAR(64) NOT NULL,
-  `fotoPerfil` VARCHAR(300) NULL,
+  `fotoPerfil` VARCHAR(1000) NULL,
   `senha` VARCHAR(12) NOT NULL,
   `nrTelefone` VARCHAR(15) NOT NULL,
   `nomeUsuario` VARCHAR(50) NOT NULL,
