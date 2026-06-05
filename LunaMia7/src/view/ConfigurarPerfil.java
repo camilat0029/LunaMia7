@@ -43,8 +43,8 @@ public class ConfigurarPerfil extends JPanel {
 	private JButton btSalvar, btEscolherFoto, btExcluirConta;
 	private JLabel interrogacaoPrecoHora, interrogacaoPercentLucro;
 	JButton btRedefinirSenha;
-	private JLabel lbExcluir;
 	private JLabel lbVoltar;
+	private JLabel asteriscoNC, asteriscoC, asteriscoE;
 
 	/**
 	 * Create the panel.
@@ -54,7 +54,7 @@ public class ConfigurarPerfil extends JPanel {
 		setBackground(new Color(234, 219, 247));
 		setPreferredSize(new Dimension(1020, 850));
 		setMinimumSize(new Dimension(1020, 700));
-		setLayout(new MigLayout(" gap 16", "[grow][][][][167.00][grow]", "[grow][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 16", "[grow][][][][167.00][grow]", "[grow][][][][][][][][][][][grow]"));
 		
 		lbVoltar = new JLabel("") {
 			@Override
@@ -199,7 +199,7 @@ public class ConfigurarPerfil extends JPanel {
 		lbFoto.setIcon(new ImageIcon(imagemPadrao.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
 
 		lbFoto.setPreferredSize(new Dimension(150, 150));
-		add(lbFoto, "cell 2 8,alignx center, gapy 40");
+		add(lbFoto, "cell 2 8,alignx center,gapy 40");
 
 		JPanel panel_btSalvar = new JPanel();
 		panel_btSalvar.setLayout(new MigLayout("", "[250:n,center]", "[]"));
@@ -257,19 +257,16 @@ public class ConfigurarPerfil extends JPanel {
 		};
 		add(interrogacaoPercentLucro, "cell 3 7");
 
-		ImageIcon iconInterrogacao = new ImageIcon(
-				CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
+		ImageIcon iconInterrogacao = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Icone_Interrogacao.png"));
 
 		Image imgInterrogacao = iconInterrogacao.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
 		interrogacaoPercentLucro.setIcon(new ImageIcon(imgInterrogacao));
 		interrogacaoPrecoHora.setIcon(new ImageIcon(imgInterrogacao));
 
-		interrogacaoPrecoHora.setToolTipText(
-				"<html><div style='width: 150px;'> O valor que será cobrado por cada hora do seu trabalho."
-						+ "Você pode fazer : (Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. </div></html>");
-		interrogacaoPercentLucro.setToolTipText(
-				"<html><div style='width:150px;'> É a porcentagem que irá sobrar após pagar as despesas do trabalho."
-						+ "Você pode fazer: (Lucro da empresa / Faturamento) * 100 </div></html>");
+		interrogacaoPrecoHora.setToolTipText("<html><div style='width: 150px;'> O valor que será cobrado por cada hora do seu trabalho."
+						+ "Você pode fazer : (Salário Desejado + Custos Fixos e Operacionais) /<br>  Horas Trabalhadas no Mês = Preço por Hora. <br> <b>* É obrigatório </b> </div></html>");
+		interrogacaoPercentLucro.setToolTipText("<html><div style='width:150px;'> É a porcentagem que irá sobrar após pagar as despesas do trabalho."
+						+ "Você pode fazer: (Lucro da empresa / Faturamento) * 100 <br> <b>* É obrigatório </b> </div></html>");
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -293,10 +290,66 @@ public class ConfigurarPerfil extends JPanel {
 
 				//lbNomeUsuarioCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
 				//lbEmailCad.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
-
 			}
 		});
+		
+		ImageIcon iconAsterisco = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png"));
+		Image imgAsterisco = iconAsterisco.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		
+		asteriscoNC = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
 
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239,239,239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoNC.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoNC, "cell 1 1,alignx left,aligny top");
+		
+		asteriscoE = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239,239,239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoE.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoE, "cell 1 6,alignx left,aligny top");
+		
+		asteriscoC = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239,239,239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoC.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoC, "cell 3 6,alignx left,aligny top");
+		
+		asteriscoNC.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoC.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoE.setToolTipText("<html><b>É obrigatório</b></html>");
 	}
 
 	public void salvar(ActionListener actionListener) {

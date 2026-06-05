@@ -55,10 +55,9 @@ public class CriarOrcamento extends JPanel {
 	private JLabel interTotal;
 	private JLabel interrogacaoStatus;
 	private JLabel asteriscoNC;
-	private JLabel asteriscoE;
 	private JLabel asteriscoE_1;
-	private JLabel asteriscoTC;
 	private JLabel asteriscoMO;
+	private JLabel asteriscoTO;
 
 	/**
 	 * Create the panel.
@@ -67,7 +66,7 @@ public class CriarOrcamento extends JPanel {
 		setBackground(new Color(239, 239, 239));
 		setPreferredSize(new Dimension(1020, 1464));
 
-		setLayout(new MigLayout("gap 15", "[grow][207.00][][207.00][grow]", "[grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("gap 15", "[grow][][][207.00][grow]", "[130.00,grow][][][][][][][][][][][][75px:n][75px:n][][][][][][][][][][][][][][][][grow]"));
 
 		lbVoltar = new JLabel("") {
 			@Override
@@ -85,11 +84,11 @@ public class CriarOrcamento extends JPanel {
 		};
 		lbVoltar.setToolTipText("Voltar");
 		lbVoltar.setIcon(new ImageIcon(CriarOrcamento.class.getResource("/imagensIcones/Icone_SetaVaziaDentro.png")));
-		add(lbVoltar, "pos 20 20");
+		add(lbVoltar, "pos 20 20, cell 0 0, gap 60");
 
 		JLabel lbTituloOrcamento = new JLabel("Título do orçamento");
 		lbTituloOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbTituloOrcamento, "flowx,cell 1 1 3 1,gapy 60");
+		add(lbTituloOrcamento, "flowx,cell 1 1 3 1");
 
 		tituloOrcamento = new JTextField();
 		tituloOrcamento.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -554,44 +553,9 @@ public class CriarOrcamento extends JPanel {
 				return tooltip;
 			}
 		};
-		asteriscoNC.setToolTipText("<html><b>É obrigatório<b/></html>");
+		asteriscoNC.setToolTipText("<html><b>É obrigatório</b></html>");
 		asteriscoNC.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoNC, "cell 1 3");
-		
-		asteriscoE = new JLabel("") {
-
-			@Override
-			public JToolTip createToolTip() {
-
-				JToolTip tooltip = super.createToolTip();
-
-				tooltip.setOpaque(true);
-				tooltip.setBackground(new Color(239, 239, 239));
-				tooltip.setForeground(new Color(143, 97, 201));
-				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
-				return tooltip;
-			}
-		};
-		asteriscoE.setToolTipText("<html><b>É obrigatório<b/></html>");
-		asteriscoE.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoE, "cell 1 5");
-		
-		asteriscoTC = new JLabel("") {
-			@Override
-			public JToolTip createToolTip() {
-
-				JToolTip tooltip = super.createToolTip();
-
-				tooltip.setOpaque(true);
-				tooltip.setBackground(new Color(239, 239, 239));
-				tooltip.setForeground(new Color(143, 97, 201));
-				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
-				return tooltip;
-			}
-		};
-		asteriscoTC.setToolTipText("<html><b>É obrigatório<b/></html>");
-		asteriscoTC.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoTC, "cell 3 5");
+		add(asteriscoNC, "cell 1 3,alignx left,aligny top");
 		
 		asteriscoMO = new JLabel("") {
 			@Override
@@ -606,9 +570,26 @@ public class CriarOrcamento extends JPanel {
 				return tooltip;
 			}
 		};
-		asteriscoMO.setToolTipText("<html><b>É obrigatório<b/></html>");
+		asteriscoMO.setToolTipText("<html><b>É obrigatório</b></html>");
 		asteriscoMO.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoMO, "cell 3 9");
+		add(asteriscoMO, "cell 3 9,alignx left,aligny top");
+		
+		asteriscoTO = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.BOLD, 15));
+				return tooltip;
+			}
+		};
+		asteriscoTO.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoTO.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoTO, "cell 1 1,alignx left,aligny top");
 
 	}
 

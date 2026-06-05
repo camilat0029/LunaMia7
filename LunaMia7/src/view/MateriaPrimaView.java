@@ -19,6 +19,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolTip;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
@@ -69,15 +70,44 @@ public class MateriaPrimaView extends JPanel {
 		tabelaMateriaPrima = new JTable(tabelaModeloMateriaPrima);
 		scrollPane.setViewportView(tabelaMateriaPrima);
 			
-		//Estilização do cabeçalho
-		
 		JTableHeader header = tabelaMateriaPrima.getTableHeader();
+		
+		header = new JTableHeader(tabelaMateriaPrima.getColumnModel()) {
+
+		    @Override
+		    public String getToolTipText(java.awt.event.MouseEvent e) {
+
+		        int coluna = columnAtPoint(e.getPoint());
+
+		        if (coluna == COLUNA_BOTOES) {
+		        	
+		            return "<html> <div style = 'width:100px;'><b>Visualizar</b>: para ver detalhes<br><b>Atualizar</b>: permite modificar"
+		            		+ "<br> <b>Excluir</b>: pode ser excluída se não estiver vinculada a nenhum orçamento </div></html>";
+		        }
+
+		        return null;
+		    }
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		    
+		    
+		};
+
+		tabelaMateriaPrima.setTableHeader(header);
 		header.setBackground(new Color(234, 219, 247));
 		header.setForeground(new Color(103, 80, 125));
 		header.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		header.setReorderingAllowed(false); // impede arrastar colunas
-		
-		//Estilização das linhas e colunas
+		header.setReorderingAllowed(false);
 		
 		tabelaMateriaPrima.setRowHeight(35);
 		tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -124,13 +154,11 @@ public class MateriaPrimaView extends JPanel {
 
 		                tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, fonteTabela));
 		                tabelaMateriaPrima.setRowHeight(alturaLinha);
-		                header.setFont(new Font("Times New Roman", Font.BOLD, fonteTabela + 2));
-
+		                tabelaMateriaPrima.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, fonteTabela + 2));
 		            } else {
 		                tabelaMateriaPrima.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		                tabelaMateriaPrima.setRowHeight(35);
-		                header.setFont(new Font("Times New Roman", Font.BOLD, 20));
-
+		                tabelaMateriaPrima.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, 20));
 		            }
 		        }
 

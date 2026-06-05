@@ -19,6 +19,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolTip;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
@@ -65,15 +66,42 @@ public class Orcamentos extends JPanel {
 		tabelaModeloOrcamento = new OrcamentoTableModel();
 		tabelaOrcamentos = new JTable(tabelaModeloOrcamento);
 		
-		//Estilização do cabeçalho
-		
-		JTableHeader header = tabelaOrcamentos.getTableHeader();
+		JTableHeader header = tabelaOrcamentos.getTableHeader();		
+		header = new JTableHeader(tabelaOrcamentos.getColumnModel()) {
+
+		    @Override
+		    public String getToolTipText(java.awt.event.MouseEvent e) {
+
+		        int coluna = columnAtPoint(e.getPoint());
+
+		        if (coluna == COLUNA_BOTOES) {
+		        	
+		            return "<html> <div style = 'width:100px;'><b>Visualizar</b>: para ver detalhes<br><b>Atualizar</b>: permite modificar"
+		            		+ "<br> <b>Excluir</b>: todos os dados são apagados e as matérias primas não voltam para o estoque"
+		            		+ "<br> <b>Cancelar</b>: o orçamento é apagado e as matérias primas voltam para o estoque</div></html>";
+		        }
+
+		        return null;
+		    }
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(234, 219, 247));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		tabelaOrcamentos.setTableHeader(header);
+
 		header.setBackground(new Color(234, 219, 247));
 		header.setForeground(new Color(103, 80, 125));
 		header.setFont(new Font("Times New Roman", Font.BOLD, 18));
-		header.setReorderingAllowed(false); // impede arrastar colunas
-		
-		//Estilização das linhas e colunas
+		header.setReorderingAllowed(false); 
 		
 		tabelaOrcamentos.setRowHeight(35);
 		tabelaOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -121,12 +149,12 @@ public class Orcamentos extends JPanel {
 
 	                tabelaOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, fonteTabela));
 	                tabelaOrcamentos.setRowHeight(alturaLinha);
-	                header.setFont(new Font("Times New Roman", Font.BOLD, fonteTabela + 2));
+	                tabelaOrcamentos.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, fonteTabela + 2));
 
 	            } else {
 	            	tabelaOrcamentos.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 	                tabelaOrcamentos.setRowHeight(35);
-	                header.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	                tabelaOrcamentos.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, 20));
 
 	            }
 	        }

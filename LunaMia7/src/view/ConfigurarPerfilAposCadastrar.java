@@ -40,6 +40,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 	private JComboBox cbEstado;
 	private JButton btIgnorar, btEscolherFoto, btSalvar;
 	private JLabel interrogacaoPrecoHora, interrogacaoPercentLucro;
+	private JLabel asteriscoNC;
 
 	/**
 	 * Create the panel.
@@ -160,7 +161,7 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
 
 		lbFoto.setPreferredSize(new Dimension(150, 150));
 		
-		add(lbFoto, "cell 2 10, gapy 25");
+		add(lbFoto, "cell 2 10,alignx center,gapy 25");
 		
 		btEscolherFoto = new JButton("Escolher foto");
 		btEscolherFoto.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -267,7 +268,26 @@ public class ConfigurarPerfilAposCadastrar extends JPanel {
             }
         });	
 		
+		ImageIcon iconAsterisco = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png"));
+		Image imgAsterisco = iconAsterisco.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		
+		asteriscoNC = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239,239,239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoNC.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoNC, "cell 1 2,alignx left,aligny top");
+		asteriscoNC.setToolTipText("<html><b>É obrigatório</b></html>");
 
 	}
 	

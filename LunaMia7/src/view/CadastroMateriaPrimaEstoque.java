@@ -177,10 +177,10 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 		interrogacaoQntUnidade.setIcon(new ImageIcon(imgInterrogacao2));
 
 		interrogacaoQntDisponivel.setToolTipText(
-				"<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã. <br><b>* É obrigatório<b/></html> ");
+				"<html>Informe a quantidade <br> disponível em relação às unidades. <br> Por exemplo: se tem cinco novelos de lã. <br><b>* É obrigatório</b></html> ");
 
 		interrogacaoQntUnidade.setToolTipText(
-				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros. <br> <b>* É obrigatório<b/></html>");
+				"<html>Informe a quantidade <br> disponível em relação à <br> unidade de medida. <br> Por exemplo: uma linha <br> que possua 8 metros. <br> <b>* É obrigatório</b></html>");
 		
 		ImageIcon iconAsterisco = new ImageIcon(CadastroMateriaPrimaEstoque.class.getResource("/imagensIcones/Asterisco.png"));
 		Image imgAsterisco = iconAsterisco.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
@@ -200,7 +200,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 			}
 		};
 		asteriscoNome.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoNome, "cell 1 1");
+		add(asteriscoNome, "cell 1 1,alignx left,aligny top");
 		
 		asteriscoValor = new JLabel("") {
 			@Override
@@ -217,7 +217,7 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 			}
 		};
 		asteriscoValor.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoValor, "cell 2 7,alignx left");
+		add(asteriscoValor, "cell 2 7,alignx left,aligny top");
 		
 		asteriscoUM = new JLabel("") {
 			@Override
@@ -234,11 +234,11 @@ public class CadastroMateriaPrimaEstoque extends JPanel {
 			}
 		};
 		asteriscoUM.setIcon(new ImageIcon(imgAsterisco));
-		add(asteriscoUM, "cell 1 5");
+		add(asteriscoUM, "cell 1 5,alignx left,aligny top");
 		
-		asteriscoNome.setToolTipText("<html><b>É obrigatório<b/></html>");
-		asteriscoUM.setToolTipText("<html><b>É obrigatório<b/></html>");
-		asteriscoValor.setToolTipText("<html><b>É obrigatório<b/></html>");
+		asteriscoNome.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoUM.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoValor.setToolTipText("<html><b>É obrigatório</b></html>");
 		
 		
 
