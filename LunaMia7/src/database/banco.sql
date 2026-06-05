@@ -17,15 +17,15 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`MateriaPrima` (
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Cliente` (
   `id_cliente` INT AUTO_INCREMENT NOT NULL,
   `nomeCliente` VARCHAR(100) NOT NULL,
-  `telefone` VARCHAR(13) NOT NULL,
-  `email` VARCHAR(64) NOT NULL,
+  `telefone` VARCHAR(13) NULL,
+  `email` VARCHAR(64) NULL,
   PRIMARY KEY (`id_cliente`));
 
 CREATE TABLE IF NOT EXISTS `LunaMia`.`Perfil_Usuario` (
   `email` VARCHAR(64) NOT NULL,
   `fotoPerfil` VARCHAR(1000) NULL,
   `senha` VARCHAR(12) NOT NULL,
-  `nrTelefone` VARCHAR(15) NOT NULL,
+  `nrTelefone` VARCHAR(15) NULL,
   `nomeUsuario` VARCHAR(50) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
   `precoHora` DECIMAL(10,2) NOT NULL,
@@ -114,6 +114,6 @@ CREATE TABLE IF NOT EXISTS `LunaMia`.`OrcamentoProduto` (
     (null, 'metro', 35, 'Circulo6', 'azul6', 30, 'Linha6', 'camila.t29@aluno.ifsc.edu.br', 600),
     (null, 'metro', 40, 'Circulo7', 'azul7', 35, 'Linha7', 'camila.t29@aluno.ifsc.edu.br', 700);
    
-    select * from Orcamento;
+    select * from Cliente;
     
     

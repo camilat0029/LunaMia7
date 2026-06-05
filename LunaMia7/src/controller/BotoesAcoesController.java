@@ -250,8 +250,19 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		visualizarOrcamento.getLbTituloOrcamCad().setText(orcam.getTituloPedido());
 		visualizarOrcamento.getLbNomeClienteCad().setText(orcam.getCliente().getNome());
-		visualizarOrcamento.getLbContClienteCad().setText(orcam.getCliente().getTelefone());
-		visualizarOrcamento.getLbEmailClienteCad().setText(orcam.getCliente().getEmail());
+		
+		if (orcam.getCliente().getTelefone() != null) {
+			visualizarOrcamento.getLbContClienteCad().setText(orcam.getCliente().getTelefone());
+		} else {
+			visualizarOrcamento.getLbContClienteCad().setText("");
+		}
+		
+		if(orcam.getCliente().getEmail() != null) {
+			visualizarOrcamento.getLbEmailClienteCad().setText(orcam.getCliente().getEmail());
+		} else {
+			visualizarOrcamento.getLbEmailClienteCad().setText("");
+		}
+		
 		visualizarOrcamento.getLbPrecoHoraCad().setText(String.valueOf(orcam.getPrecoHora()));
 		visualizarOrcamento.getLbPercLucroCad().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro()));
 		visualizarOrcamento.getLbHorasPrevistasCad().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
@@ -303,13 +314,23 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		criarOrcamento.getTituloOrcamento().setText(orcam.getTituloPedido());
 		criarOrcamento.getTfNomeCliente().setText(orcam.getCliente().getNome());
-		criarOrcamento.getTfContato().setText(orcam.getCliente().getTelefone());
-		criarOrcamento.getTfEmail().setText(orcam.getCliente().getEmail());
+		
+		if(orcam.getCliente().getTelefone() != null) {
+			criarOrcamento.getTfContato().setText(orcam.getCliente().getTelefone());
+		} else {
+			criarOrcamento.getTfContato().setText("");
+		}
+		
+		if(orcam.getCliente().getEmail() != null) {
+			criarOrcamento.getTfEmail().setText(orcam.getCliente().getEmail());
+		} else {
+			criarOrcamento.getTfEmail().setText("");
+		}
+		
 		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(orcam.getPrecoHora())); // Vefificar se dará certo caso a																									     // pessoa queira mudar esse valor
 		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(orcam.getPercentualLucro())); // verificar também
 		criarOrcamento.getTfHorasPrevistas().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
 		criarOrcamento.getTfQuantMaxDias().setText(String.valueOf(orcam.getMaxDias()));
-		criarOrcamento.getTfCustoAdicional().setText(String.valueOf(orcam.getValorAdicional()));
 		criarOrcamento.getLbCalcGastos().setText(String.valueOf(orcam.getValorGastos()));
 		criarOrcamento.getLbValorCalLucroAdici().setText(String.valueOf(orcam.getValorSemLucro()));
 		criarOrcamento.getCbStatus().setSelectedItem(orcam.getStatus());
@@ -346,8 +367,6 @@ public class BotoesAcoesController extends ComponentAdapter {
 		criarOrcamento.getBtCalcEdi().setText("Calcular");
 		criarOrcamento.getBtConfirmar().setText("Atualizar");
 
-		criarOrcamento.getTfNomeCliente().setEditable(false);
-
 		menu.removerMenu();
 		
 		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
@@ -378,7 +397,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 		String nomeClienteStr = criarOrcamento.getTfNomeCliente().getText();
 		String telefoneClienteStr = criarOrcamento.getTfContato().getText();
 		String emailClienteStr = criarOrcamento.getTfEmail().getText();
-		String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+		String custoAdicStr = criarOrcamento.getTfCustoAdicional().getText();
 		String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
 		String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 		String dataConfirStr = criarOrcamento.getTfDataConfPedido().getText();
@@ -392,11 +411,11 @@ public class BotoesAcoesController extends ComponentAdapter {
 			Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExexmplo: Júlia, Dr. Lara...");
 			return;
 			
-		}else if(emailClientePermit(emailClienteStr)==false){
+		}else if(!emailClienteStr.isEmpty() && emailClientePermit(emailClienteStr)==false){
 			Mensagem.mostrar(null, "Informação", "Email inválido! \nExexmplo: aaA@bbbb.cc");
 			return;
 			
-		}else if(telefonePermit(telefoneClienteStr)==false){
+		}else if(!telefoneClienteStr.isEmpty() && telefonePermit(telefoneClienteStr)==false){
 			Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExexmplo: (11) 22222-3333");
 			return;
 			
@@ -409,7 +428,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 			Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExexmplo: 2, 5, 8...");
 			return;
 			
-		} else if(custoAdicPermit(custoAdicStr)==false) {
+		} else if(!custoAdicStr.isEmpty() && custoAdicPermit(custoAdicStr)==false) {
 			Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExexmplo: (2.5); (5,8); (8)...");
 			return;
 			
@@ -424,20 +443,38 @@ public class BotoesAcoesController extends ComponentAdapter {
 		} else {
 			
 			Cliente clienteEdtidado = OrcEditada.getCliente();
+			
+			clienteEdtidado.setNome(criarOrcamento.getTfNomeCliente().getText());
 
-			clienteEdtidado.setTelefone(criarOrcamento.getTfContato().getText());
-			clienteEdtidado.setEmail(criarOrcamento.getTfEmail().getText());
+			if(criarOrcamento.getTfContato().getText().isEmpty()) {
+				clienteEdtidado.setTelefone(null);
+			} else {
+				clienteEdtidado.setTelefone(criarOrcamento.getTfContato().getText());
+			}
+			
+			if(criarOrcamento.getTfEmail().getText().isEmpty()) {
+				clienteEdtidado.setEmail(null);
+			} else {
+				clienteEdtidado.setEmail(criarOrcamento.getTfEmail().getText());
+			}
+			
 			clienteDAO.atualizarCliente(clienteEdtidado);
 
 			OrcEditada.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
 			OrcEditada.setQuantHorasPrevistas(Integer.parseInt(criarOrcamento.getTfHorasPrevistas().getText()));
-			OrcEditada.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
-			OrcEditada.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
+			OrcEditada.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText().replace(",", ".")));
+			OrcEditada.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText().replace(",", ".")));
 			OrcEditada.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
 			OrcEditada.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
-			OrcEditada.setValorAdicional(Float.parseFloat(criarOrcamento.getTfCustoAdicional().getText().replace(",", ".")));
-			OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText()));
-			OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalLucroAdici().getText()));
+			
+			if(custoAdicStr.isEmpty()) {
+				OrcEditada.setValorAdicional(Float.parseFloat("0"));
+			} else {
+				OrcEditada.setValorAdicional(Float.parseFloat(formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText().replace(",", "."))));
+			}
+			
+			OrcEditada.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText().replace(",", ".")));
+			OrcEditada.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalLucroAdici().getText().replace(",", ".")));
 			orcamentoDAO.atualizarOrcamento(OrcEditada);
 
 			ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(OrcEditada.getIdOrcamento());
@@ -460,8 +497,8 @@ public class BotoesAcoesController extends ComponentAdapter {
 					confirOrcam.setDataPrevistaEntrega(null);
 				}
 				
-				confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText()));
-				confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText()));
+				confirOrcam.setValorVenda(Float.parseFloat(criarOrcamento.getLbValorCalVenda().getText().replace(",", ".")));
+				confirOrcam.setLucro(Float.parseFloat(criarOrcamento.getLbCalcLucro().getText().replace(",", ".")));
 				
 				confirOrcamDAO.atualizarConfirOrcam(confirOrcam);
 			}

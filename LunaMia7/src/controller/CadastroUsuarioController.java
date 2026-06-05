@@ -128,6 +128,11 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		});
 
 		adicionarEstado();
+		
+		ComboBoxEstilizacao.estilizarComboBox(this.confPerfilAposCad.getCbCidade());
+		ComboBoxEstilizacao.estilizarComboBox(this.confPerfilAposCad.getCbEstadoCP());
+		ComboBoxEstilizacao.estilizarComboBox(this.confPerfil.getCbCidade());
+		ComboBoxEstilizacao.estilizarComboBox(this.confPerfil.getCbEstado());
 
 		this.confPerfil.getCbEstado().addActionListener(e -> {
 
@@ -264,7 +269,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		if (cadastroUsuario.getTfNomeUsuario().getText().isEmpty()
 				|| cadastroUsuario.getTfNomeComp().getText().isEmpty()
 				|| cadastroUsuario.getTfEmail().getText().isEmpty()
-				|| cadastroUsuario.getTfTelefone().getText().isEmpty()
 				|| cadastroUsuario.getPfSenha().getText().isEmpty()) {
 
 			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
@@ -279,7 +283,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Inválido", "Email inválido! \nExemplo: aaa@bbb.ccc");
 				return;
 				
-			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText())) {
+			} else if(!telefonePermit(cadastroUsuario.getTfTelefone().getText()) && !cadastroUsuario.getTfTelefone().getText().isEmpty()) {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				
@@ -338,7 +342,6 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		if (confPerfilAposCad.getTfNomeCompCP().getText().isEmpty()
 				|| confPerfilAposCad.getTfPercLucroCP().getText().isEmpty()
 				|| confPerfilAposCad.getTfPrecoHoraCP().getText().isEmpty()
-				|| confPerfilAposCad.getTfTelefoneCP().getText().isEmpty()
 				|| confPerfilAposCad.getPfSenhaCP().getText().isEmpty() || cidade == null || cidade.isEmpty()
 				|| estado == null || estado.isEmpty()) {
 
@@ -349,7 +352,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
 				return;
 
-			} else if(!telefonePermit(confPerfilAposCad.getTfTelefoneCP().getText())) {
+			} else if(!telefonePermit(confPerfilAposCad.getTfTelefoneCP().getText()) && !confPerfilAposCad.getTfTelefoneCP().getText().isEmpty()) {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				
@@ -367,7 +370,13 @@ public class CadastroUsuarioController extends ComponentAdapter {
 						usuarioAtualizado.setFotoPerfil("");
 					}
 					usuarioAtualizado.setSenha(confPerfilAposCad.getPfSenhaCP().getText());
-					usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+					
+					if(!confPerfilAposCad.getTfTelefoneCP().getText().trim().isEmpty()) {
+						usuarioAtualizado.setTelefone(confPerfilAposCad.getTfTelefoneCP().getText());
+					} else {
+						usuarioAtualizado.setTelefone(null);
+					}
+					
 					usuarioAtualizado.setNome(confPerfilAposCad.getTfNomeCompCP().getText());
 					usuarioAtualizado.setPrecoHora(Float.parseFloat(precoHoraValido));
 					usuarioAtualizado.setPercentualLucro(Float.parseFloat(percentualLucroValido));
@@ -400,9 +409,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		String estado = (String) confPerfil.getCbEstado().getSelectedItem();
 
 		if (confPerfil.getTfNomeCompCP().getText().isEmpty() || confPerfil.getTfPercLucroCP().getText().isEmpty()
-				|| confPerfil.getTfPrecoHoraCP().getText().isEmpty() || confPerfil.getTfTelefoneCP().getText().isEmpty()
-				|| confPerfil.getPfSenhaCP().getText().isEmpty() || cidade == null || cidade.isEmpty() || estado == null
-				|| estado.isEmpty()) {
+				|| confPerfil.getTfPrecoHoraCP().getText().isEmpty() || confPerfil.getPfSenhaCP().getText().isEmpty() 
+				|| cidade == null || cidade.isEmpty() || estado == null || estado.isEmpty()) {
 
 			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 
@@ -412,7 +420,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Inválido", "Nome Inválido! \nExemplo: Dr. Lara, Letícia");
 				return;
 
-			} else if(!telefonePermit(confPerfil.getTfTelefoneCP().getText())) {
+			} else if(!telefonePermit(confPerfil.getTfTelefoneCP().getText()) && !confPerfil.getTfTelefoneCP().getText().isEmpty()) {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				
@@ -434,7 +442,13 @@ public class CadastroUsuarioController extends ComponentAdapter {
 
 					}
 					usuarioAtualizado.setSenha(confPerfil.getPfSenhaCP().getText());
-					usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
+					
+					if(!confPerfil.getTfTelefoneCP().getText().trim().isEmpty()) {
+						usuarioAtualizado.setTelefone(confPerfil.getTfTelefoneCP().getText());
+					} else {
+						usuarioAtualizado.setTelefone(null);
+					}
+					
 					usuarioAtualizado.setNome(confPerfil.getTfNomeCompCP().getText());
 					usuarioAtualizado.setPrecoHora(Float.parseFloat(precoHoraValido));
 					usuarioAtualizado.setPercentualLucro(Float.parseFloat(percentualLucroValido));
@@ -571,7 +585,13 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			confPerfilAposCad.getTfNomeCompCP().setText(usuarioCadastrado.getNome());
 			confPerfilAposCad.getLbNomeUsuarioCad().setText(usuarioCadastrado.getNomeUsuario());
 			confPerfilAposCad.getLbEmailCad().setText(usuarioCadastrado.getEmail());
-			confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
+			
+			if(usuarioCadastrado.getTelefone()==null) {
+				confPerfilAposCad.getTfTelefoneCP().setText("");
+			} else {
+				confPerfilAposCad.getTfTelefoneCP().setText(usuarioCadastrado.getTelefone());
+			}
+			
 			confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
 
 		}
@@ -586,7 +606,13 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			confPerfil.getTfNomeCompCP().setText(usuario.getNome());
 			confPerfil.getLbNomeUsuarioCad().setText(usuario.getNomeUsuario());
 			confPerfil.getLbEmailCad().setText(usuario.getEmail());
-			confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
+			
+			if(usuario.getTelefone()==null) {
+				confPerfil.getTfTelefoneCP().setText("");
+			} else {
+				confPerfil.getTfTelefoneCP().setText(usuario.getTelefone());
+			}
+			
 			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			confPerfil.getTfPrecoHoraCP().setText(String.valueOf(usuario.getPrecoHora()));

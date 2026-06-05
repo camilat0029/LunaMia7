@@ -59,6 +59,9 @@ public class OrcamentoController extends ComponentAdapter {
 		criarOrcamento.getTabMateriaisEstoque().setModel(criarOrcamento.tabModeloEstoque);
 		criarOrcamento.getTabMateriaisOrcam().setModel(criarOrcamento.tabModeloOrcam);
 		orcamentos.getTabelaOrcamentos().setModel(orcamentos.tabelaModeloOrcamento);
+		
+		ComboBoxEstilizacao.estilizarComboBox(this.criarOrcamento.getCbStatus());
+		ComboBoxEstilizacao.estilizarComboBox(this.criarOrcamento.getCbFormaPaga());
 
 		this.orcamentos.criar(e -> {
 			irParaTelaCriarOrc();
@@ -236,12 +239,12 @@ public class OrcamentoController extends ComponentAdapter {
 	// CALCULANDO VALORES
 	public void calcular() {
 
-		if (criarOrcamento.getTfCustoAdicional().getText().isEmpty() || criarOrcamento.getTfHorasPrevistas().getText().isEmpty() || criarOrcamento.getTfQuantMaxDias().getText().isEmpty()) {
+		if (criarOrcamento.getTfHorasPrevistas().getText().isEmpty() || criarOrcamento.getTfQuantMaxDias().getText().isEmpty()) {
 
 			Mensagem.mostrar(null, "Informação", "Você precisa preencher os campos obrigatórios!");
 
 		} else {
-			String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+			String custoAdicStr = criarOrcamento.getTfCustoAdicional().getText();
 			String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
 			String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 
@@ -253,7 +256,7 @@ public class OrcamentoController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExemplo: 2, 5, 8...");
 				return;
 
-			} else if (custoAdicPermit(custoAdicStr) == false) {
+			} else if (!custoAdicStr.isEmpty() && custoAdicPermit(formatarCustoAdic(custoAdicStr)) == false) {
 				Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExemplo: (2.5); (5,8); (8)...");
 				return;
 
@@ -261,7 +264,14 @@ public class OrcamentoController extends ComponentAdapter {
 				ativandoDevativandoComp();
 
 				float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText());
-				float custoAdicional = Float.parseFloat(custoAdicStr);
+				float custoAdicional;
+				
+				if(custoAdicStr.isEmpty()) {
+					custoAdicional = Float.parseFloat("0");
+				} else {
+					custoAdicional = Float.parseFloat(formatarCustoAdic(custoAdicStr));
+				}
+				
 				float horasPrevistas = Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText());
 				float precoHora = Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText());
 				float valorTrabalho = horasPrevistas * precoHora;
@@ -309,9 +319,7 @@ public class OrcamentoController extends ComponentAdapter {
 	public void salvarInformacoes() {
 
 		if (criarOrcamento.getTituloOrcamento().getText().isEmpty() || criarOrcamento.getTfNomeCliente().getText().isEmpty()
-				|| criarOrcamento.getTfContato().getText().isEmpty() || criarOrcamento.getTfEmail().getText().isEmpty()
-				|| criarOrcamento.getTfCustoAdicional().getText().isEmpty() || criarOrcamento.getTfHorasPrevistas().getText().isEmpty()
-				|| criarOrcamento.getTfQuantMaxDias().getText().isEmpty()) {
+				|| criarOrcamento.getTfHorasPrevistas().getText().isEmpty() || criarOrcamento.getTfQuantMaxDias().getText().isEmpty()) {
 			Mensagem.mostrar(null, "Informação", "Você precisa preencher os campos obrigatórios!");
 
 		} else {
@@ -319,7 +327,7 @@ public class OrcamentoController extends ComponentAdapter {
 			String nomeClienteStr = criarOrcamento.getTfNomeCliente().getText();
 			String telefoneClienteStr = criarOrcamento.getTfContato().getText();
 			String emailClienteStr = criarOrcamento.getTfEmail().getText();
-			String custoAdicStr = formatarCustoAdic(criarOrcamento.getTfCustoAdicional().getText());
+			String custoAdicStr = criarOrcamento.getTfCustoAdicional().getText();
 			String horasPrevStr = criarOrcamento.getTfHorasPrevistas().getText();
 			String quantDiasStr = criarOrcamento.getTfQuantMaxDias().getText();
 
@@ -331,11 +339,11 @@ public class OrcamentoController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Informação", "Nome do cliente inválido! \nExemplo: Júlia, Dr. Lara...");
 				return;
 
-			} else if (emailClientePermit(emailClienteStr) == false) {
+			} else if (!emailClienteStr.isEmpty() && emailClientePermit(emailClienteStr) == false) {
 				Mensagem.mostrar(null, "Informação", "Email inválido! \nExemplo: aaA@bbbb.cc");
 				return;
 
-			} else if (telefonePermit(telefoneClienteStr) == false) {
+			} else if (!telefoneClienteStr.isEmpty() && telefonePermit(telefoneClienteStr) == false) {
 				Mensagem.mostrar(null, "Informação", "Telefone inválido! \nExemplo: (11) 22222-3333");
 				return;
 
@@ -347,7 +355,7 @@ public class OrcamentoController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Informação", "Quantidade máxima de dias Inválido! \nExemplo: 2, 5, 8...");
 				return;
 
-			} else if (custoAdicPermit(custoAdicStr) == false) {
+			} else if (!custoAdicStr.isEmpty() && custoAdicPermit(formatarCustoAdic(custoAdicStr)) == false) {
 				Mensagem.mostrar(null, "Informação", "Custo adicional inválido! \nExemplo: (2.5); (5,8); (8)...");
 				return;
 
@@ -360,8 +368,19 @@ public class OrcamentoController extends ComponentAdapter {
 				// DO CLIENTE
 				Cliente cliente = new Cliente(null, null, null);
 				cliente.setNome(criarOrcamento.getTfNomeCliente().getText());
-				cliente.setEmail(criarOrcamento.getTfEmail().getText());
-				cliente.setTelefone(criarOrcamento.getTfContato().getText());
+				
+				if(criarOrcamento.getTfEmail().getText().isEmpty()) {
+					cliente.setEmail(null);
+				} else {
+					cliente.setEmail(criarOrcamento.getTfEmail().getText());
+				}
+				
+				if(criarOrcamento.getTfContato().getText().isEmpty()) {
+					cliente.setTelefone(null);
+				} else {
+					cliente.setTelefone(criarOrcamento.getTfContato().getText());
+				}
+				
 				clienteDAO.adicionarDados(cliente);
 
 				// DO ORÇAMENTO
@@ -376,7 +395,13 @@ public class OrcamentoController extends ComponentAdapter {
 				novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
 				novoOrcamento.setUsuarioPerfil(usuarioLogado);
 				novoOrcamento.setCliente(cliente);
-				novoOrcamento.setValorAdicional(Float.parseFloat(custoAdicStr));
+				
+				if(custoAdicStr.isEmpty()) {
+					novoOrcamento.setValorAdicional(Float.parseFloat("0"));
+				} else {
+					novoOrcamento.setValorAdicional(Float.parseFloat(formatarCustoAdic(custoAdicStr)));
+				}
+				
 				novoOrcamento.setValorGastos(Float.parseFloat(criarOrcamento.getLbCalcGastos().getText().replace(",", ".")));
 				novoOrcamento.setValorSemLucro(Float.parseFloat(criarOrcamento.getLbValorCalLucroAdici().getText().replace(",", ".")));
 				orcamentoDAO.adicionarDados(novoOrcamento);
