@@ -31,6 +31,8 @@ public class CadastroUsuario extends JPanel {
 	private JLabel lbIconeVoltar;
 	private JButton btCadastrar;
 	private JLabel asteriscoNC, asteriscoNU, asteriscoE, asteriscoS;
+	private JLabel lbConfirmarSenha;
+	private JPasswordField pfConfirmarSenha;
 	
 	public CadastroUsuario() {
 		
@@ -55,7 +57,7 @@ public class CadastroUsuario extends JPanel {
 		};
 		
 		lbIconeVoltar.setIcon(new ImageIcon(CadastroUsuario.class.getResource("/imagensIcones/Icone_Seta.png")));
-		add(lbIconeVoltar, "pos 20 20");
+		add(lbIconeVoltar, "pos 20 20,cell 0 0");
 		lbIconeVoltar.setToolTipText("Voltar");
 		
 		JLabel lbLunaMia = new JLabel("Luna & Mia");
@@ -106,6 +108,14 @@ public class CadastroUsuario extends JPanel {
 		pfSenha.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		add(pfSenha, "cell 2 7,growx,width 27%,height 38px");
 		
+		lbConfirmarSenha = new JLabel("Confirme a senha");
+		lbConfirmarSenha.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		add(lbConfirmarSenha, "cell 1 8");
+		
+		pfConfirmarSenha = new JPasswordField();
+		pfConfirmarSenha.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		add(pfConfirmarSenha, "cell 2 8,growx, width 27%,height 38px");
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(234, 219, 247));
 		add(panel, "cell 1 9 2 1,grow");
@@ -131,6 +141,7 @@ public class CadastroUsuario extends JPanel {
                 lbNomeUsuario.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                 lbTelefone.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                 lbSenha.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
+                lbConfirmarSenha.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                 btCadastrar.setFont(new Font("Times New Roman", Font.PLAIN, novaFonte));
                                 
             }
@@ -260,5 +271,16 @@ public class CadastroUsuario extends JPanel {
 	public void setPfSenha(JPasswordField pfSenha) {
 		this.pfSenha = pfSenha;
 	}
+
+	public JPasswordField getPfConfirmarSenha() {
+		return pfConfirmarSenha;
+	}
+
+	public void setPfConfirmarSenha(JPasswordField pfConfirmarSenha) {
+		this.pfConfirmarSenha = pfConfirmarSenha;
+	}
+
+	
+	
 
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
@@ -50,6 +51,7 @@ public class CadastroUsuarioController extends ComponentAdapter {
 	private File arquivoSelecionado;
 	private boolean EmailRepetido;
 	private boolean UsuarioRepetido;
+	private boolean SenhaIgual;
 
 	public CadastroUsuarioController(CadastroUsuario cadastroUsuario, UsuarioPerfilDAO usuarioDAO,
 			NavegadorTelas navegadorTelas, Menu menu, ConfigurarPerfilAposCadastrar confPerfilAposCad,
@@ -269,7 +271,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		if (cadastroUsuario.getTfNomeUsuario().getText().isEmpty()
 				|| cadastroUsuario.getTfNomeComp().getText().isEmpty()
 				|| cadastroUsuario.getTfEmail().getText().isEmpty()
-				|| cadastroUsuario.getPfSenha().getText().isEmpty()) {
+				|| cadastroUsuario.getPfSenha().getText().isEmpty()
+				|| cadastroUsuario.getPfConfirmarSenha().getText().isEmpty()) {
 
 			Mensagem.mostrar(null, "Informação", "Preencha todos os campos!");
 
@@ -287,7 +290,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				Mensagem.mostrar(null, "Inválido", "Telefone inválido! (11) 22222-3333");
 				return;
 				
-			} else if(!senhaPermitida(new String(cadastroUsuario.getPfSenha().getPassword()))){
+			} else if(!senhaPermitida(new String(cadastroUsuario.getPfSenha().getPassword())) 
+					&& !senhaPermitida(new String(cadastroUsuario.getPfConfirmarSenha().getPassword()))){
 				Mensagem.mostrar(null, "Inválido", "Senha inválida! \nMínimo 8 caracteres");
 				return;
 				
@@ -295,33 +299,39 @@ public class CadastroUsuarioController extends ComponentAdapter {
 				
 				verificarEmail();
 				verificarUsuarioPerfil();
+				senhaIgual();
 
 				if (EmailRepetido == false && UsuarioRepetido == false) {
+					
+					if(SenhaIgual == true) {
+						
+						UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
 
-					UsuarioPerfil novoUsuario = new UsuarioPerfil(null, null, null, null, null, null, null, 0, 0, null);
+						novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
+						novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
+						novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
+						novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());
+						novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
 
-					novoUsuario.setNome(cadastroUsuario.getTfNomeComp().getText());
-					novoUsuario.setNomeUsuario(cadastroUsuario.getTfNomeUsuario().getText());
-					novoUsuario.setEmail(cadastroUsuario.getTfEmail().getText());
-					novoUsuario.setSenha(cadastroUsuario.getPfSenha().getText());
-					novoUsuario.setTelefone(cadastroUsuario.getTfTelefone().getText());
+						novoUsuario.setCidade("");
+						novoUsuario.setEstado("");
+						novoUsuario.setFotoPerfil("");
+						novoUsuario.setPercentualLucro(0);
+						novoUsuario.setPrecoHora(0);
 
-					novoUsuario.setCidade("");
-					novoUsuario.setEstado("");
-					novoUsuario.setFotoPerfil("");
-					novoUsuario.setPercentualLucro(0);
-					novoUsuario.setPrecoHora(0);
+						usuarioDAO.adicionarDados(novoUsuario);
+						this.usuarioCadastrado = novoUsuario;
 
-					usuarioDAO.adicionarDados(novoUsuario);
-					this.usuarioCadastrado = novoUsuario;
+						Mensagem.mostrar(null, "Sucesso", "Cadastro realizado com Sucesso!");
 
-					Mensagem.mostrar(null, "Sucesso", "Cadastro realizado com Sucesso!");
-
-					navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
-					limparCamposTelaCadastro();
+						navegadorTelas2.navegarTela("CONFIGURAR_PERFIL_APOS_CADASTRAR");
+						limparCamposTelaCadastro();
+					} else {
+						Mensagem.mostrar(null, "Inválido", "Senha não confirmada. \nSenha e Confirmar Senha \nprecisam ser iguais");
+					}
 
 				} else if (EmailRepetido == true && UsuarioRepetido == true) {
-					Mensagem.mostrar(null, "Inválido", "Este email e Usuário já estão em uso. \nInforme outros.");
+					Mensagem.mostrar(null, "Inválido", "Este email e usuário já estão em uso. \nInforme outros.");
 				} else if (EmailRepetido == true && UsuarioRepetido == false) {
 					Mensagem.mostrar(null, "Inválido", "Este email já está em uso. \nEscolha outro.");
 				} else if (EmailRepetido == false && UsuarioRepetido == true) {
@@ -502,6 +512,16 @@ public class CadastroUsuarioController extends ComponentAdapter {
 		String senhaValida = ".{8,}";
 		return senha.matches(senhaValida);
 	}
+	
+	//VERIFICAÇÃO SE SENHA E CONFIRMAR SENHA SÃO IGUAIS
+	public void senhaIgual() {
+		
+		if(cadastroUsuario.getPfSenha().getText().equals(cadastroUsuario.getPfConfirmarSenha().getText())) {
+			SenhaIgual = true;
+		}else {
+			SenhaIgual = false;
+		}
+	}
 
 	// VERIFICAÇÃO USUARIO REPETIDO
 	public void verificarUsuarioPerfil() {
@@ -593,6 +613,9 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			}
 			
 			confPerfilAposCad.getPfSenhaCP().setText(usuarioCadastrado.getSenha());
+			confPerfilAposCad.getPfSenhaCP().setEditable(false);
+			confPerfilAposCad.getPfSenhaCP().setFocusable(false);
+			confPerfilAposCad.getPfSenhaCP().setBackground(Color.WHITE);
 
 		}
 
@@ -614,6 +637,11 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			}
 			
 			confPerfil.getPfSenhaCP().setText(usuario.getSenha());
+			confPerfil.getPfSenhaCP().setEditable(false);
+			confPerfil.getPfSenhaCP().setFocusable(false);
+			confPerfil.getPfSenhaCP().setBackground(Color.WHITE);
+			
+			
 			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
 			confPerfil.getTfPrecoHoraCP().setText(String.valueOf(usuario.getPrecoHora()));
 
