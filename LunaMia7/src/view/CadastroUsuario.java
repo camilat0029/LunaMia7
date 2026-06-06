@@ -30,7 +30,7 @@ public class CadastroUsuario extends JPanel {
 	private JPasswordField pfSenha;
 	private JLabel lbIconeVoltar;
 	private JButton btCadastrar;
-	private JLabel asteriscoNC, asteriscoNU, asteriscoE, asteriscoS;
+	private JLabel asteriscoNC, asteriscoNU, asteriscoE, asteriscoS, asteriscoCS;
 	private JLabel lbConfirmarSenha;
 	private JPasswordField pfConfirmarSenha;
 	
@@ -215,13 +215,33 @@ public class CadastroUsuario extends JPanel {
 				return tooltip;
 			}
 		};
+		
 		asteriscoS.setIcon(new ImageIcon(imgAsterisco));
 		add(asteriscoS, "cell 1 7,alignx left,aligny top");
+		
+		asteriscoCS = new JLabel("") {
+			@Override
+			public JToolTip createToolTip() {
+
+				JToolTip tooltip = super.createToolTip();
+
+				tooltip.setOpaque(true);
+				tooltip.setBackground(new Color(239, 239, 239));
+				tooltip.setForeground(new Color(143, 97, 201));
+				tooltip.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+				return tooltip;
+			}
+		};
+		asteriscoCS.setIcon(new ImageIcon(imgAsterisco));
+		add(asteriscoCS, "cell 1 8,alignx left,aligny top");
 		
 		asteriscoNC.setToolTipText("<html><b>É obrigatório</b></html>");
 		asteriscoNU.setToolTipText("<html><b>É obrigatório</b></html>");
 		asteriscoE.setToolTipText("<html><b>É obrigatório</b></html>");
 		asteriscoS.setToolTipText("<html><b>É obrigatório</b></html>");
+		asteriscoCS.setToolTipText("<html><b>É obrigatório</b></html>");
+
 	}
 	
 	public void voltar(MouseListener mouseListener) {
