@@ -46,10 +46,6 @@ public class MensagemSimNao extends JDialog {
 
 		lbMensagem.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-		contentPanel.add(lbMensagem, BorderLayout.CENTER);
-
-		pack();
-
 		setMinimumSize(new Dimension(330, 150));
 		setLocationRelativeTo(parent);
 
@@ -94,6 +90,8 @@ public class MensagemSimNao extends JDialog {
 
 		ImageIcon icone = new ImageIcon(getClass().getResource("/imagensIcones/Logo8.png"));
 		setIconImage(icone.getImage());
+		
+		pack();
 
 	}
 
@@ -116,7 +114,7 @@ public class MensagemSimNao extends JDialog {
 	}
 
 	public void setMensagem(String mensagem) {
-		lbMensagem.setText(mensagem);
+		lbMensagem.setText(formatarMensagem(mensagem));
 	}
 
 	public void setTitulo(String titulo) {

@@ -72,6 +72,7 @@ public class OrcamentoController extends ComponentAdapter {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				navegadorTelas.navegarTela("ORCAMENTOS");
+				limparCamposCriarORC();
 				menu.mostrarPanelCont();
 			}
 		});
@@ -110,8 +111,8 @@ public class OrcamentoController extends ComponentAdapter {
 
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 
-		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
-		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
+		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()).replace(".", ","));
+		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()).replace(".", ","));
 		criarOrcamento.getTituloOrcamento().setEditable(true);
 		criarOrcamento.getTfNomeCliente().setEditable(true);
 		criarOrcamento.getTfContato().setEditable(true);
@@ -263,7 +264,7 @@ public class OrcamentoController extends ComponentAdapter {
 			} else {
 				ativandoDevativandoComp();
 
-				float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText());
+				float percLucro = Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText().replace(",", "."));
 				float custoAdicional;
 				
 				if(custoAdicStr.isEmpty()) {
@@ -273,14 +274,14 @@ public class OrcamentoController extends ComponentAdapter {
 				}
 				
 				float horasPrevistas = Float.parseFloat(criarOrcamento.getTfHorasPrevistas().getText());
-				float precoHora = Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText());
+				float precoHora = Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText().replace(",", "."));
 				float valorTrabalho = horasPrevistas * precoHora;
 				
 				int totalLinhas = criarOrcamento.tabModeloOrcam.getRowCount();
 				float somaProdutos = 0;
 
 				for (int i = 0; i < totalLinhas; i++) {
-					float valorProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 1).toString());
+					float valorProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 1).toString().replace(",", "."));
 					float quantProduto = Float.parseFloat(criarOrcamento.tabModeloOrcam.getValueAt(i, 2).toString());
 					float valorPorProduto = valorProduto * quantProduto;
 					somaProdutos += valorPorProduto;
@@ -389,8 +390,8 @@ public class OrcamentoController extends ComponentAdapter {
 				Orcamento novoOrcamento = new Orcamento(null, 0, 0, 0, null, 0, 0, 0, 0);
 				novoOrcamento.setTituloPedido(criarOrcamento.getTituloOrcamento().getText());
 				novoOrcamento.setStatus((Orcamento.Status) criarOrcamento.getCbStatus().getSelectedItem());
-				novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText()));
-				novoOrcamento.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText()));
+				novoOrcamento.setPrecoHora(Float.parseFloat(criarOrcamento.getLbPrecoHoraUsuario().getText().replace(",", ".")));
+				novoOrcamento.setPercentualLucro(Float.parseFloat(criarOrcamento.getLbPercLucroUsuario().getText().replace(",", ".")));
 				novoOrcamento.setQuantHorasPrevistas(Integer.parseInt(criarOrcamento.getTfHorasPrevistas().getText()));
 				novoOrcamento.setMaxDias(Integer.parseInt(criarOrcamento.getTfQuantMaxDias().getText()));
 				novoOrcamento.setUsuarioPerfil(usuarioLogado);
@@ -410,7 +411,7 @@ public class OrcamentoController extends ComponentAdapter {
 
 				// DE CONFIRMAÇÃO DO ORCAMENTO
 				ConfirOrcam confirOrcam = new ConfirOrcam(null, null, null, 0, 0);
-				confirOrcam.setFormPagamento(null);
+				confirOrcam.setFormPagamento(criarOrcamento.getCbFormaPaga().getSelectedItem().toString());;
 				confirOrcam.setDataPrevistaEntrega(null);
 				confirOrcam.setDataConfirmacao(null);
 				confirOrcam.setOrcamento(novoOrcamento);
@@ -492,7 +493,7 @@ public class OrcamentoController extends ComponentAdapter {
 
 		} else {
 
-			criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
+			criarOrcamento.setPreferredSize(new Dimension(1020, 1400));
 			criarOrcamento.getBtSalvar().setVisible(false);
 
 		}
@@ -531,7 +532,7 @@ public class OrcamentoController extends ComponentAdapter {
 
 	public void ativDesativCompAoSalvar() {
 
-		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
+		criarOrcamento.setPreferredSize(new Dimension(1020, 1400));
 
 		criarOrcamento.getTituloOrcamento().setEditable(false);
 		criarOrcamento.getTfNomeCliente().setEditable(false);

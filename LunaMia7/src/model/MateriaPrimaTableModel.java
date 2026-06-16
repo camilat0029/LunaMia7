@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.swing.table.AbstractTableModel;
 public class MateriaPrimaTableModel extends AbstractTableModel{
 	
 	private List<MateriaPrima> listaMateriasPrimas = new ArrayList<>();
+	
+	private final DecimalFormat formatarNumero = new DecimalFormat("0.00");
 	
 	private String[] colunas = {"Nome", "Valor", "Quantia"};
 
@@ -42,7 +45,7 @@ public class MateriaPrimaTableModel extends AbstractTableModel{
 			return materiaPrima.getNome();
 			
 		case 1:
-			return materiaPrima.getValor();
+			return formatarNumero.format(materiaPrima.getValor());
 			
 		case 2:
 			return materiaPrima.getQuantidadeDisponivel();

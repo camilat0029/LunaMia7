@@ -162,9 +162,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 		visualizarMateriaPrima.getLbMarcaCad().setText(MP.getMarca());
 		visualizarMateriaPrima.getLbCorCad().setText(MP.getCor());
 		visualizarMateriaPrima.getLbQuantCad().setText(String.valueOf(MP.getQuantidadeDisponivel()));
-		visualizarMateriaPrima.getLbQuantUniCad().setText(String.valueOf(MP.getQtdPorUnidade()));
+		visualizarMateriaPrima.getLbQuantUniCad().setText(String.valueOf(MP.getQtdPorUnidade()).replace(".", ","));
 		visualizarMateriaPrima.getLbUnMedCad().setText(String.valueOf(MP.getUnidadeMedida()));
-		visualizarMateriaPrima.getLbValorCad().setText(String.valueOf(MP.getValor()));
+		visualizarMateriaPrima.getLbValorCad().setText(String.valueOf(MP.getValor()).replace(".", ","));
 
 		menu.removerMenu();
 		navegadorTelas.navegarTela("VISUALIZAR_MATERIA_PRIMA");
@@ -180,10 +180,10 @@ public class BotoesAcoesController extends ComponentAdapter {
 		cadMateriaPrima.getTfMarca().setText(MP.getMarca());
 		cadMateriaPrima.getTfCor().setText(MP.getCor());
 		cadMateriaPrima.getTfQtdDisponivel().setText(String.valueOf(MP.getQuantidadeDisponivel()));
-		cadMateriaPrima.getTfQtdUnidade().setText(String.valueOf(MP.getQtdPorUnidade()));
+		cadMateriaPrima.getTfQtdUnidade().setText(String.valueOf(MP.getQtdPorUnidade()).replace(".", ","));
 		cadMateriaPrima.getCbUnidadeMedida().setSelectedItem(MP.getUnidadeMedida());
-		;
-		cadMateriaPrima.getTfValor().setText(String.valueOf(MP.getValor()));
+		
+		cadMateriaPrima.getTfValor().setText(String.valueOf(MP.getValor()).replace(".", ","));
 
 		cadMateriaPrima.getBtConfirmar().setText("Atualizar");
 
@@ -198,9 +198,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 		MpEditada.setMarca(cadMateriaPrima.getTfMarca().getText());
 		MpEditada.setCor(cadMateriaPrima.getTfCor().getText());
 		MpEditada.setQuantidadeDisponivel(Integer.parseInt(cadMateriaPrima.getTfQtdDisponivel().getText()));
-		MpEditada.setQtdPorUnidade(Float.parseFloat(cadMateriaPrima.getTfQtdUnidade().getText()));
+		MpEditada.setQtdPorUnidade(Float.parseFloat(cadMateriaPrima.getTfQtdUnidade().getText().replace(",", ".")));
 		MpEditada.setUnidadeMedida((MateriaPrima.UnidadeMedida) cadMateriaPrima.getCbUnidadeMedida().getSelectedItem());
-		MpEditada.setValor(Float.parseFloat(cadMateriaPrima.getTfValor().getText()));
+		MpEditada.setValor(Float.parseFloat(cadMateriaPrima.getTfValor().getText().replace(",", ".")));
 
 		materiaPrimaDAO.atualizarMateriasPrimas(MpEditada);
 
@@ -263,11 +263,11 @@ public class BotoesAcoesController extends ComponentAdapter {
 			visualizarOrcamento.getLbEmailClienteCad().setText("");
 		}
 		
-		visualizarOrcamento.getLbPrecoHoraCad().setText(String.valueOf(orcam.getPrecoHora()));
-		visualizarOrcamento.getLbPercLucroCad().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro()));
+		visualizarOrcamento.getLbPrecoHoraCad().setText(String.valueOf(orcam.getPrecoHora()).replace(".", ","));
+		visualizarOrcamento.getLbPercLucroCad().setText(String.valueOf(orcam.getUsuarioPerfil().getPercentualLucro()).replace(".", ","));
 		visualizarOrcamento.getLbHorasPrevistasCad().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
 		visualizarOrcamento.getLbQuantDiasMaxCad().setText(String.valueOf(orcam.getMaxDias()));
-		visualizarOrcamento.getLbCustoAdiCad().setText(String.valueOf(orcam.getValorAdicional()));
+		visualizarOrcamento.getLbCustoAdiCad().setText(String.valueOf(orcam.getValorAdicional()).replace(".", ","));
 		visualizarOrcamento.getLbStatusCad().setText(String.valueOf(orcam.getStatus()));
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
@@ -286,13 +286,13 @@ public class BotoesAcoesController extends ComponentAdapter {
 				visualizarOrcamento.getLbDtEntregaCad().setText(String.valueOf(confirOrcam.getDataPrevistaEntrega()));
 			}
 			
-			visualizarOrcamento.getLbValorVendaCad().setText(String.valueOf(confirOrcam.getValorVenda()));
-			visualizarOrcamento.getLbValorLucroCad().setText(String.valueOf(confirOrcam.getLucro()));
-			visualizarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
+			visualizarOrcamento.getLbValorVendaCad().setText(String.valueOf(confirOrcam.getValorVenda()).replace(".", ","));
+			visualizarOrcamento.getLbValorLucroCad().setText(String.valueOf(confirOrcam.getLucro()).replace(".", ","));
+			visualizarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()).replace(".", ","));
 		}
 
-		visualizarOrcamento.getLbTotalGastosCad().setText(String.valueOf(orcam.getValorGastos()));
-		visualizarOrcamento.getLbValorSemLucroCad().setText(String.valueOf(orcam.getValorSemLucro()));
+		visualizarOrcamento.getLbTotalGastosCad().setText(String.valueOf(orcam.getValorGastos()).replace(".", ","));
+		visualizarOrcamento.getLbValorSemLucroCad().setText(String.valueOf(orcam.getValorSemLucro()).replace(".", ","));
 
 		List<MateriaPrima> MPs = orcamProdDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
 		visualizarOrcamento.tabModeloEstoque.setLista(MPs);
@@ -327,12 +327,13 @@ public class BotoesAcoesController extends ComponentAdapter {
 			criarOrcamento.getTfEmail().setText("");
 		}
 		
-		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(orcam.getPrecoHora())); // Vefificar se dará certo caso a																									     // pessoa queira mudar esse valor
-		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(orcam.getPercentualLucro())); // verificar também
+		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(orcam.getPrecoHora()).replace(".", ",")); 																								   
+		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(orcam.getPercentualLucro()).replace(".", ",")); 
 		criarOrcamento.getTfHorasPrevistas().setText(String.valueOf(orcam.getQuantHorasPrevistas()));
 		criarOrcamento.getTfQuantMaxDias().setText(String.valueOf(orcam.getMaxDias()));
-		criarOrcamento.getLbCalcGastos().setText(String.valueOf(orcam.getValorGastos()));
-		criarOrcamento.getLbValorCalLucroAdici().setText(String.valueOf(orcam.getValorSemLucro()));
+		criarOrcamento.getTfCustoAdicional().setText(String.valueOf(orcam.getValorAdicional()).replace(".",","));
+		criarOrcamento.getLbCalcGastos().setText(String.valueOf(orcam.getValorGastos()).replace(".", ","));
+		criarOrcamento.getLbValorCalLucroAdici().setText(String.valueOf(orcam.getValorSemLucro()).replace(".", ","));
 		criarOrcamento.getCbStatus().setSelectedItem(orcam.getStatus());
 
 		ConfirOrcam confirOrcam = confirOrcamDAO.buscarPeloOrcamento(orcam.getIdOrcamento());
@@ -355,9 +356,9 @@ public class BotoesAcoesController extends ComponentAdapter {
 				criarOrcamento.getTfDtPrevEntrega().setText(confirOrcam.getDataPrevistaEntrega().format(formatacao));
 			}
 			
-			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(confirOrcam.getValorVenda()));
-			criarOrcamento.getLbCalcLucro().setText(String.valueOf(confirOrcam.getLucro()));
-			criarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()));
+			criarOrcamento.getLbValorCalVenda().setText(String.valueOf(confirOrcam.getValorVenda()).replace(".", ","));
+			criarOrcamento.getLbCalcLucro().setText(String.valueOf(confirOrcam.getLucro()).replace(".", ","));
+			criarOrcamento.getLbValorFinalCad().setText(String.valueOf(confirOrcam.getValorVenda()).replace(".", ","));
 		}
 
 		List<MateriaPrima> MPs = orcamProdDAO.buscarPeloIdOrcamento(orcam.getIdOrcamento());
@@ -369,7 +370,7 @@ public class BotoesAcoesController extends ComponentAdapter {
 
 		menu.removerMenu();
 		
-		criarOrcamento.setPreferredSize(new Dimension(1020, 1520));
+		criarOrcamento.setPreferredSize(new Dimension(1020, 1400));
 		navegadorTelas.navegarTela("CRIAR_ORCAMENTO");
 		
 		SwingUtilities.invokeLater(() -> {

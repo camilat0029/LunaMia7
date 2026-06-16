@@ -73,8 +73,8 @@ public class InicioController {
 		
 		UsuarioPerfil usuarioLogado = LoginController.usuarioLogado;
 
-		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()));
-		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()));
+		criarOrcamento.getLbPrecoHoraUsuario().setText(String.valueOf(usuarioLogado.getPrecoHora()).replace(".", ","));
+		criarOrcamento.getLbPercLucroUsuario().setText(String.valueOf(usuarioLogado.getPercentualLucro()).replace(".", ","));
 
 		criarOrcamento.getTituloOrcamento().setEditable(true);
 		criarOrcamento.getTfNomeCliente().setEditable(true);

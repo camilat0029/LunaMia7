@@ -642,8 +642,8 @@ public class CadastroUsuarioController extends ComponentAdapter {
 			confPerfil.getPfSenhaCP().setBackground(Color.WHITE);
 			
 			
-			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()));
-			confPerfil.getTfPrecoHoraCP().setText(String.valueOf(usuario.getPrecoHora()));
+			confPerfil.getTfPercLucroCP().setText(String.valueOf(usuario.getPercentualLucro()).replace(".", ","));
+			confPerfil.getTfPrecoHoraCP().setText(String.valueOf(usuario.getPrecoHora()).replace(".", ","));
 
 			confPerfil.getCbEstado().setSelectedItem(usuario.getEstado());
 			confPerfil.getCbCidade().setSelectedItem(usuario.getCidade());

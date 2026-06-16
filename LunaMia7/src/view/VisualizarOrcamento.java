@@ -53,7 +53,7 @@ public class VisualizarOrcamento extends JPanel {
 	 */
 	public VisualizarOrcamento() {
 		setBackground(new Color(234, 219, 247));
-		setPreferredSize(new Dimension(1020, 1464));
+		setPreferredSize(new Dimension(1020, 1300));
 
 		setLayout(new MigLayout("gap 15", "[grow][grow][grow][grow]", "[grow][][][][][][][][][][][][][][][][][][][][][][][][][][grow]"));
 
@@ -149,11 +149,11 @@ public class VisualizarOrcamento extends JPanel {
 		lbStatus.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbStatus, "cell 2 16");
 
-		lbValorSemLucro = new JLabel("Valor sem lucro");
+		lbValorSemLucro = new JLabel("Valor do lucro adicional");
 		lbValorSemLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValorSemLucro, "cell 1 18");
 
-		lbValorLucro = new JLabel("Valor do lucro");
+		lbValorLucro = new JLabel("Valor do lucro total");
 		lbValorLucro.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbValorLucro, "cell 2 18");
 
