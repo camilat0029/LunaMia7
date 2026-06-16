@@ -127,7 +127,7 @@ public class MenuExpandido extends JPanel {
 		btSair.setBackground(new Color(193, 151, 232));
 		add(btSair, "cell 1 10,growx,aligny center");
 		
-		
+		btRelatorios.setVisible(false);
 
 	}
 	
