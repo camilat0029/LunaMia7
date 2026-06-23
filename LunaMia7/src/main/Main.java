@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import controller.BotoesAcoesController;
 import controller.CadastroUsuarioController;
 import controller.InicioController;
@@ -19,12 +21,12 @@ import controller.OrcamentoController;
 import controller.RedefinirSenhaController;
 import controller.RelatoriosController;
 import controller.ScrollPaneEstilizacao;
-import model.OrcamentoDAO;
-import model.OrcamentoProdutoDAO;
 import model.ClienteDAO;
 import model.ConfirOrcamDAO;
 import model.MateriaPrima;
 import model.MateriaPrimaDAO;
+import model.OrcamentoDAO;
+import model.OrcamentoProdutoDAO;
 import model.UsuarioPerfil;
 import model.UsuarioPerfilDAO;
 import view.CadastroMateriaPrimaEstoque;
@@ -34,11 +36,11 @@ import view.ConfigurarPerfilAposCadastrar;
 import view.CriarOrcamento;
 import view.Inicio;
 import view.Login;
+import view.MateriaPrimaView;
+import view.Mensagem;
 import view.MenuContraido;
 import view.MenuExpandido;
 import view.Orcamentos;
-import view.MateriaPrimaView;
-import view.Mensagem;
 import view.RedefinirSenha;
 import view.RelatorioGastos;
 import view.RelatorioHorasTrabalhadas;
@@ -47,7 +49,6 @@ import view.Relatorios;
 import view.TelaPrincipal;
 import view.VisualizarMateriaPrima;
 import view.VisualizarOrcamento;
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class Main {
 

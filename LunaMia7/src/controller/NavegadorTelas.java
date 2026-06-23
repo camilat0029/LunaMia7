@@ -1,8 +1,6 @@
 
 package controller;
 
-import javax.swing.JPanel;
-
 import view.TelaPrincipal;
 
 public class NavegadorTelas {
