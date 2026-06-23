@@ -47,10 +47,14 @@ import view.Relatorios;
 import view.TelaPrincipal;
 import view.VisualizarMateriaPrima;
 import view.VisualizarOrcamento;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class Main {
 
 	public static void main(String[] args) {
+		
+		FlatLightLaf.setup();
+		UIManager.put("Button.arc", 15);
 		
 		UIManager.put("ToolTip.background", new Color(0, 0, 0, 0));
         UIManager.put("ToolTip.foreground", Color.GRAY);
